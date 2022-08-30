@@ -1,0 +1,12 @@
+*{
+    font-family: "Poppins", Sans-serif;
+    font-size: 14px;
+}
+:root{
+    --bg--primary: #21CB25;
+    --color--secondary: #313131;
+    --color--text: #424242;
+    --color--accent: #61CE70;
+    --color-white: #ffffff;
+    --color-btn-hover:#15A419;
+}
