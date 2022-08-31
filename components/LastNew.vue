@@ -11,7 +11,7 @@
     </div>
 </template>
 
-<style scoped>
+<style >
 .last-new{
     position: absolute;
     top: 0;

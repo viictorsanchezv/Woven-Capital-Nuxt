@@ -1,11 +1,11 @@
 <script setup>
     import {ref} from "vue";
-    import ButtomPrimary from "../components/ButtomPrimary.vue";
-    import titleH1 from "../components/TitleH1.vue";
-    import titleH2 from "../components/TitleH2.vue";
-    import newLast from "../components/LastNew.vue";
-    import description from "../components/DescriptionText.vue";
-    import cardPortfolio from "../components/CardPortfolio.vue";
+    import ButtomPrimary from "@/components/ButtomPrimary.vue";
+    import titleH1 from "@/components/TitleH1.vue";
+    import titleH2 from "@/components/TitleH2.vue";
+    import newLast from "@/components/LastNew.vue";
+    import description from "@/components/DescriptionText.vue";
+    import cardPortfolio from "@/components/CardPortfolio.vue";
 
   const portfolios = ref([
     { iconPort: "will-Logo.png" , imagePort: "whill.png" , linkPort : "#"},
@@ -47,7 +47,7 @@
             <div class="row text-md-center justify-content-center m-0 p-0 position-relative ">
                 <div class="col-12 m-0 p-0 ">
 
-                    <title-h2 titleH2="Meet the leaders shaping the world of tomorrow, " spanTitleH2="today"></title-h2>
+                    <title-h2 class="justify-content-center" titleH2="Meet the leaders shaping the world of tomorrow, " spanTitleH2="today"></title-h2>
                 
                     <description textDesd="Our Portfolio"></description>
                     
@@ -77,7 +77,7 @@
             <div class="row align-items-start text-md-center justify-content-center m-0 p-0">
                 <div class="col-12 m-0 p-0 ">
                     
-                    <titleH2 titleH2="Partner togethe"></titleH2>
+                    <titleH2  class="justify-content-center" titleH2="Partner togethe"></titleH2>
                 
                     <description class="mb-4 mr-0 ml-0 p-0 " textDesd="If you share our vision and your company would like to be considered for investment by Woven Capital, we want to hear from you."></description>
 

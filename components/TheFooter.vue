@@ -3,7 +3,7 @@
     import itemLink from "./ListItem.vue";
 
     const itemsFooter = [
-        { textLink: 'About', linkLink: '#'  },
+        { textLink: 'About', linkLink: '/about'  },
         { textLink: 'Portfolio', linkLink: '#'  },
         { textLink: 'Team', linkLink: '#'  },
         { textLink: 'Insights', linkLink: '#'  },

@@ -1,10 +1,10 @@
 <script setup>
 
     import {ref} from "vue";
-    import itemLink from "./ListItem.vue";
+    import itemLink from "@/components/ListItem.vue";
 
     const itemsHeader = [
-        { textLink: 'About', linkLink: '#'  },
+        { textLink: 'About', linkLink: '/about'  },
         { textLink: 'Portfolio', linkLink: '#'  },
         { textLink: 'Team', linkLink: '#'  },
         { textLink: 'Insights', linkLink: '#'  },
