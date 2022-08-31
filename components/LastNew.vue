@@ -11,7 +11,7 @@
     </div>
 </template>
 
-<style>
+<style scoped>
 .last-new{
     position: absolute;
     top: 0;
@@ -25,7 +25,7 @@
     display: block; 
     width: 100%;
     transform: translateX(100%); 
-    animation: move 30s linear infinite;
+    animation: move 20s linear infinite;
 }
 @keyframes move {
   to { transform: translateX(-100%); }

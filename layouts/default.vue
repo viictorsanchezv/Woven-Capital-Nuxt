@@ -1,14 +1,18 @@
 <template>
-    <div>
+    <div class="d-flex align-items-center m-0 flex-column">
         <!-- header -->
-        <TheHeader/>
+        <TheHeader class="content-main p-0" />
         <!-- body -->
         <Nuxt class="content-main"/>
         <!-- footer -->
+        <TheFooter class="content-main"/>
     </div>
 </template>
 <style>
     .content-main {
-        padding-left: 85px;
+        max-width: 1440px;
+        width: 100%;
+        padding: 0 0 0 85px;
     }
+ 
 </style>

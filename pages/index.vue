@@ -4,23 +4,21 @@
     import titleH1 from "../components/TitleH1.vue";
     import titleH2 from "../components/TitleH2.vue";
     import newLast from "../components/LastNew.vue";
-    import description from "../components/description.vue";
-    import cardPortfolio from "../components/card-portfolio.vue";
+    import description from "../components/DescriptionText.vue";
+    import cardPortfolio from "../components/CardPortfolio.vue";
 
   const portfolios = ref([
     { iconPort: "will-Logo.png" , imagePort: "whill.png" , linkPort : "#"},
     { iconPort: "nuro-Logo.png" , imagePort: "nuro.png" , linkPort : "#"},
     { iconPort: "ridecell-logo.png" , imagePort: "ridecell.png", linkPort : "#" }
   ]);
-
-
     
 </script>
 <template>
  <div>
   <!-- hero image -->
-    <section class="hero-image vh-100 d-flex flex-column position-relative align-items-center">
-      <div class="container-full position-relative">
+    <section class="hero-image vh-100 d-flex flex-column position-relative align-items-center w-100">
+      <div class="position-relative w-100">
         <video class="vh-100 position-absolute tp-0 lft-0 w-100 object-fit-cover" src="../assets/video/Woven-Capital-Animated.mp4" autoplay="true" muted="true" loop="true" poster="../assets/video/Woven-Capital-Animated.mp4"></video>
         <div class="content-hero row align-items-start text-md-center justify-content-center m-0">
             <div class="col-12 m-0 p-0 d-flex justify-content-center flex-column">
@@ -35,7 +33,7 @@
     </section>
     <!-- last new -->
     <section class="new-last-post m-0 p-0 position-relative d-flex justify-content-center">
-        <div class="container-full position-relative">
+        <div class=" position-relative w-100">
             <div class="row m-0 p-0">
                 <div class="col-12 m-0 p-0">
                     <new-last titleLast="WHILL Secures Funding from Woven Capital to Scale Short-Distance Mobility Service Globally"></new-last>
@@ -44,8 +42,8 @@
         </div>
     </section>
     <!-- portfolio -->
-    <section class="our-portfolio d-flex justify-content-center">
-        <div class="container-full position-relative">
+    <section class="our-portfolio d-flex justify-content-center w-100">
+        <div class=" position-relative w-100">
             <div class="row text-md-center justify-content-center m-0 p-0 position-relative ">
                 <div class="col-12 m-0 p-0 ">
 
@@ -74,8 +72,8 @@
         </div>
     </section>
     <!-- partner -->
-    <section class="partner-together d-flex justify-content-center">
-        <div class="container-full position-relative">
+    <section class="partner-together d-flex justify-content-center w-100">
+        <div class=" position-relative w-100">
             <div class="row align-items-start text-md-center justify-content-center m-0 p-0">
                 <div class="col-12 m-0 p-0 ">
                     
@@ -99,19 +97,18 @@
     background-size: cover;
 }
 .hero-image video{
-  object-fit: cover;
-  top: 0;
-  left: 0;
-}
-.container-full{
-  max-width: 1440px;
-  width: 100%;
+    object-fit: cover;
+    top: 0;
+    left: 0;
 }
 .content-hero{
     padding-top: 75px;
 }
 .our-portfolio{
     padding: 158px 0px 0px 0px;
+}
+.content-portfolio{
+    height: 605px;
 }
 .partner-together{
     padding: 107px 0 0 0;

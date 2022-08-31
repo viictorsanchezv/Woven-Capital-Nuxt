@@ -17,9 +17,9 @@
     </div>
 </template>
 
-<style >
+<style scoped>
 h2.title-h2{
-    width: 48%;
+    width: 52%;
 }
 .title-h2, .title-h2 span{
     font-size: 45px;

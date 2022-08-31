@@ -14,7 +14,7 @@
 
 </template>
 
-<style>
+<style scoped>
 
 a.button-primary{
     font-weight: 500;

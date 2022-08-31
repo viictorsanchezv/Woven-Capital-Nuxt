@@ -12,10 +12,10 @@
     </div>
 </template>
 
-<style >
+<style scoped>
 .desc-text{
     font-size: 24px;
     line-height: 38px;
-    width: 53%;
+    width: 54%;
 }
 </style>

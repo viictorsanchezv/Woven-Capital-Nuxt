@@ -26,9 +26,6 @@
 .portfolio:nth-child(3){
     margin: 0 0 0 4px;
 }
-.content-portfolio{
-    height: 605px;
-}
 .content-portfolio .portfolio{
     background-position: center;
     background-size: cover;

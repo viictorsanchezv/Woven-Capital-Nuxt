@@ -12,14 +12,14 @@ defineProps({
     </div> 
 </template>
 
-<style>
+<style scoped>
  h1.title-h1{
     color: var( --color--secondary );
     font-weight: 500;
     font-size: 70px;
     line-height: 80px;
     letter-spacing: -4px;
-    width: 48%;
+    width: 52%;
 }
 
 
