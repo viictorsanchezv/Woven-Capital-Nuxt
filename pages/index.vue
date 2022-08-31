@@ -1,11 +1,11 @@
 <script setup>
     import {ref} from "vue";
-  import ButtomPrimary from "../components/ButtomPrimary.vue";
-  import titleH1 from "../components/TitleH1.vue";
-  import titleH2 from "../components/TitleH2.vue";
-  import newLast from "../components/LastNew.vue";
-  import description from "../components/description.vue";
-  import cardPortfolio from "../components/card-portfolio.vue";
+    import ButtomPrimary from "../components/ButtomPrimary.vue";
+    import titleH1 from "../components/TitleH1.vue";
+    import titleH2 from "../components/TitleH2.vue";
+    import newLast from "../components/LastNew.vue";
+    import description from "../components/description.vue";
+    import cardPortfolio from "../components/card-portfolio.vue";
 
   const portfolios = ref([
     { iconPort: "will-Logo.png" , imagePort: "whill.png" , linkPort : "#"},
@@ -13,6 +13,8 @@
     { iconPort: "ridecell-logo.png" , imagePort: "ridecell.png", linkPort : "#" }
   ]);
 
+
+    
 </script>
 <template>
  <div>
@@ -23,10 +25,10 @@
         <div class="content-hero row align-items-start text-md-center justify-content-center m-0">
             <div class="col-12 m-0 p-0 d-flex justify-content-center flex-column">
                 <div class="mt-0 mb-5 mr-0 ml-0 p-0 w-100 align-items-start text-md-center justify-content-center">
-                    <img src="../assets/image/WC_Logo.png" alt="" width="325" height="45">
+                    <img src="../assets/image/Logo_text.png" alt="" width="325" height="45">
                 </div>
-                <titleH1 titleH1="Fueling the engine of future growth."></titleH1>
-                <ButtomPrimary text_buttom="Read our Story" link_buttom="https://nuxtjs.org/"></ButtomPrimary>
+                <title-h1 titleH1="Fueling the engine of future growth."></title-h1>
+                <buttom-primary text_buttom="Read our Story" link_buttom="https://nuxtjs.org/"></buttom-primary>
              </div>
         </div>
       </div>
@@ -36,7 +38,7 @@
         <div class="container-full position-relative">
             <div class="row m-0 p-0">
                 <div class="col-12 m-0 p-0">
-                    <newLast titleLast="WHILL Secures Funding from Woven Capital to Scale Short-Distance Mobility Service Globally"></newLast>
+                    <new-last titleLast="WHILL Secures Funding from Woven Capital to Scale Short-Distance Mobility Service Globally"></new-last>
                 </div>
             </div>
         </div>
@@ -47,7 +49,7 @@
             <div class="row text-md-center justify-content-center m-0 p-0 position-relative ">
                 <div class="col-12 m-0 p-0 ">
 
-                    <titleH2 titleH2="Meet the leaders shaping the world of tomorrow, " spanTitleH2="today"></titleH2>
+                    <title-h2 titleH2="Meet the leaders shaping the world of tomorrow, " spanTitleH2="today"></title-h2>
                 
                     <description textDesd="Our Portfolio"></description>
                     
@@ -60,13 +62,13 @@
             </div>
             <div class="row content-portfolio mt-5 mb-0 mr-0 ml-0 p-0 ">        
 
-                <cardPortfolio 
+                <card-portfolio 
                     v-for="(portfolio, index) in portfolios"
                     :key="index"
                     :iconPort= "portfolio.iconPort" 
                     :imagePort= "portfolio.imagePort" 
                     :linkPort=  "portfolio.linkPort" 
-                ></cardPortfolio>
+                ></card-portfolio>
                 
             </div>
         </div>
