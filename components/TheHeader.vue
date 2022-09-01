@@ -9,7 +9,7 @@
         { textLink: 'Team', linkLink: '#'  },
         { textLink: 'Insights', linkLink: '#'  },
         { textLink: 'Pitch', linkLink: '/pitch'  },
-        { textLink: 'Contact', linkLink: '#'  },
+        { textLink: 'Contact', linkLink: '/contact'  },
         { textLink: 'Woven Planet', linkLink: '#'  },
     ];
      var expande = false;
