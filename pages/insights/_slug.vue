@@ -10,6 +10,7 @@
 <script>
     import client from '@/plugins/contentful.js';
     export default {
+    
         data(){
             return {
                 article : ''

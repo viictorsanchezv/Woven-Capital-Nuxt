@@ -1,25 +1,56 @@
-<script setup>
-    import {ref} from "vue";
+<script>
+    
     import ButtomPrimary from "@/components/ButtomPrimary.vue";
     import titleH1 from "@/components/TitleH1.vue";
     import titleH2 from "@/components/TitleH2.vue";
     import newLast from "@/components/LastNew.vue";
     import description from "@/components/DescriptionText.vue";
     import cardPortfolio from "@/components/CardPortfolio.vue";
+    import CardInsights from "@/components/CardInsights.vue";
+   
+    import client from '../plugins/contentful.js';
 
-  const portfolios = ref([
-    { iconPort: "will-Logo.png" , imagePort: "whill.png" , linkPort : "#"},
-    { iconPort: "nuro-Logo.png" , imagePort: "nuro.png" , linkPort : "#"},
-    { iconPort: "ridecell-logo.png" , imagePort: "ridecell.png", linkPort : "#" }
-  ]);
-    
+    export default {
+       data(){
+            return {
+                portfolios : ([
+                    { iconPort: "will-Logo.png" , imagePort: "whill.png" , linkPort : "#"},
+                    { iconPort: "nuro-Logo.png" , imagePort: "nuro.png" , linkPort : "#"},
+                    { iconPort: "ridecell-logo.png" , imagePort: "ridecell.png", linkPort : "#" }
+                ]),
+                
+            }
+            
+        }, 
+        components:{
+            ButtomPrimary,
+            titleH1,
+            titleH2,
+            newLast,
+            description,
+            cardPortfolio,
+            CardInsights
+        } , 
+        asyncData () {
+             return client
+                .getEntries({
+                    content_type: "post"
+                })
+                .then(entries => {
+                  
+                    return { posts: entries.items }
+                })
+                .catch( e => console.log(e));
+        },
+    }
+
 </script>
 <template>
  <div>
   <!-- hero image -->
     <section class="hero-image vh-100 d-flex flex-column position-relative align-items-center w-100">
       <div class="position-relative w-100">
-        <video class="vh-100 position-absolute tp-0 lft-0 w-100 object-fit-cover" src="../assets/video/Woven-Capital-Animated.mp4" autoplay="true" muted="true" loop="true" poster="../assets/video/Woven-Capital-Animated.mp4"></video>
+        <video class="vh-100 position-absolute tp-0 lft-0 w-100 object-fit-cover" src="@/assets/video/Woven-Capital-Animated.mp4" autoplay="true" muted="true" loop="true" poster=""></video>
         <div class="content-hero row align-items-start text-md-center justify-content-center m-0">
             <div class="col-12 m-0 p-0 d-flex justify-content-center flex-column">
                 <div class="mt-0 mb-5 mr-0 ml-0 p-0 w-100 align-items-start text-md-center justify-content-center">
@@ -89,6 +120,28 @@
             </div>
         </div>
     </section>
+    <!-- -->
+    <section>
+        <div class="w-100">
+            <div class="content-insights">
+                <template  v-for="(post, index) in posts" >
+                     <card-insights
+                        :key="index"
+                        :titleInsights = "post.fields.title"
+                        :slugInsights = "post.fields.slug"
+                        :imageInsights ="(post.fields.image ) ? post.fields.image.fields.file.url : ''"
+                        :dateInsights = "post.sys.createdAt"
+                        v-if ="index < 3"
+                    >
+                    </card-insights> 
+                   
+                    
+                </template>
+            </div>
+        </div>
+      
+                
+    </section>
  </div>
 </template>
 <style >
@@ -115,6 +168,13 @@
 }
 .partner-together img{
     width: 984px;
+}
+.content-insights {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(49%, 1fr));
+    grid-auto-rows: calc( 50vh - 10px);
+    grid-gap: 10px;
+    margin: 0;
 }
 </style>
 

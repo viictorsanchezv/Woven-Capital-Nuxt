@@ -26,7 +26,6 @@
                 const  month = new Date(this.dateInsights);
                 
                 return new Date(month).toLocaleDateString('en', options);
-        
             }
         }
     }
@@ -34,13 +33,16 @@
 <template>
     
     <div class="card-view border-0 w-100 h-100" :style="{ 'background-image' : backImageInsights()}">
-        <nuxt-link :to="`/insights/${slugInsights}`" class="slug-insights w-100 h-100">
+        <NuxtLink :to="`/insights/${slugInsights}`" class="slug-insights w-100 h-100 aqui">
             <div class="position-relative w-100 h-100">
                 <h3 class="card-title position-absolute">{{titleInsights}}</h3>
                 <p class="card-date position-absolute">{{dateForm()}}</p>
-                <a class="card-read-more position-absolute" :href="slugInsights">Read More</a>
+              
+                <p class="card-read-more position-absolute">Read More</p>
+              
+               
             </div>
-        </nuxt-link>
+        </NuxtLink>
     </div>
    
     
@@ -73,7 +75,7 @@
         width: 50%;
         color: var(--color-white);
     }
-    .card-view a.card-read-more {
+    .card-view .card-read-more {
         bottom: 20px;
         right: 20px;
         font-size: 16px;
