@@ -8,7 +8,7 @@
         { textLink: 'Portfolio', linkLink: '#'  },
         { textLink: 'Team', linkLink: '#'  },
         { textLink: 'Insights', linkLink: '#'  },
-        { textLink: 'Pitch', linkLink: '#'  },
+        { textLink: 'Pitch', linkLink: '/pitch'  },
         { textLink: 'Contact', linkLink: '#'  },
         { textLink: 'Woven Planet', linkLink: '#'  },
     ];
