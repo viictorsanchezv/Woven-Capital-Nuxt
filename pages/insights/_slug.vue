@@ -1,9 +1,9 @@
 <template>
     <div class="row m-0">
         <div class="col-12 content_post-insight">
-            <h1 class="post_insight-title mb-4">{{post.fields.title}}</h1>
-            <span class="post_insight-date mb-3">{{dateForm(post.sys.createdAt)}}</span>
-            <p class="post_insight-content">{{post.fields.content}}</p>
+            <h1 class="post_insight-title mb-4 h1-45">{{post.fields.title}}</h1>
+            <p class="post_insight-date mb-4 text-18">{{dateForm(post.sys.createdAt)}}</p>
+            <p class="post_insight-content text-18">{{post.fields.content}}</p>
         </div>
     </div>
 </template>
@@ -45,17 +45,10 @@
         min-height: calc(100vh - 74px);
     }
     .post_insight-title{
-        font-weight: 500;
-        font-size: 45px;
-        line-height: 115%;
-        letter-spacing: -2px;
         color: var(--color--secondary);
     }
     .post_insight-content, 
     .post_insight-date{
-        font-weight: 400;
-        font-size: 18px;
-        line-height: 32px;
         color: var(--color--secondary);
     }
 </style>

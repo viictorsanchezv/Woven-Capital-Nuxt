@@ -1,6 +1,6 @@
 <template>
   <div class="mb-4" :class="[widthCol(inputInfo.column)]">
-    <label class="mb-1 w-100" :for="inputInfo.id">{{ inputInfo.label }}{{inputInfo.required?'*':''}}</label>
+    <label class="mb-1 w-100 text-18" :for="inputInfo.id">{{ inputInfo.label }}{{inputInfo.required?'*':''}}</label>
     <input
       v-if="inputInfo.type!=='textarea'"
       class="rounded w-100"
@@ -38,16 +38,14 @@ export default {
 };
 </script>
 <style scoped>
-  label, input, textarea{
-   font-size: 1.2em;
-  }
-
   input, textarea {
    padding: 8px 0;
    padding-left: 10px;
    border: 1px solid #A4A4A4;
   }
-
+  input::placeholder{
+    font-size: 13px;
+  }
   input::placeholder , textarea::placeholder{
     color:#A4A4A4;
   }

@@ -1,5 +1,5 @@
 <template>
-  <section class="vh-100 d-flex row border-box m-0">
+  <section class="v-100 d-flex row border-box m-0">
       <slot name="left">
 
       </slot>
