@@ -1,10 +1,5 @@
 <script >
     export default{
-        data (){
-            return {
-                backgroundUrl,
-            }
-        },
         props: {
             iconPort : String,
             imagePort :  String,

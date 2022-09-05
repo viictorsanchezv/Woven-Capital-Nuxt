@@ -48,7 +48,7 @@
     <!-- hero image -->
         <section class="hero-image vh-100 d-flex flex-column position-relative align-items-center w-100">
         <div class="position-relative w-100">
-            <video class="vh-100 position-absolute tp-0 lft-0 w-100 object-fit-cover top-0 lef-0" src="@/assets/video/Woven-Capital-Animated.mp4" autoplay="true" muted="true" loop="true" poster=""></video>
+            <video class="vh-100 position-absolute tp-0 lft-0 w-100 object-cover top-0 lef-0" src="@/assets/video/Woven-Capital-Animated.mp4" autoplay="true" muted="true" loop="true" poster=""></video>
             <div class="content-hero row align-items-start text-md-center justify-content-center m-0">
                 <div class="col-12 m-0 p-0 d-flex justify-content-center flex-column">
                     <div class="mt-0 mb-5 mr-0 ml-0 p-0 w-100 align-items-start text-md-center justify-content-center">

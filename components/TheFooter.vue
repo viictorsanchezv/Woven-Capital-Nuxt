@@ -5,11 +5,11 @@
             return {
                 itemsFooter: [
                     { textLink: 'About', linkLink: '/about'  },
-                    { textLink: 'Portfolio', linkLink: '#'  },
-                    { textLink: 'Team', linkLink: '#'  },
-                    { textLink: 'Insights', linkLink: '#'  },
-                    { textLink: 'Pitch', linkLink: '#'  },
-                    { textLink: 'Contact', linkLink: '#'  },
+                    { textLink: 'Portfolio', linkLink: '/portfolio'  },
+                    { textLink: 'Team', linkLink: '/team'  },
+                    { textLink: 'Insights', linkLink: '/insights'  },
+                    { textLink: 'Pitch', linkLink: '/pitch'  },
+                    { textLink: 'Contact', linkLink: '/contact'  },
                     { textLink: 'Woven Planet', linkLink: '#'  },
                     { textLink: 'Privacy Notice', linkLink: '#'  },
                 ], 

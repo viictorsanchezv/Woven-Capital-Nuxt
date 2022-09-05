@@ -10,11 +10,11 @@
 </script>
 <template>
         <div class="m-0 p-0 content-team align-items-center d-flex flex-column ">
-            <NuxtLink :to="`/team/${teamEmail}`">
+            <a :href="`/team/${teamEmail}`">
                 <img :src="require(`@/assets/image/team/${teamImage}`)" alt="" class="object-cover rounded-circle">
                 <h4 class="text-24 text-center">{{teamName}}</h4>
                 <p class="text-18 text-center">{{teamJob}}</p>
-            </NuxtLink>
+            </a>
             
         </div>
    
@@ -34,5 +34,8 @@
     .content-team h4, 
     .content-team p{
         color: var( --color--secondary );
+    }
+   .content-team  a:hover{
+        text-decoration: none;
     }
 </style>

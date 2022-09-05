@@ -5,11 +5,11 @@
             return {
                 itemsHeader : [
                     { textLink: 'About', linkLink: '/about'  },
-                    { textLink: 'Portfolio', linkLink: '#'  },
-                    { textLink: 'Team', linkLink: '#'  },
-                    { textLink: 'Insights', linkLink: '#'  },
-                    { textLink: 'Pitch', linkLink: '#'  },
-                    { textLink: 'Contact', linkLink: '#'  },
+                    { textLink: 'Portfolio', linkLink: '/portfolio'  },
+                    { textLink: 'Team', linkLink: '/team'  },
+                    { textLink: 'Insights', linkLink: '/insights'  },
+                    { textLink: 'Pitch', linkLink: '/pitc'  },
+                    { textLink: 'Contact', linkLink: '/contact'  },
                     { textLink: 'Woven Planet', linkLink: '#'  },
                 ],
                 expande : {
@@ -20,14 +20,27 @@
         }, 
         methods:{
             expanded: function (event) {
+
                 this.expande = !this.expande;
 
                 if(this.expande){
                     document.querySelector('#header-content').classList.add('menu-expanded');
                     document.querySelector('#header-content').classList.remove('menu-not-expanded');
+                    const boxes = document.querySelectorAll('.menu-expanded .item-show-expanded');
+                    boxes.forEach( box => {
+                        box.classList.remove('list-group-none');
+                    });
+                    
                 }else{
                     document.querySelector('#header-content').classList.remove('menu-expanded');
                     document.querySelector('#header-content').classList.add('menu-not-expanded');
+                    const boxes2 = document.querySelectorAll('.menu-not-expanded .item-show-expanded');
+                    boxes2.forEach( box2 => {
+                        box2.addEventListener('transitionend', function (e){
+                            box2.classList.add('list-group-none');
+                        });
+                    });
+
                 }
             }
         }, 

@@ -13,7 +13,7 @@
     
         data(){
             return {
-                article : ''
+             
             }
         },
         asyncData ({params}) {
