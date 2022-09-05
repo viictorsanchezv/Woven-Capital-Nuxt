@@ -1,12 +1,12 @@
 <script>
   import ButtomPrimary from '@/components/ButtomPrimary.vue';
   import titleH2 from '@/components/TitleH2.vue';
-export default {
-  components: {
-    ButtomPrimary,
-    titleH2,
+  export default {
+    components: {
+      ButtomPrimary,
+      titleH2,
+    }
   }
-}
 </script>
 
 

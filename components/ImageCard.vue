@@ -4,10 +4,13 @@
     <p class="text-card text-24">{{imageInfo.text}}</p>
   </div>
 </template>
-<script setup>
-  defineProps({
-        imageInfo: Object
-    });
+<script >
+  export default{
+    props: {
+      imageInfo: Object
+    }
+  }
+
 </script>
 <style scoped>
     .text-card{

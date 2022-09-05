@@ -1,42 +1,42 @@
-<script setup>
-
-    import {ref} from "vue";
+<script >
     import itemLink from "@/components/ListItem.vue";
+    export default {
+        data(){
+            return {
+                itemsHeader : [
+                    { textLink: 'About', linkLink: '/about'  },
+                    { textLink: 'Portfolio', linkLink: '#'  },
+                    { textLink: 'Team', linkLink: '#'  },
+                    { textLink: 'Insights', linkLink: '#'  },
+                    { textLink: 'Pitch', linkLink: '#'  },
+                    { textLink: 'Contact', linkLink: '#'  },
+                    { textLink: 'Woven Planet', linkLink: '#'  },
+                ],
+                expande : {
+                    type: Boolean,
+                    default: false
+                },
+            }
+        }, 
+        methods:{
+            expanded: function (event) {
+                this.expande = !this.expande;
 
-    const itemsHeader = [
-        { textLink: 'About', linkLink: '/about'  },
-        { textLink: 'Portfolio', linkLink: '#'  },
-        { textLink: 'Team', linkLink: '#'  },
-        { textLink: 'Insights', linkLink: '/insights'  },
-        { textLink: 'Pitch', linkLink: '/pitch'  },
-        { textLink: 'Contact', linkLink: '/contact'  },
-        { textLink: 'Woven Planet', linkLink: '#'  },
-    ];
-     var expande = false;
-    function expanded() {
-        expande = !expande;
-        if(expande){
-            document.querySelector('#header-content').classList.add('menu-expanded');
-            document.querySelector('#header-content').classList.remove('menu-not-expanded');
-
-            const boxes = document.querySelectorAll('.menu-expanded .item-show-expanded');
-            boxes.forEach( box => {
-                box.classList.remove('list-group-none');
-            });
-            
-        }else{
-            document.querySelector('#header-content').classList.remove('menu-expanded');
-            document.querySelector('#header-content').classList.add('menu-not-expanded');
-
-            const boxes2 = document.querySelectorAll('.menu-not-expanded .item-show-expanded');
-            boxes2.forEach( box2 => {
-                box2.addEventListener('transitionend', function (e){
-                    box2.classList.add('list-group-none');
-                });
-            });
-           
+                if(this.expande){
+                    document.querySelector('#header-content').classList.add('menu-expanded');
+                    document.querySelector('#header-content').classList.remove('menu-not-expanded');
+                }else{
+                    document.querySelector('#header-content').classList.remove('menu-expanded');
+                    document.querySelector('#header-content').classList.add('menu-not-expanded');
+                }
+            }
+        }, 
+        components: {
+            itemLink,
         }
-   }
+    }
+  
+    
 </script>
 <template>
     <header class="w-100 d-flex justify-content-start" >

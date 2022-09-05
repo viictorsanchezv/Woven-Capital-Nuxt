@@ -1,9 +1,16 @@
-<script setup>
-    defineProps({
-        iconPort : String,
-        imagePort :  String,
-        linkPort : String,
-    });
+<script >
+    export default{
+        data (){
+            return {
+                backgroundUrl,
+            }
+        },
+        props: {
+            iconPort : String,
+            imagePort :  String,
+            linkPort : String,
+        }
+    }
 </script>
 <template>
     

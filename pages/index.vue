@@ -4,7 +4,6 @@
     import titleH1 from "@/components/TitleH1.vue";
     import titleH2 from "@/components/TitleH2.vue";
     import newLast from "@/components/LastNew.vue";
-    import description from "@/components/DescriptionText.vue";
     import cardPortfolio from "@/components/CardPortfolio.vue";
     import CardInsights from "@/components/CardInsights.vue";
    
@@ -27,7 +26,6 @@
             titleH1,
             titleH2,
             newLast,
-            description,
             cardPortfolio,
             CardInsights
         } , 
@@ -80,7 +78,7 @@
 
                         <title-h2 class="justify-content-center" titleH2="Meet the leaders shaping the world of tomorrow, " spanTitleH2="today"></title-h2>
                     
-                        <description textDesd="Our Portfolio"></description>
+                        <p class="text-24 text-portfolio">Our Portfolio</p>
                         
                         <div class="d-flex m-0 p-0 w-100 justify-content-center">
                             <a href="#" class="w-100 h-100 m-0 p-0">
@@ -106,11 +104,11 @@
         <section class="partner-together d-flex justify-content-center w-100">
             <div class=" position-relative w-100">
                 <div class="row align-items-start text-md-center justify-content-center m-0 p-0">
-                    <div class="col-12 m-0 p-0 ">
+                    <div class="col-12 m-0 p-0 d-flex flex-column align-items-center">
                         
                         <titleH2  class="justify-content-center" titleH2="Partner togethe"></titleH2>
                     
-                        <description class="mb-4 mr-0 ml-0 p-0 " textDesd="If you share our vision and your company would like to be considered for investment by Woven Capital, we want to hear from you."></description>
+                        <p class="mb-4 mr-0 ml-0 p-0 text-24 text-partner">If you share our vision and your company would like to be considered for investment by Woven Capital, we want to hear from you.</p>
 
                         <buttom-primary class="mb-5 mr-0 ml-0 mt-0 p-0 justify-content-center align-items-start" text_buttom="Tell us about yourself" link_buttom="https://nuxtjs.org/"></buttom-primary>
 
@@ -151,6 +149,13 @@
     }
     .content-hero{
         padding-top: 75px;
+    }
+    .text-portfolio, 
+    .text-partner{
+        color: var( --color--secondary );
+    }
+    .text-partner{
+        width: 54%;
     }
     .our-portfolio{
         padding: 158px 0px 0px 0px;

@@ -1,8 +1,10 @@
-<script setup>
-
-    defineProps({
-        titleLast: String,
-    });
+<script >
+    export default {
+        props: {
+            titleLast: String,
+        }
+    }
+   
 </script>
 
 <template>

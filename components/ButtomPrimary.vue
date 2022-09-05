@@ -1,9 +1,11 @@
-<script setup>
+<script>
 
-    defineProps({
-        text_buttom: String,
-        link_buttom: String,
-    });
+    export default{
+        props:{
+            text_buttom: String,
+            link_buttom: String,
+        }
+    }
 
 </script>
 <template>

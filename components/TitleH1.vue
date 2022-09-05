@@ -1,8 +1,11 @@
-<script setup>
+<script >
 
-defineProps({
-    titleH1: String
-});
+    export default {
+        props: {
+            titleH1: String,
+        }
+    }
+
 
 </script>
 

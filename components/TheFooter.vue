@@ -1,17 +1,26 @@
-<script setup>
-    import {ref} from "vue";
-    import itemLink from "./ListItem.vue";
+<script >
+    import itemLink from "@/components/ListItem.vue";
+    export default {
+        data(){
+            return {
+                itemsFooter: [
+                    { textLink: 'About', linkLink: '/about'  },
+                    { textLink: 'Portfolio', linkLink: '#'  },
+                    { textLink: 'Team', linkLink: '#'  },
+                    { textLink: 'Insights', linkLink: '#'  },
+                    { textLink: 'Pitch', linkLink: '#'  },
+                    { textLink: 'Contact', linkLink: '#'  },
+                    { textLink: 'Woven Planet', linkLink: '#'  },
+                    { textLink: 'Privacy Notice', linkLink: '#'  },
+                ], 
+            }
+        },
+        components: {
+            itemLink,
+        }
+    }
+    
 
-    const itemsFooter = [
-        { textLink: 'About', linkLink: '/about'  },
-        { textLink: 'Portfolio', linkLink: '#'  },
-        { textLink: 'Team', linkLink: '#'  },
-        { textLink: 'Insights', linkLink: '#'  },
-        { textLink: 'Pitch', linkLink: '/pitch'  },
-        { textLink: 'Contact', linkLink: '/contact'  },
-        { textLink: 'Woven Planet', linkLink: '#'  },
-        { textLink: 'Privacy Notice', linkLink: '#'  },
-    ];
 </script>
 <template>
     <footer class="bg-footer d-flex justify-content-center w-100">			

@@ -1,8 +1,10 @@
-<script setup>
-    defineProps({
-        textLink: String, 
-        linkLink: String, 
-    });
+<script >
+    export default{
+        props: {
+            textLink: String, 
+            linkLink: String, 
+        }
+   }
 </script>
 <template>
     <li class="list-item text-decoration-none text-center m-0">

@@ -1,13 +1,13 @@
-<script setup>
-
-    defineProps({
-        titleH2: String, 
-        spanTitleH2: {
-            type: String, 
-            default: '',
-        } 
-        
-    });
+<script >
+    export default {
+        props: {
+            titleH2: String,
+            spanTitleH2: {
+                type: String, 
+                default: '',
+            } 
+        }
+    }
 </script>
 
 <template>
