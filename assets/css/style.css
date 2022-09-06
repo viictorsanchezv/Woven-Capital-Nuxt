@@ -1,0 +1,109 @@
+*{
+    font-family: "Poppins", Sans-serif;
+    font-size: 14px;
+}
+:root{
+    --bg--primary: #21CB25;
+    --color--secondary: #313131;
+    --color--text: #424242;
+    --color--accent: #61CE70;
+    --color-white: #ffffff;
+    --color-btn-hover:#15A419;
+}
+.text-12{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 24px;
+}
+.text-small{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 32px;
+}
+.text-medium{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 38px;
+}
+h1.h1-45, 
+span.h1-45{
+    font-size: 45px;
+    font-weight: 500;
+    font-style: normal;
+    line-height: 51.75px;
+    letter-spacing: -2px;
+}
+
+.vh-50 {
+    height: 50vh;
+}
+.border-box {
+    box-sizing: border-box;
+}
+.object-fill {
+    object-fit: fill;
+}
+.object-cover {
+    object-fit: cover;
+}
+
+.text-green {
+    color: var(--bg--primary);
+}
+
+.pr-10 {
+padding-right: 6rem;
+}
+.pr-14 {
+padding-right: 7rem;
+}
+.pt-5x{
+padding-top: 5px;
+}
+.pb-5x{
+padding-bottom: 5px;
+}
+div.p-5rem{
+    padding: 5rem;
+}
+
+.top-0{
+    top: 0;
+}
+.lef-0{
+    left: 0;
+}
+
+@media(max-width:768px){
+    .hero-image h1.title-home {
+        width: 100%!important;
+        font-size: 46px;
+        line-height: 49px;
+        text-align: center;
+        margin-bottom: 31px;
+        padding: 10px;
+    }
+    .content-hero img {
+        max-width: 100%;
+        object-fit: contain;
+        padding: 6px;
+    }
+    .our-portfolio {
+        padding: 40px 0px 0px 0px!important;
+    }
+    h2.title-secundary, h2.title-secundary span {
+        width: 100%!important;
+        font-size: 30px!important;
+        text-align: center;
+        line-height: 39px!important;
+    }
+    p.text-medium.text-portfolio {
+        text-align: center;
+    }
+    .our-portfolio {
+        text-align: center;
+    }
+}
