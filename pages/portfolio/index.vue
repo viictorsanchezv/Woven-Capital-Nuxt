@@ -59,10 +59,10 @@ export default {
         </div>
       </template>
       <template  #right>
-        <div class="overflow-y-auto col-md-6 col-12 mt-5 border-box p-5rem pb-0">
+        <div class="overflow-y-auto col-md-6 col-12 mt-5 border-box p-7 pb-2">
           <portfolio-title title="Mountain View, CA, USA" image="nuro.png"></portfolio-title>
-          <p class="portfolio-description mb-5">Nuro is the leader in autonomous delivery using robotics to improve everyday life. The company's fleet of on-road vehicles that are fully autonomous and require no human riders are designed to deliver everyday goods to consumers, ranging from groceries to pizzas to prescriptions in a way that is quick, affordable—and most importantly—safe.</p>
-          <div class="info-wrapper mb-5">
+          <p class="portfolio-description mb-5 text-small">Nuro is the leader in autonomous delivery using robotics to improve everyday life. The company's fleet of on-road vehicles that are fully autonomous and require no human riders are designed to deliver everyday goods to consumers, ranging from groceries to pizzas to prescriptions in a way that is quick, affordable—and most importantly—safe.</p>
+          <div class="info-wrapper mb-5 text-small">
             <p>“Woven Capital's focus on safe mobility and leading-edge technology, as well as their roots in Toyota, make them an ideal investment partner. Their team has a deep understanding and appreciation of our work to create a real-world, autonomous delivery service. And with their backing, we are excited to shape the future of mobility and improve people's lives.”</p>
           </div>
           <div class="text-center mb-4">
@@ -70,7 +70,7 @@ export default {
             <p>President and Co-Founder, Nuro</p>
           </div>
           <hr class="mb-4">
-          <h5 class="company-new-title mb-4">Company News</h5>
+          <h5 class="company-new-title mb-4 text-medium">Company News</h5>
           <company-news v-for="(item, index) in nuro" :key="index" :companyInfo="item"></company-news>
         </div>
       </template>
@@ -91,10 +91,10 @@ export default {
         </div>
       </template>
       <template  #right>
-        <div class="overflow-y-auto col-md-6 col-12  border-box p-5rem pb-0">
+        <div class="overflow-y-auto col-md-6 col-12  border-box p-7 pb-2">
           <portfolio-title title="San Francisco, CA, USA" image="ridecell.png"></portfolio-title>
-          <p class="portfolio-description mb-5">Ridecell is a leading platform powering digital transformations and IoT automation for fleet-driven businesses. The company’s IoT-driven automation and mobility platform helps businesses modernize and monetize their fleets by combining data insights with digital vehicle control to turn today’s manual processes into automated workflows, which improves efficiency and control for shared services, motorpool, rental, and logistics fleets.</p>
-          <div class="info-wrapper mb-5">
+          <p class="portfolio-description mb-5 text-small">Ridecell is a leading platform powering digital transformations and IoT automation for fleet-driven businesses. The company’s IoT-driven automation and mobility platform helps businesses modernize and monetize their fleets by combining data insights with digital vehicle control to turn today’s manual processes into automated workflows, which improves efficiency and control for shared services, motorpool, rental, and logistics fleets.</p>
+          <div class="info-wrapper mb-5 text-small">
             <p>"This investment with Woven Capital will be highly strategic as Ridecell continues to expand into new markets. We are excited to have Woven Capital as our investor to bring Ridecell automation and mobility innovations that use automation and digital vehicle control to help create safe and secure mobility.”</p>
           </div>
           <div class="text-center mb-4">
@@ -102,7 +102,7 @@ export default {
             <p>Founder & CEO, Ridecell</p>
           </div>
           <hr class="mb-4">
-          <h5 class="company-new-title mb-4">Company News</h5>
+          <h5 class="company-new-title mb-4 text-medium">Company News</h5>
           <company-news v-for="(item, index) in ridecell" :key="index" :companyInfo="item"></company-news>
         </div>
       </template>
@@ -123,14 +123,14 @@ export default {
         </div>
       </template>
       <template  #right>
-        <div class="overflow-y-auto col-md-6 col-12  border-box p-5rem pb-0">
+        <div class="overflow-y-auto col-md-6 col-12  border-box p-7 pb-2">
           <portfolio-title title="Tokyo, Japan" image="whill.png"></portfolio-title>
-          <p class="portfolio-description mb-4">It all began with a single user’s voice: “I’ve given up on even going to the grocery store just two blocks away.”</p>
-          <p class="portfolio-description mb-4">In 2010, this statement from a close friend was the start of it all. He was a wheelchair user who didn’t like the negative attention he received while out in public. WHILL’s founders knew him to be an amazingly independent, fun-loving, and social person, and they were determined to create a mobility device that would allow him to live his life with confidence and enthusiasm.</p>
-          <p class="portfolio-description mb-4">This is why they founded WHILL.</p>
-          <p class="portfolio-description mb-4">Since that time, WHILL’s mission has been to transform today’s antiquated power wheelchair and scooter experiences into a new kind of empowering device: an intelligent personal electric vehicle (EV). Named one of TIME’s Best Inventions of 2018, WHILL is reinventing the personal mobility industry by combining state-of-the-art technology with aesthetically pleasing design.</p>
+          <p class="portfolio-description mb-4 text-small">It all began with a single user’s voice: “I’ve given up on even going to the grocery store just two blocks away.”</p>
+          <p class="portfolio-description mb-4 text-small">In 2010, this statement from a close friend was the start of it all. He was a wheelchair user who didn’t like the negative attention he received while out in public. WHILL’s founders knew him to be an amazingly independent, fun-loving, and social person, and they were determined to create a mobility device that would allow him to live his life with confidence and enthusiasm.</p>
+          <p class="portfolio-description mb-4 text-small">This is why they founded WHILL.</p>
+          <p class="portfolio-description mb-4 text-small">Since that time, WHILL’s mission has been to transform today’s antiquated power wheelchair and scooter experiences into a new kind of empowering device: an intelligent personal electric vehicle (EV). Named one of TIME’s Best Inventions of 2018, WHILL is reinventing the personal mobility industry by combining state-of-the-art technology with aesthetically pleasing design.</p>
           <hr class="mb-4">
-          <h5 class="company-new-title mb-4">Company News</h5>
+          <h5 class="company-new-title mb-4 text-medium">Company News</h5>
           <company-news v-for="(item, index) in whill" :key="index" :companyInfo="item"></company-news>
         </div>
       </template>
@@ -151,9 +151,9 @@ export default {
         </div>
       </template>
       <template  #right>
-        <div class="overflow-y-auto col-md-6 col-12  border-box p-5rem pb-0">
+        <div class="overflow-y-auto col-md-6 col-12  border-box p-7 pb-2">
           <portfolio-title :icons="false" title="" image="lp-Investments.png"></portfolio-title>
-          <p class="portfolio-description mb-5 pb-5">Fund-of-Fund investments in early-stage venture funds that complement our geographic coverage.</p>
+          <p class="portfolio-description mb-5 pb-5 text-small">Fund-of-Fund investments in early-stage venture funds that complement our geographic coverage.</p>
           <div class="img-wrapper d-flex justify-content-between mt-5">
             <img src="@/assets/image/portfolio/ballistic.png" alt="">
             <img src="@/assets/image/portfolio/2150.png" alt="">
@@ -172,14 +172,10 @@ export default {
 
     p.portfolio-description {
       font-weight:400;
-      font-size:18px;
-      line-height: 32px;
     }
 
     .info-wrapper p {
-      font-size: 18px;
       font-weight: 600;
-      line-height: 32px;
     }
 
     div.text-center h5 {
@@ -201,8 +197,6 @@ export default {
 
     .company-new-title {
       font-weight: 600;
-      font-size: 24px;
-      line-height: 34px;
       color: #313131;
     }
 

@@ -31,7 +31,7 @@
 .content-portfolio .portfolio{
     background-position: center;
     background-size: cover;
-    height: 100%;
+    height: 80vh;
 }
 .content-portfolio .portfolio .overlay{
     background-color: #00000078;

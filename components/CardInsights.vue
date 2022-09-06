@@ -53,20 +53,10 @@
         grid-row: span 2;
     }
     .card-view h3.card-title {
-        top: 30px;
-        left: 30px;
-        padding: 0px 0px 0px 4%;
         border-left: 2px solid var(--bg--primary);
-        font-size: 24px;
-        line-height: 30px;
-        width: 50%;
         color: var(--color-white);
     }
     .card-view .card-read-more {
-        bottom: 30px;
-        right: 70px;
-        font-size: 16px;
-        line-height: 24px;
         color: #F7F7F7;
         font-weight: 500;
     }
@@ -79,8 +69,52 @@
         transition: .6s ease-out;
     }
     .card-view p.card-date {
-        bottom: 30px;
-        left: 30px;
         color: var(--color-white);
     }
+    @media(min-width: 1441px){
+        .card-view h3.card-title {
+            top: 60px;
+            left: 60px;
+            padding: 0 0 0 36px;
+            font-size: 24px;
+            line-height: 30px;
+            width: 400px;
+        }
+         .card-view p.card-date {
+            bottom: 60px;
+            left: 60px;
+        }
+        .card-view .card-read-more {
+            bottom: 60px;
+            right: 70px;
+            font-size: 16px;
+            line-height: 24px;
+        }
+    }
+    @media(max-width: 1440px){
+        .card-view h3.card-title {
+            top: 40px;
+            left: 40px;
+            padding: 0 0 0 26px;
+            font-size: 20px;
+            line-height: 24px;
+            width: 400px;
+        }
+        .card-view .card-read-more {
+            bottom: 40px;
+            right: 50px;
+            font-size: 14px;
+            line-height: 17px;
+        }
+        .card-view p.card-date {
+            bottom: 40px;
+            left: 40px;
+        }
+    }
+    @media(max-width: 768px){
+        .card-view{
+            grid-row: span 1!important;
+        }
+    }
+    
 </style>

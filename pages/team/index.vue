@@ -16,7 +16,7 @@
 <template>
     <main>
         <section >
-            <div class="p-5rem m-0">
+            <div class="p-7 m-0">
                 <div class="row m-0 p-4">
                     <div class="col-md-12 p-0 m-0 align-items-center d-flex flex-column text-center">
                         <title-secundary titleH2="Who we are" class="justify-content-center"></title-secundary>
@@ -31,6 +31,7 @@
                         :teamJob="team.teamJob"
                         :teamImage="team.teamImage"
                         :teamEmail="team.teamEmail"
+                        :teamSlug="team.teamSlug"
                     >
                     </card-Team>
                 </div>

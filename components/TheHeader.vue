@@ -46,8 +46,8 @@
 </script>
 <template>
     <header class="w-100 d-flex justify-content-start" >
-        <div class="position-fixed container-header">
-            <div class="header-container d-flex justify-content-between align-items-start flex-column m-0 min-vh-100 menu-not-expanded" id="header-content">
+        <div class=" container-header">
+            <div class="header-container d-flex justify-content-between align-items-start flex-column m-0 menu-not-expanded" id="header-content">
                     <div class="m-0 p-0 w-0" >
                         <button type="button" class="img-menu-top p-0 img-menu position-relative border-0" id="icon-closed" @click="expanded">
                             <img class="item-hide-expanded position-absolute" src="../assets/image/hamburger-menu.png" alt="Icon Menu" width="35">
@@ -75,61 +75,87 @@
 </template>
 
 <style scoped>
-header{
-    z-index: 999;
-}
-#header-content.menu-not-expanded{
-    width: 85px;
-    transition: width 0.8s  ease;
-}
-#header-content.menu-expanded{
-    width: 200px;
-    transition: width 0.8s  ease;
-}
-#header-content{
-    background: #F7F7F7;
-    z-index: 9999;
-}
-header .header-container { 
-    padding: 24px 20px;
-}
-.menu-not-expanded .item-hide-expanded, 
-.menu-expanded .item-show-expanded{
-    opacity: 1;
-    transition: 0.8s ease;
-}
-.menu-not-expanded .item-show-expanded, 
-.menu-expanded .item-hide-expanded{
-    opacity: 0;
-    transition: 0.8s ease;
-}
-header ul.list-group{
-    margin: 81px 0 0 ;
-    min-width: 168px;
-}
-header ul.list-group li {
-    padding: 6px 0;
-}
-.list-group-none{
-    display: none;
-}
-header button{
-    background-color: transparent;
-}
-.img-menu img{
-    left: 5px;
-}
-.img-menu-top{
-    height: 35px;
-    width: 35px;
-}
-.img-menu-top img{
-    top: 0;
-}
-.img-menu-bottom img{
-    bottom: 0;
-}
-.w-0{
-    width: 0;
-}
+    header{
+        z-index: 999;
+    }
+    #header-content{
+        background: #F7F7F7;
+        z-index: 9999;
+    }
+    header .header-container { 
+        padding: 24px 20px;
+    }
+    .menu-not-expanded .item-hide-expanded, 
+    .menu-expanded .item-show-expanded{
+        opacity: 1;
+        transition: 0.8s ease;
+    }
+    .menu-not-expanded .item-show-expanded, 
+    .menu-expanded .item-hide-expanded{
+        opacity: 0;
+        transition: 0.8s ease;
+    }
+    header ul.list-group{
+        margin: 81px 0 0 ;
+        min-width: 168px;
+    }
+    header ul.list-group li {
+        padding: 6px 0;
+    }
+    .list-group-none{
+        display: none;
+    }
+    header button{
+        background-color: transparent;
+    }
+    .img-menu img{
+        left: 5px;
+    }
+    .img-menu-top{
+        height: 35px;
+        width: 35px;
+    }
+    .img-menu-top img{
+        top: 0;
+    }
+    .img-menu-bottom img{
+        bottom: 0;
+    }
+    .w-0{
+        width: 0;
+    }
+    @media(min-width: 768px){
+        div#header-content {
+            height: 100vh;
+        }
+        .container-header{
+            position: fixed;
+        }
+        #header-content.menu-not-expanded{
+            width: 85px;
+            transition: width 0.8s  ease;
+        }
+        #header-content.menu-expanded{
+            width: 200px;
+            transition: width 0.8s  ease;
+        }
+    }
+    @media(max-width: 767px){
+        .container-header{
+            position: relative;
+            width: 100%;
+        }
+         #header-content{
+            width: 100%;
+            transition: width 0.8s  ease;
+        }
+        #header-content div, 
+        button#icon-closed{
+            width: 100%;
+        }
+        .img-menu-top img{
+            right: 5px;
+            left: unset;
+        }
+    }
 </style>

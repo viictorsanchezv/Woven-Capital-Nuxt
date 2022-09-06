@@ -5,12 +5,13 @@
             teamJob :  String,
             teamImage : String,
             teamEmail : String,
+            teamSlug: String,
         }
     }
 </script>
 <template>
         <div class="m-0 p-0 content-team align-items-center d-flex flex-column ">
-            <a :href="`/team/${teamEmail}`">
+            <a :href="`/team/${teamSlug}`">
                 <img :src="require(`@/assets/image/team/${teamImage}`)" alt="" class="object-cover rounded-circle">
                 <h4 class="text-medium text-center">{{teamName}}</h4>
                 <p class="text-small text-center">{{teamJob}}</p>
@@ -29,6 +30,7 @@
     .content-team img {
         width: 180px;
         height: 180px;
+        object-position: top;
     }
     .content-team a, 
     .content-team h4, 

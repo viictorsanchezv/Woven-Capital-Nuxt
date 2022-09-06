@@ -7,8 +7,8 @@ export default {
 </script>
 <template>
   <div class="company-new-info mb-5">
-    <h6 class="m-0">{{companyInfo.title}}</h6>
-    <p class="m-0">{{companyInfo.description}}</p>
+    <h6 class="m-0 text-small">{{companyInfo.title}}</h6>
+    <p class="m-0 text-small">{{companyInfo.description}}</p>
     <a href="#">Read More <img src="@/assets/image/icon/arrow.png" alt="" /></a>
   </div>
 </template>
@@ -17,14 +17,10 @@ export default {
 <style scoped>
   h6{
     font-weight: 600;
-    font-size: 18px;
-    line-height: 32px;
     color: #313131;
   }
   p {
     font-weight: 400;
-    font-size: 18px;
-    line-height: 32px;
     color: #313131;
   }
   a{

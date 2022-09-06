@@ -1,8 +1,27 @@
-  
+    const headerData = [
+        { textLink: 'About', linkLink: '/about'  },
+        { textLink: 'Portfolio', linkLink: '/portfolio'  },
+        { textLink: 'Team', linkLink: '/team'  },
+        { textLink: 'Insights', linkLink: '/insights'  },
+        { textLink: 'Pitch', linkLink: '/pitch'  },
+        { textLink: 'Contact', linkLink: '/contact'  },
+        { textLink: 'Woven Planet', linkLink: '#'  },
+    ];
+    const footerData = [
+        { textLink: 'About', linkLink: '/about'  },
+        { textLink: 'Portfolio', linkLink: '/portfolio'  },
+        { textLink: 'Team', linkLink: '/team'  },
+        { textLink: 'Insights', linkLink: '/insights'  },
+        { textLink: 'Pitch', linkLink: '/pitch'  },
+        { textLink: 'Contact', linkLink: '/contact'  },
+        { textLink: 'Woven Planet', linkLink: '#'  },
+        { textLink: 'Privacy Notice', linkLink: '/privacy-notice'  },
+    ];
     const teamData = [
         {   
             teamName: "Prashant Kumar Bothra", 
             teamJob: "Principal", 
+            teamSlug: "prashant-kumar-bothra",
             teamEmail: "prashant@woven.vc", 
             teamLinkedin: "https://www.linkedin.com/in/prashantkb/", 
             teamDesc: 
@@ -22,6 +41,7 @@
         {   
             teamName: "Betty Bryant", 
             teamJob: "Principal", 
+            teamSlug: "betty-bryant",
             teamEmail: "betty@woven.vc", 
             teamLinkedin: "https://www.linkedin.com/in/betty-bryant/", 
             teamDesc: 
@@ -39,6 +59,7 @@
         {   
             teamName: "Will Fung", 
             teamJob: "Principal", 
+            teamSlug: "will-fung",
             teamEmail: "betty@woven.vc", 
             teamLinkedin: "https://www.linkedin.com/in/betty-bryant/", 
             teamDesc: 
@@ -58,6 +79,7 @@
         {   
             teamName: "Michiko Kato", 
             teamJob: "Principal", 
+            teamSlug: "michikosugita",
             teamEmail: "michiko@woven.vc", 
             teamLinkedin: "https://www.linkedin.com/in/michikosugita/", 
             teamDesc: 
@@ -77,6 +99,7 @@
         { 
             teamName: "George Kellerman", 
             teamJob: "Managing Director", 
+            teamSlug: "georgekellerman",
             teamEmail: "George@woven.vc", 
             teamLinkedin: "https://www.linkedin.com/in/georgekellerman/", 
             teamDesc: 
@@ -96,6 +119,7 @@
         {   
             teamName: "Jarek Khoilian", 
             teamJob: "Associate", 
+            teamSlug: "jarek-khoilian",
             teamEmail: "George@woven.vc", 
             teamLinkedin: "https://www.linkedin.com/in/georgekellerman/", 
             teamDesc: 
@@ -110,7 +134,8 @@
         },
         {   
             teamName: "Masashi Odawara", 
-            teamJob: "Head-of-Finance", 
+            teamJob: "masashiodawara", 
+            teamSlug: "betty-bryant",
             teamEmail: "masa@woven.vc", 
             teamLinkedin: "https://www.linkedin.com/in/masashiodawara/", 
             teamDesc: 
@@ -128,6 +153,7 @@
         {   
             teamName: "Alissa Schneideman", 
             teamJob: "Associate", 
+            teamSlug: "alissa",
             teamEmail: "masa@woven.vc", 
             teamLinkedin: "https://www.linkedin.com/in/masashiodawara/", 
             teamDesc: 
@@ -143,6 +169,7 @@
         {   
             teamName: "Max Suzuki", 
             teamJob: "Partner, Head of Operations", 
+            teamSlug: "max-suzuki",
             teamEmail: "max@woven.vc", 
             teamLinkedin: "https://www.linkedin.com/in/masahirosuzuki/", 
             teamDesc: 
@@ -160,6 +187,7 @@
         {   
             teamName: "Daniel Yoo", 
             teamJob: "Director, Marketing & Communications", 
+            teamSlug: "danielyoo",
             teamEmail: "daniel@woven.vc", 
             teamLinkedin: "https://www.linkedin.com/in/danielyoo/", 
             teamDesc: 
@@ -179,25 +207,6 @@
         { iconPort: "will-Logo.png" , imagePort: "whill.png" , linkPort : "/portfolio#whill"},
         { iconPort: "nuro-Logo.png" , imagePort: "nuro.png" , linkPort : "/portfolio#nuro"},
         { iconPort: "ridecell-logo.png" , imagePort: "ridecell.png", linkPort : "/portfolio#ridecell" }
-    ];
-    const headerData = [
-        { textLink: 'About', linkLink: '/about'  },
-        { textLink: 'Portfolio', linkLink: '/portfolio'  },
-        { textLink: 'Team', linkLink: '/team'  },
-        { textLink: 'Insights', linkLink: '/insights'  },
-        { textLink: 'Pitch', linkLink: '/pitch'  },
-        { textLink: 'Contact', linkLink: '/contact'  },
-        { textLink: 'Woven Planet', linkLink: '#'  },
-    ];
-    const footerData = [
-        { textLink: 'About', linkLink: '/about'  },
-        { textLink: 'Portfolio', linkLink: '/portfolio'  },
-        { textLink: 'Team', linkLink: '/team'  },
-        { textLink: 'Insights', linkLink: '/insights'  },
-        { textLink: 'Pitch', linkLink: '/pitch'  },
-        { textLink: 'Contact', linkLink: '/contact'  },
-        { textLink: 'Woven Planet', linkLink: '#'  },
-        { textLink: 'Privacy Notice', linkLink: '#'  },
     ];
     const insightsData = [
         { 

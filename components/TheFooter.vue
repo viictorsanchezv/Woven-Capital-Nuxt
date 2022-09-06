@@ -27,7 +27,7 @@
                     </item-link>
                 </ul>
             </div>
-            <div class="col-md-4 m-0 p-0 text-md-end">
+            <div class="col-md-4 company">
                 <span class="w-100 content-text">Woven Capital Management Company, LLC © 2022</span>
             </div>
         </div>
@@ -47,6 +47,33 @@
         color: var(--bg--primary);
     }
     footer .content-text{
+        text-align: end;
         color: var( --color-white );
+        
+    }
+    footer .company{
+        padding: 0;
+        margin: 0;
+        display: flex;
+        justify-content: flex-end;
+        text-align: end;
+    }
+    @media(max-width:768px){
+        footer ul.list-group {
+            display: flex;
+            flex-direction: unset;
+            flex-wrap: wrap;
+        }
+        footer ul.list-group li{
+            width: 50%;
+            display: flex;
+        }
+        .content-footer{
+            padding: 40px;
+        }
+        footer .company {
+            text-align: center;
+            margin-top: 10px;
+        }
     }
 </style>

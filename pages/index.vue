@@ -33,10 +33,10 @@
             <video class="vh-100 position-absolute tp-0 lft-0 w-100 object-cover top-0 lef-0" src="@/assets/video/Woven-Capital-Animated.mp4" autoplay="true" muted="true" loop="true" poster=""></video>
             <div class="content-hero row align-items-start text-md-center justify-content-center m-0">
                 <div class="col-12 m-0 p-0 d-flex justify-content-center flex-column align-items-center">
-                    <div class="mt-0 mb-5 mr-0 ml-0 p-0 w-100 align-items-start text-md-center justify-content-center">
+                    <div class="mt-0 mb-5 mr-0 ml-0 p-0 w-100 d-flex align-items-start text-md-center justify-content-center">
                         <img src="../assets/image/Logo_text.png" alt="" width="325" height="45">
                     </div>
-                    <h1 class="title-home">Fueling the engine of future growth.</h1>
+                    <h1 class="title-home mb-5">Fueling the engine of future growth.</h1>
                     <buttom-primary class="d-flex justify-content-center align-items-start " text_buttom="Read our Story" link_buttom="/about"></buttom-primary>
                 </div>
             </div>
@@ -55,7 +55,7 @@
         <!-- portfolio -->
         <section class="our-portfolio d-flex justify-content-center w-100">
             <div class=" position-relative w-100">
-                <div class="row text-md-center justify-content-center m-0 p-0 position-relative ">
+                <div class="row text-md-center justify-content-center m-0 p-0 position-relative our-portfolio-content">
                     <div class="col-12 m-0 p-0 ">
 
                         <title-secundary class="justify-content-center" titleH2="Meet the leaders shaping the world of tomorrow, " spanTitleH2="today"></title-secundary>
@@ -129,13 +129,7 @@
     h1.title-home{
         color: var( --color--secondary );
         font-weight: 500;
-        font-size: 70px;
-        line-height: 80px;
         letter-spacing: -4px;
-        
-    }
-    .hero-image h1.title-home{
-        width: 52%;
     }
     .hero-image{
         background-position: center;
@@ -148,20 +142,11 @@
     .text-partner{
         color: var( --color--secondary );
     }
-    .text-partner{
-        width: 54%;
-    }
     .our-portfolio{
         padding: 158px 0px 0px 0px;
     }
-    .content-portfolio{
-        height: 605px;
-    }
     .partner-together{
         padding: 107px 0 0 0;
-    }
-    .partner-together img{
-        width: 984px;
     }
     .content-insights {
         display: grid;
@@ -169,23 +154,93 @@
         grid-auto-rows: calc( 50vh - 10px);
         grid-gap: 10px;
     }
-    @media(max-width: 767px){
+    .card-view:first-child, .card-view:nth-child(3n+1) {
+        grid-row: span 2;
+    }
+    @media(min-width:1441px){
+        .hero-image h1.title-home{
+            width: 590px;
+            font-size: 70px;
+            line-height: 80px;
+        }
+        .text-partner{
+            width: 737px;
+        }
+    }
+    @media(max-width: 1440px){
+        .hero-image h1.title-home {
+            width: 535px;
+            font-size: 63px;
+            line-height: 76px;
+        }
+        .text-partner{
+            width: 600px;
+        }
+    }
+    @media(max-width:768px){
+        .hero-image h1.title-home {
+            width: 384px;
+            font-size: 35px;
+            line-height: 49px;
+            text-align: center;
+            padding: 10px;
+        }
+        .content-hero img {
+            max-width: 100%;
+            object-fit: contain;
+            padding: 6px;
+        }
+        .our-portfolio{
+            padding: 40px 0 0;
+        }
+        .our-portfolio .our-portfolio-content, 
+        .partner-together{
+            padding: 10% 0% 0%;
+            text-align: center;
+            padding: 40px;
+        }
+        h2.title-secundary, h2.title-secundary span {
+            width: 100%!important;
+            font-size: 35px!important;
+            text-align: center;
+            line-height: 39px!important;
+        }
+        p.text-medium.text-portfolio {
+            text-align: center;
+        }
+        .text-partner{
+            width: 100%;
+        }
         .content-portfolio{
             height: auto!important;
         }
         .content-portfolio .portfolio {
-            height: 500px!important;
-            margin: 0!important;
+            height: 400px!important;
+            margin: 0 0 40px 0;
+        }
+        .content-portfolio .portfolio:nth-child(3){
+            margin: 0;
         }
         .partner-img {
             width: 100%!important;
         }
-        .partner-together {
-            padding: 40px 0 0 0!important;
-            text-align: center;
+        .content-insights {
+            grid-template-columns: repeat(auto-fill, minmax(50%, 1fr));
+            grid-auto-rows: calc( 50vh - 5px);
+            grid-gap: 40px;
         }
-
     }
+    @media(min-width: 1080px){
+        .partner-together img{
+            width: 984px;
+        }
+    }
+    @media(max-width: 1079px){
+        .partner-together img{
+            width: 100%;
+        }
+    }
+    
 </style>
 
 

@@ -27,7 +27,8 @@
     display: block; 
     width: 100%;
     transform: translateX(100%); 
-    animation: move 20s linear infinite;
+    animation: move 40s linear infinite;
+    white-space: nowrap;
 }
 @keyframes move {
   to { transform: translateX(-100%); }

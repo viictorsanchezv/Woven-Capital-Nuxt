@@ -11,7 +11,8 @@
 
 
 <template>
-  <main>
+  <main class="contact-page">
+
     <section class="row m-0">
       <div class="col-12 col-md-6 p-0">
         <img class="w-100 image-contact object-cover " src="@/assets/image/contact/rectangle-444.png" alt="">
@@ -19,7 +20,7 @@
       <div class="col-12 col-md-6 column-padding d-flex justify-content-end flex-column content-contact">
         <h1 class="h1-45">Get in touch</h1>
         <p class=" first-p pb-2 text-small">If you share our vision and your company would like to be considered for investment by Woven Capital, we want to hear from you.</p>
-        <buttom-primary class="mb-5 mr-0 ml-0 mt-0 p-0 d-flex justify-content-start" text_buttom="Pitch your company" link_buttom="https://nuxtjs.org/"></buttom-primary>
+        <buttom-primary class="mb-5 mr-0 ml-0 mt-0 p-0 d-flex justify-content-start" text_buttom="Pitch your company" link_buttom="/pitch"></buttom-primary>
         <div class="m-0 p-0 d-flex justify-content-start mail-wrapper">
           <div class=" col-md-6 p-0" >
             <h4 class="text-medium wight-600">General</h4>
@@ -63,6 +64,9 @@
 
 
 <style scoped>
+    .contact-page{
+      min-height: calc(100vh - 74px);
+    }
     h5.wight-600, 
     h4.wight-600, 
     span.wight-600{

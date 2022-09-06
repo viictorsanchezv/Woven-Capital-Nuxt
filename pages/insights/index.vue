@@ -41,4 +41,11 @@
         grid-gap: 10px;
         margin: 0;
     }
+    @media(max-width: 768px){
+        .content-insights {
+            grid-template-columns: repeat(auto-fill, minmax(50%, 1fr));
+            grid-auto-rows: calc( 50vh - 5px);
+            grid-gap: 40px;
+        }
+    }
 </style>

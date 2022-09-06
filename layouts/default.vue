@@ -9,10 +9,18 @@
     </div>
 </template>
 <style>
+    
+    @media(min-width: 768px){
+        .content-main {
+            width: 100%;
+            padding: 0 0 0 85px;
+        }
+    }
+    @media(max-width: 767px){
     .content-main {
-        max-width: 1440px;
-        width: 100%;
-        padding: 0 0 0 85px;
+            width: 100%;
+            padding: 0;
+        }
     }
  
 </style>

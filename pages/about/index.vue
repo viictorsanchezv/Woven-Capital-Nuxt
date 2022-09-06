@@ -1,45 +1,50 @@
 <script >
-  import { onMounted, ref } from "vue";
   import titleSecundary from "@/components/TitleSecundary.vue";
   import SectionColumns from "@/components/SectionColumns.vue";
   import ImageCard from "@/components/ImageCard.vue";
   export default {
-     
-      props: {
-        imageCardInfo : Array,
-      }, 
-      onMounted: () => {
-          imageCardInfo.value.push({
+     data(){
+        return {
+          imageCardInfo: [],
+        }
+     },
+     components: {
+        titleSecundary,
+        SectionColumns,
+        ImageCard
+      },
+      created () {
+          this.imageCardInfo.push({
             image: "/about/IA.png",
             text: "Artificial Intelligence",
             imageAlt: "Artificial Intelligence",
           });
 
-          imageCardInfo.value.push({
+          this.imageCardInfo.push({
             image: "/about/automation.png",
             text: "Automation",
             imageAlt: "Automation",
           });
 
-          imageCardInfo.value.push({
+          this.imageCardInfo.push({
             image: "/about/connectivity.png",
             text: "Connectivity",
             imageAlt: "Connectivity",
           });
 
-          imageCardInfo.value.push({
+          this.imageCardInfo.push({
             image: "/about/data-analytics.png",
             text: "Data & Analytics",
             imageAlt: "Data & Analytics",
           });
 
-          imageCardInfo.value.push({
+          this.imageCardInfo.push({
             image: "/about/mobility.png",
             text: "Mobility",
             imageAlt: "Mobility",
           });
 
-          imageCardInfo.value.push({
+          this.imageCardInfo.push({
             image: "/about/woven-city.png",
             text: "Woven City",
             imageAlt: "Woven City",
@@ -53,7 +58,7 @@
   <main>
     <section-columns class="">
       <template #left>
-        <div class="col-md-6 col-12 border-box p-5rem">
+        <div class="col-md-6 col-12 border-box p-7">
           <h1 class="mb-4 h1-45">Our <span class="text-green h1-45">Mission</span></h1>
           <p class="text-sect text-small">
             We are in the business of investing in the future of mobility and
@@ -111,7 +116,7 @@
         </div>
       </template>
       <template #right>
-        <div class="col-md-6 col-12 border-box p-5rem">
+        <div class="col-md-6 col-12 border-box p-7">
           <title-secundary class="mb-4" titleH2="Capital is only the " spanTitleH2="starting point"></title-secundary>
           <p class="text-sect text-small">
             What gets us up in the morning? Building up and investing in
@@ -141,7 +146,6 @@
           through technology. <br />Key areas of development include:
         </p>
       </div>
-
       <image-card
         v-for="(image, index) in imageCardInfo"
         :key="index"
@@ -152,7 +156,7 @@
 
     <section-columns >
       <template #left>
-        <div class="col-md-6 col-12 mt-5 border-box p-5rem">
+        <div class="col-md-6 col-12 mt-5 border-box p-7">
           <title-secundary class="mb-5 justify-content-start p-0" titleH2="Our " spanTitleH2="Commitment"></title-secundary>
           <p class="mb-2 mt-5 text-comm text-medium"> 
             “We engage with entrepreneurs and innovators in an array of disciplines and give them the resources they need to take a chance and change the world. This requires ambition. It requires imagination. It requires the courage to look past the possible and see a better world and make it real. This is our commitment.”
