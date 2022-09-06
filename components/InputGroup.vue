@@ -1,6 +1,6 @@
 <template>
   <div class="mb-4" :class="[widthCol(inputInfo.column)]">
-    <label class="mb-1 w-100 text-18" :for="inputInfo.id">{{ inputInfo.label }}{{inputInfo.required?'*':''}}</label>
+    <label class="mb-1 w-100 text-small" :for="inputInfo.id">{{ inputInfo.label }}{{inputInfo.required?'*':''}}</label>
     <input
       v-if="inputInfo.type!=='textarea'"
       class="rounded w-100"

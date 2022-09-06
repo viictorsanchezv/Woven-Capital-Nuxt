@@ -12,8 +12,8 @@
         <div class="m-0 p-0 content-team align-items-center d-flex flex-column ">
             <a :href="`/team/${teamEmail}`">
                 <img :src="require(`@/assets/image/team/${teamImage}`)" alt="" class="object-cover rounded-circle">
-                <h4 class="text-24 text-center">{{teamName}}</h4>
-                <p class="text-18 text-center">{{teamJob}}</p>
+                <h4 class="text-medium text-center">{{teamName}}</h4>
+                <p class="text-small text-center">{{teamJob}}</p>
             </a>
             
         </div>

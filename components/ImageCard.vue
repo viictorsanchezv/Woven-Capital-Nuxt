@@ -1,7 +1,7 @@
 <template>
   <div>
     <img class="mb-3 h-50"  :src="require(`@/assets/image${imageInfo.image}`)" :alt="imageInfo.imageAlt">
-    <p class="text-card text-24">{{imageInfo.text}}</p>
+    <p class="text-card text-medium">{{imageInfo.text}}</p>
   </div>
 </template>
 <script >

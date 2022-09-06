@@ -175,15 +175,211 @@
             teamImage: "Daniel-Yoo.png", 
         },
     ];
-    const portfolios =  [
-        { iconPort: "will-Logo.png" , imagePort: "whill.png" , linkPort : "#"},
-        { iconPort: "nuro-Logo.png" , imagePort: "nuro.png" , linkPort : "#"},
-        { iconPort: "ridecell-logo.png" , imagePort: "ridecell.png", linkPort : "#" }
+    const portfoliosData =  [
+        { iconPort: "will-Logo.png" , imagePort: "whill.png" , linkPort : "/portfolio#whill"},
+        { iconPort: "nuro-Logo.png" , imagePort: "nuro.png" , linkPort : "/portfolio#nuro"},
+        { iconPort: "ridecell-logo.png" , imagePort: "ridecell.png", linkPort : "/portfolio#ridecell" }
     ];
+    const headerData = [
+        { textLink: 'About', linkLink: '/about'  },
+        { textLink: 'Portfolio', linkLink: '/portfolio'  },
+        { textLink: 'Team', linkLink: '/team'  },
+        { textLink: 'Insights', linkLink: '/insights'  },
+        { textLink: 'Pitch', linkLink: '/pitch'  },
+        { textLink: 'Contact', linkLink: '/contact'  },
+        { textLink: 'Woven Planet', linkLink: '#'  },
+    ];
+    const footerData = [
+        { textLink: 'About', linkLink: '/about'  },
+        { textLink: 'Portfolio', linkLink: '/portfolio'  },
+        { textLink: 'Team', linkLink: '/team'  },
+        { textLink: 'Insights', linkLink: '/insights'  },
+        { textLink: 'Pitch', linkLink: '/pitch'  },
+        { textLink: 'Contact', linkLink: '/contact'  },
+        { textLink: 'Woven Planet', linkLink: '#'  },
+        { textLink: 'Privacy Notice', linkLink: '#'  },
+    ];
+    const insightsData = [
+        { 
+            titleInsights : "WHILL Secures Funding from Woven Capital to Scale Short-Distance Mobility Service Globally" , 
+            slugInsights : "whill" , 
+            imageInsights : "will.png" , 
+            createdAt : "May 17, 2022" , 
+            articleInd : "false",
+            contentInsight : `
+                New Funding Accelerates Smart City Initiatives Using WHILL Mobility Products and Services
 
+                San Francisco, May 17, 2022 – WHILL, Inc., a leading developer and service provider of short-distance mobility, announced today it closed new funding led by a strategic investor Woven Capital, the growth-stage corporate venture capital fund of Woven Planet, a subsidiary of Toyota Motor Corporation. WHILL plans to use the investment to scale production globally as well as to place more emphasis and resources on the service side of its business.
+
+                The funding follows successful airport trials of WHILL’s fully autonomous mobility service in the San Jose International Airport (which serves Silicon Valley) in addition to other successful trials in New York, Houston, Dallas, Atlanta, Grand Rapids, Toronto, Winnipeg and a permanent installment in Tokyo International Airport in Japan.
+
+                “We are pleased to have closed this important funding to coincide with our 10-year anniversary,” says WHILL CEO Satoshi Sugie. “WHILL has been creating innovative mobility hardware and software since 2012. Looking to the next 10 years, this funding will help us scale operations to meet growing demand and to provide new services to accelerate innovations in autonomous mobility service at airports, hospitals, and other locations where people need mobility assistance. Both Woven Capital and Woven Planet share our mission and offer unique insights and access to industry leaders to accelerate our journey. This funding opens the possibility of future collaboration between Woven Planet and WHILL’s mobility products and services.”
+
+                Michiko Kato, the Woven Capital principal who led the investment, said, “WHILL is transforming a legacy wheelchair industry that hasn’t created real innovation in years. More than 200 million people around the world have difficulty walking, and new mobility solutions can make a tremendous impact in fostering human relationships, boosting health and improving the quality of life. WHILL has led the way with a decade of proven experience delivering innovative mobility assistance solutions and is well positioned to support this important market and help anyone live their best lives through mobility.”
+
+                WHILL offers commercial models of short-distance mobility vehicles that are equipped with autonomous driving and anti-collision functions. Facility managers can automatically transport people throughout their facilities by implementing the compatible service package that WHILL offers as a B2B service, which includes a portal that can manage and operate multiple vehicles simultaneously. In addition to improving customer experience and providing convenient transportation services, facility managers can reduce staff load and run safer and more efficient operations.
+
+                WHILL offers their consumer models to airports as an option for passengers to navigate the terminal themselves. Tampa International Airport for example utilized 15 units to transport passengers. With this option, passengers have the independence to explore the airport and head to the gate on their own.
+
+                WHILL is also in the B2B2C space. For example, the micromobility company Bird is offering rentals in New York City, San Diego, and San Francisco. Through Bird’s main app, users have an option to rent a WHILL.
+
+                About WHILL, Inc. WHILL connects the world with short-distance mobility products and services. Along with designing and selling short-distance mobility vehicles, WHILL provides Mobility-as-a-Service solutions, offering autonomous and manual transportation services that make public spaces more accessible. WHILL now offers products and services in over 20 countries and regions globally. Learn more at https://whill.inc.
+
+                About Woven Capital Woven Capital is an $800 million global investment fund that supports growth-stage companies focused on technology and innovation in mobility. It was established in 2021 as the corporate venture capital investment arm of Woven Planet, founded by Toyota Motor Corporation. Supporting Woven Planet’s effort to hasten the world’s journey to the future of mobility, Woven Capital invests in mobility technologies, automation, artificial intelligence, data and analytics, connectivity and smart cities globally. For the latest news, please visit www.woven.vc.
+                ` 
+        },    
+        { 
+            titleInsights : "GCV Powerlist 2022: George Kellerman, Woven Capital" , 
+            slugInsights : "gcv-powerlist-2022-george-kellerman-woven-capital" , 
+            imageInsights : "powerlist.png" , 
+            createdAt : "May 16, 2022" , 
+            articleInd : "false",
+            contentInsight : `
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sagittis leo id felis congue, at commodo metus laoreet. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Vestibulum fringilla ipsum sit amet tellus luctus convallis. Mauris quis tellus vitae erat semper dictum quis sed turpis. Proin a finibus dui, nec malesuada odio. Aliquam ultrices lectus eu enim finibus, in dapibus nisl scelerisque. Curabitur massa ipsum, sollicitudin nec sem ut, porta congue nulla. Aliquam erat volutpat. Phasellus mauris metus, semper in metus eu, gravida varius massa. Nam quis interdum purus, ac feugiat lacus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse dictum odio lectus, in tempus ligula bibendum sed. Etiam odio tortor, dignissim sed venenatis ut, elementum eu lacus.
+
+                Nunc tempus eget nunc quis interdum. Nam at scelerisque dui. Morbi imperdiet ligula in posuere convallis. Quisque ut mi ultrices, sollicitudin risus ac, tristique justo. Integer in facilisis erat. Vivamus id bibendum ipsum, in pharetra sem. Curabitur commodo mattis sem eu sodales.
+
+                Donec in felis ac ipsum facilisis lobortis faucibus eu urna. In auctor, eros a accumsan auctor, nulla odio viverra nisi, et placerat massa augue quis purus. Etiam facilisis magna metus, eu finibus eros sodales sed. Donec massa dui, commodo vel tincidunt et, viverra faucibus libero. Quisque leo tellus, finibus eget molestie nec, faucibus non odio. Pellentesque vitae vestibulum sapien. Morbi ipsum ante, blandit at est ut, hendrerit placerat odio. Aliquam iaculis dui ac dui pharetra, et dignissim purus commodo.
+
+                Ut pellentesque commodo tortor in lobortis. Aliquam a porttitor lacus. Quisque iaculis lacus nunc, et congue dui tincidunt nec. Ut aliquet turpis quis urna aliquam dictum. Morbi ultrices diam porttitor, scelerisque magna ac, ornare nibh. Vivamus blandit ante eu augue consequat pulvinar. Vestibulum efficitur ac enim et tempus. Vestibulum mollis purus enim, fermentum convallis leo efficitur non.
+
+                Praesent interdum sapien vitae magna feugiat, et sagittis risus semper. Duis non leo hendrerit, dignissim dolor ac, ultrices diam. Donec lorem elit, blandit vel justo ut, volutpat lacinia ex. Curabitur dignissim dictum aliquam. Fusce vitae venenatis ipsum, vitae dapibus eros. Vivamus in nisl nec lectus vulputate ornare. Morbi vel arcu magna. Aenean odio ex, sodales nec quam nec, sollicitudin ullamcorper lacus. Ut tincidunt justo ex, non elementum ante pharetra nec. Nulla porta tellus ac neque sagittis facilisis interdum sit amet ligula. Cras non felis eget urna finibus pellentesque. Phasellus elementum ipsum ac tortor elementum finibus. Sed lectus justo, suscipit at nisi sed, luctus consectetur lacus.
+            `
+        },    
+        { 
+            titleInsights : "GCV Interview: Woven Capital’s George Kellerman – Experience & Vision" , 
+            slugInsights : "https://globalventuring.com/corporate/woven-capitals-george-kellerman-experience-vision" , 
+            imageInsights : "interview.png" , 
+            createdAt : "Mar 31, 2022" , 
+            articleInd : "true",
+            contentInsight : `
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sagittis leo id felis congue, at commodo metus laoreet. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Vestibulum fringilla ipsum sit amet tellus luctus convallis. Mauris quis tellus vitae erat semper dictum quis sed turpis. Proin a finibus dui, nec malesuada odio. Aliquam ultrices lectus eu enim finibus, in dapibus nisl scelerisque. Curabitur massa ipsum, sollicitudin nec sem ut, porta congue nulla. Aliquam erat volutpat. Phasellus mauris metus, semper in metus eu, gravida varius massa. Nam quis interdum purus, ac feugiat lacus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse dictum odio lectus, in tempus ligula bibendum sed. Etiam odio tortor, dignissim sed venenatis ut, elementum eu lacus.
+
+                Nunc tempus eget nunc quis interdum. Nam at scelerisque dui. Morbi imperdiet ligula in posuere convallis. Quisque ut mi ultrices, sollicitudin risus ac, tristique justo. Integer in facilisis erat. Vivamus id bibendum ipsum, in pharetra sem. Curabitur commodo mattis sem eu sodales.
+
+                Donec in felis ac ipsum facilisis lobortis faucibus eu urna. In auctor, eros a accumsan auctor, nulla odio viverra nisi, et placerat massa augue quis purus. Etiam facilisis magna metus, eu finibus eros sodales sed. Donec massa dui, commodo vel tincidunt et, viverra faucibus libero. Quisque leo tellus, finibus eget molestie nec, faucibus non odio. Pellentesque vitae vestibulum sapien. Morbi ipsum ante, blandit at est ut, hendrerit placerat odio. Aliquam iaculis dui ac dui pharetra, et dignissim purus commodo.
+
+                Ut pellentesque commodo tortor in lobortis. Aliquam a porttitor lacus. Quisque iaculis lacus nunc, et congue dui tincidunt nec. Ut aliquet turpis quis urna aliquam dictum. Morbi ultrices diam porttitor, scelerisque magna ac, ornare nibh. Vivamus blandit ante eu augue consequat pulvinar. Vestibulum efficitur ac enim et tempus. Vestibulum mollis purus enim, fermentum convallis leo efficitur non.
+
+                Praesent interdum sapien vitae magna feugiat, et sagittis risus semper. Duis non leo hendrerit, dignissim dolor ac, ultrices diam. Donec lorem elit, blandit vel justo ut, volutpat lacinia ex. Curabitur dignissim dictum aliquam. Fusce vitae venenatis ipsum, vitae dapibus eros. Vivamus in nisl nec lectus vulputate ornare. Morbi vel arcu magna. Aenean odio ex, sodales nec quam nec, sollicitudin ullamcorper lacus. Ut tincidunt justo ex, non elementum ante pharetra nec. Nulla porta tellus ac neque sagittis facilisis interdum sit amet ligula. Cras non felis eget urna finibus pellentesque. Phasellus elementum ipsum ac tortor elementum finibus. Sed lectus justo, suscipit at nisi sed, luctus consectetur lacus.
+            `
+        },    
+        { 
+            titleInsights : "Woven Capital Invests in UP.Partners’ New Venture Capital Fund Dedicated to Powering the Future of Mobility Through Emerging Technology" , 
+            slugInsights : "woven-capital-invests-in-UP-Partners" , 
+            imageInsights : "parthners.png" , 
+            createdAt : "Oct 19, 2021" , 
+            articleInd : "false",
+            contentInsight : `
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sagittis leo id felis congue, at commodo metus laoreet. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Vestibulum fringilla ipsum sit amet tellus luctus convallis. Mauris quis tellus vitae erat semper dictum quis sed turpis. Proin a finibus dui, nec malesuada odio. Aliquam ultrices lectus eu enim finibus, in dapibus nisl scelerisque. Curabitur massa ipsum, sollicitudin nec sem ut, porta congue nulla. Aliquam erat volutpat. Phasellus mauris metus, semper in metus eu, gravida varius massa. Nam quis interdum purus, ac feugiat lacus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse dictum odio lectus, in tempus ligula bibendum sed. Etiam odio tortor, dignissim sed venenatis ut, elementum eu lacus.
+
+                Nunc tempus eget nunc quis interdum. Nam at scelerisque dui. Morbi imperdiet ligula in posuere convallis. Quisque ut mi ultrices, sollicitudin risus ac, tristique justo. Integer in facilisis erat. Vivamus id bibendum ipsum, in pharetra sem. Curabitur commodo mattis sem eu sodales.
+
+                Donec in felis ac ipsum facilisis lobortis faucibus eu urna. In auctor, eros a accumsan auctor, nulla odio viverra nisi, et placerat massa augue quis purus. Etiam facilisis magna metus, eu finibus eros sodales sed. Donec massa dui, commodo vel tincidunt et, viverra faucibus libero. Quisque leo tellus, finibus eget molestie nec, faucibus non odio. Pellentesque vitae vestibulum sapien. Morbi ipsum ante, blandit at est ut, hendrerit placerat odio. Aliquam iaculis dui ac dui pharetra, et dignissim purus commodo.
+
+                Ut pellentesque commodo tortor in lobortis. Aliquam a porttitor lacus. Quisque iaculis lacus nunc, et congue dui tincidunt nec. Ut aliquet turpis quis urna aliquam dictum. Morbi ultrices diam porttitor, scelerisque magna ac, ornare nibh. Vivamus blandit ante eu augue consequat pulvinar. Vestibulum efficitur ac enim et tempus. Vestibulum mollis purus enim, fermentum convallis leo efficitur non.
+
+                Praesent interdum sapien vitae magna feugiat, et sagittis risus semper. Duis non leo hendrerit, dignissim dolor ac, ultrices diam. Donec lorem elit, blandit vel justo ut, volutpat lacinia ex. Curabitur dignissim dictum aliquam. Fusce vitae venenatis ipsum, vitae dapibus eros. Vivamus in nisl nec lectus vulputate ornare. Morbi vel arcu magna. Aenean odio ex, sodales nec quam nec, sollicitudin ullamcorper lacus. Ut tincidunt justo ex, non elementum ante pharetra nec. Nulla porta tellus ac neque sagittis facilisis interdum sit amet ligula. Cras non felis eget urna finibus pellentesque. Phasellus elementum ipsum ac tortor elementum finibus. Sed lectus justo, suscipit at nisi sed, luctus consectetur lacus.
+            ` 
+        },    
+        { 
+            titleInsights : "Woven Capital Invests in Planet-Friendly Urban Innovations with the Climate Technology Sustainability Fund of 2150" , 
+            slugInsights : "2150" , 
+            imageInsights : "invests.png" , 
+            createdAt : "Oct 11, 2021" , 
+            articleInd : "false",
+            contentInsight : `
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sagittis leo id felis congue, at commodo metus laoreet. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Vestibulum fringilla ipsum sit amet tellus luctus convallis. Mauris quis tellus vitae erat semper dictum quis sed turpis. Proin a finibus dui, nec malesuada odio. Aliquam ultrices lectus eu enim finibus, in dapibus nisl scelerisque. Curabitur massa ipsum, sollicitudin nec sem ut, porta congue nulla. Aliquam erat volutpat. Phasellus mauris metus, semper in metus eu, gravida varius massa. Nam quis interdum purus, ac feugiat lacus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse dictum odio lectus, in tempus ligula bibendum sed. Etiam odio tortor, dignissim sed venenatis ut, elementum eu lacus.
+
+                Nunc tempus eget nunc quis interdum. Nam at scelerisque dui. Morbi imperdiet ligula in posuere convallis. Quisque ut mi ultrices, sollicitudin risus ac, tristique justo. Integer in facilisis erat. Vivamus id bibendum ipsum, in pharetra sem. Curabitur commodo mattis sem eu sodales.
+
+                Donec in felis ac ipsum facilisis lobortis faucibus eu urna. In auctor, eros a accumsan auctor, nulla odio viverra nisi, et placerat massa augue quis purus. Etiam facilisis magna metus, eu finibus eros sodales sed. Donec massa dui, commodo vel tincidunt et, viverra faucibus libero. Quisque leo tellus, finibus eget molestie nec, faucibus non odio. Pellentesque vitae vestibulum sapien. Morbi ipsum ante, blandit at est ut, hendrerit placerat odio. Aliquam iaculis dui ac dui pharetra, et dignissim purus commodo.
+
+                Ut pellentesque commodo tortor in lobortis. Aliquam a porttitor lacus. Quisque iaculis lacus nunc, et congue dui tincidunt nec. Ut aliquet turpis quis urna aliquam dictum. Morbi ultrices diam porttitor, scelerisque magna ac, ornare nibh. Vivamus blandit ante eu augue consequat pulvinar. Vestibulum efficitur ac enim et tempus. Vestibulum mollis purus enim, fermentum convallis leo efficitur non.
+
+                Praesent interdum sapien vitae magna feugiat, et sagittis risus semper. Duis non leo hendrerit, dignissim dolor ac, ultrices diam. Donec lorem elit, blandit vel justo ut, volutpat lacinia ex. Curabitur dignissim dictum aliquam. Fusce vitae venenatis ipsum, vitae dapibus eros. Vivamus in nisl nec lectus vulputate ornare. Morbi vel arcu magna. Aenean odio ex, sodales nec quam nec, sollicitudin ullamcorper lacus. Ut tincidunt justo ex, non elementum ante pharetra nec. Nulla porta tellus ac neque sagittis facilisis interdum sit amet ligula. Cras non felis eget urna finibus pellentesque. Phasellus elementum ipsum ac tortor elementum finibus. Sed lectus justo, suscipit at nisi sed, luctus consectetur lacus.
+            ` 
+        },    
+        { 
+            titleInsights : "Woven Capital Invests in Ridecell to Accelerate Global Growth in IoT-driven Automation for Mobility and Fleet Businesses" , 
+            slugInsights : "ridecell" , 
+            imageInsights : "ridecell.png" , 
+            createdAt : "Jun 16, 2021" , 
+            articleInd : "false",
+            contentInsight : `
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sagittis leo id felis congue, at commodo metus laoreet. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Vestibulum fringilla ipsum sit amet tellus luctus convallis. Mauris quis tellus vitae erat semper dictum quis sed turpis. Proin a finibus dui, nec malesuada odio. Aliquam ultrices lectus eu enim finibus, in dapibus nisl scelerisque. Curabitur massa ipsum, sollicitudin nec sem ut, porta congue nulla. Aliquam erat volutpat. Phasellus mauris metus, semper in metus eu, gravida varius massa. Nam quis interdum purus, ac feugiat lacus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse dictum odio lectus, in tempus ligula bibendum sed. Etiam odio tortor, dignissim sed venenatis ut, elementum eu lacus.
+
+                Nunc tempus eget nunc quis interdum. Nam at scelerisque dui. Morbi imperdiet ligula in posuere convallis. Quisque ut mi ultrices, sollicitudin risus ac, tristique justo. Integer in facilisis erat. Vivamus id bibendum ipsum, in pharetra sem. Curabitur commodo mattis sem eu sodales.
+
+                Donec in felis ac ipsum facilisis lobortis faucibus eu urna. In auctor, eros a accumsan auctor, nulla odio viverra nisi, et placerat massa augue quis purus. Etiam facilisis magna metus, eu finibus eros sodales sed. Donec massa dui, commodo vel tincidunt et, viverra faucibus libero. Quisque leo tellus, finibus eget molestie nec, faucibus non odio. Pellentesque vitae vestibulum sapien. Morbi ipsum ante, blandit at est ut, hendrerit placerat odio. Aliquam iaculis dui ac dui pharetra, et dignissim purus commodo.
+
+                Ut pellentesque commodo tortor in lobortis. Aliquam a porttitor lacus. Quisque iaculis lacus nunc, et congue dui tincidunt nec. Ut aliquet turpis quis urna aliquam dictum. Morbi ultrices diam porttitor, scelerisque magna ac, ornare nibh. Vivamus blandit ante eu augue consequat pulvinar. Vestibulum efficitur ac enim et tempus. Vestibulum mollis purus enim, fermentum convallis leo efficitur non.
+
+                Praesent interdum sapien vitae magna feugiat, et sagittis risus semper. Duis non leo hendrerit, dignissim dolor ac, ultrices diam. Donec lorem elit, blandit vel justo ut, volutpat lacinia ex. Curabitur dignissim dictum aliquam. Fusce vitae venenatis ipsum, vitae dapibus eros. Vivamus in nisl nec lectus vulputate ornare. Morbi vel arcu magna. Aenean odio ex, sodales nec quam nec, sollicitudin ullamcorper lacus. Ut tincidunt justo ex, non elementum ante pharetra nec. Nulla porta tellus ac neque sagittis facilisis interdum sit amet ligula. Cras non felis eget urna finibus pellentesque. Phasellus elementum ipsum ac tortor elementum finibus. Sed lectus justo, suscipit at nisi sed, luctus consectetur lacus.
+            `
+        },    
+        { 
+            titleInsights : "TechCrunch: Woven Capital kicks off portfolio with investment in autonomous delivery company Nuro" , 
+            slugInsights : "https://techcrunch.com/2021/03/26/woven-capital-kicks-off-portfolio-with-investment-in-autonomous-delivery-company-nuro" , 
+            imageInsights : "techcrunch.png" , 
+            createdAt : "Mar 26, 2021" , 
+            articleInd : "true",
+            contentInsight : `
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sagittis leo id felis congue, at commodo metus laoreet. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Vestibulum fringilla ipsum sit amet tellus luctus convallis. Mauris quis tellus vitae erat semper dictum quis sed turpis. Proin a finibus dui, nec malesuada odio. Aliquam ultrices lectus eu enim finibus, in dapibus nisl scelerisque. Curabitur massa ipsum, sollicitudin nec sem ut, porta congue nulla. Aliquam erat volutpat. Phasellus mauris metus, semper in metus eu, gravida varius massa. Nam quis interdum purus, ac feugiat lacus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse dictum odio lectus, in tempus ligula bibendum sed. Etiam odio tortor, dignissim sed venenatis ut, elementum eu lacus.
+
+                Nunc tempus eget nunc quis interdum. Nam at scelerisque dui. Morbi imperdiet ligula in posuere convallis. Quisque ut mi ultrices, sollicitudin risus ac, tristique justo. Integer in facilisis erat. Vivamus id bibendum ipsum, in pharetra sem. Curabitur commodo mattis sem eu sodales.
+
+                Donec in felis ac ipsum facilisis lobortis faucibus eu urna. In auctor, eros a accumsan auctor, nulla odio viverra nisi, et placerat massa augue quis purus. Etiam facilisis magna metus, eu finibus eros sodales sed. Donec massa dui, commodo vel tincidunt et, viverra faucibus libero. Quisque leo tellus, finibus eget molestie nec, faucibus non odio. Pellentesque vitae vestibulum sapien. Morbi ipsum ante, blandit at est ut, hendrerit placerat odio. Aliquam iaculis dui ac dui pharetra, et dignissim purus commodo.
+
+                Ut pellentesque commodo tortor in lobortis. Aliquam a porttitor lacus. Quisque iaculis lacus nunc, et congue dui tincidunt nec. Ut aliquet turpis quis urna aliquam dictum. Morbi ultrices diam porttitor, scelerisque magna ac, ornare nibh. Vivamus blandit ante eu augue consequat pulvinar. Vestibulum efficitur ac enim et tempus. Vestibulum mollis purus enim, fermentum convallis leo efficitur non.
+
+                Praesent interdum sapien vitae magna feugiat, et sagittis risus semper. Duis non leo hendrerit, dignissim dolor ac, ultrices diam. Donec lorem elit, blandit vel justo ut, volutpat lacinia ex. Curabitur dignissim dictum aliquam. Fusce vitae venenatis ipsum, vitae dapibus eros. Vivamus in nisl nec lectus vulputate ornare. Morbi vel arcu magna. Aenean odio ex, sodales nec quam nec, sollicitudin ullamcorper lacus. Ut tincidunt justo ex, non elementum ante pharetra nec. Nulla porta tellus ac neque sagittis facilisis interdum sit amet ligula. Cras non felis eget urna finibus pellentesque. Phasellus elementum ipsum ac tortor elementum finibus. Sed lectus justo, suscipit at nisi sed, luctus consectetur lacus.
+            ` 
+        },    
+        { 
+            titleInsights : "Woven Capital Makes Its First Investment, Backing Nuro" , 
+            slugInsights : "woven-capital-makes-first-investment-backing-nuro" , 
+            imageInsights : "invest.png" , 
+            createdAt : "Mar 24, 2021" , 
+            articleInd : "false",
+            contentInsight : `
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sagittis leo id felis congue, at commodo metus laoreet. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Vestibulum fringilla ipsum sit amet tellus luctus convallis. Mauris quis tellus vitae erat semper dictum quis sed turpis. Proin a finibus dui, nec malesuada odio. Aliquam ultrices lectus eu enim finibus, in dapibus nisl scelerisque. Curabitur massa ipsum, sollicitudin nec sem ut, porta congue nulla. Aliquam erat volutpat. Phasellus mauris metus, semper in metus eu, gravida varius massa. Nam quis interdum purus, ac feugiat lacus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse dictum odio lectus, in tempus ligula bibendum sed. Etiam odio tortor, dignissim sed venenatis ut, elementum eu lacus.
+
+                Nunc tempus eget nunc quis interdum. Nam at scelerisque dui. Morbi imperdiet ligula in posuere convallis. Quisque ut mi ultrices, sollicitudin risus ac, tristique justo. Integer in facilisis erat. Vivamus id bibendum ipsum, in pharetra sem. Curabitur commodo mattis sem eu sodales.
+
+                Donec in felis ac ipsum facilisis lobortis faucibus eu urna. In auctor, eros a accumsan auctor, nulla odio viverra nisi, et placerat massa augue quis purus. Etiam facilisis magna metus, eu finibus eros sodales sed. Donec massa dui, commodo vel tincidunt et, viverra faucibus libero. Quisque leo tellus, finibus eget molestie nec, faucibus non odio. Pellentesque vitae vestibulum sapien. Morbi ipsum ante, blandit at est ut, hendrerit placerat odio. Aliquam iaculis dui ac dui pharetra, et dignissim purus commodo.
+
+                Ut pellentesque commodo tortor in lobortis. Aliquam a porttitor lacus. Quisque iaculis lacus nunc, et congue dui tincidunt nec. Ut aliquet turpis quis urna aliquam dictum. Morbi ultrices diam porttitor, scelerisque magna ac, ornare nibh. Vivamus blandit ante eu augue consequat pulvinar. Vestibulum efficitur ac enim et tempus. Vestibulum mollis purus enim, fermentum convallis leo efficitur non.
+
+                Praesent interdum sapien vitae magna feugiat, et sagittis risus semper. Duis non leo hendrerit, dignissim dolor ac, ultrices diam. Donec lorem elit, blandit vel justo ut, volutpat lacinia ex. Curabitur dignissim dictum aliquam. Fusce vitae venenatis ipsum, vitae dapibus eros. Vivamus in nisl nec lectus vulputate ornare. Morbi vel arcu magna. Aenean odio ex, sodales nec quam nec, sollicitudin ullamcorper lacus. Ut tincidunt justo ex, non elementum ante pharetra nec. Nulla porta tellus ac neque sagittis facilisis interdum sit amet ligula. Cras non felis eget urna finibus pellentesque. Phasellus elementum ipsum ac tortor elementum finibus. Sed lectus justo, suscipit at nisi sed, luctus consectetur lacus.
+            `
+        },    
+        { 
+            titleInsights : "Toyota Research Institute - Advanced Development to Form Woven Capital, an $800 Million Global Investment Fund" , 
+            slugInsights : "tri-ad" , 
+            imageInsights : "toyota.png" , 
+            createdAt : "Sep 9, 2020" , 
+            articleInd : "false",
+            contentInsight : `
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sagittis leo id felis congue, at commodo metus laoreet. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Vestibulum fringilla ipsum sit amet tellus luctus convallis. Mauris quis tellus vitae erat semper dictum quis sed turpis. Proin a finibus dui, nec malesuada odio. Aliquam ultrices lectus eu enim finibus, in dapibus nisl scelerisque. Curabitur massa ipsum, sollicitudin nec sem ut, porta congue nulla. Aliquam erat volutpat. Phasellus mauris metus, semper in metus eu, gravida varius massa. Nam quis interdum purus, ac feugiat lacus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse dictum odio lectus, in tempus ligula bibendum sed. Etiam odio tortor, dignissim sed venenatis ut, elementum eu lacus.
+
+                Nunc tempus eget nunc quis interdum. Nam at scelerisque dui. Morbi imperdiet ligula in posuere convallis. Quisque ut mi ultrices, sollicitudin risus ac, tristique justo. Integer in facilisis erat. Vivamus id bibendum ipsum, in pharetra sem. Curabitur commodo mattis sem eu sodales.
+
+                Donec in felis ac ipsum facilisis lobortis faucibus eu urna. In auctor, eros a accumsan auctor, nulla odio viverra nisi, et placerat massa augue quis purus. Etiam facilisis magna metus, eu finibus eros sodales sed. Donec massa dui, commodo vel tincidunt et, viverra faucibus libero. Quisque leo tellus, finibus eget molestie nec, faucibus non odio. Pellentesque vitae vestibulum sapien. Morbi ipsum ante, blandit at est ut, hendrerit placerat odio. Aliquam iaculis dui ac dui pharetra, et dignissim purus commodo.
+
+                Ut pellentesque commodo tortor in lobortis. Aliquam a porttitor lacus. Quisque iaculis lacus nunc, et congue dui tincidunt nec. Ut aliquet turpis quis urna aliquam dictum. Morbi ultrices diam porttitor, scelerisque magna ac, ornare nibh. Vivamus blandit ante eu augue consequat pulvinar. Vestibulum efficitur ac enim et tempus. Vestibulum mollis purus enim, fermentum convallis leo efficitur non.
+
+                Praesent interdum sapien vitae magna feugiat, et sagittis risus semper. Duis non leo hendrerit, dignissim dolor ac, ultrices diam. Donec lorem elit, blandit vel justo ut, volutpat lacinia ex. Curabitur dignissim dictum aliquam. Fusce vitae venenatis ipsum, vitae dapibus eros. Vivamus in nisl nec lectus vulputate ornare. Morbi vel arcu magna. Aenean odio ex, sodales nec quam nec, sollicitudin ullamcorper lacus. Ut tincidunt justo ex, non elementum ante pharetra nec. Nulla porta tellus ac neque sagittis facilisis interdum sit amet ligula. Cras non felis eget urna finibus pellentesque. Phasellus elementum ipsum ac tortor elementum finibus. Sed lectus justo, suscipit at nisi sed, luctus consectetur lacus.
+            ` 
+        },    
+    ];
+    
     export { 
         teamData, 
-        portfolios
+        portfoliosData,
+        headerData,
+        footerData,
+        insightsData,
     }
     
 

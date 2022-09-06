@@ -120,13 +120,13 @@ export default({
           </template>
 
           <div class="col-12 mb-2">
-            <h5 class="mb-4 text-18">*Required Field</h5>
+            <h5 class="mb-4 text-small">*Required Field</h5>
             <p class="text-12">By submitting this proposal to Woven Capital Management Company, LLC, you represent and warrant that you have the authority to disclose this information to Woven Capital Management Company, LLC. You acknowledge that you make your submissions voluntarily. You agree that no relationship is established or implied by Woven Capital Management Company, LLC’s acceptance or evaluation of the submitted material.</p>
             <p class="text-12">Please do not send Woven Capital Management Company, LLC anything that constitutes a trade secret or confidential or proprietary information. You agree that no confidential relation is established by or is to be inferred from your submissions or the consideration of your submissions by Woven Capital Management Company, LLC.</p>
           </div>
 
           <div class="col-12 mb-5 d-flex flex-column align-items-center justify-content-center">
-            <h4 class="text-24  mb-4">Stay Connected</h4>
+            <h4 class="text-medium  mb-4">Stay Connected</h4>
             <buttom-primary text_buttom="Submit info"></buttom-primary>
 
           </div>

@@ -1,18 +1,10 @@
 <script >
     import itemLink from "@/components/ListItem.vue";
+    import { footerData } from "@/data/data.js";
     export default {
         data(){
             return {
-                itemsFooter: [
-                    { textLink: 'About', linkLink: '/about'  },
-                    { textLink: 'Portfolio', linkLink: '/portfolio'  },
-                    { textLink: 'Team', linkLink: '/team'  },
-                    { textLink: 'Insights', linkLink: '/insights'  },
-                    { textLink: 'Pitch', linkLink: '/pitch'  },
-                    { textLink: 'Contact', linkLink: '/contact'  },
-                    { textLink: 'Woven Planet', linkLink: '#'  },
-                    { textLink: 'Privacy Notice', linkLink: '#'  },
-                ], 
+                itemsFooter : footerData
             }
         },
         components: {

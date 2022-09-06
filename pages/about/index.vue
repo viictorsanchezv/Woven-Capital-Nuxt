@@ -1,47 +1,52 @@
-<script setup>
-import { onMounted, ref } from "vue";
-import TitleH2 from "@/components/TitleH2.vue";
-import SectionColumns from "@/components/SectionColumns.vue";
-import ImageCard from "@/components/ImageCard.vue";
+<script >
+  import { onMounted, ref } from "vue";
+  import titleSecundary from "@/components/TitleSecundary.vue";
+  import SectionColumns from "@/components/SectionColumns.vue";
+  import ImageCard from "@/components/ImageCard.vue";
+  export default {
+     
+      props: {
+        imageCardInfo : Array,
+      }, 
+      onMounted: () => {
+          imageCardInfo.value.push({
+            image: "/about/IA.png",
+            text: "Artificial Intelligence",
+            imageAlt: "Artificial Intelligence",
+          });
 
-const imageCardInfo = ref([]);
-onMounted(() => {
-  imageCardInfo.value.push({
-    image: "/about/IA.png",
-    text: "Artificial Intelligence",
-    imageAlt: "Artificial Intelligence",
-  });
+          imageCardInfo.value.push({
+            image: "/about/automation.png",
+            text: "Automation",
+            imageAlt: "Automation",
+          });
 
-  imageCardInfo.value.push({
-    image: "/about/automation.png",
-    text: "Automation",
-    imageAlt: "Automation",
-  });
+          imageCardInfo.value.push({
+            image: "/about/connectivity.png",
+            text: "Connectivity",
+            imageAlt: "Connectivity",
+          });
 
-  imageCardInfo.value.push({
-    image: "/about/connectivity.png",
-    text: "Connectivity",
-    imageAlt: "Connectivity",
-  });
+          imageCardInfo.value.push({
+            image: "/about/data-analytics.png",
+            text: "Data & Analytics",
+            imageAlt: "Data & Analytics",
+          });
 
-  imageCardInfo.value.push({
-    image: "/about/data-analytics.png",
-    text: "Data & Analytics",
-    imageAlt: "Data & Analytics",
-  });
+          imageCardInfo.value.push({
+            image: "/about/mobility.png",
+            text: "Mobility",
+            imageAlt: "Mobility",
+          });
 
-  imageCardInfo.value.push({
-    image: "/about/mobility.png",
-    text: "Mobility",
-    imageAlt: "Mobility",
-  });
+          imageCardInfo.value.push({
+            image: "/about/woven-city.png",
+            text: "Woven City",
+            imageAlt: "Woven City",
+          });
+      },
+  }
 
-  imageCardInfo.value.push({
-    image: "/about/woven-city.png",
-    text: "Woven City",
-    imageAlt: "Woven City",
-  });
-});
 </script>
 
 <template>
@@ -50,25 +55,25 @@ onMounted(() => {
       <template #left>
         <div class="col-md-6 col-12 border-box p-5rem">
           <h1 class="mb-4 h1-45">Our <span class="text-green h1-45">Mission</span></h1>
-          <p class="text-sect text-18">
+          <p class="text-sect text-small">
             We are in the business of investing in the future of mobility and
             driving innovation in adjacent industries by offering resources and
             expertise to entrepreneurs and visionaries across core technologies
             and disciplines.
           </p>
-          <p class="text-sect text-18">
+          <p class="text-sect text-small">
             As the $800 million investment arm of the
-            <nuxt-link to="#" class="text-green text-18">Woven Planet</nuxt-link>, founded by
-            <nuxt-link to="#" class="text-green text-18">Toyota Motor Corporation</nuxt-link>, our aim is
+            <nuxt-link to="#" class="text-green text-small">Woven Planet</nuxt-link>, founded by
+            <nuxt-link to="#" class="text-green text-small">Toyota Motor Corporation</nuxt-link>, our aim is
             to broaden the group’s global reach and accelerate innovation by
             investing in exceptional growth-stage ventures.
           </p>
-          <p class="text-sect text-18">
+          <p class="text-sect text-small">
             Woven Capital and Woven Planet share a common goal: discover and
             develop groundbreaking technologies that will help people all over
             the world lead happier, healthier, richer lives.
           </p>
-          <p class="text-sect text-18">
+          <p class="text-sect text-small">
             We invite you to partner with us and gain access to the world’s
             largest platform for mobility.
           </p>
@@ -107,19 +112,19 @@ onMounted(() => {
       </template>
       <template #right>
         <div class="col-md-6 col-12 border-box p-5rem">
-          <title-h2 class="mb-4" titleH2="Capital is only the " spanTitleH2="starting point"></title-h2>
-          <p class="text-sect text-18">
+          <title-secundary class="mb-4" titleH2="Capital is only the " spanTitleH2="starting point"></title-secundary>
+          <p class="text-sect text-small">
             What gets us up in the morning? Building up and investing in
             technologies that will drive the future. We look years ahead at what
             we think will unfold, but also stop to ask, “What can we build now?”
           </p>
-          <p class="text-sect text-18">
+          <p class="text-sect text-small">
             When we back a startup, we don’t write a check and step away. We
             take an active role by connecting portfolio companies to our global
             network and in-house experts to refine ideas, provide guidance,
             build prototypes and accelerate global scaleup.
           </p>
-          <p class="text-sect text-18">
+          <p class="text-sect text-small">
             Through open collaboration and investment, combined with Woven
             Planet’s own innovation projects, we hope to realize the promise of
             technology in solving the world’s most difficult challenges.
@@ -130,8 +135,8 @@ onMounted(() => {
 
     <section class="mt-5 mb-5 row m-0">
       <div class="text-center col-12 my-5">
-        <title-h2 class="mb-4 justify-content-center" titleH2="We see tomorrow, " spanTitleH2="today"></title-h2>
-        <p class="text-sect text-18">
+        <title-secundary class="mb-4 justify-content-center" titleH2="We see tomorrow, " spanTitleH2="today"></title-secundary>
+        <p class="text-sect text-small">
           Let’s set our sights beyond the horizon to create a bright future
           through technology. <br />Key areas of development include:
         </p>
@@ -148,14 +153,14 @@ onMounted(() => {
     <section-columns >
       <template #left>
         <div class="col-md-6 col-12 mt-5 border-box p-5rem">
-          <title-h2 class="mb-5 justify-content-start p-0" titleH2="Our " spanTitleH2="Commitment"></title-h2>
-          <p class="mb-2 mt-5 text-comm text-24"> 
+          <title-secundary class="mb-5 justify-content-start p-0" titleH2="Our " spanTitleH2="Commitment"></title-secundary>
+          <p class="mb-2 mt-5 text-comm text-medium"> 
             “We engage with entrepreneurs and innovators in an array of disciplines and give them the resources they need to take a chance and change the world. This requires ambition. It requires imagination. It requires the courage to look past the possible and see a better world and make it real. This is our commitment.”
           </p>
-          <p class="mb-0 author-sect text-18">
+          <p class="mb-0 author-sect text-small">
             George Kellerman
           </p>
-          <p class="author-sect text-18">
+          <p class="author-sect text-small">
             Managing Director, Woven Capital
           </p>
         </div>
@@ -172,8 +177,8 @@ onMounted(() => {
     </section-columns>
   </main>
 </template>
+
 <style scoped>
- 
   p.text-sect, .author-sect, p.text-comm{
     color: var(--color--secondary);
   }

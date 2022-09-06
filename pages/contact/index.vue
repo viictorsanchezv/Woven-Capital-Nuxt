@@ -1,10 +1,10 @@
 <script>
   import ButtomPrimary from '@/components/ButtomPrimary.vue';
-  import titleH2 from '@/components/TitleH2.vue';
+  import titleSecundary from '@/components/TitleSecundary.vue';
   export default {
     components: {
       ButtomPrimary,
-      titleH2,
+      titleSecundary,
     }
   }
 </script>
@@ -18,16 +18,16 @@
       </div>
       <div class="col-12 col-md-6 column-padding d-flex justify-content-end flex-column content-contact">
         <h1 class="h1-45">Get in touch</h1>
-        <p class=" first-p pb-2 text-18">If you share our vision and your company would like to be considered for investment by Woven Capital, we want to hear from you.</p>
+        <p class=" first-p pb-2 text-small">If you share our vision and your company would like to be considered for investment by Woven Capital, we want to hear from you.</p>
         <buttom-primary class="mb-5 mr-0 ml-0 mt-0 p-0 d-flex justify-content-start" text_buttom="Pitch your company" link_buttom="https://nuxtjs.org/"></buttom-primary>
         <div class="m-0 p-0 d-flex justify-content-start mail-wrapper">
           <div class=" col-md-6 p-0" >
-            <h4 class="text-24 wight-600">General</h4>
-            <a class="text-18"  href="mailto:hello@woven.vc">hello@woven.vc</a>
+            <h4 class="text-medium wight-600">General</h4>
+            <a class="text-small"  href="mailto:hello@woven.vc">hello@woven.vc</a>
           </div>
           <div class="col-md-6 p-0">
-            <h4 class="text-24 wight-600">Media</h4>
-            <a class="text-18" href="mailto:press@woven.vc">press@woven.vc</a>
+            <h4 class="text-medium wight-600">Media</h4>
+            <a class="text-small" href="mailto:press@woven.vc">press@woven.vc</a>
           </div>
         </div>
       </div>
@@ -35,20 +35,20 @@
     <section class="my-5 pb-5 row m-0 d-flex align-items-start">
       <div class="col-12 col-md-6 p-0 mb-5 d-flex justify-content-center">
         <div class="info-wrapper col-md-8 d-flex justify-content-center flex-column">
-          <h5 class="text-18 wight-600">Japan (Tokyo)</h5>
-          <p class="text-18 m-0">Nihonbashi Muromachi Mitsui Tower,</p>
-          <p class="text-18 m-0">3-2-1 Nihonbashimuromachi, Chuo-ku,</p>
-          <p class="text-18 m-0">Tokyo, 103-0022, JAPAN</p>
+          <h5 class="text-small wight-600">Japan (Tokyo)</h5>
+          <p class="text-small m-0">Nihonbashi Muromachi Mitsui Tower,</p>
+          <p class="text-small m-0">3-2-1 Nihonbashimuromachi, Chuo-ku,</p>
+          <p class="text-small m-0">Tokyo, 103-0022, JAPAN</p>
         </div>
         <div class="info-wrapper col-md-4 d-flex justify-content-center flex-column">
-          <h5 class="text-18 wight-600">USA (Silicon Valley)</h5>
-          <p class="text-18 m-0">900 Arastradero Rd</p>
-          <p class="text-18 m-0">Palo Alto, CA 94304</p>
-          <p class="text-18 m-0">USA</p>
+          <h5 class="text-small wight-600">USA (Silicon Valley)</h5>
+          <p class="text-small m-0">900 Arastradero Rd</p>
+          <p class="text-small m-0">Palo Alto, CA 94304</p>
+          <p class="text-small m-0">USA</p>
         </div>
       </div>
       <div class="col-12 left-column col-md-6 column-padding d-flex content-news justify-content-end flex-column">
-        <h4 class="text-24 wight-600 mb-3"> Stay <span class="text-green text-24 wight-600">connected</span></h4>
+        <h4 class="text-medium wight-600 mb-3"> Stay <span class="text-green text-medium wight-600">connected</span></h4>
         <form class="mb-4" @submit.prevent="">
           <div>
             <input type="email" placeholder="Enter your email" name="email" id="email" />

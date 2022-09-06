@@ -1,26 +1,19 @@
 <script >
     import itemLink from "@/components/ListItem.vue";
+    import {headerData} from "@/data/data.js"; ; 
     export default {
         data(){
             return {
-                itemsHeader : [
-                    { textLink: 'About', linkLink: '/about'  },
-                    { textLink: 'Portfolio', linkLink: '/portfolio'  },
-                    { textLink: 'Team', linkLink: '/team'  },
-                    { textLink: 'Insights', linkLink: '/insights'  },
-                    { textLink: 'Pitch', linkLink: '/pitc'  },
-                    { textLink: 'Contact', linkLink: '/contact'  },
-                    { textLink: 'Woven Planet', linkLink: '#'  },
-                ],
-                expande : {
-                    type: Boolean,
-                    default: false
-                },
+                
+                itemsHeader : headerData,
             }
         }, 
+        created(){
+            this.expande = false;
+        },
         methods:{
             expanded: function (event) {
-
+               
                 this.expande = !this.expande;
 
                 if(this.expande){

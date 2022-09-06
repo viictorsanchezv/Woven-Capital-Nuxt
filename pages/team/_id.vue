@@ -34,7 +34,7 @@
             <template #right>
                 <div class="col-md-6 col-12 border-box p-5rem">
                     <h1 class="h1-45 name-team">{{teamProfile.teamName}}</h1>
-                    <p class="text-24 job-team">{{teamProfile.teamJob}}</p>    
+                    <p class="text-medium job-team">{{teamProfile.teamJob}}</p>    
                     <div class="social">
                         <a :href="teamProfile.teamLinkedin" class="mr-2">
                             <img class="image-social object-cover" src="@/assets/image/icon/linkedin.png" alt="">
@@ -43,7 +43,7 @@
                             <img class="image-social object-cover" src="@/assets/image/icon/email.png" alt="">
                         </a>
                     </div>    
-                    <p class="desc-team text-18 mt-4">{{teamProfile.teamDesc}}</p>       
+                    <p class="desc-team text-small mt-4">{{teamProfile.teamDesc}}</p>       
                 </div>
             </template>
         </section-columns>
