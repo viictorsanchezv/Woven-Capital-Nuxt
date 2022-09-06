@@ -111,6 +111,7 @@
                             :slugInsights = "post.slugInsights"
                             :imageInsights = "post.imageInsights"
                             :dateInsights = "post.createdAt"
+                            :flagInsights = "post.articleInd"
                             v-if ="index < 3"
                         >
                         </card-insights> 
@@ -167,6 +168,23 @@
         grid-template-columns: repeat(auto-fill, minmax(49%, 1fr));
         grid-auto-rows: calc( 50vh - 10px);
         grid-gap: 10px;
+    }
+    @media(max-width: 767px){
+        .content-portfolio{
+            height: auto!important;
+        }
+        .content-portfolio .portfolio {
+            height: 500px!important;
+            margin: 0!important;
+        }
+        .partner-img {
+            width: 100%!important;
+        }
+        .partner-together {
+            padding: 40px 0 0 0!important;
+            text-align: center;
+        }
+
     }
 </style>
 

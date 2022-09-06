@@ -32,9 +32,6 @@
     background-position: center;
     background-size: cover;
     height: 100%;
-    width: calc( 33.33333333% - 4px);
-    flex: 0 0 calc( 33.33333333% - 4px)!important;
-    max-width: calc( 33.33333333% - 4px)!important;
 }
 .content-portfolio .portfolio .overlay{
     background-color: #00000078;
@@ -45,6 +42,13 @@
 }
 .content-portfolio .portfolio img{
     width: 226px;
+}
+@media(min-width: 768px){
+    .content-portfolio .portfolio{
+        width: calc( 33.33333333% - 4px);
+        flex: 0 0 calc( 33.33333333% - 4px)!important;
+        max-width: calc( 33.33333333% - 4px)!important;
+    }
 }
 
 </style>

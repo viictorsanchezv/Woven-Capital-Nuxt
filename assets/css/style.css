@@ -76,3 +76,34 @@ div.p-5rem{
 .lef-0{
     left: 0;
 }
+
+@media(max-width:768px){
+    .hero-image h1.title-home {
+        width: 100%!important;
+        font-size: 46px;
+        line-height: 49px;
+        text-align: center;
+        margin-bottom: 31px;
+        padding: 10px;
+    }
+    .content-hero img {
+        max-width: 100%;
+        object-fit: contain;
+        padding: 6px;
+    }
+    .our-portfolio {
+        padding: 40px 0px 0px 0px!important;
+    }
+    h2.title-secundary, h2.title-secundary span {
+        width: 100%!important;
+        font-size: 30px!important;
+        text-align: center;
+        line-height: 39px!important;
+    }
+    p.text-medium.text-portfolio {
+        text-align: center;
+    }
+    .our-portfolio {
+        text-align: center;
+    }
+}

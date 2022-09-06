@@ -14,7 +14,7 @@
         },
         methods: {
             urlInsights( ) {
-                console.log(this.flagInsights);
+              
                  if( this.flagInsights == "false"){
                     return `/insights/${this.slugInsights}`;
                 }else{
