@@ -36,15 +36,15 @@
                         <p class="text-medium text-team">We’re a team of investors, innovators, and industry experts passionate about developing the next-generation of life-changing mobility technologies.</p>
                     </div>
                 </div>
-                <div class="container-team m-0">
+                <div class="container-team p-0">
                     <card-Team 
-                        v-for="(team, index) in posts" 
+                        v-for="index in 10" 
                         :key="index"
-                        :teamName="team.fields.title"
-                        :teamJob="team.fields.designation"
-                        :teamImage="team.fields.profilePic.fields.file.url"
-                        :teamEmail="team.fields.emailId"
-                        :teamSlug="team.fields.slug"
+                        :teamName="posts[0].fields.title"
+                        :teamJob="posts[0].fields.designation"
+                        :teamImage="posts[0].fields.profilePic.fields.file.url"
+                        :teamEmail="posts[0].fields.emailId"
+                        :teamSlug="posts[0].fields.slug"
                     >
                     </card-Team>
                 </div>
@@ -56,6 +56,12 @@
     .text-team{
         color: var( --color--secondary );
         width: 80%;
+    }
+    .container-team{
+        margin-top: 4%;
+    }
+    p.text-team{
+        max-width: 1022px;
     }
     
 </style>

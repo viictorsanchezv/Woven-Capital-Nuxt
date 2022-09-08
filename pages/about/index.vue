@@ -68,8 +68,8 @@
           </p>
           <p class="text-sect text-small">
             As the $800 million investment arm of the
-            <nuxt-link to="#" class="text-green text-small">Woven Planet</nuxt-link>, founded by
-            <nuxt-link to="#" class="text-green text-small">Toyota Motor Corporation</nuxt-link>, our aim is
+            <a href="https://www.woven-planet.global/" class="text-green text-small">Woven Planet</a>, founded by
+            <a href="https://global.toyota/en/" class="text-green text-small">Toyota Motor Corporation</a>, our aim is
             to broaden the group’s global reach and accelerate innovation by
             investing in exceptional growth-stage ventures.
           </p>
@@ -198,12 +198,15 @@
   .p-6p{
     padding: 6%;
   }
-  
   .image-card{
     margin: 3rem 0;
   }
   .section-sticky{
     position: sticky;
+  }
+  a:hover{
+   
+    color: var(--bg--primary);
   }
   @media(max-width:767px){
     .section-sticky{

@@ -106,13 +106,17 @@
     }
     form input {
       padding: 8px 16px;
-
+      border: 1px solid #c1c1c1;
     }
     .first-p{
       max-width: 524px;
     }
     .col-info{
       padding-top: 4%;
+      margin: 0;
+    }
+    .col-info{
+      word-break: break-word;
     }
     @media(max-width:767px){
       .content-contact,
