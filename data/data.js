@@ -5,7 +5,6 @@
         { textLink: 'Insights', linkLink: '/insights'  },
         { textLink: 'Pitch', linkLink: '/pitch'  },
         { textLink: 'Contact', linkLink: '/contact'  },
-        { textLink: 'Woven Planet', linkLink: '#'  },
     ];
     const footerData = [
         { textLink: 'About', linkLink: '/about'  },
@@ -14,7 +13,6 @@
         { textLink: 'Insights', linkLink: '/insights'  },
         { textLink: 'Pitch', linkLink: '/pitch'  },
         { textLink: 'Contact', linkLink: '/contact'  },
-        { textLink: 'Woven Planet', linkLink: '#'  },
         { textLink: 'Privacy Notice', linkLink: '/privacy-notice'  },
     ];
     const teamData = [

@@ -85,14 +85,14 @@
         </div>
       </template>
       <template #right>
-        <div class="col-md-6 col-12 border-box p-0 position-sticky vh-100 top-0">
+        <div class="col-md-6 col-12 border-box p-0 section-sticky vh-100 top-0">
           <img
-            class="vh-50 pb-5x w-100 object-fill"
+            class="vh-50 pb-5x w-100 object-cover object-center"
             src="@/assets/image/about/rectangle-401.png"
             alt=""
           />
           <img
-            class="vh-50 pt-5x w-100 object-fill"
+            class="vh-50 pt-5x w-100 object-cover object-center"
             src="@/assets/image/about/rectangle-442.png"
             alt=""
           />
@@ -100,16 +100,16 @@
       </template>
     </section-columns>
 
-    <section-columns class="mb-5">
+    <section-columns class="m-0">
       <template #left>
-        <div class="col-md-6 col-12 border-box p-0 justify-content-start position-sticky vh-100 top-0">
+        <div class="col-md-6 col-12 border-box p-0 justify-content-start section-sticky vh-100 top-0">
           <img
-            class="vh-50 pb-5x w-100 object-fill"
+            class="vh-50 pb-5x w-100 object-cover object-center"
             src="@/assets/image/about/Rectangle-621.png"
             alt=""
           />
           <img
-            class="vh-50 pt-5x w-100 object-fill"
+            class="vh-50 pt-5x w-100 object-cover object-center"
             src="@/assets/image/about/Rectangle-371.png"
             alt=""
           />
@@ -117,7 +117,7 @@
       </template>
       <template #right>
         <div class="col-md-6 col-12 border-box p-7">
-          <title-secundary class="mb-4" titleH2="Capital is only the " spanTitleH2="starting point"></title-secundary>
+          <title-secundary class="mb-4 limit-width" titleH2="Capital is only the " spanTitleH2="starting point"></title-secundary>
           <p class="text-sect text-small">
             What gets us up in the morning? Building up and investing in
             technologies that will drive the future. We look years ahead at what
@@ -138,8 +138,8 @@
       </template>
     </section-columns>
 
-    <section class="mt-5 mb-5 row m-0">
-      <div class="text-center col-12 my-5">
+    <section class="m-6p row p-6p m-0">
+      <div class="text-center col-12 mt-0 mb-5 ml-0 mr-0 p-0">
         <title-secundary class="mb-4 justify-content-center" titleH2="We see tomorrow, " spanTitleH2="today"></title-secundary>
         <p class="text-sect text-small">
           Let’s set our sights beyond the horizon to create a bright future
@@ -150,13 +150,13 @@
         v-for="(image, index) in imageCardInfo"
         :key="index"
         :imageInfo="image"
-        class="col-md-4 text-center my-5"
+        class="col-md-4 text-center image-card"
       ></image-card>
     </section>
 
     <section-columns >
       <template #left>
-        <div class="col-md-6 col-12 mt-5 border-box p-7">
+        <div class="col-md-6 col-12 m-0 border-box p-7">
           <title-secundary class="mb-5 justify-content-start p-0" titleH2="Our " spanTitleH2="Commitment"></title-secundary>
           <p class="mb-2 mt-5 text-comm text-medium"> 
             “We engage with entrepreneurs and innovators in an array of disciplines and give them the resources they need to take a chance and change the world. This requires ambition. It requires imagination. It requires the courage to look past the possible and see a better world and make it real. This is our commitment.”
@@ -170,9 +170,9 @@
         </div>
       </template>
       <template #right>
-        <div class="col-md-6 col-12 border-box p-0 position-sticky vh-100 top-0">
+        <div class="col-md-6 col-12 border-box p-0 section-sticky vh-100 top-0">
           <img
-            class="vh-100 w-100 ima-comm object-cover"
+            class="vh-100 w-100 ima-comm object-cover object-top"
             src="@/assets/image/about/Rectangle-405.png"
             alt=""
           />
@@ -185,5 +185,40 @@
 <style scoped>
   p.text-sect, .author-sect, p.text-comm{
     color: var(--color--secondary);
+  }
+  .object-top{
+    object-position: top;
+  }
+  .object-center{
+    object-position: center;
+  }
+  .m-6p{
+    margin: 6% 0;
+  }
+  .p-6p{
+    padding: 6%;
+  }
+  
+  .image-card{
+    margin: 3rem 0;
+  }
+  .section-sticky{
+    position: sticky;
+  }
+  @media(max-width:767px){
+    .section-sticky{
+      order: 2;
+    }
+    .image-card{
+      margin: 0;
+      height: 200px;
+    }
+    .m-6p{
+      margin: 0;
+      padding: 7%;
+    }
+    .section-sticky{
+        position: relative;
+    }
   }
 </style>

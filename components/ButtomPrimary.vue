@@ -31,5 +31,9 @@
         background-color: var( --color-btn-hover );
         color: var(--color-white);
     }
+    .form-pitch .button-primary{
+        padding: 8px 26px;
+        height: 100%;
+    }
 
 </style>

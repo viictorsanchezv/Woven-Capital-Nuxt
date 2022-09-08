@@ -47,7 +47,7 @@
         color: var(--bg--primary);
     }
     footer .content-text{
-        text-align: end;
+        text-align: right;
         color: var( --color-white );
         
     }
@@ -56,7 +56,7 @@
         margin: 0;
         display: flex;
         justify-content: flex-end;
-        text-align: end;
+        text-align: right;
     }
     @media(max-width:768px){
         footer ul.list-group {

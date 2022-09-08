@@ -109,11 +109,11 @@ export default({
 </script>
 <template>
   <main>
-    <section class="h-100 row m-0">
-      <div class="col-12 vh-100 col-md-6 p-0 pr-5 position-sticky top-0">
-        <img class="h-100 w-100" src="@/assets/image/pitch/frame-1.png" alt="">
+    <section class="h-100 row m-0 ">
+      <div class="col-12 vh-100 col-md-6 sect-image section-sticky top-0">
+        <img class="h-100 w-100 img-pitch" src="@/assets/image/pitch/frame-1.png" alt="">
       </div>
-      <div class="col-12 col-md-6 p-4">
+      <div class="col-12 col-md-6 form-pitch">
         <form @submit.prevent="" class="row m-0">
           <template v-for="inputItem in inputData" >
             <input-group  :key="inputItem.id" :inputInfo="inputItem" ></input-group>
@@ -126,8 +126,8 @@ export default({
           </div>
 
           <div class="col-12 mb-5 d-flex flex-column align-items-center justify-content-center">
-            <h4 class="text-medium  mb-4">Stay Connected</h4>
-            <buttom-primary text_buttom="Submit info"></buttom-primary>
+            <h4 class="text-medium mb-4">Stay Connected</h4>
+            <buttom-primary text_buttom="Submit info" class="text-center"></buttom-primary>
 
           </div>
         </form>
@@ -137,6 +137,34 @@ export default({
 </template>
 
 <style scoped>
- 
-
+  .form-pitch{
+    padding: 7% 7% 7% 0;
+  }
+  .img-pitch{
+    object-fit: cover;
+    object-position: top;
+  }
+  .sect-image{
+    padding: 0 5% 5% 5% 0;
+  }
+  .section-sticky{
+    position: sticky;
+  }
+  @media(max-width:768px){
+    .sect-image{
+      padding: 0;
+    }
+    .img-pitch{
+      object-position: center left;
+    }
+    .form-pitch{
+      padding: 7%;
+    }
+    .form-pitch .col-12{
+      padding: 0;
+    }
+    .section-sticky{
+      position: relative;
+    }
+  }
 </style>

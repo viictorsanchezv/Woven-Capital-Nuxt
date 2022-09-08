@@ -28,6 +28,9 @@
     .title-secundary span{
         color: var( --bg--primary);
     }
+    .limit-width h2.title-secundary{
+        width: 401px;
+    }
     
    
     @media(min-width: 1441px){
@@ -48,6 +51,11 @@
         .our-portfolio h2.title-secundary, 
         .our-partner-together h2.title-secundary{
             width: 570px;
+        }
+    }
+    @media(max-width:768px){
+        .limit-width h2.title-secundary{
+            widows: 100%;
         }
     }
 </style>

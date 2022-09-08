@@ -1,6 +1,8 @@
 <script>
     import titleSecundary from '@/components/TitleSecundary.vue';
     import { teamData } from '@/data/data.js';
+    import client from '@/plugins/contentful.js';
+
     export default {
         data() {
             return {
@@ -10,6 +12,17 @@
         components:{
             titleSecundary,
         }, 
+        asyncData () {
+             return client
+                .getEntries({
+                    content_type: "teamNwc"
+                })
+                .then(entries => {
+                  
+                    return { posts: entries.items }
+                })
+                .catch( e => console.log(e));
+        },
         
     }
 </script>
@@ -24,14 +37,14 @@
                     </div>
                 </div>
                 <div class="container-team m-0">
-                  <card-Team 
-                        v-for="(team, index) in teamInfo" 
+                    <card-Team 
+                        v-for="(team, index) in posts" 
                         :key="index"
-                        :teamName="team.teamName"
-                        :teamJob="team.teamJob"
-                        :teamImage="team.teamImage"
-                        :teamEmail="team.teamEmail"
-                        :teamSlug="team.teamSlug"
+                        :teamName="team.fields.title"
+                        :teamJob="team.fields.designation"
+                        :teamImage="team.fields.profilePic.fields.file.url"
+                        :teamEmail="team.fields.emailId"
+                        :teamSlug="team.fields.slug"
                     >
                     </card-Team>
                 </div>
