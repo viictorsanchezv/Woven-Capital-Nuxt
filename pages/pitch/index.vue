@@ -138,7 +138,7 @@ export default({
 
 <style scoped>
   .form-pitch{
-    padding: 7% 7% 7% 0;
+    padding: 7% 7% 7% 4%;
   }
   .img-pitch{
     object-fit: cover;

@@ -21,27 +21,27 @@
         <h1 class="h1-45">Get in touch</h1>
         <p class=" first-p pb-2 text-small">If you share our vision and your company would like to be considered for investment by Woven Capital, we want to hear from you.</p>
         <buttom-primary class="mb-5 mr-0 ml-0 mt-0 p-0 d-flex justify-content-start" text_buttom="Pitch your company" link_buttom="/pitch"></buttom-primary>
-        <div class="m-0 p-0 d-flex justify-content-start mail-wrapper">
-          <div class=" col-md-6 p-0" >
+        <div class="p-0 d-flex justify-content-start mail-wrapper">
+          <div class=" col-md-5 p-0" >
             <h4 class="text-medium wight-600">General</h4>
             <a class="text-small"  href="mailto:hello@woven.vc">hello@woven.vc</a>
           </div>
-          <div class="col-md-6 p-0">
+          <div class="col-md-7 p-0">
             <h4 class="text-medium wight-600">Media</h4>
             <a class="text-small" href="mailto:press@woven.vc">press@woven.vc</a>
           </div>
         </div>
       </div>
     </section>
-    <section class="my-5 pb-5 row m-0 d-flex align-items-start">
-      <div class="col-12 col-md-6 p-0 mb-5 d-flex justify-content-center">
-        <div class="info-wrapper col-md-8 d-flex justify-content-center flex-column">
+    <section class="row d-flex align-items-start col-info">
+      <div class="col-12 col-md-6 d-flex justify-content-start info-contact">
+        <div class="info-wrapper col-md-7 col-12 d-flex justify-content-center flex-column">
           <h5 class="text-small wight-600">Japan (Tokyo)</h5>
           <p class="text-small m-0">Nihonbashi Muromachi Mitsui Tower,</p>
           <p class="text-small m-0">3-2-1 Nihonbashimuromachi, Chuo-ku,</p>
           <p class="text-small m-0">Tokyo, 103-0022, JAPAN</p>
         </div>
-        <div class="info-wrapper col-md-4 d-flex justify-content-center flex-column">
+        <div class="info-wrapper col-md-5 col-12 d-flex justify-content-start flex-column">
           <h5 class="text-small wight-600">USA (Silicon Valley)</h5>
           <p class="text-small m-0">900 Arastradero Rd</p>
           <p class="text-small m-0">Palo Alto, CA 94304</p>
@@ -81,19 +81,54 @@
     .info-wrapper {
       border-left : 3px solid var(--bg--primary);
       padding-left: 2rem;
+      margin-top: 8px;
     }
     .image-contact {
       min-height: 50vh;
     }
+    .mail-wrapper{
+      margin: 0 0 10% 0;
+    }
     .mail-wrapper  a, .column-padding p.first-p{
         color: var(--color--secondary);
     }
+    input#email {
+      width: 53%;
+    }
     .info-p {
       font-size: 12px;
-      padding-right: 2rem;
+      padding-right: 0;
+      max-width: 519px;
+    }
+    .info-contact{    
+      padding: 0 0 0 4%;
+      margin-bottom: 3rem;
     }
     form input {
       padding: 8px 16px;
 
+    }
+    .first-p{
+      max-width: 524px;
+    }
+    .col-info{
+      padding-top: 4%;
+    }
+    @media(max-width:767px){
+      .content-contact,
+      .col-info{
+        padding: 7%;
+        margin: 0;
+      }
+      .info-contact{
+        padding: 0;
+        flex-wrap: wrap;
+      }
+      .mail-wrapper{
+        margin: 0;
+      }
+      .content-news{
+        padding: 0;
+      }
     }
   </style>
