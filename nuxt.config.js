@@ -43,8 +43,16 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
-    '@nuxtjs/dotenv'
+    '@nuxtjs/dotenv', '@nuxtjs/markdownit'
   ],
+  markdownit: {
+    injected: true,
+    preset: 'default',
+    linkify: true,
+    breaks: false,
+    runtime: true,
+    html: true,
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {

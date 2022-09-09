@@ -43,9 +43,8 @@ export default {
               :src="insight.fields.coverImage.fields.file.url"
               alt=""
             />
-           
             <div
-              v-html="insight.fields.content" v-once
+               v-html="$md.render(insight.fields.content)"
               class="post_insight-content text-small"
             ></div>
             
@@ -69,8 +68,8 @@ export default {
             <p class="post_insight-date mb-4 text-small">
               {{ dateForm(insight.fields.publishDate) }}
             </p>
-            <div
-              v-html="insight.fields.content"
+           <div
+               v-html="$md.render(insight.fields.content)"
               class="post_insight-content text-small"
             ></div>
           </div>
@@ -91,9 +90,6 @@ export default {
 .post_insight-content,
 .post_insight-date {
   color: var(--color--secondary);
-}
-.post_insight-content {
-  white-space: pre-line;
 }
 .image-insight {
     margin-bottom: 20px;
