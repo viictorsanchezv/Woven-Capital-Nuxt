@@ -38,13 +38,13 @@
                 </div>
                 <div class="container-team p-0">
                     <card-Team 
-                        v-for="index in 10" 
+                        v-for="(team, index) in posts" 
                         :key="index"
-                        :teamName="posts[0].fields.title"
-                        :teamJob="posts[0].fields.designation"
-                        :teamImage="posts[0].fields.profilePic.fields.file.url"
-                        :teamEmail="posts[0].fields.emailId"
-                        :teamSlug="posts[0].fields.slug"
+                        :teamName="team.fields.title"
+                        :teamJob="team.fields.designation"
+                        :teamImage="team.fields.profilePic.fields.file.url"
+                        :teamEmail="team.fields.emailId"
+                        :teamSlug="team.fields.slug"
                     >
                     </card-Team>
                 </div>

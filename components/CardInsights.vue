@@ -8,27 +8,26 @@
         props:{
             titleInsights : String, 
             slugInsights: String, 
+            externalslugInsights: String,
             dateInsights: String,
             imageInsights: String,
-            flagInsights: String,
+        
         },
         methods: {
-            urlInsights( ) {
-              
-                 if( this.flagInsights == "false"){
-                    return `/insights/${this.slugInsights}`;
-                }else{
-                    return this.slugInsights ;
-                }
-               
-            },
+             urlInsight(urlSlug, externalLink){
+        
+                if(externalLink != undefined){
+                    return externalLink;
+                }else
+                    return `/insights/${urlSlug}`;
+            }
         }
     }
 </script>
 <template>
     
-    <div class="card-view border-0 w-100 h-100 d-flex position-relative align-items-center justify-content-center" :style="{ 'background-image' : 'url('+require('../assets/image/insights/'+imageInsights ) + ' )'}">
-        <a :href="urlInsights()" class="slug-insights w-100 h-100">
+    <div class="card-view border-0 w-100 h-100 d-flex position-relative align-items-center justify-content-center" :style="{ 'background-image' : `url(${imageInsights})`}">
+        <a :href="urlInsight(slugInsights, externalslugInsights)" class="slug-insights w-100 h-100">
             <div class="position-relative w-100 h-100">
                 <h3 class="card-title position-absolute">{{titleInsights}}</h3>
                 <p class="card-date position-absolute text-small">{{dateInsights}}</p>
