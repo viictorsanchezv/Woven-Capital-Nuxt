@@ -3,6 +3,8 @@ export default {
   props: {
      title: String,
      image: String,
+     linkWeb: String,
+     linkLinkedin: String,
      icons: {
       type: Boolean,
       default: true,
@@ -12,11 +14,17 @@ export default {
 </script>
 <template>
   <section>
-    <img class="mb-4" :src="require(`@/assets/image/portfolio/logo/${image}`)" alt="">
+    <img class="mb-4" :src="image" alt="">
     <p class="m-0 mb-4">{{title}}</p>
     <div class="mb-5" v-show="icons===true">
-      <img src="@/assets/image/icon/linkedin.png" alt="">
-      <img src="@/assets/image/icon/Vector.png" alt="">
+      <a :href="linkLinkedin">
+        <img src="@/assets/image/icon/linkedin.png" alt="">
+      </a>
+      <a :href="linkWeb">
+        <img src="@/assets/image/icon/Vector.png" alt="">
+      </a>
+      
+      
     </div>
   </section>
 </template>

@@ -31,18 +31,16 @@ export default {
   async asyncData() {
     const portf = await client.getEntries({
       content_type: "portfolioNwc",
+      order: "fields.order",
     });
 
     const insig = await client.getEntries({
       content_type: "insightsNwc",
+      order: "-fields.publishDate",
+      limit: "3",
     });
 
     return { portfoliosCont: portf.items, insightsCont: insig.items };
-  },
-  created() {
-    this.portfoliosCont.sort((a, b) => {
-      return a.fields.order - b.fields.order;
-    });
   },
 };
 </script>
@@ -50,28 +48,11 @@ export default {
   <main>
     <!-- hero image -->
     <section
-      class="
-        hero-image
-        vh-100
-        d-flex
-        flex-column
-        position-relative
-        align-items-center
-        w-100
-      "
+      class="hero-image vh-100 d-flex flex-column position-relative align-items-center w-100"
     >
       <div class="position-relative w-100">
         <video
-          class="
-            vh-100
-            position-absolute
-            tp-0
-            lft-0
-            w-100
-            object-cover
-            top-0
-            lef-0
-          "
+          class="vh-100 position-absolute tp-0 lft-0 w-100 object-cover top-0 lef-0"
           src="@/assets/video/Woven-Capital-Animated.mp4"
           autoplay="true"
           muted="true"
@@ -79,39 +60,13 @@ export default {
           poster=""
         ></video>
         <div
-          class="
-            content-hero
-            row
-            align-items-start
-            text-md-center
-            justify-content-center
-            m-0
-          "
+          class="content-hero row align-items-start text-md-center justify-content-center m-0"
         >
           <div
-            class="
-              col-12
-              m-0
-              p-0
-              d-flex
-              justify-content-center
-              flex-column
-              align-items-center
-            "
+            class="col-12 m-0 p-0 d-flex justify-content-center flex-column align-items-center"
           >
             <div
-              class="
-                mt-0
-                mb-5
-                mr-0
-                ml-0
-                p-0
-                w-100
-                d-flex
-                align-items-start
-                text-md-center
-                justify-content-center
-              "
+              class="mt-0 mb-5 mr-0 ml-0 p-0 w-100 d-flex align-items-start text-md-center justify-content-center"
             >
               <img
                 src="../assets/image/Logo_text.png"
@@ -134,14 +89,7 @@ export default {
     </section>
     <!-- last new -->
     <section
-      class="
-        new-last-post
-        m-0
-        p-0
-        position-relative
-        d-flex
-        justify-content-center
-      "
+      class="new-last-post m-0 p-0 position-relative d-flex justify-content-center"
     >
       <div class="position-relative w-100">
         <div class="row m-0 p-0">
@@ -157,15 +105,7 @@ export default {
     <section class="our-portfolio d-flex justify-content-center w-100">
       <div class="position-relative w-100">
         <div
-          class="
-            row
-            text-md-center
-            justify-content-center
-            m-0
-            p-0
-            position-relative
-            our-portfolio-content
-          "
+          class="row text-md-center justify-content-center m-0 p-0 position-relative our-portfolio-content"
         >
           <div class="col-12 m-0 p-0">
             <title-secundary
@@ -189,8 +129,7 @@ export default {
               :key="index"
               :iconPort="portfolio.fields.logo.fields.file.url"
               :imagePort="portfolio.fields.coverImage.fields.file.url"
-              :linkPort="portfolio.fields.link"
-              v-if="index < 3"
+              :linkPort="portfolio.fields.slug"
             ></card-portfolio>
           </template>
         </div>
@@ -201,14 +140,7 @@ export default {
     <section class="partner-together d-flex justify-content-center w-100">
       <div class="position-relative w-100">
         <div
-          class="
-            row
-            align-items-start
-            text-md-center
-            justify-content-center
-            m-0
-            p-0
-          "
+          class="row align-items-start text-md-center justify-content-center m-0 p-0"
         >
           <div class="col-12 m-0 p-0 d-flex flex-column align-items-center">
             <title-secundary
@@ -223,15 +155,7 @@ export default {
             </p>
 
             <buttom-primary
-              class="
-                mb-5
-                mr-0
-                ml-0
-                mt-0
-                p-0
-                justify-content-center
-                align-items-start
-              "
+              class="mb-5 mr-0 ml-0 mt-0 p-0 justify-content-center align-items-start"
               text_buttom="Tell us about yourself"
               link_buttom="/pitch"
             ></buttom-primary>
@@ -250,7 +174,6 @@ export default {
       <div class="w-100">
         <div class="content-insights m-0">
           <template v-for="(post, index) in insightsCont">
-        
             <card-insights
               :key="index"
               :titleInsights="post.fields.title"
@@ -258,9 +181,7 @@ export default {
               :externalslugInsights="post.fields.externalLink"
               :imageInsights="post.fields.coverImage.fields.file.url"
               :dateInsights="dateForm(post.fields.publishDate)"
-              v-if="index < 3"
             >
-            
             </card-insights>
           </template>
         </div>

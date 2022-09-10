@@ -1,13 +1,15 @@
 <script>
 import CardInsights from "@/components/CardInsights.vue";
 import client from "@/plugins/contentful.js";
-import { insightsData } from "@/data/data.js";
 export default {
   data() {
     return {
-      insights: insightsData,
       insightsCont: {},
     };
+  },
+  
+  components: {
+    CardInsights,
   },
   methods: {
     dateForm(dateI) {
@@ -20,6 +22,7 @@ export default {
   async asyncData() {
     const insig = await client.getEntries({
       content_type: "insightsNwc",
+      order: "-fields.publishDate",
     });
 
     return { insightsCont: insig.items };
