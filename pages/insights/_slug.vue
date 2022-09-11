@@ -44,10 +44,9 @@ export default {
               alt=""
             />
             <div
-               v-html="$md.render(insight.fields.content)"
+              v-html="$md.render(insight.fields.content)"
               class="post_insight-content text-small"
             ></div>
-            
           </div>
         </div>
       </template>
@@ -68,8 +67,8 @@ export default {
             <p class="post_insight-date mb-4 text-small">
               {{ dateForm(insight.fields.publishDate) }}
             </p>
-           <div
-               v-html="$md.render(insight.fields.content)"
+            <div
+              v-html="$md.render(insight.fields.content)"
               class="post_insight-content text-small"
             ></div>
           </div>
@@ -92,7 +91,7 @@ export default {
   color: var(--color--secondary);
 }
 .image-insight {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 .content-img {
   position: sticky;

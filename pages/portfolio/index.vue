@@ -60,10 +60,8 @@ export default {
 <template>
   <main>
     <portfolio-header></portfolio-header>
-    <template 
-      v-for="(portfolio, index) in portfoliosCont" >
-      <section-columns :id="portfolio.fields.title" :key="index">
-         
+    <template v-for="(portfolio, index) in portfoliosCont">
+      <section-columns :id="'partner='+portfolio.fields.title" :key="index">
         <template #left>
           <div
             class="col-md-6 col-12 border-box p-0 justify-content-start position-sticky vh-100 top-0"
@@ -80,7 +78,7 @@ export default {
             />
           </div>
         </template>
-        <template #right >
+        <template #right>
           <div class="overflow-y-auto col-md-6 col-12 mt-5 border-box p-7 pb-2">
             <portfolio-title
               :title="portfolio.fields.location"
@@ -88,18 +86,18 @@ export default {
               :linkWeb="portfolio.fields.link"
               :linkLinkedin="portfolio.fields.linkedinUrl"
             ></portfolio-title>
-           
+
             <p class="portfolio-description mb-5 text-small">
-              {{portfolio.fields.content}}
+              {{ portfolio.fields.content }}
             </p>
             <div class="info-wrapper mb-5 text-small">
               <p>
-                {{portfolio.fields.testimonial}}
+                {{ portfolio.fields.testimonial }}
               </p>
             </div>
             <div class="text-center mb-4">
-              <h5 class="m-0">{{portfolio.fields.authorTestimonial}}</h5>
-              <p>{{portfolio.fields.designationTestimonial}}</p>
+              <h5 class="m-0">{{ portfolio.fields.authorTestimonial }}</h5>
+              <p>{{ portfolio.fields.designationTestimonial }}</p>
             </div>
             <hr class="mb-4" />
             <h5 class="company-new-title mb-4 text-medium">Company News</h5>

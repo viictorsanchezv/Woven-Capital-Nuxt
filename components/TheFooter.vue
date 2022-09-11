@@ -17,7 +17,7 @@
 <template>
     <footer class="bg-footer d-flex justify-content-center w-100">			
         <div class="row align-items-start m-0  content-footer w-100">
-            <div class="col-md-8 m-0 p-0 ">
+            <div class="col-md-8 m-0 p-0 footer-items">
                 <ul class="list-group justify-content-evenly list-group-horizontal-md list-unstyled m-0 p-0">
                   <item-link 
                     v-for="(itemFooter, index) in itemsFooter"
@@ -34,8 +34,10 @@
     </footer>
 </template>
 <style scoped>
-    .content-footer{
-        padding: 25px;
+    footer .company .content-text{
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 24px;
     }
     .bg-footer{
         background-color: var( --color--secondary );
@@ -58,6 +60,29 @@
         justify-content: flex-end;
         text-align: right;
     }
+     @media(min-width:1280px){
+        .content-footer{
+            padding: 25px 42px;
+        } 
+    }
+    @media(max-width:1280px){
+        .content-footer{
+            padding: 25px 32px;
+        } 
+    }
+    @media(max-width:1300px){
+        .footer-items, .company{
+            width: 100%;
+            max-width: 100%;
+            flex: 0 0 100%;
+            justify-content: center;
+            display: flex;
+        }
+        .company .content-text{
+            text-align: center;
+            margin-top: 20px;
+        }
+    }
     @media(max-width:768px){
         footer ul.list-group {
             display: flex;
@@ -74,6 +99,11 @@
         footer .company {
             text-align: center;
             margin-top: 10px;
+            max-width: 300px;
+        }
+        .content-footer[data-v-50f6c8a1] {
+            padding: 25px 60px;
         }
     }
+   
 </style>

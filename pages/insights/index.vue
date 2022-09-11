@@ -7,7 +7,7 @@ export default {
       insightsCont: {},
     };
   },
-  
+
   components: {
     CardInsights,
   },

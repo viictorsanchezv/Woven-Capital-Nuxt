@@ -48,11 +48,11 @@ export default {
   <main>
     <!-- hero image -->
     <section
-      class="hero-image vh-100 d-flex flex-column position-relative align-items-center w-100"
+      class="hero-image vh-hero d-flex flex-column position-relative align-items-center w-100"
     >
       <div class="position-relative w-100">
         <video
-          class="vh-100 position-absolute tp-0 lft-0 w-100 object-cover top-0 lef-0"
+          class="vh-hero position-absolute tp-0 lft-0 w-100 object-cover top-0 lef-0"
           src="@/assets/video/Woven-Capital-Animated.mp4"
           autoplay="true"
           muted="true"
@@ -66,7 +66,7 @@ export default {
             class="col-12 m-0 p-0 d-flex justify-content-center flex-column align-items-center"
           >
             <div
-              class="mt-0 mb-5 mr-0 ml-0 p-0 w-100 d-flex align-items-start text-md-center justify-content-center"
+              class="logo-hero mt-0 mb-5 mr-0 ml-0 p-0 w-100 align-items-start text-md-center justify-content-center"
             >
               <img
                 src="../assets/image/Logo_text.png"
@@ -75,7 +75,7 @@ export default {
                 height="45"
               />
             </div>
-            <h1 class="title-home mb-5">
+            <h1 class="title-home">
               Fueling the engine of future growth.
             </h1>
             <buttom-primary
@@ -194,6 +194,10 @@ h1.title-home {
   color: var(--color--secondary);
   font-weight: 500;
   letter-spacing: -4px;
+  margin-bottom: 3rem;
+}
+.vh-hero{
+  height: 100vh;
 }
 .hero-image {
   background-position: center;
@@ -244,11 +248,12 @@ h1.title-home {
 }
 @media (max-width: 768px) {
   .hero-image h1.title-home {
-    width: 384px;
+    width: 290px;
     font-size: 35px;
     line-height: 49px;
     text-align: center;
     padding: 10px;
+    margin-bottom: 20px;
   }
   .content-hero img {
     max-width: 100%;
@@ -300,10 +305,25 @@ h1.title-home {
   .partner-together img {
     width: 984px;
   }
+  .content-hero .logo-hero{
+    display: block;
+  }
 }
 @media (max-width: 1079px) {
   .partner-together img {
     width: 100%;
+  }
+  .hero-image video {
+    margin-top: -2px;
+  }
+  .vh-hero{
+    height: calc(100vh - 83px);
+  }
+  .content-hero {
+    padding-top: 180px;
+  }
+  .content-hero .logo-hero{
+    display: none;
   }
 }
 </style>

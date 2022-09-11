@@ -10,13 +10,13 @@
 </template>
 <style>
     
-    @media(min-width: 768px){
+    @media(min-width: 1025px){
         .content-main {
             width: 100%;
             padding: 0 0 0 85px;
         }
     }
-    @media(max-width: 767px){
+    @media(max-width: 1024px){
     .content-main {
             width: 100%;
             padding: 0;
