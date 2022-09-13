@@ -22,5 +22,11 @@
             padding: 0;
         }
     }
+    @media(max-width:768px){
+        main.content-main {
+           margin-top: 75px;
+        }
+            
+    }
  
 </style>

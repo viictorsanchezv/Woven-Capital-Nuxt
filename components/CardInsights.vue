@@ -21,12 +21,13 @@
                 }else
                     return `/insights/${urlSlug}`;
             }
+            
         }
     }
 </script>
 <template>
     
-    <div class="card-view border-0 w-100 h-100 d-flex position-relative align-items-center justify-content-center" :style="{ 'background-image' : `url(${imageInsights})`}">
+    <div class="card-view border-0 h-100 d-flex position-relative align-items-center justify-content-center" :style="{ 'background-image' : `url(${imageInsights})`}">
         <a :href="urlInsight(slugInsights, externalslugInsights)" class="slug-insights w-100 h-100">
             <div class="position-relative w-100 h-100">
                 <h3 class="card-title position-absolute">{{titleInsights}}</h3>
@@ -42,16 +43,24 @@
         background: #00000052;
         color: transparent;
     }
-    .card-view  {
+    .content-insights .card-view  {
         overflow: hidden;
         grid-row: span 1;
+    }
+    .result-insights .card-view{
+        width: 100%;
+    }
+    .result-insights .card-view:nth-child(2){
+        margin-left: 10px;
+    }
+    .card-view {
         background-position: center top;
         background-size: cover;
     }
-    .card-view:nth-child(3n+1), .card-view:first-child{
+    .content-insights .card-view:nth-child(3n+1){
         grid-row: span 2;
     }
-    .card-view h3.card-title {
+    .card-view.card-view h3.card-title {
         border-left: 2px solid var(--bg--primary);
         color: var(--color-white);
     }
@@ -111,7 +120,7 @@
         }
     }
     @media(max-width: 768px){
-        .card-view{
+        .content-insights .card-view{
             grid-row: span 1!important;
         }
     }

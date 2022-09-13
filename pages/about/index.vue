@@ -111,11 +111,13 @@ export default {
         <div
           class="col-md-6 col-12 border-box p-0 justify-content-start section-sticky vh-100 top-0"
         >
-          <img
-            class="vh-50 pb-5x w-100 object-cover object-center"
-            src="@/assets/image/about/Rectangle-621.png"
-            alt=""
-          />
+          <video
+            class="w-100 object-cover v-50"
+            src="@/assets/video/overview.mp4"
+            autoplay="false"
+            muted="false"
+            controls 
+          ></video>
           <img
             class="vh-50 pt-5x w-100 object-cover object-center"
             src="@/assets/image/about/Rectangle-371.png"

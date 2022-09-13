@@ -1,7 +1,10 @@
 <script>
-
 export default {
  
+  methods: {
+  
+  },
+  
 };
 </script>
 
@@ -9,17 +12,15 @@ export default {
   <header class="py-4 position-fixed top-0 w-100">
     <nav class="w-100">
       <ul class="w-100 m-0 p-0 d-flex justify-content-center">
-        <li class="list-unstyled">
-          <a class="px-3 rounded py-1 mx-3 scroll-active" href="#partner=nuro" >
-            Nuro
-          </a>
+        <li class="list-unstyled linkPortfolio">
+          <a class="px-3 rounded py-1 mx-3" href="#partner=nuro"> Nuro </a>
         </li>
-        <li class="list-unstyled">
+        <li class="list-unstyled linkPortfolio">
           <a class="px-3 rounded py-1 mx-3" href="#partner=Ridecell">
             Ridecell
           </a>
         </li>
-        <li class="list-unstyled">
+        <li class="list-unstyled linkPortfolio">
           <a class="px-3 rounded py-1 mx-3" href="#partner=Whill"> WHILL </a>
         </li>
       </ul>

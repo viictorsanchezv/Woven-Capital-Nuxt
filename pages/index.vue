@@ -11,6 +11,7 @@ export default {
     return {
       portfoliosCont: {},
       insightsCont: {},
+      pressReleasesCont: {},
     };
   },
   components: {
@@ -40,7 +41,15 @@ export default {
       limit: "3",
     });
 
-    return { portfoliosCont: portf.items, insightsCont: insig.items };
+    const pressReleases = await client.getEntries({
+      content_type: "pressReleasesNwc",
+    });
+
+    return {
+      portfoliosCont: portf.items,
+      insightsCont: insig.items,
+      pressReleasesCont: pressReleases.items,
+    };
   },
 };
 </script>
@@ -75,9 +84,7 @@ export default {
                 height="45"
               />
             </div>
-            <h1 class="title-home">
-              Fueling the engine of future growth.
-            </h1>
+            <h1 class="title-home">Fueling the engine of future growth.</h1>
             <buttom-primary
               class="d-flex justify-content-center align-items-start"
               text_buttom="Read our Story"
@@ -94,9 +101,12 @@ export default {
       <div class="position-relative w-100">
         <div class="row m-0 p-0">
           <div class="col-12 m-0 p-0">
-            <new-last
-              titleLast="WHILL Secures Funding from Woven Capital to Scale Short-Distance Mobility Service Globally"
-            ></new-last>
+            <template v-for="(pressReleases, index) in pressReleasesCont">
+              <new-last
+                :key="index"
+                :titleLast="pressReleases.fields.title"
+              ></new-last>
+            </template>
           </div>
         </div>
       </div>
@@ -136,7 +146,6 @@ export default {
       </div>
     </section>
     <!-- partner -->
-
     <section class="partner-together d-flex justify-content-center w-100">
       <div class="position-relative w-100">
         <div
@@ -196,7 +205,7 @@ h1.title-home {
   letter-spacing: -4px;
   margin-bottom: 3rem;
 }
-.vh-hero{
+.vh-hero {
   height: 100vh;
 }
 .hero-image {
@@ -210,11 +219,9 @@ h1.title-home {
 .text-partner {
   color: var(--color--secondary);
 }
-.our-portfolio {
-  padding: 158px 0px 0px 0px;
-}
+.our-portfolio,
 .partner-together {
-  padding: 107px 0 0 0;
+  padding: 100px 0px 0px 0px;
 }
 .content-insights {
   display: grid;
@@ -305,7 +312,7 @@ h1.title-home {
   .partner-together img {
     width: 984px;
   }
-  .content-hero .logo-hero{
+  .content-hero .logo-hero {
     display: block;
   }
 }
@@ -316,13 +323,13 @@ h1.title-home {
   .hero-image video {
     margin-top: -2px;
   }
-  .vh-hero{
+  .vh-hero {
     height: calc(100vh - 83px);
   }
   .content-hero {
     padding-top: 180px;
   }
-  .content-hero .logo-hero{
+  .content-hero .logo-hero {
     display: none;
   }
 }

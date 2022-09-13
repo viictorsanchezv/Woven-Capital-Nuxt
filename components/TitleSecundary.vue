@@ -57,5 +57,8 @@
         .limit-width h2.title-secundary{
             widows: 100%;
         }
+        h2.title-secundary{
+            padding: 0 40px;
+        }
     }
 </style>

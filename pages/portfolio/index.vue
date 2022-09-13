@@ -44,6 +44,9 @@ export default {
         },
       ],
       portfoliosCont: {},
+      investmentsCont: {},
+      slide: 0,
+      sliding: null,
     };
   },
   async asyncData() {
@@ -52,7 +55,19 @@ export default {
       order: "fields.order",
     });
 
-    return { portfoliosCont: portf.items };
+    const investmentsC = await client.getEntries({
+      content_type: "investmentsNwc",
+    });
+
+    return { portfoliosCont: portf.items, investmentsCont: investmentsC.items };
+  },
+  methods: {
+    onSlideStart(slide) {
+      this.sliding = true;
+    },
+    onSlideEnd(slide) {
+      this.sliding = false;
+    },
   },
 };
 </script>
@@ -61,10 +76,14 @@ export default {
   <main>
     <portfolio-header></portfolio-header>
     <template v-for="(portfolio, index) in portfoliosCont">
-      <section-columns :id="'partner='+portfolio.fields.title" :key="index">
+      <section-columns
+        class="page-section"
+        :id="'partner=' + portfolio.fields.title"
+        :key="index"
+      >
         <template #left>
           <div
-            class="col-md-6 col-12 border-box p-0 justify-content-start position-sticky vh-100 top-0"
+            class="col-md-6 col-12 border-box p-0 justify-content-start vh-100 col-sticky"
           >
             <img
               class="vh-50 pb-5x w-100 object-cover"
@@ -79,7 +98,9 @@ export default {
           </div>
         </template>
         <template #right>
-          <div class="overflow-y-auto col-md-6 col-12 mt-5 border-box p-7 pb-2">
+          <div
+            class="overflow-y-auto col-md-6 col-12 border-box p-7 col-content"
+          >
             <portfolio-title
               :title="portfolio.fields.location"
               :image="portfolio.fields.logoblack.fields.file.url"
@@ -114,31 +135,61 @@ export default {
     <section-columns id="lp-investiments">
       <template #left>
         <div
-          class="col-md-6 col-12 border-box p-0 justify-content-start position-sticky vh-100 top-0"
+          class="col-md-6 col-12 border-box p-0 justify-content-start col-sticky vh-100"
         >
           <img
             class="vh-50 pb-5x w-100 object-cover"
-            src="@/assets/image/portfolio/rectangle-619.png"
+            :src="investmentsCont[0].fields.coverImage.fields.file.url"
             alt=""
           />
-          <img
-            class="vh-50 pt-5x w-100 object-cover"
-            src="@/assets/image/portfolio/rectangle-619.png"
-            alt=""
-          />
+
+          <div class="vh-50 section-carousel">
+            <b-carousel
+              id="carousel-1"
+              v-model="slide"
+              :interval="4000"
+              style="text-shadow: 1px 1px 2px #333"
+              class="w-100 h-100"
+              img-width="100"
+              img-height="100"
+              @sliding-start="onSlideStart"
+              @sliding-end="onSlideEnd"
+            >
+              <template
+                v-for="(gallery, index) in investmentsCont[0].fields
+                  .galleryImages"
+              >
+                <b-carousel-slide
+                  :key="index"
+                >
+                 <template #img>
+                  <img :src="gallery.fields.file.url" alt="" class="vh-50 image-slide d-block w-100">
+       
+        </template>
+                
+                </b-carousel-slide>
+              </template>
+         
+            </b-carousel>
+
+            
+          </div>
         </div>
       </template>
       <template #right>
-        <div class="overflow-y-auto col-md-6 col-12 border-box p-7 pb-2">
-          <img src="@/assets/image/portfolio/logo/lp-Investments.png" alt="" />
-          <p class="portfolio-description mb-5 pb-5 text-small">
-            Fund-of-Fund investments in early-stage venture funds that
-            complement our geographic coverage.
+        <div class="overflow-y-auto col-md-6 col-12 border-box p-7 col-content">
+          <title-secundary
+            class="justify-content-start"
+            :titleH2="investmentsCont[0].fields.title"
+            spanTitleH2=""
+          ></title-secundary>
+          <p class="portfolio-description text-small">
+            {{ investmentsCont[0].fields.description }}
           </p>
-          <div class="img-wrapper d-flex justify-content-between mt-5">
-            <img src="@/assets/image/portfolio/ballistic.png" alt="" />
-            <img src="@/assets/image/portfolio/2150.png" alt="" />
-            <img src="@/assets/image/portfolio/uppartners.png" alt="" />
+          <div class="img-wrapper-logo">
+            <template v-for="(logo, index) in investmentsCont[0].fields.logos">
+              <img :key="index" :src="logo.fields.file.url" alt="" />
+            </template>
           </div>
         </div>
       </template>
@@ -146,9 +197,24 @@ export default {
   </main>
 </template>
 <style scoped>
-.info-wrapper {
-  border-left: 3px solid var(--bg--primary);
-  padding-left: 2rem;
+
+.image-slide{
+  object-fit: cover;
+  object-position: top;
+}
+.portfolio-description {
+  margin-bottom: 50px;
+}
+#lp-investiments .img-wrapper-logo {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+#lp-investiments .img-wrapper-logo img {
+  object-fit: contain;
+  width: 33.33%;
+  padding: 0 20px 0 0;
+  height: 60px;
 }
 
 p.portfolio-description {
@@ -180,8 +246,28 @@ div.text-center p {
   font-weight: 600;
   color: #313131;
 }
-
-.img-wrapper img {
-  width: 30%;
+.col-sticky {
+  position: sticky;
+  top: 0;
+}
+.col-content {
+  margin-top: 3rem;
+}
+@media (max-width: 768px) {
+  .col-sticky {
+    position: relative;
+    top: unset;
+    order: 1;
+  }
+  .col-content {
+    order: 2;
+    margin: 0;
+    padding: 40px;
+  }
+  #lp-investiments .img-wrapper-logo img {
+    width: 50%;
+    padding: 20px 0;
+    height: 100px;
+  }
 }
 </style>
