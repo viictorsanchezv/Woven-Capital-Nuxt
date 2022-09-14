@@ -8,7 +8,9 @@ export default {
       insightsResult: [],
     };
   },
-
+  head: {
+    title: "Insigth - Woven Capital",
+  },
   components: {
     CardInsights,
   },
@@ -18,7 +20,7 @@ export default {
       const month = new Date(dateI);
 
       return new Date(month).toLocaleDateString("en", options);
-    }
+    },
   },
   async asyncData() {
     const insig = await client.getEntries({
@@ -28,13 +30,15 @@ export default {
 
     return { insightsCont: insig.items };
   },
-  mounted () {
-      const result = this.insightsCont.length % 3;
- 
-      if(result > 0 ){
-        this.insightsResult = this.insightsCont.splice(this.insightsCont.length - result , result);
-        
-      }
+  mounted() {
+    const result = this.insightsCont.length % 3;
+
+    if (result > 0) {
+      this.insightsResult = this.insightsCont.splice(
+        this.insightsCont.length - result,
+        result
+      );
+    }
   },
 };
 </script>
@@ -52,25 +56,22 @@ export default {
               :externalslugInsights="post.fields.externalLink"
               :imageInsights="post.fields.coverImage.fields.file.url"
               :dateInsights="dateForm(post.fields.publishDate)"
-            
             >
             </card-insights>
           </template>
         </div>
         <div class="result-insights" v-if="this.insightsResult.length > 0">
-           <template v-for="(result, index) in this.insightsResult">
-              <card-insights
-                :key="index"
-                :titleInsights="result.fields.title"
-                :slugInsights="result.fields.urlSlug"
-                :externalslugInsights="result.fields.externalLink"
-                :imageInsights="result.fields.coverImage.fields.file.url"
-                :dateInsights="dateForm(result.fields.publishDate)"
-              
-              >
-              </card-insights>
-            </template>
-           
+          <template v-for="(result, index) in this.insightsResult">
+            <card-insights
+              :key="index"
+              :titleInsights="result.fields.title"
+              :slugInsights="result.fields.urlSlug"
+              :externalslugInsights="result.fields.externalLink"
+              :imageInsights="result.fields.coverImage.fields.file.url"
+              :dateInsights="dateForm(result.fields.publishDate)"
+            >
+            </card-insights>
+          </template>
         </div>
       </div>
     </section>
@@ -84,7 +85,7 @@ export default {
   grid-gap: 10px;
   margin: 0;
 }
-.result-insights{
+.result-insights {
   height: 50vh;
   margin-top: 10px;
   display: flex;
@@ -93,7 +94,7 @@ export default {
   .content-insights {
     grid-template-columns: repeat(auto-fill, minmax(50%, 1fr));
     grid-auto-rows: calc(50vh - 5px);
-    grid-gap: 40px;
+    grid-gap: 20px;
   }
 }
 </style>

@@ -4,6 +4,9 @@ export default {
   data() {
     return {};
   },
+  head: {
+    title: "Insigth - Woven Capital",
+  },
   asyncData({ params }) {
     return client
       .getEntries({
@@ -26,8 +29,7 @@ export default {
 };
 </script>
 <template>
-  <div class="row m-0">
-    <div class="col-12 m-0 p-0">
+  <main class="row">
       <template v-if="insight.fields.typeArticle === 'insight'">
         <div class="row m-0">
           <div class="col-12 content_post-insight">
@@ -74,8 +76,7 @@ export default {
           </div>
         </div>
       </template>
-    </div>
-  </div>
+    </main>
 </template>
 
 <style scoped>
@@ -97,5 +98,12 @@ export default {
   position: sticky;
   height: 100vh;
   top: 0;
+}
+@media(max-width: 767px){
+  .content-img, .content-img img {
+  position: relative;
+  height: 50vh;
+
+}
 }
 </style>

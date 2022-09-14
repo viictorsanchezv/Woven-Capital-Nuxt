@@ -217,7 +217,7 @@ header .header-desktop ul.list-group {
   min-width: 168px;
 }
 header ul.list-group li {
-  padding: 6px 0;
+  padding: 10px 0;
 }
 .list-group-none {
   display: none;
@@ -253,12 +253,12 @@ header button {
   justify-content: flex-end;
 }
 .modal-menu-mobile .content-modal ul#list-group {
-    margin-top: 50px;
+  margin-top: 50px;
 }
-.modal-menu-mobile .content-modal ul#list-group li{
-      padding: 10px 0;
+.modal-menu-mobile .content-modal ul#list-group li {
+  padding: 10px 0;
 }
-div#header-content-mobile{
+div#header-content-mobile {
   padding: 15px 20px;
 }
 div#header-content-mobile {
@@ -282,7 +282,7 @@ div#header-content-mobile {
   transform: translateX(250px);
 }
 .expanded-mobile .modal-menu-mobile {
-  transform: translateX(0px);
+  transform: translateX(7px);
   transition: transform 250ms ease-in-out;
 }
 

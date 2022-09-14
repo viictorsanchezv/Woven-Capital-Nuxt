@@ -8,6 +8,9 @@ export default {
       inputData: [],
     };
   },
+  head: {
+    title: "Pitch - Woven Capital",
+  },
   components: {
     InputGroup,
     ButtomPrimary,

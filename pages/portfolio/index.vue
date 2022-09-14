@@ -14,42 +14,21 @@ export default {
   },
   data() {
     return {
-      nuro: [
-        {
-          title: "Woven Capital Makes Its First Investment, Backing Nuro",
-          description:
-            "Woven Capital, an $800 million global investment fund that supports growth-stage companies in mobility, made an equity investment in Nuro...",
-        },
-        {
-          title:
-            "TechCrunch: Woven Capital kicks off portfolio with investment in autonomous delivery company Nuro",
-          description:
-            "Woven Capital, the investment arm of Toyota’s innovation-focused subsidiary Woven Planet, has announced an investment into Silicon...",
-        },
-      ],
-      ridecell: [
-        {
-          title:
-            "Woven Capital Invests in Ridecell to Accelerate Global Growth in IoT-driven Automation for Mobility and Fleet Businesses",
-          description:
-            "Woven Capital, L.P. today announced that it has made an investment in Ridecell Inc., a leading platform powering digital transformations and IoT...",
-        },
-      ],
-      whill: [
-        {
-          title:
-            "WHILL Secures Funding from Woven Capital to Scale Short-Distance Mobility Service Globally",
-          description:
-            "WHILL, Inc., a leading developer and service provider of short-distance mobility, announced today it closed new funding led by a strategic...",
-        },
-      ],
+     
       portfoliosCont: {},
       investmentsCont: {},
+      insightsPortf: {},
       slide: 0,
       sliding: null,
     };
   },
+  head: {
+    title: 'Portfolio - Woven Capital',
+  },
   async asyncData() {
+    let dataInfo = [];
+    const promiseArray = [];
+
     const portf = await client.getEntries({
       content_type: "portfolioNwc",
       order: "fields.order",
@@ -59,7 +38,27 @@ export default {
       content_type: "investmentsNwc",
     });
 
-    return { portfoliosCont: portf.items, investmentsCont: investmentsC.items };
+    portf.items.forEach((portfolio) => {
+      promiseArray.push(
+        client.getEntries({
+          content_type: "insightsNwc",
+          "fields.company": portfolio.fields.slug,
+          limit: "2",
+        })
+      );
+    });
+
+    dataInfo = await Promise.all(promiseArray);
+
+    dataInfo = dataInfo.map((element) => {
+      return element.items;
+    });
+
+    return {
+      portfoliosCont: portf.items,
+      investmentsCont: investmentsC.items,
+      insightsPortf: dataInfo,
+    };
   },
   methods: {
     onSlideStart(slide) {
@@ -78,7 +77,7 @@ export default {
     <template v-for="(portfolio, index) in portfoliosCont">
       <section-columns
         class="page-section"
-        :id="'partner=' + portfolio.fields.title"
+        :id="portfolio.fields.slug"
         :key="index"
       >
         <template #left>
@@ -120,13 +119,18 @@ export default {
               <h5 class="m-0">{{ portfolio.fields.authorTestimonial }}</h5>
               <p>{{ portfolio.fields.designationTestimonial }}</p>
             </div>
+
             <hr class="mb-4" />
-            <h5 class="company-new-title mb-4 text-medium">Company News</h5>
-            <company-news
-              v-for="(item, index) in nuro"
-              :key="index"
-              :companyInfo="item"
-            ></company-news>
+
+            <template v-if="insightsPortf[index].length > 0">
+              <h5 class="company-new-title mb-4 text-medium">Company News</h5>
+
+              <company-news
+                v-for="(item, index) in insightsPortf[index]"
+                :key="index"
+                :companyInfo="item"
+              ></company-news>
+            </template>
           </div>
         </template>
       </section-columns>
@@ -159,20 +163,17 @@ export default {
                 v-for="(gallery, index) in investmentsCont[0].fields
                   .galleryImages"
               >
-                <b-carousel-slide
-                  :key="index"
-                >
-                 <template #img>
-                  <img :src="gallery.fields.file.url" alt="" class="vh-50 image-slide d-block w-100">
-       
-        </template>
-                
+                <b-carousel-slide :key="index">
+                  <template #img>
+                    <img
+                      :src="gallery.fields.file.url"
+                      alt=""
+                      class="vh-50 image-slide d-block w-100"
+                    />
+                  </template>
                 </b-carousel-slide>
               </template>
-         
             </b-carousel>
-
-            
           </div>
         </div>
       </template>
@@ -197,8 +198,7 @@ export default {
   </main>
 </template>
 <style scoped>
-
-.image-slide{
+.image-slide {
   object-fit: cover;
   object-position: top;
 }

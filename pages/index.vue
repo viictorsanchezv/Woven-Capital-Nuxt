@@ -14,6 +14,9 @@ export default {
       pressReleasesCont: {},
     };
   },
+  head: {
+    title: "Woven Capital",
+  },
   components: {
     ButtomPrimary,
     titleSecundary,
@@ -115,7 +118,7 @@ export default {
     <section class="our-portfolio d-flex justify-content-center w-100">
       <div class="position-relative w-100">
         <div
-          class="row text-md-center justify-content-center m-0 p-0 position-relative our-portfolio-content"
+          class="row text-md-center justify-content-center m-0 position-relative our-portfolio-content"
         >
           <div class="col-12 m-0 p-0">
             <title-secundary
@@ -213,11 +216,14 @@ h1.title-home {
   background-size: cover;
 }
 .content-hero {
-  padding-top: 75px;
+  padding-top: 100px;
 }
 .text-portfolio,
 .text-partner {
   color: var(--color--secondary);
+}
+.our-portfolio .our-portfolio-content{
+  padding: 0;
 }
 .our-portfolio,
 .partner-together {
@@ -267,21 +273,20 @@ h1.title-home {
     object-fit: contain;
     padding: 6px;
   }
-  .our-portfolio {
-    padding: 40px 0 0;
+  .our-portfolio{
+    padding: 0;
   }
   .our-portfolio .our-portfolio-content,
   .partner-together {
-    padding: 10% 0% 0%;
     text-align: center;
     padding: 40px;
   }
   h2.title-secundary,
   h2.title-secundary span {
-    width: 100% !important;
-    font-size: 35px !important;
+    width: 100%;
+    font-size: 35px;
     text-align: center;
-    line-height: 39px !important;
+    line-height: 39px;
   }
   p.text-medium.text-portfolio {
     text-align: center;
@@ -294,7 +299,7 @@ h1.title-home {
   }
   .content-portfolio .portfolio {
     height: 400px !important;
-    margin: 0 0 40px 0;
+    margin: 0 0 20px 0;
   }
   .content-portfolio .portfolio:nth-child(3) {
     margin: 0;
@@ -305,7 +310,7 @@ h1.title-home {
   .content-insights {
     grid-template-columns: repeat(auto-fill, minmax(50%, 1fr));
     grid-auto-rows: calc(50vh - 5px);
-    grid-gap: 40px;
+    grid-gap: 20px;
   }
 }
 @media (min-width: 1080px) {

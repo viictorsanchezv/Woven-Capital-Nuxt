@@ -9,10 +9,14 @@ export default {
   components: {
     titleSecundary,
   },
+  head: {
+    title: "Team - Woven Capital",
+  },
   asyncData() {
     return client
       .getEntries({
         content_type: "teamNwc",
+        order: "fields.order",
       })
       .then((entries) => {
         return { posts: entries.items };
@@ -25,7 +29,7 @@ export default {
   <main>
     <section>
       <div class="p-7 m-0">
-        <div class="row m-0 p-4">
+        <div class="row m-0 p-0">
           <div
             class="col-md-12 p-0 m-0 align-items-center d-flex flex-column text-center"
           >

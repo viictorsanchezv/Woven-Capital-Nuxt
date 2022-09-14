@@ -1,5 +1,9 @@
 <script>
-export default {};
+export default {
+  head: {
+    title: "Privacy Notice - Woven Capital",
+  },
+};
 </script>
 <template>
   <main>

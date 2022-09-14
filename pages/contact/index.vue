@@ -6,6 +6,9 @@ export default {
     ButtomPrimary,
     titleSecundary,
   },
+  head: {
+    title: "Contact - Woven Capital",
+  },
 };
 </script>
 

@@ -8,6 +8,9 @@ export default {
       imageCardInfo: [],
     };
   },
+  head: {
+    title: "About - Woven Capital",
+  },
   components: {
     titleSecundary,
     SectionColumns,
@@ -112,11 +115,11 @@ export default {
           class="col-md-6 col-12 border-box p-0 justify-content-start section-sticky vh-100 top-0"
         >
           <video
-            class="w-100 object-cover v-50"
+            class="w-100 object-cover vh-50"
             src="@/assets/video/overview.mp4"
             autoplay="false"
             muted="false"
-            controls 
+            controls
           ></video>
           <img
             class="vh-50 pt-5x w-100 object-cover object-center"
@@ -152,7 +155,7 @@ export default {
       </template>
     </section-columns>
 
-    <section class="m-6p row p-6p m-0">
+    <section class="m-3p row p-6p ">
       <div class="text-center col-12 mt-0 mb-5 ml-0 mr-0 p-0">
         <title-secundary
           class="mb-4 justify-content-center"
@@ -192,9 +195,9 @@ export default {
         </div>
       </template>
       <template #right>
-        <div class="col-md-6 col-12 border-box p-0 section-sticky vh-100 top-0">
+        <div class="col-md-6 col-12 border-box p-0 section-sticky top-0 commitment">
           <img
-            class="vh-100 w-100 ima-comm object-cover object-top"
+            class=" w-100 ima-comm object-cover object-top"
             src="@/assets/image/about/Rectangle-405.png"
             alt=""
           />
@@ -205,6 +208,10 @@ export default {
 </template>
 
 <style scoped>
+.ima-comm, 
+.commitment{
+  height: 100vh;
+}
 p.text-sect,
 .author-sect,
 p.text-comm {
@@ -218,6 +225,9 @@ p.text-comm {
 }
 .m-6p {
   margin: 6% 0;
+}
+.m-3p {
+  margin: 3% 0;
 }
 .p-6p {
   padding: 6%;
@@ -245,6 +255,14 @@ a:hover {
   }
   .section-sticky {
     position: relative;
+  }
+  .ima-comm, 
+  .commitment{
+    height: 50vh;
+  }
+  .p-6p{
+    padding: 40px;
+    margin: 0;
   }
 }
 </style>

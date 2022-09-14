@@ -1,6 +1,7 @@
 *{
     font-family: "Poppins", Sans-serif;
     font-size: 14px;
+    scroll-behavior: smooth;
 }
 :root{
     --bg--primary: #21CB25;
@@ -9,6 +10,9 @@
     --color--accent: #61CE70;
     --color-white: #ffffff;
     --color-btn-hover:#15A419;
+}
+main.content-main a:not(.button-primary, .refPortfolio){
+    color: var( --bg--primary)!important;
 }
 .text-12{
     font-style: normal;
@@ -101,5 +105,16 @@ div.p-7{
         font-size: 40px;
         line-height: 48px;
     }
+}
+@media(max-width: 768px){
+    div.p-7{
+        padding: 40px;
+    }
+    h1.h1-45, 
+    span.h1-45{
+        font-size: 35px;
+        line-height: 39px;
+    }
+    
 }
 
