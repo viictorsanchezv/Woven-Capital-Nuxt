@@ -13,7 +13,7 @@ export default {
 };
 </script>
 <template>
-  <footer class="bg-footer d-flex justify-content-center w-100">
+  <footer class="bg-footer w-100 content-main" id="footer-container">
     <div class="row align-items-start m-0 content-footer w-100">
       <div class="col-md-8 m-0 p-0 footer-items">
         <ul
@@ -35,6 +35,7 @@ export default {
       </div>
     </div>
   </footer>
+  
 </template>
 <style scoped>
 footer .company .content-text {

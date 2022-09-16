@@ -14,7 +14,6 @@ export default {
   },
   data() {
     return {
-     
       portfoliosCont: {},
       investmentsCont: {},
       insightsPortf: {},
@@ -23,7 +22,7 @@ export default {
     };
   },
   head: {
-    title: 'Portfolio - Woven Capital',
+    title: "Portfolio - Woven Capital",
   },
   async asyncData() {
     let dataInfo = [];
@@ -72,13 +71,14 @@ export default {
 </script>
 
 <template>
-  <main>
+  <main class="portfolio">
     <portfolio-header></portfolio-header>
     <template v-for="(portfolio, index) in portfoliosCont">
       <section-columns
-        class="page-section"
+        class="fullpage"
         :id="portfolio.fields.slug"
         :key="index"
+        :title="portfolio.fields.title"
       >
         <template #left>
           <div
@@ -136,7 +136,7 @@ export default {
       </section-columns>
     </template>
 
-    <section-columns id="lp-investiments">
+    <section-columns id="lp-investiments" class="fullpage" title="LP Investments">
       <template #left>
         <div
           class="col-md-6 col-12 border-box p-0 justify-content-start col-sticky vh-100"
@@ -198,6 +198,19 @@ export default {
   </main>
 </template>
 <style scoped>
+
+main.portfolio{
+  overflow: hidden;
+  height: 100vh;
+      display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.fullpage {
+  height: 100vh;
+  width: 100%;
+  position: relative;
+}
 .image-slide {
   object-fit: cover;
   object-position: top;
@@ -251,9 +264,18 @@ div.text-center p {
   top: 0;
 }
 .col-content {
-  margin-top: 3rem;
+  margin-top: 0;
+  overflow-y: auto;
+  height: 100%;
 }
-@media (max-width: 768px) {
+@media (min-width: 768px) and (max-width:1024px){
+main.portfolio{
+      margin-top: 75px;
+    height: calc(100vh - 75px);
+}
+}
+
+@media (max-width: 767px) {
   .col-sticky {
     position: relative;
     top: unset;
@@ -268,6 +290,13 @@ div.text-center p {
     width: 50%;
     padding: 20px 0;
     height: 100px;
+  }
+  main.portfolio{
+    overflow: unset;
+    height: 100%;
+  }
+  .fullpage{
+    height: 100%;
   }
 }
 </style>
