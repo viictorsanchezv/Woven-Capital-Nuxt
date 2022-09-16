@@ -69,7 +69,8 @@ export default {
       this.inMove = true;
       this.activeSection++;
         
-      if(this.activeSection > this.offsets.length - 1) this.activeSection = 0;
+      // if(this.activeSection > this.offsets.length - 1) this.activeSection = 0;
+      if(this.activeSection > this.offsets.length - 1) this.activeSection = this.offsets.length - 1;
         
       this.scrollToSection(this.activeSection, true);
     },
