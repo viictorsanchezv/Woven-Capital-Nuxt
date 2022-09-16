@@ -24,7 +24,7 @@ a.button-primary {
   background-color: var(--color--secondary);
   border-radius: 4px;
   padding: 8px 16px;
-  color: var(--color-white)!important;
+  color: var(--color-white) !important;
   font-size: 16px;
   min-width: 170px;
 }

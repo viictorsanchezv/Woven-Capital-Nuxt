@@ -120,6 +120,7 @@ export default {
           src="@/assets/image/pitch/frame-1.png"
           alt=""
         />
+        <h1 class="title-pitch">Tell us about your company</h1>
       </div>
       <div class="col-12 col-md-6 form-pitch">
         <form @submit.prevent="" class="row m-0">
@@ -167,6 +168,40 @@ export default {
 </template>
 
 <style scoped>
+h1.title-pitch {
+  color: var(--color--secondary);
+  font-weight: 500;
+  letter-spacing: -4px;
+  margin-bottom: 3rem;
+  position: absolute;
+  z-index: 9;
+  top: 18%;
+  left: 10%;
+  max-width: 485px;
+}
+@media (min-width: 1441px) {
+  h1.title-pitch {
+    font-size: 70px;
+    line-height: 80px;
+  }
+}
+@media (max-width: 1440px) {
+  h1.title-pitch {
+    font-size: 63px;
+    line-height: 76px;
+  }
+}
+@media (max-width: 768px) {
+  h1.title-pitch {
+    width: 100%;
+    font-size: 35px;
+    line-height: 49px;
+    text-align: center;
+    padding: 10px;
+    margin-bottom: 20px;
+    letter-spacing: -2px;
+  }
+}
 .form-pitch {
   padding: 7% 7% 7% 4%;
 }

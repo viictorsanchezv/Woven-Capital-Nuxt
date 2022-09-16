@@ -71,7 +71,7 @@ export default {
   font-weight: 500;
 }
 .card-view .card-read-more img {
-  top: 6px;
+  top: 21%;
   margin-left: 6px;
 }
 .card-view .card-read-more:hover img {
@@ -81,52 +81,78 @@ export default {
 .card-view p.card-date {
   color: var(--color-white);
 }
+.card-view p{
+  margin: 0;
+}
+.content-insights .card-view:nth-child(3n + 1) h3.card-title {
+  top: 6%;
+  left: 6%;
+}
+.content-insights .card-view:nth-child(3n + 1) p.card-date {
+  bottom: 6%;
+  left: 6%;
+}
+.content-insights .card-view:nth-child(3n + 1) .card-read-more {
+  bottom: 6.5%;
+  right: 7%;
+}
+.card-view h3.card-title {
+  top: 12%;
+  left: 6%;
+}
+.card-view p.card-date {
+  bottom: 12%;
+  left: 6%;
+}
+.card-view .card-read-more {
+  bottom: 13%;
+  right: 8%;
+}
 @media (min-width: 1441px) {
   .card-view h3.card-title {
-    top: 60px;
-    left: 60px;
     padding: 0 0 0 36px;
     font-size: 24px;
     line-height: 30px;
     width: 400px;
   }
-  .card-view p.card-date {
-    bottom: 60px;
-    left: 60px;
-  }
   .card-view .card-read-more {
-    bottom: 60px;
-    right: 70px;
     font-size: 16px;
     line-height: 24px;
   }
 }
 @media (max-width: 1440px) {
   .card-view h3.card-title {
-    top: 40px;
-    left: 40px;
     padding: 0 0 0 26px;
     font-size: 20px;
     line-height: 24px;
     width: 400px;
   }
   .card-view .card-read-more {
-    bottom: 40px;
-    right: 50px;
     font-size: 14px;
     line-height: 17px;
-  }
-  .card-view p.card-date {
-    bottom: 40px;
-    left: 40px;
   }
 }
 @media (max-width: 768px) {
   .content-insights .card-view {
     grid-row: span 1 !important;
   }
-  .card-view h3.card-title{
+  .card-view h3.card-title {
     width: 80%;
   }
+  .content-insights .card-view:nth-child(3n + 1) h3.card-title, 
+  .content-insights .card-view h3.card-title  {
+  top: 8%;
+  left: 8%;
+}
+.content-insights .card-view:nth-child(3n + 1) p.card-date, 
+.content-insights .card-view p.card-date {
+  bottom: 8%;
+  left: 8%;
+}
+.content-insights .card-view:nth-child(3n + 1) .card-read-more, 
+.content-insights .card-view .card-read-more {
+  bottom: 9%;
+  right: 10%;
+}
 }
 </style>
