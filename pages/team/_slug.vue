@@ -110,6 +110,7 @@ export default {
   padding-bottom: 20px;
   border-bottom: 2px solid var(--bg--primary);
   width: fit-content;
+  line-height: 25px;
 }
 .job-team {
   color: #818181;

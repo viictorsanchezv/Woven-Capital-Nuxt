@@ -139,15 +139,6 @@ export default {
           id="header-content-mobile"
         >
           <div class="m-0 p-0 w-0 content-mobile">
-            <a href="/" class="position-relative border-0">
-              <img
-                class=""
-                src="../assets/image/logo-closed.png"
-                alt="Image Logo"
-                height="45"
-                width="45"
-              />
-            </a>
             <button
               type="button"
               class="p-0 img-menu position-relative border-0"
@@ -160,6 +151,16 @@ export default {
                 width="35"
               />
             </button>
+            <a href="/" class="position-relative border-0">
+              <img
+                class=""
+                src="../assets/image/logo-closed.png"
+                alt="Image Logo"
+                height="45"
+                width="45"
+              />
+            </a>
+           
           </div>
           <div class="modal-menu-mobile">
             <div class="content-modal">
@@ -212,6 +213,10 @@ header .header-container {
   opacity: 0;
   transition: 0.8s ease;
 }
+.menu-not-expanded img.item-show-expanded, 
+ .menu-expanded img.item-hide-expanded {
+    transition: 0s linear;
+}
 header .header-desktop ul.list-group {
   margin: 81px 0 0;
   min-width: 168px;
@@ -219,7 +224,7 @@ header .header-desktop ul.list-group {
 header ul.list-group li {
   padding: 10px 0;
 }
-.list-group-none {
+.menu-not-expanded .list-group-none {
   display: none;
 }
 header button {
@@ -250,7 +255,7 @@ header button {
 .modal-menu-mobile .content-modal button {
   width: 100%;
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
 }
 .modal-menu-mobile .content-modal ul#list-group {
   margin-top: 50px;
@@ -272,17 +277,17 @@ div#header-content-mobile {
   background: #f7f7f7;
   height: calc(100vh);
   position: fixed;
-  right: 0;
+  left: 0;
   width: 250px;
   margin-top: 0;
   transition: transform 250ms ease-in-out;
   top: 0;
 }
 .not-expanded-mobile .modal-menu-mobile {
-  transform: translateX(250px);
+  transform: translateX(-250px);
 }
 .expanded-mobile .modal-menu-mobile {
-  transform: translateX(7px);
+  transform: translateX(0px);
   transition: transform 250ms ease-in-out;
 }
 

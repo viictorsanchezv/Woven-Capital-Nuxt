@@ -27,6 +27,7 @@ export default {
     <a
       :href="urlInsight(slugInsights, externalslugInsights)"
       class="slug-insights w-100 h-100"
+      :target="externalslugInsights != undefined ? '_blank' : '_self'"
     >
       <div class="position-relative w-100 h-100">
         <h3 class="card-title position-absolute">{{ titleInsights }}</h3>

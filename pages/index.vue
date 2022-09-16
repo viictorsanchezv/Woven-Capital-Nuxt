@@ -87,7 +87,7 @@ export default {
                 height="45"
               />
             </div>
-            <h1 class="title-home">Fueling the engine of future growth.</h1>
+            <h1 class="title-home">Building Mobility at Scale</h1>
             <buttom-primary
               class="d-flex justify-content-center align-items-start"
               text_buttom="Read our Story"
@@ -241,7 +241,6 @@ h1.title-home {
 }
 @media (min-width: 1441px) {
   .hero-image h1.title-home {
-    width: 590px;
     font-size: 70px;
     line-height: 80px;
   }
@@ -251,7 +250,6 @@ h1.title-home {
 }
 @media (max-width: 1440px) {
   .hero-image h1.title-home {
-    width: 535px;
     font-size: 63px;
     line-height: 76px;
   }
@@ -261,12 +259,13 @@ h1.title-home {
 }
 @media (max-width: 768px) {
   .hero-image h1.title-home {
-    width: 290px;
+    width: 100%;
     font-size: 35px;
     line-height: 49px;
     text-align: center;
     padding: 10px;
     margin-bottom: 20px;
+    letter-spacing: -2px;
   }
   .content-hero img {
     max-width: 100%;

@@ -40,7 +40,7 @@ export default {
 }
 .content-team h4,
 .content-team p {
-  max-width: 270px;
+  max-width: 223px;
 }
 .content-team a:hover {
   text-decoration: none;
