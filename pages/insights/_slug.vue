@@ -5,7 +5,7 @@ export default {
     return {};
   },
   head: {
-    title: "Insigth - Woven Capital",
+    title: "Insight - Woven Capital",
   },
   asyncData({ params }) {
     return client

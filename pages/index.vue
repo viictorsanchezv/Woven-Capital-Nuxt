@@ -77,22 +77,41 @@ export default {
           <div
             class="col-12 m-0 p-0 d-flex justify-content-center flex-column align-items-center"
           >
-            <div
-              class="logo-hero mt-0 mb-5 mr-0 ml-0 p-0 w-100 align-items-start text-md-center justify-content-center"
-            >
-              <img
-                src="../assets/image/Logo_text.png"
-                alt=""
-                width="325"
-                height="45"
-              />
+            <div class="content-logos">
+              <a href="https://global.toyota/" class="toyota logo">
+                <img src="../assets/image/Toyota-Logo.png" alt="Logo Toyota" />
+              </a>
+              <a href="https://www.woven-planet.global/" class="woven-city logo">
+                <img
+                  src="../assets/image/Woven-City-Logo.png"
+                  alt="Logo Woven City"
+                />
+              </a>
+              <a href="https://www.woven-planet.global/" class="woven-planet logo">
+                <img
+                  src="../assets/image/WovenPlanet Logo.png"
+                  alt="Logo Woven Planet"
+                />
+              </a>
             </div>
-            <h1 class="title-home">Building Mobility at Scale</h1>
-            <buttom-primary
-              class="d-flex justify-content-center align-items-start"
-              text_buttom="Read our Story"
-              link_buttom="/about"
-            ></buttom-primary>
+            <div class="m-0">
+              <div
+                class="logo-hero mt-0 mb-4 mr-0 ml-0 p-0 w-100 align-items-start text-md-center justify-content-center"
+              >
+                <img
+                  src="../assets/image/Logo_text.png"
+                  alt=""
+                  width="325"
+                  height="45"
+                />
+              </div>
+              <h1 class="title-home">Building Mobility at Scale</h1>
+              <buttom-primary
+                class="d-flex justify-content-center align-items-start"
+                text_buttom="Read our Story"
+                link_buttom="/about"
+              ></buttom-primary>
+            </div>
           </div>
         </div>
       </div>
@@ -202,6 +221,37 @@ export default {
   </main>
 </template>
 <style>
+.content-logos {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+  padding: 20px 70px;
+  border-bottom: 2px solid var(--color--secondary);
+  margin-bottom: 70px;
+  background: var(--color-white);
+}
+.content-logos .woven-city {
+  padding: 0 15px;
+  border-left: 1px solid #a4a4a4;
+  margin: 0px 15px;
+  border-right: 1px solid #a4a4a4;
+}
+.content-logos a{
+  height: 25px;
+}
+.content-logos  img{
+  padding: 0;
+  object-fit: contain;
+}
+.content-logos .toyota img{
+  width: 90.39px;
+}
+.content-logos .woven-planet img{
+  width: 180.46px;
+}
+.content-logos .woven-city img{
+  width: 204.73px;
+}
 h1.title-home {
   color: var(--color--secondary);
   font-weight: 500;
@@ -216,13 +266,13 @@ h1.title-home {
   background-size: cover;
 }
 .content-hero {
-  padding-top: 100px;
+  padding-top: 0px;
 }
 .text-portfolio,
 .text-partner {
   color: var(--color--secondary);
 }
-.our-portfolio .our-portfolio-content{
+.our-portfolio .our-portfolio-content {
   padding: 0;
 }
 .our-portfolio,
@@ -258,6 +308,15 @@ h1.title-home {
   }
 }
 @media (max-width: 768px) {
+  .content-logos {
+    justify-content: center;
+    padding: 10px 20px;
+    margin-bottom: 46px;
+  }
+  .content-logos a.logo {
+    height: auto;
+  }
+
   .hero-image h1.title-home {
     width: 100%;
     font-size: 35px;
@@ -272,7 +331,7 @@ h1.title-home {
     object-fit: contain;
     padding: 6px;
   }
-  .our-portfolio{
+  .our-portfolio {
     padding: 0;
   }
   .our-portfolio .our-portfolio-content,
@@ -331,7 +390,7 @@ h1.title-home {
     height: calc(100vh - 83px);
   }
   .content-hero {
-    padding-top: 180px;
+    padding-top: 0px;
   }
   .content-hero .logo-hero {
     display: none;

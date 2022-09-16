@@ -9,7 +9,7 @@ export default {
     };
   },
   head: {
-    title: "Insigth - Woven Capital",
+    title: "Insight - Woven Capital",
   },
   components: {
     CardInsights,

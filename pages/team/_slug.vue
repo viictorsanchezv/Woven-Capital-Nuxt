@@ -7,7 +7,7 @@ export default {
   data() {
     return {
       teamCont: {},
-      teamInsigth: {},
+      teamInsight: {},
     };
   },
   components: {
@@ -27,7 +27,7 @@ export default {
       limit: "2",
     });
 
-    return { teamCont: teamItem.items, teamInsigth: insights.items };
+    return { teamCont: teamItem.items, teamInsight: insights.items };
   },
 };
 </script>
@@ -72,13 +72,13 @@ export default {
           </p>
           <hr class="mb-4" />
 
-          <template v-if="teamInsigth.length > 0">
+          <template v-if="teamInsight.length > 0">
             <h5 class="more-from mb-4 text-medium">
               More From {{ teamCont[0].fields.title }}
             </h5>
 
             <company-news
-              v-for="(item, index) in teamInsigth"
+              v-for="(item, index) in teamInsight"
               :key="index"
               :companyInfo="item"
             ></company-news>
