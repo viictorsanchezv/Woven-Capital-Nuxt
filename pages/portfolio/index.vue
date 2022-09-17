@@ -122,7 +122,7 @@ export default {
 
             <hr class="mb-4" />
 
-            <template v-if="insightsPortf[index].length > 0">
+            <!-- <template v-if="insightsPortf[index].length > 0">
               <h5 class="company-new-title mb-4 text-medium">Company News</h5>
 
               <company-news
@@ -130,13 +130,17 @@ export default {
                 :key="index"
                 :companyInfo="item"
               ></company-news>
-            </template>
+            </template> -->
           </div>
         </template>
       </section-columns>
     </template>
 
-    <section-columns id="lp-investiments" class="fullpage" title="LP Investments">
+    <section-columns
+      id="lp-investiments"
+      class="fullpage"
+      title="LP Investments"
+    >
       <template #left>
         <div
           class="col-md-6 col-12 border-box p-0 justify-content-start col-sticky vh-100"
@@ -198,13 +202,12 @@ export default {
   </main>
 </template>
 <style scoped>
-
-main.portfolio{
+main.portfolio  {
   overflow: hidden;
   height: 100vh;
-      display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .fullpage {
   height: 100vh;
@@ -268,11 +271,11 @@ div.text-center p {
   overflow-y: auto;
   height: 100%;
 }
-@media (min-width: 768px) and (max-width:1024px){
-main.portfolio{
-      margin-top: 75px;
+@media (min-width: 768px) and (max-width: 1024px) {
+  main.portfolio {
+    margin-top: 75px;
     height: calc(100vh - 75px);
-}
+  }
 }
 
 @media (max-width: 767px) {
@@ -291,11 +294,11 @@ main.portfolio{
     padding: 20px 0;
     height: 100px;
   }
-  main.portfolio{
+  main.portfolio {
     overflow: unset;
     height: 100%;
   }
-  .fullpage{
+  .fullpage {
     height: 100%;
   }
 }

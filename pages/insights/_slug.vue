@@ -30,53 +30,53 @@ export default {
 </script>
 <template>
   <main class="row">
-      <template v-if="insight.fields.typeArticle === 'insight'">
-        <div class="row m-0">
-          <div class="col-12 content_post-insight">
-            <h1 class="post_insight-title mb-4 h1-45">
-              {{ insight.fields.title }}
-            </h1>
-            <p class="text-medium">{{ insight.fields.shortDescription }}</p>
-            <p class="post_insight-date mb-4 text-small">
-              {{ dateForm(insight.fields.publishDate) }}
-            </p>
-            <img
-              class="w-100 object-cover p-0 image-insight"
-              :src="insight.fields.coverImage.fields.file.url"
-              alt=""
-            />
-            <div
-              v-html="$md.render(insight.fields.content)"
-              class="post_insight-content text-small"
-            ></div>
-          </div>
+    <template v-if="insight.fields.typeArticle === 'insight'">
+      <div class="row m-0">
+        <div class="col-md-6 m-0 p-0 content-img">
+          <img
+            class="w-100 object-cover m-0 p-0 image-insight v-100 h-100"
+            :src="insight.fields.coverImage.fields.file.url"
+            alt=""
+          />
         </div>
-      </template>
-      <template v-else-if="insight.fields.typeArticle === 'press releases'">
-        <div class="row m-0">
-          <div class="col-md-6 m-0 p-0 content-img">
-            <img
-              class="w-100 object-cover m-0 p-0 image-insight v-100 h-100"
-              :src="insight.fields.coverImage.fields.file.url"
-              alt=""
-            />
-          </div>
-          <div class="col-md-6 content_post-insight">
-            <h1 class="post_insight-title mb-4 h1-45">
-              {{ insight.fields.title }}
-            </h1>
-            <p>{{ insight.fields.shortDescription }}</p>
-            <p class="post_insight-date mb-4 text-small">
-              {{ dateForm(insight.fields.publishDate) }}
-            </p>
-            <div
-              v-html="$md.render(insight.fields.content)"
-              class="post_insight-content text-small"
-            ></div>
-          </div>
+        <div class="col-md-6 content_post-insight">
+          <h1 class="post_insight-title mb-4 h1-45">
+            {{ insight.fields.title }}
+          </h1>
+          <p>{{ insight.fields.shortDescription }}</p>
+          <p class="post_insight-date mb-4 text-small">
+            {{ dateForm(insight.fields.publishDate) }}
+          </p>
+          <div
+            v-html="$md.render(insight.fields.content)"
+            class="post_insight-content text-small"
+          ></div>
         </div>
-      </template>
-    </main>
+      </div>
+    </template>
+    <template v-else-if="insight.fields.typeArticle === 'press releases'">
+      <div class="row m-0">
+        <div class="col-12 content_post-insight">
+          <h1 class="post_insight-title mb-4 h1-45">
+            {{ insight.fields.title }}
+          </h1>
+          <p class="text-medium">{{ insight.fields.shortDescription }}</p>
+          <p class="post_insight-date mb-4 text-small">
+            {{ dateForm(insight.fields.publishDate) }}
+          </p>
+          <img
+            class="w-100 object-cover p-0 image-insight"
+            :src="insight.fields.coverImage.fields.file.url"
+            alt=""
+          />
+          <div
+            v-html="$md.render(insight.fields.content)"
+            class="post_insight-content text-small"
+          ></div>
+        </div>
+      </div>
+    </template>
+  </main>
 </template>
 
 <style scoped>
@@ -99,11 +99,11 @@ export default {
   height: 100vh;
   top: 0;
 }
-@media(max-width: 767px){
-  .content-img, .content-img img {
-  position: relative;
-  height: 50vh;
-
-}
+@media (max-width: 767px) {
+  .content-img,
+  .content-img img {
+    position: relative;
+    height: 50vh;
+  }
 }
 </style>

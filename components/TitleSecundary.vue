@@ -11,7 +11,7 @@ export default {
 </script>
 
 <template>
-  <div class="d-flex mt-0 mb-4 mr-0 ml-0 p-0 w-100">
+  <div class="d-flex mt-0 mr-0 ml-0 p-0 w-100 container-secundary">
     <h2 class="title-secundary">
       {{ titleH2 }} <span> {{ spanTitleH2 }} </span>
     </h2>
@@ -19,6 +19,13 @@ export default {
 </template>
 
 <style scoped>
+.container-secundary{
+  margin-bottom: 1.5rem;
+}
+.our-portfolio .container-secundary, 
+.partner-together .container-secundary{
+  margin: 0px;
+}
 .title-secundary,
 .title-secundary span {
   font-weight: 500;

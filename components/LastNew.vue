@@ -19,7 +19,7 @@ export default {
   left: 0;
   width: 100%;
   background-color: var(--color--secondary);
-  padding: 25px 0;
+  padding: 18px 0;
 }
 .last-new p {
   color: var(--color-white);
