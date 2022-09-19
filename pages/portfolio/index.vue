@@ -164,7 +164,9 @@ export default {
       this.hideFooter();
     },
     handleSection (value) {
-      this.activeSection = value
+       console.log("escucha");
+      this.activeSection = value;
+     
     },
   },
   mounted() {
@@ -185,7 +187,7 @@ export default {
 
 <template>
   <main class="portfolio">
-    <portfolio-header :offsets="offsets" :activeSection="activeSection" @scrollToSection="handleSection">
+    <portfolio-header :offsets="offsets" :activeSection="activeSection" v-on:sectActive="handleSection">
     </portfolio-header>
     
     <template v-for="(portfolio, index) in portfoliosCont">

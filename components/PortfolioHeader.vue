@@ -10,20 +10,11 @@ export default {
     activeSection: Number,
   },
   methods: {
-  scrollActiveSection(index){
-      
-      
+    scrollToSection(index) {
+     console.log(index);
+      this.$emit("sectActive", index);
+    },
   },
-  },
-  watch: {
-    scrollToSection: function (index) {
-      this.sectActive = index;
-      console.log(this.sectActive);
-      this.$emit('sectActive', this.sectActive);
-      
-    }
-  }
-
 };
 </script>
 
