@@ -11,7 +11,7 @@ export default {
   },
   methods: {
     scrollToSection(index) {
-     console.log(index);
+    
       this.$emit("sectActive", index);
     },
   },

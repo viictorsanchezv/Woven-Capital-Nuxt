@@ -116,13 +116,16 @@ export default {
       return false;
     },
     handleMouseWheelDOM: function (e) {
-
       let elemtInt =
         document.getElementsByClassName("section-content")[this.activeSection];
       let elemtExt =
         document.getElementsByClassName("col-content")[this.activeSection];
 
-      if (e.detail > 0 && !this.inMove && elemtExt.offsetHeight + elemtExt.scrollTop >= elemtInt.scrollHeight - 1) {
+      if (
+        e.detail > 0 &&
+        !this.inMove &&
+        elemtExt.offsetHeight + elemtExt.scrollTop >= elemtInt.scrollHeight - 1
+      ) {
         this.moveUp();
       } else if (e.detail < 0 && !this.inMove && elemtExt.scrollTop <= 0) {
         this.moveDown();
@@ -133,7 +136,7 @@ export default {
     moveDown() {
       this.inMove = true;
       this.activeSection--;
-      
+
       if (this.activeSection < 0) this.activeSection = 0;
 
       this.scrollToSection(this.activeSection, true);
@@ -142,7 +145,6 @@ export default {
       this.inMove = true;
       this.activeSection++;
 
-     
       if (this.activeSection > this.offsets.length - 1)
         this.activeSection = this.offsets.length - 1;
 
@@ -163,15 +165,22 @@ export default {
       }, 400);
       this.hideFooter();
     },
-    handleSection (value) {
-       console.log("escucha");
+    handleSection(value) {
       this.activeSection = value;
-     
     },
   },
   mounted() {
     this.calculateSectionOffsets();
     this.hideFooter();
+
+    if (this.$route.hash == "#nuro") {
+      this.activeSection = 0;
+    } else if (this.$route.hash == "#ridecell") {
+      this.activeSection = 1;
+    } else if (this.$route.hash == "#whill") {
+      this.activeSection = 2;
+    }
+
     document.getElementById("footer-container").style.display = "none";
 
     window.addEventListener("DOMMouseScroll", this.handleMouseWheelDOM); // Mozilla Firefox
@@ -181,167 +190,172 @@ export default {
     window.removeEventListener("mousewheel", this.handleMouseWheel); // Other browsers
     window.removeEventListener("DOMMouseScroll", this.handleMouseWheelDOM); // Mozilla Firefox
   },
- 
 };
 </script>
 
 <template>
   <main class="portfolio">
-    <portfolio-header :offsets="offsets" :activeSection="activeSection" v-on:sectActive="handleSection">
+    <portfolio-header
+      :offsets="offsets"
+      :activeSection="activeSection"
+      v-on:sectActive="handleSection"
+    >
     </portfolio-header>
-    
+
     <template v-for="(portfolio, index) in portfoliosCont">
-      <Transition :key="index" >
+      <Transition :key="index">
+        <section-columns
+          class="fullpage"
+          :id="portfolio.fields.slug"
+          :title="portfolio.fields.title"
+          v-show="activeSection == index"
+        >
+          <template #left>
+            <div
+              class="col-md-6 col-12 border-box p-0 justify-content-start vh-100 col-sticky"
+            >
+              <img
+                class="vh-50 pb-5x w-100 object-cover"
+                :src="portfolio.fields.mediaTop.fields.file.url"
+                alt=""
+              />
+              <img
+                class="vh-50 pt-5x w-100 object-cover"
+                :src="portfolio.fields.mediaBottom.fields.file.url"
+                alt=""
+              />
+            </div>
+          </template>
+          <template #right>
+            <div
+              class="overflow-y-auto col-md-6 col-12 border-box p-0 col-content w-100"
+            >
+              <div class="p-14 m-0 section-content">
+                <portfolio-title
+                  :title="portfolio.fields.location"
+                  :image="portfolio.fields.logoblack.fields.file.url"
+                  :linkWeb="portfolio.fields.link"
+                  :linkLinkedin="portfolio.fields.linkedinUrl"
+                ></portfolio-title>
+
+                <p class="portfolio-description mb-5 text-small">
+                  {{ portfolio.fields.content }}
+                </p>
+                <div class="info-wrapper mb-5 text-small">
+                  <p>
+                    {{ portfolio.fields.testimonial }}
+                  </p>
+                </div>
+                <div class="text-center mb-4">
+                  <h5 class="m-0">{{ portfolio.fields.authorTestimonial }}</h5>
+                  <p>{{ portfolio.fields.designationTestimonial }}</p>
+                </div>
+
+                <hr class="mb-4" />
+
+                <template v-if="insightsPortf[index].length > 0">
+                  <h5 class="company-new-title mb-4 text-medium">
+                    Company News
+                  </h5>
+
+                  <company-news
+                    v-for="(item, index) in insightsPortf[index]"
+                    :key="index"
+                    :companyInfo="item"
+                  ></company-news>
+                </template>
+              </div>
+            </div>
+          </template>
+        </section-columns>
+      </Transition>
+    </template>
+
+    <Transition>
       <section-columns
+        id="lp-investiments"
         class="fullpage"
-        :id="portfolio.fields.slug"
-        
-        :title="portfolio.fields.title"
-        v-show="activeSection == index"
+        title="LP Investments"
+        v-show="activeSection == offsets.length - 1"
       >
         <template #left>
           <div
-            class="col-md-6 col-12 border-box p-0 justify-content-start vh-100 col-sticky"
+            class="col-md-6 col-12 border-box p-0 justify-content-start col-sticky vh-100"
           >
             <img
               class="vh-50 pb-5x w-100 object-cover"
-              :src="portfolio.fields.mediaTop.fields.file.url"
+              :src="investmentsCont[0].fields.coverImage.fields.file.url"
               alt=""
             />
-            <img
-              class="vh-50 pt-5x w-100 object-cover"
-              :src="portfolio.fields.mediaBottom.fields.file.url"
-              alt=""
-            />
+
+            <div class="vh-50 section-carousel">
+              <b-carousel
+                id="carousel-1"
+                v-model="slide"
+                :interval="4000"
+                style="text-shadow: 1px 1px 2px #333"
+                class="w-100 h-100"
+                img-width="100"
+                img-height="100"
+                @sliding-start="onSlideStart"
+                @sliding-end="onSlideEnd"
+              >
+                <template
+                  v-for="(gallery, index) in investmentsCont[0].fields
+                    .galleryImages"
+                >
+                  <b-carousel-slide :key="index">
+                    <template #img>
+                      <img
+                        :src="gallery.fields.file.url"
+                        alt=""
+                        class="vh-50 image-slide d-block w-100"
+                      />
+                    </template>
+                  </b-carousel-slide>
+                </template>
+              </b-carousel>
+            </div>
           </div>
         </template>
         <template #right>
           <div
-            class="overflow-y-auto col-md-6 col-12 border-box p-0 col-content w-100"
+            class="overflow-y-auto col-md-6 col-12 border-box p-0 col-content"
           >
             <div class="p-14 m-0 section-content">
-              <portfolio-title
-                :title="portfolio.fields.location"
-                :image="portfolio.fields.logoblack.fields.file.url"
-                :linkWeb="portfolio.fields.link"
-                :linkLinkedin="portfolio.fields.linkedinUrl"
-              ></portfolio-title>
-
-              <p class="portfolio-description mb-5 text-small">
-                {{ portfolio.fields.content }}
+              <title-secundary
+                class="justify-content-start"
+                :titleH2="investmentsCont[0].fields.title"
+                spanTitleH2=""
+              ></title-secundary>
+              <p class="portfolio-description text-small">
+                {{ investmentsCont[0].fields.description }}
               </p>
-              <div class="info-wrapper mb-5 text-small">
-                <p>
-                  {{ portfolio.fields.testimonial }}
-                </p>
+              <div class="img-wrapper-logo">
+                <template
+                  v-for="(logo, index) in investmentsCont[0].fields.logos"
+                >
+                  <img :key="index" :src="logo.fields.file.url" alt="" />
+                </template>
               </div>
-              <div class="text-center mb-4">
-                <h5 class="m-0">{{ portfolio.fields.authorTestimonial }}</h5>
-                <p>{{ portfolio.fields.designationTestimonial }}</p>
-              </div>
-
-              <hr class="mb-4" />
-
-              <template v-if="insightsPortf[index].length > 0">
-                <h5 class="company-new-title mb-4 text-medium">Company News</h5>
-
-                <company-news
-                  v-for="(item, index) in insightsPortf[index]"
-                  :key="index"
-                  :companyInfo="item"
-                ></company-news>
-              </template>
             </div>
           </div>
         </template>
       </section-columns>
-      </Transition>
-    </template>
-
-  <Transition>
-    <section-columns
-      id="lp-investiments"
-      class="fullpage"
-      title="LP Investments"
-      v-show="activeSection == offsets.length - 1"
-    >
-      <template #left>
-        <div
-          class="col-md-6 col-12 border-box p-0 justify-content-start col-sticky vh-100"
-        >
-          <img
-            class="vh-50 pb-5x w-100 object-cover"
-            :src="investmentsCont[0].fields.coverImage.fields.file.url"
-            alt=""
-          />
-
-          <div class="vh-50 section-carousel">
-            <b-carousel
-              id="carousel-1"
-              v-model="slide"
-              :interval="4000"
-              style="text-shadow: 1px 1px 2px #333"
-              class="w-100 h-100"
-              img-width="100"
-              img-height="100"
-              @sliding-start="onSlideStart"
-              @sliding-end="onSlideEnd"
-            >
-              <template
-                v-for="(gallery, index) in investmentsCont[0].fields
-                  .galleryImages"
-              >
-                <b-carousel-slide :key="index">
-                  <template #img>
-                    <img
-                      :src="gallery.fields.file.url"
-                      alt=""
-                      class="vh-50 image-slide d-block w-100"
-                    />
-                  </template>
-                </b-carousel-slide>
-              </template>
-            </b-carousel>
-          </div>
-        </div>
-      </template>
-      <template #right>
-        <div class="overflow-y-auto col-md-6 col-12 border-box p-0 col-content">
-          <div class="p-14 m-0 section-content">
-            <title-secundary
-              class="justify-content-start"
-              :titleH2="investmentsCont[0].fields.title"
-              spanTitleH2=""
-            ></title-secundary>
-            <p class="portfolio-description text-small">
-              {{ investmentsCont[0].fields.description }}
-            </p>
-            <div class="img-wrapper-logo">
-              <template
-                v-for="(logo, index) in investmentsCont[0].fields.logos"
-              >
-                <img :key="index" :src="logo.fields.file.url" alt="" />
-              </template>
-            </div>
-          </div>
-        </div>
-      </template>
-    </section-columns>
     </Transition>
   </main>
 </template>
 
 <style scoped>
-
 .v-enter-active,
 .v-leave-active {
-  -webkit-animation: slide-in-top 0.3s ease;
-  animation: slide-in-top 0.3s ease;
+  -webkit-animation: slide-in-top 0.5s ease;
+  animation: slide-in-top 0.53s ease;
 }
 .v-enter-from,
 .v-leave-to {
-  -webkit-animation: slide-out-top 0.3s ease;
-  animation: slide-out-top 0.3s ease;
+  -webkit-animation: slide-out-top 0.5s ease;
+  animation: slide-out-top 0.5s ease;
 }
 
 @-webkit-keyframes slide-in-top {
@@ -407,8 +421,8 @@ main.portfolio {
   height: 100vh;
   width: 100%;
   position: absolute;
-    top: 0;
-    left: 0;
+  top: 0;
+  left: 0;
 }
 .image-slide {
   object-fit: cover;
