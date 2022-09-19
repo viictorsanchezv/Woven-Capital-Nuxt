@@ -163,6 +163,9 @@ export default {
       }, 400);
       this.hideFooter();
     },
+    handleSection (value) {
+      this.activeSection = value
+    },
   },
   mounted() {
     this.calculateSectionOffsets();
@@ -176,12 +179,13 @@ export default {
     window.removeEventListener("mousewheel", this.handleMouseWheel); // Other browsers
     window.removeEventListener("DOMMouseScroll", this.handleMouseWheelDOM); // Mozilla Firefox
   },
+ 
 };
 </script>
 
 <template>
   <main class="portfolio">
-    <portfolio-header :offsets="offsets" :activeSection="activeSection">
+    <portfolio-header :offsets="offsets" :activeSection="activeSection" @scrollToSection="handleSection">
     </portfolio-header>
     
     <template v-for="(portfolio, index) in portfoliosCont">
@@ -326,14 +330,66 @@ export default {
 </template>
 
 <style scoped>
+
 .v-enter-active,
 .v-leave-active {
-  transition: all 0.8s ease-in;
+  -webkit-animation: slide-in-top 0.3s ease;
+  animation: slide-in-top 0.3s ease;
 }
 .v-enter-from,
 .v-leave-to {
-  opacity: 0;
-  transition: all 0.1s ease-out;
+  -webkit-animation: slide-out-top 0.3s ease;
+  animation: slide-out-top 0.3s ease;
+}
+
+@-webkit-keyframes slide-in-top {
+  0% {
+    -webkit-transform: translateY(-1000px);
+    transform: translateY(-1000px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes slide-in-top {
+  0% {
+    -webkit-transform: translateY(-1000px);
+    transform: translateY(-1000px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes slide-out-top {
+  0% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: translateY(-1000px);
+    transform: translateY(-1000px);
+    opacity: 0;
+  }
+}
+@keyframes slide-out-top {
+  0% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: translateY(-1000px);
+    transform: translateY(-1000px);
+    opacity: 0;
+  }
 }
 div.p-14 {
   padding: 14%;
@@ -374,7 +430,11 @@ main.portfolio {
 p.portfolio-description {
   font-weight: 400;
 }
-
+.info-wrapper {
+  border-left: 3px solid var(--bg--primary);
+  padding-left: 2rem;
+  margin-top: 8px;
+}
 .info-wrapper p {
   font-weight: 600;
 }

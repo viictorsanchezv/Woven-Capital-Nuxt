@@ -2,12 +2,26 @@
 export default {
   data() {
     return {
-      
+      sectActive: 0,
     };
   },
   props: {
     offsets: Array,
     activeSection: Number,
+  },
+  methods: {
+  scrollActiveSection(index){
+      
+      
+  },
+  },
+  watch: {
+    scrollToSection: function (index) {
+      this.sectActive = index;
+      console.log(this.sectActive);
+      this.$emit('sectActive', this.sectActive);
+      
+    }
   }
 
 };
