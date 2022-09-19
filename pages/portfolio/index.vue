@@ -185,7 +185,7 @@ export default {
     </portfolio-header>
     
     <template v-for="(portfolio, index) in portfoliosCont">
-      <Transition :key="index" mode="out-in">
+      <Transition :key="index" >
       <section-columns
         class="fullpage"
         :id="portfolio.fields.slug"
@@ -252,7 +252,7 @@ export default {
       </Transition>
     </template>
 
-  <Transition mode="out-in">
+  <Transition>
     <section-columns
       id="lp-investiments"
       class="fullpage"
@@ -328,11 +328,12 @@ export default {
 <style scoped>
 .v-enter-active,
 .v-leave-active {
-  transition: opacity 0.2s ease-in;
+  transition: all 0.8s ease-in;
 }
 .v-enter-from,
 .v-leave-to {
   opacity: 0;
+  transition: all 0.1s ease-out;
 }
 div.p-14 {
   padding: 14%;
@@ -347,7 +348,9 @@ main.portfolio {
 .fullpage {
   height: 100vh;
   width: 100%;
-  position: relative;
+  position: absolute;
+    top: 0;
+    left: 0;
 }
 .image-slide {
   object-fit: cover;
