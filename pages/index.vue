@@ -58,13 +58,15 @@ export default {
       }
     },
     handleMouseWheel: function (e) {
+      let elemtInt =
+        document.getElementsByClassName("section-content")[this.activeSection];
+      let elemtExt =
+        document.getElementsByClassName("col-content")[this.activeSection];
       if (e.wheelDelta < 30 && !this.inMove) {
         this.moveUp();
       } else if (e.wheelDelta > 30 && !this.inMove) {
         this.moveDown();
       }
-
-      e.preventDefault();
       return false;
     },
     handleMouseWheelDOM: function (e) {
@@ -80,7 +82,7 @@ export default {
       this.inMove = true;
       this.activeSection--;
 
-      if (this.activeSection < 0) this.activeSection = this.offsets.length - 1;
+      if (this.activeSection < 0) this.activeSection = 0;
 
       this.scrollToSection(this.activeSection, true);
     },
@@ -88,7 +90,6 @@ export default {
       this.inMove = true;
       this.activeSection++;
 
-      // if(this.activeSection > this.offsets.length - 1) this.activeSection = 0;
       if (this.activeSection > this.offsets.length - 1)
         this.activeSection = this.offsets.length - 1;
 
@@ -99,36 +100,24 @@ export default {
 
       this.activeSection = id;
       this.inMove = true;
-
-      document
-        .getElementsByClassName("fullpage")
-        [id].scrollIntoView({ behavior: "smooth" });
-
       setTimeout(() => {
         this.inMove = false;
       }, 400);
       this.hideFooter();
     },
-    touchStart(e) {
-      e.preventDefault();
+  },
+  mounted() {
+    this.calculateSectionOffsets();
+    this.hideFooter();
 
-      this.touchStartY = e.touches[0].clientY;
-    },
-    touchMove(e) {
-      if (this.inMove) return false;
-      e.preventDefault();
+    document.getElementById("footer-container").style.display = "none";
 
-      const currentY = e.touches[0].clientY;
-
-      if (this.touchStartY < currentY) {
-        this.moveDown();
-      } else {
-        this.moveUp();
-      }
-
-      this.touchStartY = 0;
-      return false;
-    },
+    window.addEventListener("DOMMouseScroll", this.handleMouseWheelDOM); // Mozilla Firefox
+    window.addEventListener("mousewheel", this.handleMouseWheel); // Other browsers
+  },
+  destroyed() {
+    window.removeEventListener("mousewheel", this.handleMouseWheel); // Other browsers
+    window.removeEventListener("DOMMouseScroll", this.handleMouseWheelDOM); // Mozilla Firefox
   },
   async asyncData() {
     const portf = await client.getEntries({
@@ -152,195 +141,270 @@ export default {
       pressReleasesCont: pressReleases.items,
     };
   },
-  // mounted() {
-  //   this.calculateSectionOffsets();
-
-  //   document.getElementById("footer-container").style.display = "none";
-
-  //   window.addEventListener("DOMMouseScroll", this.handleMouseWheelDOM); // Mozilla Firefox
-  //   window.addEventListener("mousewheel", this.handleMouseWheel, {
-  //     passive: false,
-  //   }); // Other browsers
-  // },
-  // destroyed() {
-  //   window.removeEventListener("mousewheel", this.handleMouseWheel, {
-  //     passive: false,
-  //   }); // Other browsers
-  //   window.removeEventListener("DOMMouseScroll", this.handleMouseWheelDOM); // Mozilla Firefox
-  // },
 };
 </script>
 <template>
   <main class="homePage">
-    <!-- hero image -->
-    <section
-      class="fullpage hero-image vh-hero d-flex flex-column position-relative align-items-center w-100"
-    >
-      <div class="position-relative w-100 hero-container">
-        <video
-          class="vh-hero position-absolute tp-0 lft-0 w-100 object-cover top-0 lef-0"
-          src="@/assets/video/Woven-Capital-Animated.mp4"
-          autoplay="true"
-          muted="true"
-          loop="true"
-          poster=""
-        ></video>
-        <div
-          class="content-hero row align-items-start text-md-center justify-content-center m-0"
+    <div class="container-homepage">
+      <!-- hero image -->
+      <Transition>
+        <section
+          v-show="activeSection == 0"
+          class="fullpage hero-image vh-hero d-flex flex-column position-relative align-items-center w-100"
         >
-          <div
-            class="col-12 m-0 p-0 d-flex justify-content-center flex-column align-items-center"
-          >
-            <div class="content-logos">
-              <a href="https://global.toyota/" class="toyota logo">
-                <img src="../assets/image/Toyota-Logo.png" alt="Logo Toyota" />
-              </a>
-              <a
-                href="https://www.woven-planet.global/"
-                class="woven-city logo"
-              >
-                <img
-                  src="../assets/image/Woven-City-Logo.png"
-                  alt="Logo Woven City"
-                />
-              </a>
-              <a
-                href="https://www.woven-planet.global/"
-                class="woven-planet logo"
-              >
-                <img
-                  src="../assets/image/WovenPlanet Logo.png"
-                  alt="Logo Woven Planet"
-                />
-              </a>
-            </div>
-            <div class="m-0">
-              <div
-                class="logo-hero mt-0 mb-4 mr-0 ml-0 p-0 w-100 align-items-start text-md-center justify-content-center"
-              >
-                <img
-                  src="../assets/image/Logo_text.png"
-                  alt=""
-                  width="325"
-                  height="45"
-                />
-              </div>
-              <h1 class="title-home">Building Mobility at Scale</h1>
-              <buttom-primary
-                class="d-flex justify-content-center align-items-start"
-                text_buttom="Read our Story"
-                link_buttom="/about"
-              ></buttom-primary>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- last new -->
-    <!-- portfolio -->
-    <section class="fullpage our-portfolio w-100">
-      <div class="position-relative w-100 portf-col">
-        <div
-          class="new-last-post m-0 p-0 position-relative d-flex justify-content-center"
-        >
-          <div class="position-relative w-100">
-            <div class="row m-0 p-0">
-              <div class="col-12 m-0 p-0">
-                <template v-for="(pressReleases, index) in pressReleasesCont">
-                  <new-last
-                    :key="index"
-                    :titleLast="pressReleases.fields.title"
-                  ></new-last>
-                </template>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div
-          class="row text-md-center justify-content-center m-0 position-relative our-portfolio-content"
-        >
-          <div class="col-12 m-0 p-0">
-            <title-secundary
-              class="justify-content-center"
-              titleH2="Meet the leaders shaping the world of tomorrow, "
-              spanTitleH2="today"
-            ></title-secundary>
-
-            <p class="text-medium text-portfolio">Our Portfolio</p>
-
-            <div class="d-flex m-0 p-0 w-100 justify-content-center">
-              <a href="/portfolio" class="w-100 h-100 m-0 p-0">
-                <img src="../assets/image/chevron-down.png" alt="" />
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="row content-portfolio mt-4 mb-0 mr-0 ml-0 p-0">
-          <template v-for="(portfolio, index) in portfoliosCont">
-            <card-portfolio
-              :key="index"
-              :iconPort="portfolio.fields.logo.fields.file.url"
-              :imagePort="portfolio.fields.coverImage.fields.file.url"
-              :linkPort="portfolio.fields.slug"
-            ></card-portfolio>
-          </template>
-        </div>
-      </div>
-    </section>
-    <!-- partner -->
-    <section class="fullpage partner-together w-100">
-      <div class="position-relative w-100 m-0 p-0">
-        <div
-          class="row align-items-start text-md-center justify-content-center m-0 p-0"
-        >
-          <div class="col-12 m-0 partner-col">
-            <title-secundary
-              class="justify-content-center"
-              titleH2="Partner together"
-            ></title-secundary>
-
-            <p class="mb-3 mr-0 ml-0 p-0 text-medium text-partner">
-              If you share our vision and your company would like to be
-              considered for investment by Woven Capital, we want to hear from
-              you.
-            </p>
-
-            <buttom-primary
-              class="mb-1 mr-0 ml-0 mt-0 p-0 justify-content-center align-items-start"
-              text_buttom="Tell us about yourself"
-              link_buttom="/pitch"
-            ></buttom-primary>
-
-            <img
-              src="../assets/image/partner.png"
-              class="mt-5 mb-0 mr-0 ml-0 p-0 partner-img"
-              alt=""
-            />
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- Insights-->
-    <section class="fullpage w-100">
-      <div class="w-100">
-        <div class="content-insights m-0">
-          <template v-for="(post, index) in insightsCont">
-            <card-insights
-              :key="index"
-              :titleInsights="post.fields.title"
-              :slugInsights="post.fields.urlSlug"
-              :externalslugInsights="post.fields.externalLink"
-              :imageInsights="post.fields.coverImage.fields.file.url"
-              :dateInsights="dateForm(post.fields.publishDate)"
+          <div class="position-relative w-100 hero-container">
+            <div
+              class="content-hero row align-items-start text-md-center justify-content-center m-0"
             >
-            </card-insights>
-          </template>
-        </div>
-      </div>
-    </section>
+              <div
+                class="col-12 m-0 p-0 d-flex justify-content-center flex-column align-items-center hero-info"
+              >
+                <div class="content-logos">
+                  <a href="https://global.toyota/" class="toyota logo" target="_blank">
+                    <img
+                      src="../assets/image/Toyota-Logo.png"
+                      alt="Logo Toyota"
+                    />
+                  </a>
+                  <a
+                    href="https://www.woven-planet.global/"
+                    class="woven-city logo"
+                    target="_blank"
+                  >
+                    <img
+                      src="../assets/image/Woven-City-Logo.png"
+                      alt="Logo Woven City"
+                    />
+                  </a>
+                  <a
+                    href="https://www.woven-planet.global/"
+                    class="woven-planet logo"
+                    target="_blank"
+                  >
+                    <img
+                      src="../assets/image/WovenPlanet Logo.png"
+                      alt="Logo Woven Planet"
+                    />
+                  </a>
+                </div>
+                <div class="m-0">
+                  <div
+                    class="logo-hero mt-0 mb-4 mr-0 ml-0 p-0 w-100 align-items-start text-md-center justify-content-center"
+                  >
+                    <img
+                      src="../assets/image/Logo_text.png"
+                      alt=""
+                      width="325"
+                      height="45"
+                    />
+                  </div>
+                  <h1 class="title-home">Building Mobility at Scale</h1>
+                  <buttom-primary
+                    class="d-flex justify-content-center align-items-start"
+                    text_buttom="Read our Story"
+                    link_buttom="/about"
+                  ></buttom-primary>
+                </div>
+              </div>
+            </div>
+            <video
+              class="vh-hero w-100 object-cover"
+              src="@/assets/video/Woven-Capital-Animated.mp4"
+              autoplay="true"
+              muted="true"
+              loop="true"
+              poster=""
+            ></video>
+          </div>
+        </section>
+      </Transition>
+      <!-- portfolio -->
+      <Transition>
+        <section
+          v-show="activeSection == 1"
+          class="fullpage our-portfolio w-100"
+        >
+          <div class="position-relative w-100 portf-col">
+            <div
+              class="new-last-post m-0 p-0 position-relative d-flex justify-content-center"
+            >
+              <div class="position-relative w-100">
+                <div class="row m-0 p-0">
+                  <div class="col-12 m-0 p-0">
+                    <template
+                      v-for="(pressReleases, index) in pressReleasesCont"
+                    >
+                      <new-last
+                        :key="index"
+                        :titleLast="pressReleases.fields.title"
+                      ></new-last>
+                    </template>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="row text-md-center justify-content-center m-0 position-relative our-portfolio-content"
+            >
+              <div class="col-12 m-0 p-0">
+                <title-secundary
+                  class="justify-content-center"
+                  titleH2="Meet the leaders shaping the world of tomorrow, "
+                  spanTitleH2="today"
+                ></title-secundary>
+
+                <p class="text-medium text-portfolio">Our Portfolio</p>
+
+                <div class="d-flex m-0 p-0 w-100 justify-content-center">
+                  <a href="/portfolio" class="w-100 h-100 m-0 p-0">
+                    <img src="../assets/image/chevron-down.png" alt="" />
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="row content-portfolio mt-4 mb-0 mr-0 ml-0 p-0">
+              <template v-for="(portfolio, index) in portfoliosCont">
+                <card-portfolio
+                  :key="index"
+                  :iconPort="portfolio.fields.logo.fields.file.url"
+                  :imagePort="portfolio.fields.coverImage.fields.file.url"
+                  :linkPort="portfolio.fields.slug"
+                ></card-portfolio>
+              </template>
+            </div>
+          </div>
+        </section>
+      </Transition>
+      <!-- partner -->
+      <Transition>
+        <section
+          v-show="activeSection == 2"
+          class="fullpage partner-together w-100"
+        >
+          <div class="position-relative w-100 m-0 p-0">
+            <div
+              class="row m-0 partner-col"
+            >
+              <div class="col-12 m-0">
+                <title-secundary
+                  class="justify-content-center"
+                  titleH2="Partner together"
+                ></title-secundary>
+
+                <p class=" p-0 text-medium text-partner">
+                  If you share our vision and your company would like to be
+                  considered for investment by Woven Capital, we want to hear
+                  from you.
+                </p>
+
+                <buttom-primary
+                  class="mb-1 mr-0 ml-0 mt-0 p-0 justify-content-center align-items-start"
+                  text_buttom="Tell us about yourself"
+                  link_buttom="/pitch"
+                ></buttom-primary>
+              </div>
+                <img
+                  src="../assets/image/partner.png"
+                  class="p-0 partner-img"
+                  alt=""
+                />
+            </div>
+          </div>
+        </section>
+      </Transition>
+      <!-- Insights-->
+      <Transition>
+        <section v-show="activeSection == 3" class="fullpage w-100">
+          <div class="w-100">
+            <div class="content-insights m-0">
+              <template v-for="(post, index) in insightsCont">
+                <card-insights
+                  :key="index"
+                  :titleInsights="post.fields.title"
+                  :slugInsights="post.fields.urlSlug"
+                  :externalslugInsights="post.fields.externalLink"
+                  :imageInsights="post.fields.coverImage.fields.file.url"
+                  :dateInsights="dateForm(post.fields.publishDate)"
+                >
+                </card-insights>
+              </template>
+            </div>
+          </div>
+        </section>
+      </Transition>
+    </div>
   </main>
 </template>
 <style>
+.v-enter-active,
+.v-leave-active {
+  -webkit-animation: slide-in-top 0.5s ease;
+  animation: slide-in-top 0.53s ease;
+}
+.v-enter-from,
+.v-leave-to {
+  -webkit-animation: slide-out-top 0.5s ease;
+  animation: slide-out-top 0.5s ease;
+  opacity: 0;
+}
+
+@-webkit-keyframes slide-in-top {
+  0% {
+    -webkit-transform: translateY(-1000px);
+    transform: translateY(-1000px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes slide-in-top {
+  0% {
+    -webkit-transform: translateY(-1000px);
+    transform: translateY(-1000px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes slide-out-top {
+  0% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: translateY(-1000px);
+    transform: translateY(-1000px);
+    opacity: 0;
+  }
+}
+@keyframes slide-out-top {
+  0% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: translateY(-1000px);
+    transform: translateY(-1000px);
+    opacity: 0;
+  }
+}
+.hero-info{
+  z-index: 9;
+}
+.container-homepage {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
 .hero-image {
   height: 100vh;
 }
@@ -350,6 +414,9 @@ video.vh-hero {
 }
 .new-last-post {
   width: 100%;
+}
+.partner-img{
+  margin: 3rem 0 0 0;
 }
 .content-logos {
   display: flex;
@@ -395,6 +462,9 @@ h1.title-home {
 .content-hero {
   padding-top: 0px;
 }
+.text-partner{
+  margin: 1rem 0 ;
+}
 .text-portfolio,
 .text-partner {
   color: var(--color--secondary);
@@ -408,10 +478,16 @@ h1.title-home {
 .partner-col {
   height: 100vh;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: center;
+  align-items: flex-end;
   padding: 4vh 0 0 0;
+}
+.partner-col .col-12{
+      display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 0;
 }
 .our-portfolio .our-portfolio-content {
   padding: 4vh 0 0 0;
@@ -422,9 +498,9 @@ h1.title-home {
   padding: 0;
   align-items: flex-end;
 }
-/* .homePage .content-insights {
-  grid-auto-rows: 50vh;
-} */
+.homePage .content-insights {
+  grid-auto-rows: calc(50vh - 5px);
+}
 .content-insights {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(49%, 1fr));
@@ -437,6 +513,9 @@ h1.title-home {
 }
 .partner-together img {
   height: 54vh;
+}
+.fullpage{
+  z-index: 1;
 }
 @media (min-width: 1441px) {
   .hero-image h1.title-home {
@@ -456,89 +535,9 @@ h1.title-home {
     width: 600px;
   }
 }
-@media (min-width: 768px) {
-  /* .fullpage {
-    min-height: 100vh;
-    max-height: 100vh;
-  } */
-  /* main.homePage {
-  overflow: hidden;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-} */
-}
-
-@media (max-width: 767px) {
-  .content-logos {
-    justify-content: center;
-    padding: 10px 20px;
-    margin-bottom: 46px;
-  }
-  .content-logos a.logo {
-    height: auto;
-  }
-  main.homePage {
-    overflow: unset;
-    height: 100%;
-  }
-  .homePage .fullpage {
-    height: 100%;
-  }
-  .hero-image h1.title-home {
-    width: 100%;
-    font-size: 35px;
-    line-height: 49px;
-    text-align: center;
-    padding: 10px;
-    margin-bottom: 20px;
-    letter-spacing: -2px;
-  }
-  .content-hero img {
-    max-width: 100%;
-    object-fit: contain;
-    padding: 6px;
-  }
-  .our-portfolio {
-    padding: 0;
-  }
-  .our-portfolio .our-portfolio-content,
-  .partner-together {
-    text-align: center;
-    padding: 40px;
-  }
-  h2.title-secundary,
-  h2.title-secundary span {
-    width: 100%;
-    font-size: 35px;
-    text-align: center;
-    line-height: 39px;
-  }
-  p.text-medium.text-portfolio {
-    text-align: center;
-    margin: 0;
-  }
-  .text-partner {
-    width: 100%;
-  }
-  .content-portfolio {
-    height: auto !important;
-  }
-  .content-portfolio .portfolio {
-    height: 400px !important;
-    margin: 0 0 20px 0;
-  }
-  .content-portfolio .portfolio:nth-child(3) {
-    margin: 0;
-  }
-  .partner-img {
-    width: 100% !important;
-  }
-  .content-insights {
-    grid-template-columns: repeat(auto-fill, minmax(50%, 1fr));
-    grid-auto-rows: calc(50vh - 5px);
-    grid-gap: 20px;
+@media (max-width: 1024px) {
+  main.homePage.content-main {
+    margin-top: 85px;
   }
 }
 @media (min-width: 1080px) {
@@ -558,6 +557,132 @@ h1.title-home {
   }
   .content-hero .logo-hero {
     display: none;
+  }
+}
+@media (min-width: 768px) {
+  .fullpage {
+    height: 100vh;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: white;
+  }
+  main.homePage {
+    overflow: hidden;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+  }
+  video.vh-hero {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .fullpage {
+    display: block !important;
+  }
+  video.vh-hero {
+    height: 500px;
+    object-fit: cover;
+  }
+  .content-logos {
+    justify-content: center;
+    padding: 10px 20px;
+    margin-bottom: 46px;
+  }
+  .content-logos a.logo {
+    height: auto;
+  }
+  main.homePage {
+    overflow: unset;
+    height: 100%;
+  }
+  .homePage .fullpage,
+  .homePage .portf-col {
+    height: 100%;
+  }
+  .hero-image h1.title-home {
+    width: 100%;
+    font-size: 35px;
+    line-height: 49px;
+    text-align: center;
+    padding: 10px;
+    margin-bottom: 20px;
+    letter-spacing: -2px;
+  }
+  .content-hero img {
+    max-width: 100%;
+    object-fit: contain;
+    padding: 6px;
+  }
+  .our-portfolio, 
+  .partner-col{
+    padding: 0;
+    height: 100%;
+  }
+  .partner-col{
+    justify-content: flex-start;
+  }
+.partner-together .partner-col{
+  padding: 0;
+}
+  .our-portfolio .our-portfolio-content,
+  .partner-together .partner-col .col-12{
+    text-align: center;
+    padding: 90px 40px 20px 40px;
+  }
+  h2.title-secundary,
+  h2.title-secundary span {
+    width: 100%;
+    font-size: 35px;
+    text-align: center;
+    line-height: 39px;
+  }
+  p.text-medium.text-portfolio {
+    text-align: center;
+    margin: 15px 0 0 0;
+  }
+  .text-partner {
+    width: 100%;
+  }
+  .content-portfolio {
+    height: auto !important;
+  }
+  .content-portfolio .portfolio {
+    height: 500px !important;
+    margin: 0 0 20px 0;
+    background-position: center top;
+  }
+  .content-portfolio .portfolio:nth-child(3) {
+    margin: 0;
+  }
+  .partner-img {
+    width: 100% !important;
+  }
+  .content-insights {
+    grid-template-columns: repeat(auto-fill, minmax(50%, 1fr));
+    grid-auto-rows: calc(50vh - 5px);
+    grid-gap: 20px;
+  }
+  .container-homepage,
+  .hero-container,
+  .hero-image {
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+  .text-partner{
+    margin: 15px 0 30px 0;
+  }
+  .partner-together img{
+    height: 100%;
+    object-fit: contain;
   }
 }
 </style>

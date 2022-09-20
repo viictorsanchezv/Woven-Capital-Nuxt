@@ -195,6 +195,7 @@ export default {
 
 <template>
   <main class="portfolio">
+    <div  class="container-portfolio">
     <portfolio-header
       :offsets="offsets"
       :activeSection="activeSection"
@@ -343,19 +344,25 @@ export default {
         </template>
       </section-columns>
     </Transition>
+    </div>
   </main>
 </template>
 
 <style scoped>
+.container-portfolio{
+  width: 100%;
+    height: 100%;
+    position: relative;
+}
 .v-enter-active,
 .v-leave-active {
-  -webkit-animation: slide-in-top 0.5s ease;
-  animation: slide-in-top 0.53s ease;
+  -webkit-animation: slide-in-top 0.3s ease;
+  animation: slide-in-top 0.3s ease;
 }
 .v-enter-from,
 .v-leave-to {
-  -webkit-animation: slide-out-top 0.5s ease;
-  animation: slide-out-top 0.5s ease;
+  -webkit-animation: slide-out-top 0.1s ease;
+  animation: slide-out-top 0.1s ease;
 }
 
 @-webkit-keyframes slide-in-top {
