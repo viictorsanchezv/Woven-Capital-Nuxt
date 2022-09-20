@@ -107,7 +107,7 @@ div.p-7{
 }
 @media(max-width: 768px){
     div.p-7{
-        padding: 40px;
+        padding: 60px 40px 40px;
     }
     h1.h1-45, 
     span.h1-45{

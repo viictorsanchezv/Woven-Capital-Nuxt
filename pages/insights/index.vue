@@ -96,5 +96,11 @@ export default {
     grid-auto-rows: calc(50vh - 5px);
     grid-gap: 20px;
   }
+  .result-insights{
+    flex-direction: column;
+  }
+  .result-insights{
+    height: 100vh;
+  }
 }
 </style>

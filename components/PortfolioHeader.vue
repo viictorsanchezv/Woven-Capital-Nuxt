@@ -36,7 +36,7 @@ export default {
 .header-portfolio {
   display: flex;
   justify-content: center;
-  width: 100%;
+  width: auto;
   z-index: 10000000000000000;
   top: 0;
 }
@@ -53,9 +53,7 @@ export default {
   transition: all 0.4s ease;
   cursor: pointer;
 }
-.header-portfolio {
-  top: 0;
-}
+
 .scroll-active {
   background: var(--color--secondary);
   color: white;

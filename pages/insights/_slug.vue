@@ -197,11 +197,22 @@ export default {
   height: 100vh;
   top: 0;
 }
+@media (max-width: 1024px) {
+  .content_post-insight{
+    padding: 10%;
+  }
+}
 @media (max-width: 767px) {
-  .content-img,
+  .content-img{
+    height: auto;
+    position: relative;
+  }
   .content-img img {
     position: relative;
     height: 50vh;
+  }
+  .content_post-insight{
+    padding: 60px 40px 40px;
   }
 }
 </style>

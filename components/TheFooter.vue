@@ -90,6 +90,7 @@ footer .company {
 @media (max-width: 768px) {
   footer#footer-container{
     display: block!important;
+    margin: 0!important;
   }
   footer ul.list-group {
     display: flex;

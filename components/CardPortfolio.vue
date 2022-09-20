@@ -26,7 +26,7 @@ export default {
 .content-portfolio .portfolio {
   background-position: center;
   background-size: cover;
-  height: 50vh;
+  height: 60vh;
 }
 .content-portfolio .portfolio .overlay {
   background-color: #00000078;

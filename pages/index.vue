@@ -535,11 +535,6 @@ h1.title-home {
     width: 600px;
   }
 }
-@media (max-width: 1024px) {
-  main.homePage.content-main {
-    margin-top: 85px;
-  }
-}
 @media (min-width: 1080px) {
   .content-hero .logo-hero {
     display: block;

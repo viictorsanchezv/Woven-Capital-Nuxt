@@ -353,6 +353,8 @@ export default {
   width: 100%;
     height: 100%;
     position: relative;
+    justify-content: center;
+    display: flex;
 }
 .v-enter-active,
 .v-leave-active {
@@ -500,6 +502,13 @@ div.text-center p {
 }
 
 @media (max-width: 767px) {
+  .fullpage{
+    display: block!important;
+    position: relative;
+  }
+  div.p-14{
+    padding: 60px 40px 40px;
+  }
   .col-sticky {
     position: relative;
     top: unset;
