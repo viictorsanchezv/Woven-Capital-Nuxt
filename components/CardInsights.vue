@@ -81,20 +81,20 @@ export default {
 .card-view p.card-date {
   color: var(--color-white);
 }
-.card-view p{
+.card-view p {
   margin: 0;
 }
-.content-insights .card-view:nth-child(3n + 1) h3.card-title, 
+.content-insights .card-view:nth-child(3n + 1) h3.card-title,
 .result-insights .card-view h3.card-title {
   top: 6%;
   left: 6%;
 }
-.content-insights .card-view:nth-child(3n + 1) p.card-date, 
+.content-insights .card-view:nth-child(3n + 1) p.card-date,
 .result-insights .card-view p.card-date {
   bottom: 6%;
   left: 6%;
 }
-.content-insights .card-view:nth-child(3n + 1) .card-read-more, 
+.content-insights .card-view:nth-child(3n + 1) .card-read-more,
 .result-insights .card-view .card-read-more {
   bottom: 6.5%;
   right: 7%;
@@ -135,42 +135,45 @@ export default {
     line-height: 17px;
   }
 }
-@media(min-width: 768px){
- .content-insights .card-view {
+@media (min-width: 768px) {
+  .content-insights .card-view {
     height: 100%;
   }
+ 
 }
 @media (max-width: 767px) {
-  .result-insights .card-view:nth-child(2){
-    margin: 20px 0 0 0 ;
+  .result-insights .card-view:nth-child(2) {
+    margin: 20px 0 0 0;
   }
-  .result-insights .card-view:nth-child(1){
-    margin: 10px 0 0 0 ;
+  .result-insights .card-view:nth-child(1) {
+    margin: 10px 0 0 0;
   }
-  .content-insights .card-view, 
+  .content-insights .card-view,
   .result-insights .card-view {
     grid-row: span 1 !important;
     height: 400px;
     margin-bottom: 15px;
-
   }
   .card-view h3.card-title {
     width: 80%;
   }
-  .content-insights .card-view:nth-child(3n + 1) h3.card-title, 
-  .content-insights .card-view h3.card-title  {
-  top: 8%;
-  left: 8%;
-}
-.content-insights .card-view:nth-child(3n + 1) p.card-date, 
-.content-insights .card-view p.card-date {
-  bottom: 8%;
-  left: 8%;
-}
-.content-insights .card-view:nth-child(3n + 1) .card-read-more, 
-.content-insights .card-view .card-read-more {
-  bottom: 9%;
-  right: 10%;
-}
+  .content-insights .card-view:nth-child(3n + 1) h3.card-title,
+  .content-insights .card-view h3.card-title {
+    top: 8%;
+    left: 8%;
+  }
+  .content-insights .card-view:nth-child(3n + 1) p.card-date,
+  .content-insights .card-view p.card-date {
+    bottom: 8%;
+    left: 8%;
+  }
+  .content-insights .card-view:nth-child(3n + 1) .card-read-more,
+  .content-insights .card-view .card-read-more {
+    bottom: 9%;
+    right: 10%;
+  }
+  .card-view .card-read-more {
+    right: 12% !important;
+  }
 }
 </style>

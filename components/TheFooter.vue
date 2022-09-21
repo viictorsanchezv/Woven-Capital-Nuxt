@@ -24,11 +24,12 @@ export default {
             :key="index"
             :textLink="itemFooter.textLink"
             :linkLink="itemFooter.linkLink"
+            :targetLink="itemFooter.targetL"
           >
           </item-link>
         </ul>
       </div>
-      <div class="col-md-4 company">
+      <div class="col-md-4 company d-flex justify-content-center w-100">
         <span class="w-100 content-text"
           >Woven Capital Management Company, LLC © 2022</span
         >
@@ -104,7 +105,7 @@ footer .company {
   .content-footer {
     padding: 40px;
   }
-  footer .company {
+  footer .company span {
     text-align: center;
     margin-top: 10px;
     max-width: 300px;

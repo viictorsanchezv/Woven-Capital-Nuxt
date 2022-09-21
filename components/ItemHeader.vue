@@ -3,18 +3,29 @@ export default {
   props: {
     textLink: String,
     linkLink: String,
-    targetLink: String, 
+  },
+  methods: {
+    activeHeader() {
+      this.$emit("expanded", false);
+    },
   },
 };
 </script>
 <template>
-  <li class="list-item text-decoration-none text-center m-0">
-    <a class="text-decoration-none content-text-menu" :href="linkLink" :target="targetLink">{{
+  <li
+    @click="activeHeader()"
+    class="list-item text-decoration-none text-center m-0"
+  >
+    <nuxt-link class="text-decoration-none content-text-menu" :to="linkLink">{{
       textLink
-    }}</a>
+    }}</nuxt-link>
   </li>
 </template>
 <style scoped>
+.list-item a.nuxt-link-exact-active,
+.list-item a:hover {
+  border-bottom: 2px solid var(--bg--primary);
+}
 .content-text-menu {
   white-space: pre;
 }

@@ -2,13 +2,14 @@
 export default {
   props: {
     titleLast: String,
+    urlLast: String,
   },
 };
 </script>
 
 <template>
   <div class="last-new m-0 overflow-hidden position-relative">
-    <p class="w-100 content-text fw-normal p-text m-0 p-0">{{ titleLast }}</p>
+    <a :href="urlLast" class="w-100 text-new content-text fw-normal p-text m-0 p-0">{{ titleLast }}</a>
   </div>
 </template>
 
@@ -21,13 +22,17 @@ export default {
   background-color: var(--color--secondary);
   padding: 18px 0;
 }
-.last-new p {
+.last-new a {
   color: var(--color-white);
   display: block;
   width: 100%;
   transform: translateX(100%);
   animation: move 40s linear infinite;
   white-space: nowrap;
+}
+.last-new a:hover{
+  color: var(--bg--primary);
+  text-decoration: none;
 }
 @keyframes move {
   to {

@@ -44,7 +44,7 @@ export default {
     calculateSectionOffsets() {
       let sections = document.getElementsByClassName("fullpage");
       let length = sections.length;
-      
+
       for (let i = 0; i < length; i++) {
         let sectionOffset = sections[i].offsetTop;
         this.offsets.push(sectionOffset);
@@ -96,8 +96,8 @@ export default {
     },
   },
   destroyed() {
-    window.removeEventListener("mousewheel", this.handleMouseWheel); // Other browsers
-    window.removeEventListener("DOMMouseScroll", this.handleMouseWheelDOM); // Mozilla Firefox
+    window.removeEventListener("mousewheel", this.handleMouseWheel); 
+    window.removeEventListener("DOMMouseScroll", this.handleMouseWheelDOM); 
   },
   async asyncData() {
     const insig = await client.getEntries({
@@ -107,32 +107,28 @@ export default {
 
     const result = insig.items.length % 3;
     var resulArr = [];
-    
+
     const ctPost = 3;
     var arrayInsig = [];
 
     if (result > 0) {
-      resulArr = insig.items.splice(
-        insig.items.length - result,
-        result
-      );
+      resulArr = insig.items.splice(insig.items.length - result, result);
     }
    
     const numbSections = insig.items.length / 3;
 
-    for (let i = 0; i < numbSections; i++) {
-      arrayInsig[i] = insig.items.splice(
-        insig.items.length - ctPost,
-        ctPost
-      );
+    for (let i = numbSections -1 ; i >= 0; i--) {
+      arrayInsig[i] = insig.items.splice(  insig.items.length - ctPost, ctPost );
     }
 
-    return { insightsCont: insig.items, insightsResult : resulArr , cantSections : numbSections, insightArray:arrayInsig};
+    return {
+      insightsCont: insig.items,
+      insightsResult: resulArr,
+      cantSections: numbSections,
+      insightArray: arrayInsig,
+    };
   },
   mounted() {
-    
-
-
     this.hideFooter();
 
     document.getElementById("footer-container").style.display = "none";
@@ -148,9 +144,10 @@ export default {
 <template>
   <main class="content-main insights-page">
     <div class="w-100 container-insights">
-      <template v-for="(arrayI, index) in insightArray">
+      
+      <template v-for="(arrayI, index) in insightArray"  >
         <Transition :key="index">
-          <section
+          <section 
             class="content-insights fullpage"
             v-show="activeSection == index"
           >
@@ -191,16 +188,59 @@ export default {
   </main>
 </template>
 <style scoped>
+@media(min-width:768px){
 .v-enter-active,
 .v-leave-active {
-  -webkit-animation: slide-in-top 0.5s ease;
-  animation: slide-in-top 0.53s ease;
+  -webkit-animation: slide-in-bottom 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+    both;
+  animation: slide-in-bottom 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  -webkit-backface-visibility: hidden; 
+  backface-visibility: hidden;
 }
 .v-enter-from,
 .v-leave-to {
-  -webkit-animation: slide-out-top 0.5s ease;
-  animation: slide-out-top 0.5s ease;
-  opacity: 0;
+  -webkit-animation: slide-in-top 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+    reverse forwards;
+  animation: slide-in-top 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse
+    forwards;
+  -webkit-backface-visibility: hidden; 
+  backface-visibility: hidden;
+}
+}
+
+@-webkit-keyframes slide-in-bottom {
+  0% {
+    -webkit-transform: translateY(1000px);
+    transform: translateY(1000px);
+    opacity: 0;
+  }
+  50% {
+    -webkit-transform: translateY(500);
+    transform: translateY(500);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes slide-in-bottom {
+  0% {
+    -webkit-transform: translateY(1000px);
+    transform: translateY(1000px);
+    opacity: 0;
+  }
+  50% {
+    -webkit-transform: translateY(500);
+    transform: translateY(500);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 @-webkit-keyframes slide-in-top {
@@ -228,30 +268,6 @@ export default {
   }
 }
 
-@-webkit-keyframes slide-out-top {
-  0% {
-    -webkit-transform: translateY(0);
-    transform: translateY(0);
-    opacity: 1;
-  }
-  100% {
-    -webkit-transform: translateY(-1000px);
-    transform: translateY(-1000px);
-    opacity: 0;
-  }
-}
-@keyframes slide-out-top {
-  0% {
-    -webkit-transform: translateY(0);
-    transform: translateY(0);
-    opacity: 1;
-  }
-  100% {
-    -webkit-transform: translateY(-1000px);
-    transform: translateY(-1000px);
-    opacity: 0;
-  }
-}
 .content-insights {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(49%, 1fr));
@@ -267,15 +283,18 @@ section.content-insights.fullPage {
   margin-top: 0px;
   display: flex;
 }
-@media(min-width:768px) and (max-width:1024px){
-  main.insights-page{
-        margin-top: 85px;
-    height: calc( 100vh - 85px);
+main.insights-page .fullpage{
+  overflow: hidden;
+}
+@media (min-width: 768px) and (max-width: 1024px) {
+  main.insights-page {
+    margin-top: 85px;
+    height: calc(100vh - 85px);
   }
 }
-@media(min-width:1024px){
-  main.insights-page{
-     height: 100vh;
+@media (min-width: 1024px) {
+  main.insights-page {
+    height: 100vh;
   }
 }
 @media (min-width: 768px) {
@@ -300,19 +319,15 @@ section.content-insights.fullPage {
   }
 }
 @media (max-width: 768px) {
-  .content-insights {
-    grid-template-columns: repeat(auto-fill, minmax(50%, 1fr));
-    grid-auto-rows: calc(50vh - 5px);
-    grid-gap: 20px;
-  }
+  
   .result-insights {
     flex-direction: column;
   }
   .result-insights {
     height: 100%;
   }
-  .fullpage{
-    display: block!important;
+  .fullpage {
+    display: block !important;
   }
 }
 </style>

@@ -356,15 +356,59 @@ export default {
     justify-content: center;
     display: flex;
 }
-.v-enter-active,
-.v-leave-active {
-  -webkit-animation: slide-in-top 0.3s ease;
-  animation: slide-in-top 0.3s ease;
+@media (min-width: 768px) {
+  .v-enter-active,
+  .v-leave-active {
+    -webkit-animation: slide-in-bottom 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+      both;
+    animation: slide-in-bottom 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+  .v-enter-from,
+  .v-leave-to {
+    -webkit-animation: slide-in-top 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+      reverse forwards;
+    animation: slide-in-top 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse
+      forwards;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
 }
-.v-enter-from,
-.v-leave-to {
-  -webkit-animation: slide-out-top 0.1s ease;
-  animation: slide-out-top 0.1s ease;
+
+@-webkit-keyframes slide-in-bottom {
+  0% {
+    -webkit-transform: translateY(1000px);
+    transform: translateY(1000px);
+    opacity: 0;
+  }
+  50% {
+    -webkit-transform: translateY(500);
+    transform: translateY(500);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes slide-in-bottom {
+  0% {
+    -webkit-transform: translateY(1000px);
+    transform: translateY(1000px);
+    opacity: 0;
+  }
+  50% {
+    -webkit-transform: translateY(500);
+    transform: translateY(500);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 @-webkit-keyframes slide-in-top {
@@ -392,30 +436,6 @@ export default {
   }
 }
 
-@-webkit-keyframes slide-out-top {
-  0% {
-    -webkit-transform: translateY(0);
-    transform: translateY(0);
-    opacity: 1;
-  }
-  100% {
-    -webkit-transform: translateY(-1000px);
-    transform: translateY(-1000px);
-    opacity: 0;
-  }
-}
-@keyframes slide-out-top {
-  0% {
-    -webkit-transform: translateY(0);
-    transform: translateY(0);
-    opacity: 1;
-  }
-  100% {
-    -webkit-transform: translateY(-1000px);
-    transform: translateY(-1000px);
-    opacity: 0;
-  }
-}
 div.p-14 {
   padding: 14%;
 }
@@ -502,6 +522,9 @@ div.text-center p {
 }
 
 @media (max-width: 767px) {
+  .container-portfolio{
+    display: block;
+  }
   .fullpage{
     display: block!important;
     position: relative;

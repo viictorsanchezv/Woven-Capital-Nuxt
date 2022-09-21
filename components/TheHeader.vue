@@ -1,5 +1,5 @@
 <script>
-import itemLink from "@/components/ListItem.vue";
+import itemLink from "@/components/ItemHeader.vue";
 import { headerData } from "@/data/data.js";
 export default {
   data() {
@@ -11,6 +11,9 @@ export default {
     this.expande = false;
   },
   methods: {
+    handleExpanded() {
+      this.expanded();
+    },
     expanded: function (event) {
       this.expande = !this.expande;
 
@@ -105,6 +108,7 @@ export default {
               id="list-group"
             >
               <item-link
+              v-on:expanded="handleExpanded"
                 v-for="(itemHeader, index) in itemsHeader"
                 :key="index"
                 :textLink="itemHeader.textLink"
@@ -177,6 +181,7 @@ export default {
               </button>
               <ul class="list-group list-unstyled p-0" id="list-group">
                 <item-link
+                v-on:expanded="handleExpanded"
                   v-for="(itemHeader, index) in itemsHeader"
                   :key="index"
                   :textLink="itemHeader.textLink"

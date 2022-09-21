@@ -150,7 +150,7 @@ export default {
       <Transition>
         <section
           v-show="activeSection == 0"
-          class="fullpage hero-image vh-hero d-flex flex-column position-relative align-items-center w-100"
+          class="fullpage hero-image vh-hero d-flex flex-column align-items-center w-100"
         >
           <div class="position-relative w-100 hero-container">
             <div
@@ -231,14 +231,12 @@ export default {
               <div class="position-relative w-100">
                 <div class="row m-0 p-0">
                   <div class="col-12 m-0 p-0">
-                    <template
-                      v-for="(pressReleases, index) in pressReleasesCont"
-                    >
+                    
                       <new-last
-                        :key="index"
-                        :titleLast="pressReleases.fields.title"
+                        :titleLast="insightsCont[0].fields.title"
+                        :urlLast="insightsCont[0].fields.urlSlug"
                       ></new-last>
-                    </template>
+                    
                   </div>
                 </div>
               </div>
@@ -313,9 +311,10 @@ export default {
         </section>
       </Transition>
       <!-- Insights-->
+
       <Transition>
         <section v-show="activeSection == 3" class="fullpage w-100">
-          <div class="w-100">
+          <div class="w-100 container-insight">
             <div class="content-insights m-0">
               <template v-for="(post, index) in insightsCont">
                 <card-insights
@@ -329,6 +328,15 @@ export default {
                 </card-insights>
               </template>
             </div>
+            <div class="d-flex justify-content-center flex-column align-item-center text-center p-2 read-more-insight"  >
+              <p class="text-insight w-100 text-medium">Read More</p>
+
+                <div class="d-flex m-0 p-0 w-100 justify-content-center ">
+                  <a href="/insights" class="w-100 h-100 m-0 p-0">
+                    <img src="../assets/image/chevron-down.png" alt="" />
+                  </a>
+                </div>
+            </div>
           </div>
         </section>
       </Transition>
@@ -336,23 +344,66 @@ export default {
   </main>
 </template>
 <style>
-.v-enter-active,
-.v-leave-active {
-  -webkit-animation: slide-in-top 0.5s ease;
-  animation: slide-in-top 0.53s ease;
+@media (min-width: 768px) {
+  .v-enter-active,
+  .v-leave-active {
+    -webkit-animation: slide-in-bottom 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+      both;
+    animation: slide-in-bottom 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+  .v-enter-from,
+  .v-leave-to {
+    -webkit-animation: slide-in-top 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+      reverse forwards;
+    animation: slide-in-top 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse
+      forwards;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
 }
-.v-enter-from,
-.v-leave-to {
-  -webkit-animation: slide-out-top 0.5s ease;
-  animation: slide-out-top 0.5s ease;
-  opacity: 0;
+
+@-webkit-keyframes slide-in-bottom {
+  0% {
+    -webkit-transform: translateY(1000px);
+    transform: translateY(1000px);
+    opacity: 1;
+  }
+  50% {
+    -webkit-transform: translateY(500);
+    transform: translateY(500);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes slide-in-bottom {
+  0% {
+    -webkit-transform: translateY(1000px);
+    transform: translateY(1000px);
+    opacity: 1;
+  }
+  50% {
+    -webkit-transform: translateY(500);
+    transform: translateY(500);
+    opacity:1;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 @-webkit-keyframes slide-in-top {
   0% {
     -webkit-transform: translateY(-1000px);
     transform: translateY(-1000px);
-    opacity: 0;
+    opacity: 1;
   }
   100% {
     -webkit-transform: translateY(0);
@@ -364,7 +415,7 @@ export default {
   0% {
     -webkit-transform: translateY(-1000px);
     transform: translateY(-1000px);
-    opacity: 0;
+    opacity: 1;
   }
   100% {
     -webkit-transform: translateY(0);
@@ -372,30 +423,9 @@ export default {
     opacity: 1;
   }
 }
-
-@-webkit-keyframes slide-out-top {
-  0% {
-    -webkit-transform: translateY(0);
-    transform: translateY(0);
-    opacity: 1;
-  }
-  100% {
-    -webkit-transform: translateY(-1000px);
-    transform: translateY(-1000px);
-    opacity: 0;
-  }
-}
-@keyframes slide-out-top {
-  0% {
-    -webkit-transform: translateY(0);
-    transform: translateY(0);
-    opacity: 1;
-  }
-  100% {
-    -webkit-transform: translateY(-1000px);
-    transform: translateY(-1000px);
-    opacity: 0;
-  }
+p.text-insight {
+  margin: 0;
+  line-height: 26px;
 }
 .hero-info{
   z-index: 9;
@@ -498,9 +528,6 @@ h1.title-home {
   padding: 0;
   align-items: flex-end;
 }
-.homePage .content-insights {
-  grid-auto-rows: calc(50vh - 5px);
-}
 .content-insights {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(49%, 1fr));
@@ -555,16 +582,30 @@ h1.title-home {
   }
 }
 @media (min-width: 768px) {
+   .homePage .content-insights {
+    grid-auto-rows: calc(45vh - 5px);
+    height: 90vh;
+  }
+  .read-more-insight{
+    height: 10vh;
+  }
+  .container-insight{
+        display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+  }
   .fullpage {
     height: 100vh;
     width: 100%;
-    position: absolute;
     top: 0;
     left: 0;
     background: white;
+    position: absolute;
+    overflow: hidden;
   }
   main.homePage {
-    overflow: hidden;
+    overflow: auto;
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -579,6 +620,14 @@ h1.title-home {
 }
 
 @media (max-width: 767px) {
+  .homePage .content-insights {
+    grid-template-columns: repeat(auto-fill, minmax(50%, 1fr));
+    grid-auto-rows: 400px;
+    grid-gap: 20px;
+  }
+  .content-insights{
+    display: block;
+  }
   .fullpage {
     display: block !important;
   }
@@ -659,11 +708,6 @@ h1.title-home {
   }
   .partner-img {
     width: 100% !important;
-  }
-  .content-insights {
-    grid-template-columns: repeat(auto-fill, minmax(50%, 1fr));
-    grid-auto-rows: calc(50vh - 5px);
-    grid-gap: 20px;
   }
   .container-homepage,
   .hero-container,

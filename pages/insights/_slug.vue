@@ -119,7 +119,7 @@ export default {
           </p>
           <img
             class="w-100 object-cover p-0 image-insight"
-            :src="insightCont[0].fields.coverImage.fields.file.url"
+            :src="insightCont[0].fields.internaImage.fields.file.url"
             alt=""
           />
           <div

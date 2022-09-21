@@ -10,7 +10,7 @@
     --color-white: #ffffff;
     --color-btn-hover:#15A419;
 }
-main.content-main a:not(.button-primary, .refPortfolio){
+main.content-main a:not(.button-primary, .refPortfolio, .text-new){
     color: var( --bg--primary)!important;
 }
 .text-12{
