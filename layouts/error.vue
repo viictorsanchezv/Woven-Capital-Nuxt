@@ -1,10 +1,10 @@
 <template>
   <main>
     <section class="m-0" v-if="error.statusCode === 404" id="error-404">
-      <div class="col-12 col-md-6 sect-image">
+      <div class="col-12 col-md-6 sect-image h-100">
         <img class="img-error" src="@/assets/image/error.png" alt="" />
       </div>
-      <div class="col-12 col-md-6 content-error">
+      <div class="col-12 col-md-6 content-error  h-100">
         <p class="text-medium desc-error">Page not found</p>
         <h1 class="title-error">Error 404</h1>
         <p class="text-medium desc-error mb-4">
@@ -18,21 +18,18 @@
         ></buttom-primary>
       </div>
     </section>
+    <NuxtLink v-else to="/">Home page</NuxtLink>
   </main>
 </template>
 
 <script>
 export default {
   props: ["error"],
-  layout: "error",
   mounted() {
-    console.log("1");
     const footerH = document.getElementById("footer-container");
     const footerHeight = footerH.clientHeight;
-    console.log(footerHeight);
     const sectionError = document.getElementById("error-404");
     if (sectionError) {
-      console.log(typeof footerHeight);
       sectionError.style.height = "calc(100vh - " + footerHeight + "px)";
     }
   },
@@ -42,7 +39,10 @@ export default {
 <style scoped>
 #error-404 {
   display: flex;
+  align-items: center;
+ min-height: 50vh;
 }
+
 .sect-image {
   position: relative;
   justify-content: center;

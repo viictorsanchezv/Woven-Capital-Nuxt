@@ -8,6 +8,7 @@
         { textLink: 'Contact', linkLink: '/contact'  },
     ];
     const footerData = [
+        { textLink: 'Home', linkLink: '/'  },
         { textLink: 'About', linkLink: '/about', targetL: '_self' },
         { textLink: 'Portfolio', linkLink: '/portfolio', targetL: '_self'  },
         { textLink: 'Team', linkLink: '/team', targetL: '_self'  },

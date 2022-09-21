@@ -235,6 +235,7 @@ export default {
                       <new-last
                         :titleLast="insightsCont[0].fields.title"
                         :urlLast="insightsCont[0].fields.urlSlug"
+                        :urlExternalLast="insightsCont[0].fields.externalLink"
                       ></new-last>
                     
                   </div>

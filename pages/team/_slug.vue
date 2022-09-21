@@ -16,7 +16,7 @@ export default {
   head: {
     title: "Team - Woven Capital",
   },
-  async asyncData({ params }) {
+  async asyncData({ params, error }) {
     const teamItem = await client.getEntries({
       content_type: "teamNwc",
       "fields.slug": params.slug,
@@ -26,6 +26,10 @@ export default {
       "fields.author": params.slug,
       limit: "2",
     });
+    if(!teamItem.items[0] )
+    {
+      error ({ statusCode: 404, mensaje: 'Publicación no encontrada' }) ;
+    }
 
     return { teamCont: teamItem.items, teamInsight: insights.items };
   },
@@ -52,7 +56,7 @@ export default {
             {{ teamCont[0].fields.designation }}
           </p>
           <div class="social">
-            <a :href="teamCont[0].fields.linkedInUrl" class="mr-2">
+            <a :href="teamCont[0].fields.linkedInUrl" class="mr-2" target="_blank">
               <img
                 class="image-social object-cover"
                 src="@/assets/image/icon/linkedin.png"
@@ -122,6 +126,9 @@ export default {
 .desc-team {
   white-space: pre-line;
   color: var(--color--secondary);
+}
+h1.h1-45.name-team {
+    line-height: 43px;
 }
 @media (max-width: 768px) {
   .image-profile {

@@ -74,7 +74,7 @@ footer .company {
     padding: 25px 32px;
   }
 }
-@media (max-width: 1460px) {
+@media (max-width: 1530px) {
   .footer-items,
   .company {
     width: 100%;

@@ -21,6 +21,7 @@ export default {
       maxlength="10"
     ></div>
     <a
+      :target="companyInfo.fields.externalLink != undefined ? '_blank' : '_self'"
       :href="
         urlInsight(companyInfo.fields.urlSlug, companyInfo.fields.externalLink)
       "

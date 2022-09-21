@@ -13,12 +13,18 @@ export default {
   <div class="p-0 content-team align-items-center d-flex flex-column">
     <a :href="`/team/${teamSlug}`" class="text-center">
       <img :src="teamImage" alt="" class="object-cover rounded-circle" />
-      <h4 class="text-medium text-center">{{ teamName }}</h4>
-      <p class="text-small text-center">{{ teamJob }}</p>
+      <h4 class="text-medium text-center team-name">{{ teamName }}</h4>
+      <p class="text-small text-center designation">{{ teamJob }}</p>
     </a>
   </div>
 </template>
 <style>
+h4.team-name{
+line-height: 26px;
+}
+p.designation{
+  line-height: 24px;
+}
 .container-team {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(calc(20% - 20px), 1fr));

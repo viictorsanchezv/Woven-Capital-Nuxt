@@ -1,5 +1,6 @@
 <script>
 import client from "@/plugins/contentful.js";
+import Error404 from "@/layouts/error.vue";
 export default {
   data() {
     return {
@@ -10,21 +11,25 @@ export default {
   head: {
     title: "Insight - Woven Capital",
   },
-  async asyncData({ params }) {
+  async asyncData({ params , error}) {
     const insightP = await client.getEntries({
       content_type: "insightsNwc",
       "fields.urlSlug": params.slug,
     });
-    
-    const authorI = insightP.items[0].fields.author;
-    
-     const  teamP = await client.getEntries({
-      content_type: "teamNwc",
-      "fields.slug": authorI,
-    });
-  
+    let teamP = [];
 
-    return { insightCont: insightP.items, teamInsight: teamP.items };
+    if (insightP.items[0]) {
+      const authorI = insightP.items[0].fields.author;
+      teamP = await client.getEntries({
+        content_type: "teamNwc",
+        "fields.slug": authorI,
+      });
+      teamP = teamP.items;
+    }else{
+      error ({ statusCode: 404, mensaje: 'Publicación no encontrada' }) ;
+    }
+
+    return { insightCont: insightP.items, teamInsight: teamP };
   },
   methods: {
     dateForm(dateI) {
@@ -38,97 +43,114 @@ export default {
 </script>
 <template>
   <main class="row">
-    <template v-if="insightCont[0].fields.typeArticle === 'article'">
-      <div class="row m-0">
-        <div class="col-md-6 m-0 p-0 content-img">
-          <img
-            class="w-100 m-0 p-0 image-insight img-article"
-            :src="insightCont[0].fields.coverImage.fields.file.url"
-            alt=""
-          />
-          <img
-            class="w-100 m-0 p-0 image-insight img-article"
-            :src="insightCont[0].fields.internaImage.fields.file.url"
-            alt=""
-          />
-        </div>
-        <div class="col-md-6 content_post-insight">
-          <h1 class="post_insight-title mb-4 h1-45" v-if="insightCont[0].fields.title">
-            {{ insightCont[0].fields.title }}
-          </h1>
-          <div class="info-post">
-            <p class="text-small">
-              By:
-              <a v-if="teamInsight[0].fields.slug"
-                :href="`/team/${teamInsight[0].fields.slug}`"
-                class="text-small author-post"
-                >{{ teamInsight[0].fields.title }}</a
-              >
-            </p>
-            <p class="post_insight-date mb-4 text-small">
-              {{ dateForm(insightCont[0].fields.publishDate) }}
-            </p>
-          </div>
-          <p v-if="insightCont[0].fields.shortDescription">{{ insightCont[0].fields.shortDescription }}</p>
-
-          <div v-if="insightCont[0].fields.subtitle1"
-            v-html="$md.render(insightCont[0].fields.subtitle1)"
-            class="post_insight-content text-small info-wrapper"
-          ></div>
-          <div v-if="insightCont[0].fields.content"
-            v-html="$md.render(insightCont[0].fields.content)"
-            class="post_insight-content text-small"
-          ></div>
-          <div v-if="insightCont[0].fields.subtitle2"
-            v-html="$md.render(insightCont[0].fields.subtitle2)"
-            class="post_insight-content text-small info-wrapper"
-          ></div>
-          <div v-if="insightCont[0].fields.content2"
-            v-html="$md.render(insightCont[0].fields.content2)"
-            class="post_insight-content text-small"
-          ></div>
-
-          <div class="author-information ">
-            <img v-if="teamInsight[0].fields.profilePic.fields.file.url"
-              :src="teamInsight[0].fields.profilePic.fields.file.url"
+    <section v-if="insightCont[0]">
+      <template v-if="insightCont[0].fields.typeArticle === 'article'">
+        <div class="row m-0">
+          <div class="col-md-6 m-0 p-0 content-img">
+            <img
+              class="w-100 m-0 p-0 image-insight img-article"
+              :src="insightCont[0].fields.coverImage.fields.file.url"
               alt=""
             />
-            <div class="information">
-              <h5 class="title-author">About the Author</h5>
-              <p class="text-small" v-if="teamInsight[0].fields.descriptionDesignation">
-                {{ teamInsight[0].fields.descriptionDesignation }}
+            <img
+              class="w-100 m-0 p-0 image-insight img-article"
+              :src="insightCont[0].fields.internaImage.fields.file.url"
+              alt=""
+            />
+          </div>
+          <div class="col-md-6 content_post-insight">
+            <h1
+              class="post_insight-title mb-4 h1-45"
+              v-if="insightCont[0].fields.title"
+            >
+              {{ insightCont[0].fields.title }}
+            </h1>
+            <div class="info-post" v-if="teamInsight[0]">
+              <p class="text-small">
+                By:
+                <a
+                  v-if="teamInsight[0].fields.slug"
+                  :href="`/team/${teamInsight[0].fields.slug}`"
+                  class="text-small author-post"
+                  >{{ teamInsight[0].fields.title }}</a
+                >
               </p>
+              <p class="post_insight-date mb-4 text-small">
+                {{ dateForm(insightCont[0].fields.publishDate) }}
+              </p>
+            </div>
+            <p v-if="insightCont[0].fields.shortDescription">
+              {{ insightCont[0].fields.shortDescription }}
+            </p>
+
+            <div
+              v-if="insightCont[0].fields.subtitle1"
+              v-html="$md.render(insightCont[0].fields.subtitle1)"
+              class="post_insight-content text-small info-wrapper"
+            ></div>
+            <div
+              v-if="insightCont[0].fields.content"
+              v-html="$md.render(insightCont[0].fields.content)"
+              class="post_insight-content text-small"
+            ></div>
+            <div
+              v-if="insightCont[0].fields.subtitle2"
+              v-html="$md.render(insightCont[0].fields.subtitle2)"
+              class="post_insight-content text-small info-wrapper"
+            ></div>
+            <div
+              v-if="insightCont[0].fields.content2"
+              v-html="$md.render(insightCont[0].fields.content2)"
+              class="post_insight-content text-small"
+            ></div>
+
+            <div class="author-information"  v-if="teamInsight[0]">
+              <img
+                v-if="teamInsight[0].fields.profilePic.fields.file.url"
+                :src="teamInsight[0].fields.profilePic.fields.file.url"
+                alt=""
+              />
+              <div class="information">
+                <h5 class="title-author">About the Author</h5>
+                <p
+                  class="text-small"
+                  v-if="teamInsight[0].fields.descriptionDesignation"
+                >
+                  {{ teamInsight[0].fields.descriptionDesignation }}
+                </p>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </template>
-    <template
-      v-else-if="insightCont[0].fields.typeArticle === 'press releases'"
-    >
-      <div class="row m-0">
-        <div class="col-12 content_post-insight">
-          <h1 class="post_insight-title mb-4 h1-45">
-            {{ insightCont[0].fields.title }}
-          </h1>
-          <p class="text-medium">
-            {{ insightCont[0].fields.shortDescription }}
-          </p>
-          <p class="post_insight-date mb-4 text-small">
-            {{ dateForm(insightCont[0].fields.publishDate) }}
-          </p>
-          <img
-            class="w-100 object-cover p-0 image-insight"
-            :src="insightCont[0].fields.internaImage.fields.file.url"
-            alt=""
-          />
-          <div
-            v-html="$md.render(insightCont[0].fields.content)"
-            class="post_insight-content text-small"
-          ></div>
+      </template>
+      <template
+        v-else-if="insightCont[0].fields.typeArticle === 'press releases'"
+      >
+        <div class="row m-0">
+          <div class="col-12 content_post-insight">
+            <h1 class="post_insight-title mb-4 h1-45">
+              {{ insightCont[0].fields.title }}
+            </h1>
+            <p class="text-medium">
+              {{ insightCont[0].fields.shortDescription }}
+            </p>
+            <p class="post_insight-date mb-4 text-small pl-0">
+              {{ dateForm(insightCont[0].fields.publishDate) }}
+            </p>
+            <img
+              class="w-100 object-cover p-0 image-insight"
+              :src="insightCont[0].fields.internaImage.fields.file.url"
+              alt=""
+            />
+            <div
+              v-html="$md.render(insightCont[0].fields.content)"
+              class="post_insight-content text-small"
+            ></div>
+          </div>
         </div>
-      </div>
-    </template>
+      </template>
+    </section>
+   
   </main>
 </template>
 
@@ -198,12 +220,12 @@ export default {
   top: 0;
 }
 @media (max-width: 1024px) {
-  .content_post-insight{
+  .content_post-insight {
     padding: 10%;
   }
 }
 @media (max-width: 767px) {
-  .content-img{
+  .content-img {
     height: auto;
     position: relative;
   }
@@ -211,7 +233,7 @@ export default {
     position: relative;
     height: 50vh;
   }
-  .content_post-insight{
+  .content_post-insight {
     padding: 60px 40px 40px;
   }
 }

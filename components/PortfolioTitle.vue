@@ -17,10 +17,10 @@ export default {
     <img class="mb-4" :src="image" alt="" />
     <p class="m-0 mb-4">{{ title }}</p>
     <div class="mb-5" v-show="icons === true">
-      <a :href="linkLinkedin">
+      <a :href="linkLinkedin"  target="_blank">
         <img src="@/assets/image/icon/linkedin.png" alt="" />
       </a>
-      <a :href="linkWeb">
+      <a :href="linkWeb"  target="_blank">
         <img src="@/assets/image/icon/Vector.png" alt="" />
       </a>
     </div>
