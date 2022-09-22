@@ -27,7 +27,7 @@ export default {
 </script>
 <template>
   <main>
-    <section>
+    <section class="team-section">
       <div class="p-7 m-0">
         <div class="row m-0 p-0">
           <div
@@ -70,5 +70,13 @@ export default {
 }
 p.text-team {
   max-width: 1022px;
+}
+.team-section{
+  min-height: 97vh;
+}
+@media(max-width:1024px){
+.team-section{
+  min-height: 100%;
+}
 }
 </style>

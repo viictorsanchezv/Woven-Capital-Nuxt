@@ -160,7 +160,11 @@ export default {
                 class="col-12 m-0 p-0 d-flex justify-content-center flex-column align-items-center hero-info"
               >
                 <div class="content-logos">
-                  <a href="https://global.toyota/" class="toyota logo" target="_blank">
+                  <a
+                    href="https://global.toyota/"
+                    class="toyota logo"
+                    target="_blank"
+                  >
                     <img
                       src="../assets/image/Toyota-Logo.png"
                       alt="Logo Toyota"
@@ -231,13 +235,11 @@ export default {
               <div class="position-relative w-100">
                 <div class="row m-0 p-0">
                   <div class="col-12 m-0 p-0">
-                    
-                      <new-last
-                        :titleLast="insightsCont[0].fields.title"
-                        :urlLast="insightsCont[0].fields.urlSlug"
-                        :urlExternalLast="insightsCont[0].fields.externalLink"
-                      ></new-last>
-                    
+                    <new-last
+                      :titleLast="insightsCont[0].fields.title"
+                      :urlLast="insightsCont[0].fields.urlSlug"
+                      :urlExternalLast="insightsCont[0].fields.externalLink"
+                    ></new-last>
                   </div>
                 </div>
               </div>
@@ -281,16 +283,14 @@ export default {
           class="fullpage partner-together w-100"
         >
           <div class="position-relative w-100 m-0 p-0">
-            <div
-              class="row m-0 partner-col"
-            >
+            <div class="row m-0 partner-col">
               <div class="col-12 m-0">
                 <title-secundary
                   class="justify-content-center"
                   titleH2="Partner together"
                 ></title-secundary>
 
-                <p class=" p-0 text-medium text-partner">
+                <p class="p-0 text-medium text-partner">
                   If you share our vision and your company would like to be
                   considered for investment by Woven Capital, we want to hear
                   from you.
@@ -302,11 +302,11 @@ export default {
                   link_buttom="/pitch"
                 ></buttom-primary>
               </div>
-                <img
-                  src="../assets/image/partner.png"
-                  class="p-0 partner-img"
-                  alt=""
-                />
+              <img
+                src="../assets/image/partner.png"
+                class="p-0 partner-img"
+                alt=""
+              />
             </div>
           </div>
         </section>
@@ -329,14 +329,16 @@ export default {
                 </card-insights>
               </template>
             </div>
-            <div class="d-flex justify-content-center flex-column align-item-center text-center p-2 read-more-insight"  >
+            <div
+              class="d-flex justify-content-center flex-column align-item-center text-center p-2 read-more-insight"
+            >
               <p class="text-insight w-100 text-medium">Read More</p>
 
-                <div class="d-flex m-0 p-0 w-100 justify-content-center ">
-                  <a href="/insights" class="w-100 h-100 m-0 p-0">
-                    <img src="../assets/image/chevron-down.png" alt="" />
-                  </a>
-                </div>
+              <div class="d-flex m-0 p-0 w-100 justify-content-center">
+                <a href="/insights" class="w-100 h-100 m-0 p-0">
+                  <img src="../assets/image/chevron-down.png" alt="" />
+                </a>
+              </div>
             </div>
           </div>
         </section>
@@ -391,7 +393,7 @@ export default {
   50% {
     -webkit-transform: translateY(500);
     transform: translateY(500);
-    opacity:1;
+    opacity: 1;
   }
   100% {
     -webkit-transform: translateY(0);
@@ -428,7 +430,7 @@ p.text-insight {
   margin: 0;
   line-height: 26px;
 }
-.hero-info{
+.hero-info {
   z-index: 9;
 }
 .container-homepage {
@@ -446,7 +448,7 @@ video.vh-hero {
 .new-last-post {
   width: 100%;
 }
-.partner-img{
+.partner-img {
   margin: 3rem 0 0 0;
 }
 .content-logos {
@@ -493,8 +495,8 @@ h1.title-home {
 .content-hero {
   padding-top: 0px;
 }
-.text-partner{
-  margin: 1rem 0 ;
+.text-partner {
+  margin: 1rem 0;
 }
 .text-portfolio,
 .text-partner {
@@ -513,12 +515,12 @@ h1.title-home {
   align-items: flex-end;
   padding: 4vh 0 0 0;
 }
-.partner-col .col-12{
-      display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding: 0;
+.partner-col .col-12 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0;
 }
 .our-portfolio .our-portfolio-content {
   padding: 4vh 0 0 0;
@@ -542,7 +544,7 @@ h1.title-home {
 .partner-together img {
   height: 54vh;
 }
-.fullpage{
+.fullpage {
   z-index: 1;
 }
 @media (min-width: 1441px) {
@@ -583,15 +585,15 @@ h1.title-home {
   }
 }
 @media (min-width: 768px) {
-   .homePage .content-insights {
+  .homePage .content-insights {
     grid-auto-rows: calc(45vh - 5px);
     height: 90vh;
   }
-  .read-more-insight{
+  .read-more-insight {
     height: 10vh;
   }
-  .container-insight{
-        display: flex;
+  .container-insight {
+    display: flex;
     flex-direction: column;
     justify-content: space-between;
     height: 100vh;
@@ -626,7 +628,7 @@ h1.title-home {
     grid-auto-rows: 400px;
     grid-gap: 20px;
   }
-  .content-insights{
+  .content-insights {
     display: block;
   }
   .fullpage {
@@ -666,19 +668,19 @@ h1.title-home {
     object-fit: contain;
     padding: 6px;
   }
-  .our-portfolio, 
-  .partner-col{
+  .our-portfolio,
+  .partner-col {
     padding: 0;
     height: 100%;
   }
-  .partner-col{
+  .partner-col {
     justify-content: flex-start;
   }
-.partner-together .partner-col{
-  padding: 0;
-}
+  .partner-together .partner-col {
+    padding: 0;
+  }
   .our-portfolio .our-portfolio-content,
-  .partner-together .partner-col .col-12{
+  .partner-together .partner-col .col-12 {
     text-align: center;
     padding: 90px 40px 20px 40px;
   }
@@ -717,10 +719,10 @@ h1.title-home {
     height: 100%;
     position: relative;
   }
-  .text-partner{
+  .text-partner {
     margin: 15px 0 30px 0;
   }
-  .partner-together img{
+  .partner-together img {
     height: 100%;
     object-fit: contain;
   }

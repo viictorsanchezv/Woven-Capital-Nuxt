@@ -25,6 +25,7 @@
 <script>
 export default {
   props: ["error"],
+  layout: 'error',
   mounted() {
     const footerH = document.getElementById("footer-container");
     const footerHeight = footerH.clientHeight;

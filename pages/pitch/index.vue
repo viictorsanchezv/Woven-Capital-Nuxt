@@ -200,6 +200,7 @@ h1.title-pitch {
     padding: 10px;
     margin-bottom: 20px;
     letter-spacing: -2px;
+    left: 0;
   }
 }
 .form-pitch {

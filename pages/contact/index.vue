@@ -94,8 +94,8 @@ export default {
         <p class="info-p">
           This submission constitutes my consent to Woven Capital Management
           Company, LLC, and its affiliates sending me news and updates by email.
-          I understand that I can opt out at any time. View Privacy Policy for
-          more information. Form 20-2.
+          I understand that I can opt out at any time. View <a href="/privacy-notice">Privacy Policy</a> for
+          more information. <a href="https://www.woven-planet.global/en/woven-capital-contact" target="_blank"> Form 20-2</a>.
         </p>
       </div>
     </section>
