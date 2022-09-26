@@ -16,8 +16,6 @@
         { textLink: 'Pitch', linkLink: '/pitch', targetL: '_self'  },
         { textLink: 'Contact', linkLink: '/contact', targetL: '_self'  },
         { textLink: 'Privacy Notice', linkLink: '/privacy-notice', targetL: '_self'  },
-        { textLink: 'Woven Planet', linkLink: 'https://www.woven-planet.global/', targetL: '_blank'  },
-        { textLink: 'Toyota ', linkLink: 'https://global.toyota/', targetL: '_blank'  },
 
     ];
    

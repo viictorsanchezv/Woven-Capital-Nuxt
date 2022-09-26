@@ -6,7 +6,7 @@ export default {
   data() {
     return {
       inputData: [],
-    };
+    }
   },
   head: {
     title: "Pitch - Woven Capital",
@@ -109,12 +109,15 @@ export default {
       column: 1,
     });
   },
+   mounted() {
+    document.getElementById("footer-container").style.display = "block";
+   }
 };
 </script>
 <template>
   <main>
     <section class="h-100 row m-0">
-      <div class="col-12 vh-100 col-md-6 sect-image section-sticky top-0">
+      <div class="col-12 col-md-6 sect-image section-sticky top-0">
         <img
           class="h-100 w-100 img-pitch"
           src="@/assets/image/pitch/frame-1.png"
@@ -179,6 +182,9 @@ h1.title-pitch {
   left: 10%;
   max-width: 485px;
 }
+.sect-image{
+  height: 100vh;
+}
 @media (min-width: 1441px) {
   h1.title-pitch {
     font-size: 70px;
@@ -192,6 +198,9 @@ h1.title-pitch {
   }
 }
 @media (max-width: 768px) {
+  .sect-image{
+  height: 100%;
+}
   h1.title-pitch {
     width: 100%;
     font-size: 35px;
@@ -201,13 +210,15 @@ h1.title-pitch {
     margin-bottom: 20px;
     letter-spacing: -2px;
     left: 0;
+    top: 13%;
+    padding: 0 10%;
   }
 }
 .form-pitch {
   padding: 7% 7% 7% 4%;
 }
 .img-pitch {
-  object-fit: cover;
+  object-fit: contain;
   object-position: top;
 }
 .sect-image {

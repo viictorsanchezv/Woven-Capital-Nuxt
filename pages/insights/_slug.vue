@@ -11,7 +11,7 @@ export default {
   head: {
     title: "Insight - Woven Capital",
   },
-  async asyncData({ params , error}) {
+  async asyncData({ params, error }) {
     const insightP = await client.getEntries({
       content_type: "insightsNwc",
       "fields.urlSlug": params.slug,
@@ -19,40 +19,50 @@ export default {
     let teamP = [];
 
     if (insightP.items[0]) {
-      const authorI = insightP.items[0].fields.author;
-      teamP = await client.getEntries({
-        content_type: "teamNwc",
-        "fields.slug": authorI,
-      });
-      teamP = teamP.items;
-    }else{
-      error ({ statusCode: 404, mensaje: 'Publicación no encontrada' }) ;
+      
+      if (insightP.items[0].fields.author) {
+        const authorI = insightP.items[0].fields.author;
+        teamP = await client.getEntries({
+          content_type: "teamNwc",
+          "fields.slug": authorI,
+        });
+         teamP = teamP.items;
+      }
+
+     
+    } else {
+      error({ statusCode: 404, mensaje: "Publicación no encontrada" });
     }
 
     return { insightCont: insightP.items, teamInsight: teamP };
   },
   methods: {
     dateForm(dateI) {
-      const options = { year: "numeric", month: "short", day: "numeric" };
+      const options = { year: "numeric", month: "long", day: "numeric" };
       const month = new Date(dateI);
 
       return new Date(month).toLocaleDateString("en", options);
     },
   },
+   mounted() {
+    document.getElementById("footer-container").style.display = "block";
+   }
 };
 </script>
 <template>
   <main class="row">
-    <section v-if="insightCont[0]">
+    <section v-if="insightCont[0]" class="w-100">
       <template v-if="insightCont[0].fields.typeArticle === 'article'">
         <div class="row m-0">
           <div class="col-md-6 m-0 p-0 content-img">
             <img
+              v-if="insightCont[0].fields.coverImage"
               class="w-100 m-0 p-0 image-insight img-article"
               :src="insightCont[0].fields.coverImage.fields.file.url"
               alt=""
             />
             <img
+              v-if="insightCont[0].fields.internaImage"
               class="w-100 m-0 p-0 image-insight img-article"
               :src="insightCont[0].fields.internaImage.fields.file.url"
               alt=""
@@ -65,8 +75,8 @@ export default {
             >
               {{ insightCont[0].fields.title }}
             </h1>
-            <div class="info-post" v-if="teamInsight[0]">
-              <p class="text-small">
+            <div class="info-post" >
+              <p class="text-small name-team" v-if="teamInsight[0]">
                 By:
                 <a
                   v-if="teamInsight[0].fields.slug"
@@ -75,11 +85,14 @@ export default {
                   >{{ teamInsight[0].fields.title }}</a
                 >
               </p>
-              <p class="post_insight-date mb-4 text-small">
+              <p
+                class="post_insight-date mb-4 text-small article"
+                v-if="insightCont[0].fields.publishDate"
+              >
                 {{ dateForm(insightCont[0].fields.publishDate) }}
               </p>
             </div>
-            <p v-if="insightCont[0].fields.shortDescription">
+            <p class="text-small" v-if="insightCont[0].fields.shortDescription">
               {{ insightCont[0].fields.shortDescription }}
             </p>
 
@@ -104,7 +117,7 @@ export default {
               class="post_insight-content text-small"
             ></div>
 
-            <div class="author-information"  v-if="teamInsight[0]">
+            <div class="author-information" v-if="teamInsight[0]">
               <img
                 v-if="teamInsight[0].fields.profilePic.fields.file.url"
                 :src="teamInsight[0].fields.profilePic.fields.file.url"
@@ -128,21 +141,32 @@ export default {
       >
         <div class="row m-0">
           <div class="col-12 content_post-insight">
-            <h1 class="post_insight-title mb-4 h1-45">
+            <h1
+              class="post_insight-title mb-4 h1-45"
+              v-if="insightCont[0].fields.title"
+            >
               {{ insightCont[0].fields.title }}
             </h1>
-            <p class="text-medium">
+            <p
+              class="text-medium"
+              v-if="insightCont[0].fields.shortDescription"
+            >
               {{ insightCont[0].fields.shortDescription }}
             </p>
-            <p class="post_insight-date mb-4 text-small pl-0">
+            <p
+              class="post_insight-date mb-4 text-small pl-0"
+              v-if="insightCont[0].fields.publishDate"
+            >
               {{ dateForm(insightCont[0].fields.publishDate) }}
             </p>
             <img
               class="w-100 object-cover p-0 image-insight"
+              v-if="insightCont[0].fields.internaImage"
               :src="insightCont[0].fields.internaImage.fields.file.url"
               alt=""
             />
             <div
+              v-if="insightCont[0].fields.content"
               v-html="$md.render(insightCont[0].fields.content)"
               class="post_insight-content text-small"
             ></div>
@@ -150,11 +174,15 @@ export default {
         </div>
       </template>
     </section>
-   
   </main>
 </template>
 
 <style scoped>
+.name-team::after{
+  content: "";
+  margin: 0 10px;
+  border-right: 2px solid #a4a4a4;
+}
 .author-information {
   display: flex;
   margin: 30px 0 0 0;
@@ -165,6 +193,7 @@ export default {
   height: 150px;
   width: 150px;
   object-fit: contain;
+  border-radius: 100%;
 }
 .author-information .information {
   display: flex;
@@ -181,11 +210,15 @@ export default {
 }
 .author-post {
   font-weight: 600;
-  border-right: 2px solid #a4a4a4;
-  padding-right: 15px;
+  padding-right: 0;
+  color: var(--color--secondary);
+  text-decoration: revert;
 }
 .post_insight-date {
   padding-left: 10px;
+}
+.article.post_insight-date{
+  padding: 0;
 }
 .info-post {
   display: flex;
@@ -213,6 +246,8 @@ export default {
 }
 .image-insight {
   margin-bottom: 20px;
+  min-height: 313px;
+  object-fit: cover;
 }
 .content-img {
   position: sticky;
@@ -221,10 +256,15 @@ export default {
 }
 @media (max-width: 1024px) {
   .content_post-insight {
-    padding: 10%;
+    padding: 10% 6%;
   }
 }
 @media (max-width: 767px) {
+  .post_insight-content div{
+    display: block!important;
+    display: flex; margin-bottom: 15px; align-items: center; background: rgb(49,49,49);
+background: linear-gradient(90deg, rgba(49,49,49,1) 40%, rgba(255,255,255,1) 40%, rgba(255,255,255,1) 100%);;
+  }
   .content-img {
     height: auto;
     position: relative;
@@ -235,6 +275,11 @@ export default {
   }
   .content_post-insight {
     padding: 60px 40px 40px;
+  }
+  .image-insight {
+    margin-bottom: 20px;
+    min-height: 230px;
+    object-fit: cover;
   }
 }
 </style>

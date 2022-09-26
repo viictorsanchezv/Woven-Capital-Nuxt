@@ -155,11 +155,7 @@ export default {
 
       this.activeSection = id;
       this.inMove = true;
-
-      // document
-      //   .getElementsByClassName("fullpage")
-      //   [id].scrollIntoView({ behavior: "smooth" });
-
+      
       setTimeout(() => {
         this.inMove = false;
       }, 400);
@@ -196,17 +192,18 @@ export default {
 <template>
   <main class="portfolio">
     <div class="container-portfolio">
-      <portfolio-header
+      <!-- <portfolio-header
         :offsets="offsets"
         :activeSection="activeSection"
         v-on:sectActive="handleSection"
       >
-      </portfolio-header>
+      </portfolio-header> -->
 
       <template v-for="(portfolio, index) in portfoliosCont">
-        <Transition :key="index">
+        <Transition :key="index" mode="out-in">
           <section-columns
             class="fullpage"
+            :class="{active : activeSection == index }"
             :id="portfolio.fields.slug"
             :title="portfolio.fields.title"
             v-show="activeSection == index"
@@ -215,16 +212,24 @@ export default {
               <div
                 class="col-md-6 col-12 border-box p-0 justify-content-start vh-100 col-sticky"
               >
-                <img
-                  class="vh-50 pb-5x w-100 object-cover"
+               <img
+                  class="vh-50 pt-0 w-100 object-cover pb-5x"
                   :src="portfolio.fields.mediaTop.fields.file.url"
                   alt=""
                 />
-                <img
-                  class="vh-50 pt-5x w-100 object-cover"
+                <img v-if="portfolio.fields.mediaBottom.fields.file.contentType == 'image/png'"
+                  class="vh-50 w-100 object-cover"
                   :src="portfolio.fields.mediaBottom.fields.file.url"
                   alt=""
                 />
+                <video v-else-if="portfolio.fields.mediaBottom.fields.file.contentType == 'video/mp4'"
+                  class="w-100 object-cover vh-50"
+                  :src="portfolio.fields.mediaBottom.fields.file.url"
+                  autoplay="false"
+                  muted="false"
+                  controls
+              ></video>
+                
               </div>
             </template>
             <template #right>
@@ -274,10 +279,11 @@ export default {
         </Transition>
       </template>
 
-      <Transition>
+      <Transition  mode="out-in">
         <section-columns
           id="lp-investiments"
           class="fullpage"
+          :class="{active : activeSection == this.offsets.length - 1}"
           title="LP Investments"
           v-show="activeSection == offsets.length - 1"
         >
@@ -351,42 +357,40 @@ export default {
 </template>
 
 <style scoped>
-.container-portfolio {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  justify-content: center;
-  display: flex;
+@media(min-width:768px){
+.v-enter-active,
+.v-leave-active {
+  -webkit-animation: slide-in-bottom 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+    both;
+  animation: slide-in-bottom 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  -webkit-backface-visibility: hidden; 
+  backface-visibility: hidden;
+  z-index: 100;
+  
 }
-@media (min-width: 768px) {
-  .v-enter-active,
-  .v-leave-active {
-    -webkit-animation: slide-in-bottom 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)
-      both;
-    animation: slide-in-bottom 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-  }
-  .v-enter-from,
-  .v-leave-to {
-    -webkit-animation: slide-in-top 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)
-      reverse forwards;
-    animation: slide-in-top 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse
-      forwards;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-  }
+.v-enter-from,
+.v-leave-to {
+  -webkit-animation: slide-in-top 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+    reverse forwards;
+  animation: slide-in-top 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse
+    forwards;
+  -webkit-backface-visibility: hidden; 
+  backface-visibility: hidden;
+  z-index: 99;
 }
+}
+.fullpage{
+  display: block!important;
+  z-index: 88;
+}
+.fullpage.active{
+  z-index: 99;
 
+}
 @-webkit-keyframes slide-in-bottom {
   0% {
-    -webkit-transform: translateY(1000px);
-    transform: translateY(1000px);
-    opacity: 0;
-  }
-  50% {
-    -webkit-transform: translateY(500);
-    transform: translateY(500);
+    -webkit-transform: translateY(100px);
+    transform: translateY(100px);
     opacity: 0;
   }
   100% {
@@ -397,14 +401,10 @@ export default {
 }
 @keyframes slide-in-bottom {
   0% {
-    -webkit-transform: translateY(1000px);
-    transform: translateY(1000px);
+    -webkit-transform: translateY(100px);
+    transform: translateY(100px);
     opacity: 0;
-  }
-  50% {
-    -webkit-transform: translateY(500);
-    transform: translateY(500);
-    opacity: 0;
+  
   }
   100% {
     -webkit-transform: translateY(0);
@@ -415,8 +415,8 @@ export default {
 
 @-webkit-keyframes slide-in-top {
   0% {
-    -webkit-transform: translateY(-1000px);
-    transform: translateY(-1000px);
+    -webkit-transform: translateY(-100px);
+    transform: translateY(-100px);
     opacity: 0;
   }
   100% {
@@ -427,8 +427,8 @@ export default {
 }
 @keyframes slide-in-top {
   0% {
-    -webkit-transform: translateY(-1000px);
-    transform: translateY(-1000px);
+    -webkit-transform: translateY(-100px);
+    transform: translateY(-100px);
     opacity: 0;
   }
   100% {
@@ -436,6 +436,14 @@ export default {
     transform: translateY(0);
     opacity: 1;
   }
+}
+
+.container-portfolio {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  justify-content: center;
+  display: flex;
 }
 
 div.p-14 {

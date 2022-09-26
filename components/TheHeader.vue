@@ -41,7 +41,8 @@ export default {
         document
           .querySelector("#header-content-mobile")
           .classList.remove("not-expanded-mobile");
-      } else {
+      } 
+      else {
         document
           .querySelector("#header-content")
           .classList.remove("menu-expanded");
@@ -68,6 +69,64 @@ export default {
           .classList.add("not-expanded-mobile");
       }
     },
+    notExpanded: function (event) {
+      this.expande =false;
+
+        document
+          .querySelector("#header-content")
+          .classList.remove("menu-expanded");
+
+        document
+          .querySelector("#header-content")
+          .classList.add("menu-not-expanded");
+
+        const boxes2 = document.querySelectorAll(
+          ".menu-not-expanded .item-show-expanded"
+        );
+        boxes2.forEach((box2) => {
+          box2.addEventListener("transitionend", function (e) {
+            box2.classList.add("list-group-none");
+          });
+        });
+
+        document
+          .querySelector("#header-content-mobile")
+          .classList.remove("expanded-mobile");
+
+        document
+          .querySelector("#header-content-mobile")
+          .classList.add("not-expanded-mobile");
+      
+    },
+    expandedHeader: function (event) {
+      this.expande =true;
+     
+        document
+          .querySelector("#header-content")
+          .classList.add("menu-expanded");
+
+        document
+          .querySelector("#header-content")
+          .classList.remove("menu-not-expanded");
+
+        const boxes = document.querySelectorAll(
+          ".menu-expanded .item-show-expanded"
+        );
+
+        boxes.forEach((box) => {
+          box.classList.remove("list-group-none");
+        });
+
+        document
+          .querySelector("#header-content-mobile")
+          .classList.add("expanded-mobile");
+
+        document
+          .querySelector("#header-content-mobile")
+          .classList.remove("not-expanded-mobile");
+      
+      
+    },
   },
   components: {
     itemLink,
@@ -77,7 +136,7 @@ export default {
 <template>
   <header class="w-100 d-flex justify-content-start">
     <div class="container-header">
-      <div class="m-0 p-0 menu-desktop">
+      <div class="m-0 p-0 menu-desktop" v-on:mouseleave="notExpanded" v-on:mouseover="expandedHeader">
         <div
           class="header-container header-desktop d-flex justify-content-between align-items-start flex-column m-0 menu-not-expanded"
           id="header-content"
@@ -87,7 +146,8 @@ export default {
               type="button"
               class="img-menu-top p-0 img-menu position-relative border-0"
               id="icon-closed"
-              @click="expanded"
+              
+              
             >
               <img
                 class="item-hide-expanded position-absolute"
@@ -166,7 +226,7 @@ export default {
             </a>
            
           </div>
-          <div class="modal-menu-mobile">
+          <div class="modal-menu-mobile vh-100" >
             <div class="content-modal">
               <button
                 type="button"

@@ -33,6 +33,9 @@ export default {
 
     return { teamCont: teamItem.items, teamInsight: insights.items };
   },
+   mounted() {
+    document.getElementById("footer-container").style.display = "block";
+   }
 };
 </script>
 <template>
@@ -56,14 +59,14 @@ export default {
             {{ teamCont[0].fields.designation }}
           </p>
           <div class="social">
-            <a :href="teamCont[0].fields.linkedInUrl" class="mr-2" target="_blank">
+            <a :href="teamCont[0].fields.linkedInUrl" class="mr-2" target="_blank" v-if="teamCont[0].fields.linkedInUrl">
               <img
                 class="image-social object-cover"
                 src="@/assets/image/icon/linkedin.png"
                 alt=""
               />
             </a>
-            <a :href="`mailto:${teamCont[0].fields.emailId}`">
+            <a :href="`mailto:${teamCont[0].fields.emailId}`" v-if="teamCont[0].fields.emailId">
               <img
                 class="image-social object-cover"
                 src="@/assets/image/icon/email.png"

@@ -13,7 +13,7 @@ export default {
   <div class="p-0 content-team align-items-center d-flex flex-column">
     <a :href="`/team/${teamSlug}`" class="text-center">
       <img :src="teamImage" alt="" class="object-cover rounded-circle" />
-      <h4 class="text-medium text-center team-name">{{ teamName }}</h4>
+      <h4 class=" text-center team-name">{{ teamName }}</h4>
       <p class="text-small text-center designation">{{ teamJob }}</p>
     </a>
   </div>
@@ -21,6 +21,7 @@ export default {
 <style>
 h4.team-name{
 line-height: 26px;
+font-size: 21px;
 }
 p.designation{
   line-height: 24px;
@@ -46,7 +47,7 @@ p.designation{
 }
 .content-team h4,
 .content-team p {
-  max-width: 223px;
+  max-width: 340px;
 }
 .content-team a:hover {
   text-decoration: none;

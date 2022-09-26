@@ -23,12 +23,15 @@ export default {
       })
       .catch((e) => console.log(e));
   },
+   mounted() {
+    document.getElementById("footer-container").style.display = "block";
+   }
 };
 </script>
 <template>
   <main>
     <section class="team-section">
-      <div class="p-7 m-0">
+      <div class="p-team m-0">
         <div class="row m-0 p-0">
           <div
             class="col-md-12 p-0 m-0 align-items-center d-flex flex-column text-center"
@@ -61,6 +64,9 @@ export default {
   </main>
 </template>
 <style scoped>
+.p-team{
+  padding:4%;
+}
 .text-team {
   color: var(--color--secondary);
   width: 80%;
@@ -72,11 +78,16 @@ p.text-team {
   max-width: 1022px;
 }
 .team-section{
-  min-height: 97vh;
+  min-height: 93vh;
 }
 @media(max-width:1024px){
 .team-section{
   min-height: 100%;
+}
+}
+@media(max-width: 767px){
+  .p-team{
+  padding: 60px 40px 40px;
 }
 }
 </style>

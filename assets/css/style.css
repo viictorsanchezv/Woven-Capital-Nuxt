@@ -2,6 +2,7 @@
     font-family: "Poppins", Sans-serif;
     font-size: 14px;
 }
+
 :root{
     --bg--primary: #21CB25;
     --color--secondary: #313131;
@@ -10,8 +11,36 @@
     --color-white: #ffffff;
     --color-btn-hover:#15A419;
 }
-main.content-main a:not(.button-primary, .refPortfolio, .text-new){
+main.content-main a:not(.button-primary, .refPortfolio, .text-new, .author-post){
     color: var( --bg--primary)!important;
+}
+.post_insight-content div.content-background{
+    display: flex;
+    margin-bottom: 15px;
+    align-items: center;
+    background: linear-gradient(90deg, rgba(49,49,49,1) 40%, rgba(255,255,255,1) 40%, rgba(255,255,255,1) 100%);
+}
+.post_insight-content div.content-background .leftS, 
+.post_insight-content div.content-background2 .rightS{
+    width: 40%;
+    padding: 3%;
+    display: flex;
+    align-items: center;
+    color: #fff;
+}
+.post_insight-content div.content-background .rightS{
+    width: 60%;
+    padding-left: 20px;
+}
+.post_insight-content div.content-background2{
+    display: flex; 
+    margin-bottom: 15px;
+    align-items: center; ;
+    background: linear-gradient(90deg, rgba(255,255,255,1) 60%, rgba(49,49,49,1) 60%, rgba(49,49,49,1) 100%);
+}
+.post_insight-content div.content-background2 .leftS{
+    width: 60%;
+    padding-right: 20px;
 }
 .text-12{
     font-style: normal;
@@ -80,7 +109,7 @@ div.p-7{
         font-size: 24px;
         line-height: 38px;
     }
-    .text-small{
+    .text-small, .text-small p, .text-small a{
         font-size: 18px;
         line-height: 32px;
     }
@@ -91,11 +120,14 @@ div.p-7{
     }
 }
 @media(max-width: 1440px){
+    p, strong, span {
+        font-size: 16px;
+    }
     .text-medium{
         font-size: 20px;
         line-height: 30px;
     }
-    .text-small{
+    .text-small, .text-small p, .text-small a{
         font-size: 16px;
         line-height: 24px;
     }
@@ -115,5 +147,24 @@ div.p-7{
         line-height: 39px;
     }
     
+}
+@media(max-width:1058px){
+    .post_insight-content div.content-background, 
+    .post_insight-content div.content-background2{
+        display: block;
+        background: white;
+    } 
+    .post_insight-content div.content-background .rightS, 
+    .post_insight-content div.content-background2 .leftS{
+        width: 100%;
+        margin:  0 0 10px 0 ;
+        padding: 0;
+    }
+    .post_insight-content div.content-background .leftS, 
+    .post_insight-content div.content-background2 .rightS{
+        background: #313131;
+        width: 100%;
+        margin:  0 0 10px 0 ;
+    }
 }
 

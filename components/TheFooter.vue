@@ -15,7 +15,7 @@ export default {
 <template>
   <footer class="bg-footer w-100 content-main" id="footer-container">
     <div class="row align-items-start m-0 content-footer w-100">
-      <div class="col-md-8 m-0 p-0 footer-items">
+      <div class="col-md-7 m-0 p-0 footer-items">
         <ul
           class="list-group justify-content-evenly list-group-horizontal-md list-unstyled m-0 p-0"
         >
@@ -29,7 +29,7 @@ export default {
           </item-link>
         </ul>
       </div>
-      <div class="col-md-4 company d-flex justify-content-center w-100">
+      <div class="col-md-5 company d-flex justify-content-center w-100">
         <span class="w-100 content-text"
           >Woven Capital Management Company, LLC © 2022</span
         >
@@ -74,7 +74,7 @@ footer .company {
     padding: 25px 32px;
   }
 }
-@media (max-width: 1530px) {
+@media (max-width: 1200px) {
   .footer-items,
   .company {
     width: 100%;

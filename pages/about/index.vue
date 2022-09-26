@@ -16,6 +16,9 @@ export default {
     SectionColumns,
     ImageCard,
   },
+   mounted() {
+    document.getElementById("footer-container").style.display = "block";
+   },
   created() {
     this.imageCardInfo.push({
       image: "/about/IA.png",
@@ -72,12 +75,12 @@ export default {
           </p>
           <p class="text-sect text-small">
             As the $800 million investment arm of the
-            <a
+            <a target="_blank"
               href="https://www.woven-planet.global/"
               class="text-green text-small"
               >Woven Planet</a
             >, founded by
-            <a href="https://global.toyota/en/" class="text-green text-small"
+            <a target="_blank" href="https://global.toyota/en/" class="text-green text-small"
               >Toyota Motor Corporation</a
             >, our aim is to broaden the group’s global reach and accelerate
             innovation by investing in exceptional growth-stage ventures.

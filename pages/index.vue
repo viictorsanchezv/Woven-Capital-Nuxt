@@ -31,7 +31,7 @@ export default {
   },
   methods: {
     dateForm(dateI) {
-      const options = { year: "numeric", month: "short", day: "numeric" };
+      const options = { year: "numeric", month: "long", day: "numeric" };
       const month = new Date(dateI);
 
       return new Date(month).toLocaleDateString("en", options);
@@ -147,9 +147,10 @@ export default {
   <main class="homePage">
     <div class="container-homepage">
       <!-- hero image -->
-      <Transition>
+      <Transition  mode="out-in">
         <section
           v-show="activeSection == 0"
+          :class="{active : activeSection == 0}"
           class="fullpage hero-image vh-hero d-flex flex-column align-items-center w-100"
         >
           <div class="position-relative w-100 hero-container">
@@ -161,13 +162,13 @@ export default {
               >
                 <div class="content-logos">
                   <a
-                    href="https://global.toyota/"
-                    class="toyota logo"
+                    href="https://www.woven-planet.global/"
+                    class="woven-planet logo"
                     target="_blank"
                   >
                     <img
-                      src="../assets/image/Toyota-Logo.png"
-                      alt="Logo Toyota"
+                      src="../assets/image/WovenPlanet Logo.png"
+                      alt="Logo Woven Planet"
                     />
                   </a>
                   <a
@@ -181,15 +182,17 @@ export default {
                     />
                   </a>
                   <a
-                    href="https://www.woven-planet.global/"
-                    class="woven-planet logo"
+                    href="https://global.toyota/"
+                    class="toyota logo"
                     target="_blank"
                   >
                     <img
-                      src="../assets/image/WovenPlanet Logo.png"
-                      alt="Logo Woven Planet"
+                      src="../assets/image/Toyota-Logo.png"
+                      alt="Logo Toyota"
                     />
                   </a>
+                  
+                  
                 </div>
                 <div class="m-0">
                   <div
@@ -223,16 +226,17 @@ export default {
         </section>
       </Transition>
       <!-- portfolio -->
-      <Transition>
+      <Transition  mode="out-in">
         <section
           v-show="activeSection == 1"
+          :class="{active : activeSection == 1}"
           class="fullpage our-portfolio w-100"
         >
           <div class="position-relative w-100 portf-col">
             <div
               class="new-last-post m-0 p-0 position-relative d-flex justify-content-center"
             >
-              <div class="position-relative w-100">
+              <!-- <div class="position-relative w-100">
                 <div class="row m-0 p-0">
                   <div class="col-12 m-0 p-0">
                     <new-last
@@ -242,7 +246,7 @@ export default {
                     ></new-last>
                   </div>
                 </div>
-              </div>
+              </div> -->
             </div>
             <div
               class="row text-md-center justify-content-center m-0 position-relative our-portfolio-content"
@@ -277,8 +281,9 @@ export default {
         </section>
       </Transition>
       <!-- partner -->
-      <Transition>
+      <Transition  mode="out-in">
         <section
+        :class="{active : activeSection == 2}"
           v-show="activeSection == 2"
           class="fullpage partner-together w-100"
         >
@@ -313,8 +318,10 @@ export default {
       </Transition>
       <!-- Insights-->
 
-      <Transition>
-        <section v-show="activeSection == 3" class="fullpage w-100">
+      <Transition mode="out-in">
+        <section v-show="activeSection == 3" class="fullpage w-100 section-insight"
+        :class="{active : activeSection == 3}"
+        >
           <div class="w-100 container-insight">
             <div class="content-insights m-0">
               <template v-for="(post, index) in insightsCont">
@@ -332,12 +339,12 @@ export default {
             <div
               class="d-flex justify-content-center flex-column align-item-center text-center p-2 read-more-insight"
             >
-              <p class="text-insight w-100 text-medium">Read More</p>
-
               <div class="d-flex m-0 p-0 w-100 justify-content-center">
-                <a href="/insights" class="w-100 h-100 m-0 p-0">
-                  <img src="../assets/image/chevron-down.png" alt="" />
-                </a>
+                <buttom-primary
+                    class="d-flex justify-content-center align-items-start"
+                    text_buttom="Meet the Team"
+                    link_buttom="/team"
+                  ></buttom-primary>
               </div>
             </div>
           </div>
@@ -347,36 +354,44 @@ export default {
   </main>
 </template>
 <style>
-@media (min-width: 768px) {
-  .v-enter-active,
-  .v-leave-active {
-    -webkit-animation: slide-in-bottom 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94)
-      both;
-    animation: slide-in-bottom 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-  }
-  .v-enter-from,
-  .v-leave-to {
-    -webkit-animation: slide-in-top 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94)
-      reverse forwards;
-    animation: slide-in-top 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse
-      forwards;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-  }
+@media(min-width:768px){
+.v-enter-active,
+.v-leave-active {
+  -webkit-animation: slide-in-bottom 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+    both;
+  animation: slide-in-bottom 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  -webkit-backface-visibility: hidden; 
+  backface-visibility: hidden;
+  z-index: 100;
+  
+}
+.v-enter-from,
+.v-leave-to {
+  -webkit-animation: slide-in-top 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+    reverse forwards;
+  animation: slide-in-top 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse
+    forwards;
+  -webkit-backface-visibility: hidden; 
+  backface-visibility: hidden;
+}
+}
+.hero-image{
+  z-index: 50;
 }
 
+.fullpage{
+  display: block!important;
+  z-index: 1;
+}
+.fullpage.active{
+  z-index: 99;
+
+}
 @-webkit-keyframes slide-in-bottom {
   0% {
-    -webkit-transform: translateY(1000px);
-    transform: translateY(1000px);
-    opacity: 1;
-  }
-  50% {
-    -webkit-transform: translateY(500);
-    transform: translateY(500);
-    opacity: 1;
+    -webkit-transform: translateY(100px);
+    transform: translateY(100px);
+    opacity: 0;
   }
   100% {
     -webkit-transform: translateY(0);
@@ -386,14 +401,10 @@ export default {
 }
 @keyframes slide-in-bottom {
   0% {
-    -webkit-transform: translateY(1000px);
-    transform: translateY(1000px);
-    opacity: 1;
-  }
-  50% {
-    -webkit-transform: translateY(500);
-    transform: translateY(500);
-    opacity: 1;
+    -webkit-transform: translateY(100px);
+    transform: translateY(100px);
+    opacity: 0;
+  
   }
   100% {
     -webkit-transform: translateY(0);
@@ -404,9 +415,9 @@ export default {
 
 @-webkit-keyframes slide-in-top {
   0% {
-    -webkit-transform: translateY(-1000px);
-    transform: translateY(-1000px);
-    opacity: 1;
+    -webkit-transform: translateY(-100px);
+    transform: translateY(-100px);
+    opacity: 0;
   }
   100% {
     -webkit-transform: translateY(0);
@@ -416,9 +427,9 @@ export default {
 }
 @keyframes slide-in-top {
   0% {
-    -webkit-transform: translateY(-1000px);
-    transform: translateY(-1000px);
-    opacity: 1;
+    -webkit-transform: translateY(-100px);
+    transform: translateY(-100px);
+    opacity: 0;
   }
   100% {
     -webkit-transform: translateY(0);
@@ -426,6 +437,7 @@ export default {
     opacity: 1;
   }
 }
+
 p.text-insight {
   margin: 0;
   line-height: 26px;
@@ -544,9 +556,7 @@ h1.title-home {
 .partner-together img {
   height: 54vh;
 }
-.fullpage {
-  z-index: 1;
-}
+
 @media (min-width: 1441px) {
   .hero-image h1.title-home {
     font-size: 70px;
@@ -623,6 +633,9 @@ h1.title-home {
 }
 
 @media (max-width: 767px) {
+  .read-more-insight{
+    margin-bottom: 15px;
+  }
   .homePage .content-insights {
     grid-template-columns: repeat(auto-fill, minmax(50%, 1fr));
     grid-auto-rows: 400px;

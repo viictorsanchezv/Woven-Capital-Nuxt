@@ -9,6 +9,9 @@ export default {
   head: {
     title: "Contact - Woven Capital",
   },
+   mounted() {
+    document.getElementById("footer-container").style.display = "block";
+   }
 };
 </script>
 
@@ -135,7 +138,7 @@ span.wight-600 {
 input#email {
   width: 53%;
 }
-.info-p {
+.info-p, .info-p a {
   font-size: 12px;
   padding-right: 0;
   max-width: 519px;

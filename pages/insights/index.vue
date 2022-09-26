@@ -24,7 +24,7 @@ export default {
   },
   methods: {
     dateForm(dateI) {
-      const options = { year: "numeric", month: "short", day: "numeric" };
+      const options = { year: "numeric", month: 'long', day: "numeric" };
       const month = new Date(dateI);
 
       return new Date(month).toLocaleDateString("en", options);
@@ -146,11 +146,15 @@ export default {
     <div class="w-100 container-insights">
       
       <template v-for="(arrayI, index) in insightArray"  >
-        <Transition :key="index">
+        <Transition :key="index"  mode="out-in">
           <section 
+          :class="{active : activeSection == index }"
             class="content-insights fullpage"
             v-show="activeSection == index"
           >
+          <div class="content-insights">
+
+          
             <template v-for="(post, index) in arrayI">
               <card-insights
                 :key="index"
@@ -162,15 +166,20 @@ export default {
               >
               </card-insights>
             </template>
+            </div>
           </section>
         </Transition>
       </template>
-      <Transition>
+      <Transition  mode="out-in">
         <section
           v-show="activeSection == cantSections"
           class="result-insights fullpage"
+          :class="{active : activeSection == this.offsets.length - 1}"
           v-if="this.insightsResult.length > 0"
         >
+        <div class="result-insights">
+
+        
           <template v-for="(result, index) in this.insightsResult">
             <card-insights
               :key="index"
@@ -182,6 +191,7 @@ export default {
             >
             </card-insights>
           </template>
+          </div>
         </section>
       </Transition>
     </div>
@@ -196,6 +206,8 @@ export default {
   animation: slide-in-bottom 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
   -webkit-backface-visibility: hidden; 
   backface-visibility: hidden;
+  z-index: 100;
+  
 }
 .v-enter-from,
 .v-leave-to {
@@ -205,18 +217,21 @@ export default {
     forwards;
   -webkit-backface-visibility: hidden; 
   backface-visibility: hidden;
+  z-index: 99;
 }
 }
+.fullpage{
+  display: block!important;
+  z-index: 88;
+}
+.fullpage.active{
+  z-index: 99;
 
+}
 @-webkit-keyframes slide-in-bottom {
   0% {
-    -webkit-transform: translateY(1000px);
-    transform: translateY(1000px);
-    opacity: 0;
-  }
-  50% {
-    -webkit-transform: translateY(500);
-    transform: translateY(500);
+    -webkit-transform: translateY(100px);
+    transform: translateY(100px);
     opacity: 0;
   }
   100% {
@@ -227,14 +242,10 @@ export default {
 }
 @keyframes slide-in-bottom {
   0% {
-    -webkit-transform: translateY(1000px);
-    transform: translateY(1000px);
+    -webkit-transform: translateY(100px);
+    transform: translateY(100px);
     opacity: 0;
-  }
-  50% {
-    -webkit-transform: translateY(500);
-    transform: translateY(500);
-    opacity: 0;
+  
   }
   100% {
     -webkit-transform: translateY(0);
@@ -245,8 +256,8 @@ export default {
 
 @-webkit-keyframes slide-in-top {
   0% {
-    -webkit-transform: translateY(-1000px);
-    transform: translateY(-1000px);
+    -webkit-transform: translateY(-100px);
+    transform: translateY(-100px);
     opacity: 0;
   }
   100% {
@@ -257,8 +268,8 @@ export default {
 }
 @keyframes slide-in-top {
   0% {
-    -webkit-transform: translateY(-1000px);
-    transform: translateY(-1000px);
+    -webkit-transform: translateY(-100px);
+    transform: translateY(-100px);
     opacity: 0;
   }
   100% {
@@ -298,6 +309,7 @@ main.insights-page .fullpage{
   }
 }
 @media (min-width: 768px) {
+  
   .fullpage {
     height: 100vh;
     width: 100%;
@@ -319,7 +331,12 @@ main.insights-page .fullpage{
   }
 }
 @media (max-width: 768px) {
-  
+  .content-insights {
+    grid-template-columns: repeat(auto-fill, minmax(50%, 1fr));
+    grid-auto-rows: 400px;
+    grid-gap: 20px;
+    margin-bottom: 10px;
+  }
   .result-insights {
     flex-direction: column;
   }
