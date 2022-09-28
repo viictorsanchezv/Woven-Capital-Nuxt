@@ -23,9 +23,9 @@ export default {
       })
       .catch((e) => console.log(e));
   },
-   mounted() {
+  mounted() {
     document.getElementById("footer-container").style.display = "block";
-   }
+  },
 };
 </script>
 <template>
@@ -64,8 +64,8 @@ export default {
   </main>
 </template>
 <style scoped>
-.p-team{
-  padding:4%;
+.p-team {
+  padding: 4%;
 }
 .text-team {
   color: var(--color--secondary);
@@ -77,17 +77,17 @@ export default {
 p.text-team {
   max-width: 1022px;
 }
-.team-section{
+.team-section {
   min-height: 93vh;
 }
-@media(max-width:1024px){
-.team-section{
-  min-height: 100%;
+@media (max-width: 1024px) {
+  .team-section {
+    min-height: 100%;
+  }
 }
-}
-@media(max-width: 767px){
-  .p-team{
-  padding: 60px 40px 40px;
-}
+@media (max-width: 767px) {
+  .p-team {
+    padding: 60px 40px 40px;
+  }
 }
 </style>

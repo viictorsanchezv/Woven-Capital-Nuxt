@@ -16,7 +16,7 @@ export default {
   <div class="company-new-info mb-5">
     <h6 class="m-0 text-small post-title">{{ companyInfo.fields.title }}</h6>
     <div
-      v-html="$md.render(companyInfo.fields.content.substring(0, 300) + '...')"
+      v-html="$md.render(companyInfo.fields.content.substring(0, 150) + '...')"
       class="post_insight-content text-small"
       maxlength="10"
     ></div>

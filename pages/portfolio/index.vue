@@ -51,6 +51,7 @@ export default {
           content_type: "insightsNwc",
           "fields.company": portfolio.fields.slug,
           limit: "2",
+          order: "-fields.publishDate",
         })
       );
     });
@@ -243,10 +244,11 @@ export default {
                     :linkWeb="portfolio.fields.link"
                     :linkLinkedin="portfolio.fields.linkedinUrl"
                   ></portfolio-title>
-
-                  <p class="portfolio-description mb-5 text-small">
-                    {{ portfolio.fields.content }}
-                  </p>
+                   <div
+                    v-if=" portfolio.fields.content"
+                    v-html="$md.render( portfolio.fields.content)"
+                    class="post_insight-content text-small"
+                  ></div>
                   <div class="info-wrapper mb-5 text-small">
                     <p>
                       {{ portfolio.fields.testimonial }}

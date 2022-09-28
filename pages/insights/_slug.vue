@@ -92,9 +92,12 @@ export default {
                 {{ dateForm(insightCont[0].fields.publishDate) }}
               </p>
             </div>
-            <p class="text-small" v-if="insightCont[0].fields.shortDescription">
-              {{ insightCont[0].fields.shortDescription }}
-            </p>
+          
+            <div
+              v-if="insightCont[0].fields.content"
+              v-html="$md.render(insightCont[0].fields.content)"
+              class="post_insight-content text-small"
+            ></div>
 
             <div
               v-if="insightCont[0].fields.subtitle1"
@@ -102,8 +105,8 @@ export default {
               class="post_insight-content text-small info-wrapper"
             ></div>
             <div
-              v-if="insightCont[0].fields.content"
-              v-html="$md.render(insightCont[0].fields.content)"
+              v-if="insightCont[0].fields.content2"
+              v-html="$md.render(insightCont[0].fields.content2)"
               class="post_insight-content text-small"
             ></div>
             <div
@@ -112,8 +115,8 @@ export default {
               class="post_insight-content text-small info-wrapper"
             ></div>
             <div
-              v-if="insightCont[0].fields.content2"
-              v-html="$md.render(insightCont[0].fields.content2)"
+              v-if="insightCont[0].fields.content3"
+              v-html="$md.render(insightCont[0].fields.content3)"
               class="post_insight-content text-small"
             ></div>
 

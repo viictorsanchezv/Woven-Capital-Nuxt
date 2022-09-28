@@ -17,7 +17,7 @@ export default {
     <img class="mb-4" :src="image" alt="" />
     <p class="m-0 mb-4">{{ title }}</p>
     <div class="mb-5" v-show="icons === true">
-      <a :href="linkLinkedin" target="_blank" class="mr-2" v-if="linkLinkedin">
+      <a :href="linkLinkedin" target="_blank" class="linkedin-logo" v-if="linkLinkedin">
         <img src="@/assets/image/icon/linkedin.png" alt="" />
       </a>
       <a :href="linkWeb" target="_blank" v-if="linkWeb">
@@ -28,6 +28,9 @@ export default {
 </template>
 
 <style scoped>
+.linkedin-logo{
+  margin: 0 16px 0 0;
+}
 section > img {
   width: 40%;
 }

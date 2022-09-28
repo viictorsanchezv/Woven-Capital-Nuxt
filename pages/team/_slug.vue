@@ -25,6 +25,7 @@ export default {
       content_type: "insightsNwc",
       "fields.author": params.slug,
       limit: "2",
+      order: "-fields.publishDate",
     });
     if(!teamItem.items[0] )
     {
@@ -59,7 +60,7 @@ export default {
             {{ teamCont[0].fields.designation }}
           </p>
           <div class="social">
-            <a :href="teamCont[0].fields.linkedInUrl" class="mr-2" target="_blank" v-if="teamCont[0].fields.linkedInUrl">
+            <a :href="teamCont[0].fields.linkedInUrl" class="linkedin-logo" target="_blank" v-if="teamCont[0].fields.linkedInUrl">
               <img
                 class="image-social object-cover"
                 src="@/assets/image/icon/linkedin.png"
@@ -97,6 +98,9 @@ export default {
 </template>
 
 <style scoped>
+.linkedin-logo{
+  margin: 0 16px 0 0;
+}
 .image-profile {
   position: sticky;
   height: 100vh;
