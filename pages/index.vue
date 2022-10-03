@@ -17,6 +17,7 @@ export default {
       offsets: [],
       touchStartY: 0,
       sectionOffsetO: {},
+      mousePoint: 0,
     };
   },
   head: {
@@ -58,10 +59,7 @@ export default {
       }
     },
     handleMouseWheel: function (e) {
-      let elemtInt =
-        document.getElementsByClassName("section-content")[this.activeSection];
-      let elemtExt =
-        document.getElementsByClassName("col-content")[this.activeSection];
+  
       if (e.wheelDelta < 30 && !this.inMove) {
         this.moveUp();
       } else if (e.wheelDelta > 30 && !this.inMove) {
@@ -105,6 +103,42 @@ export default {
       }, 400);
       this.hideFooter();
     },
+
+    touchStart(e) {
+     
+      this.touchStartY = e.touches[0].clientY;
+    },
+    touchMove(e) {
+      if (this.inMove) return false;
+      
+      const currentY = e.touches[0].clientY;
+
+      if (this.touchStartY < currentY) {
+        this.moveDown();
+      } else {
+        this.moveUp();
+      }
+
+      this.touchStartY = 0;
+      return false;
+    },
+    mouseUpHandler(e) {
+  
+      if (this.mousePoint > e.pageY) {
+        this.moveUp();
+      } else if (this.mousePoint < e.pageY) {
+        this.moveDown();
+      }
+
+      e.preventDefault();
+      
+    },
+    mouseDownHandler(e) {
+      this.mousePoint = e.pageY;
+      e.preventDefault();
+    
+
+    },
   },
   mounted() {
     this.calculateSectionOffsets();
@@ -114,10 +148,22 @@ export default {
 
     window.addEventListener("DOMMouseScroll", this.handleMouseWheelDOM); // Mozilla Firefox
     window.addEventListener("mousewheel", this.handleMouseWheel); // Other browsers
+    window.addEventListener("touchstart", this.touchStart, { passive: false }); // mobile devices
+    window.addEventListener("touchmove", this.touchMove, { passive: false }); // mobile devices
+
+    window.addEventListener("mouseup", this.mouseUpHandler);
+    window.addEventListener("mousedown", this.mouseDownHandler);
+    
+
   },
   destroyed() {
+    
     window.removeEventListener("mousewheel", this.handleMouseWheel); // Other browsers
     window.removeEventListener("DOMMouseScroll", this.handleMouseWheelDOM); // Mozilla Firefox
+    window.removeEventListener("touchstart", this.touchStart); // mobile devices
+    window.removeEventListener("touchmove", this.touchMove); // mobile devices
+    window.removeEventListener("mouseup", this.mouseUpHandler);
+    window.removeEventListener("mousedown", this.mouseDownHandler);
   },
   async asyncData() {
     const portf = await client.getEntries({
@@ -147,10 +193,10 @@ export default {
   <main class="homePage">
     <div class="container-homepage">
       <!-- hero image -->
-      <Transition  mode="out-in">
+      <Transition mode="out-in">
         <section
           v-show="activeSection == 0"
-          :class="{active : activeSection == 0}"
+          :class="{ active: activeSection == 0 }"
           class="fullpage hero-image vh-hero d-flex flex-column align-items-center w-100"
         >
           <div class="position-relative w-100 hero-container">
@@ -191,8 +237,6 @@ export default {
                       alt="Logo Toyota"
                     />
                   </a>
-                  
-                  
                 </div>
                 <div class="m-0">
                   <div
@@ -226,10 +270,10 @@ export default {
         </section>
       </Transition>
       <!-- portfolio -->
-      <Transition  mode="out-in">
+      <Transition mode="out-in">
         <section
           v-show="activeSection == 1"
-          :class="{active : activeSection == 1}"
+          :class="{ active: activeSection == 1 }"
           class="fullpage our-portfolio w-100"
         >
           <div class="position-relative w-100 portf-col">
@@ -261,7 +305,7 @@ export default {
                 <p class="text-medium text-portfolio">Our Portfolio</p>
 
                 <div class="d-flex m-0 p-0 w-100 justify-content-center">
-                  <a href="/portfolio" class="w-100 h-100 m-0 p-0">
+                  <a href="/portfolio" class=" h-100 m-0 p-0">
                     <img src="../assets/image/chevron-down.png" alt="" />
                   </a>
                 </div>
@@ -281,9 +325,9 @@ export default {
         </section>
       </Transition>
       <!-- partner -->
-      <Transition  mode="out-in">
+      <Transition mode="out-in">
         <section
-        :class="{active : activeSection == 2}"
+          :class="{ active: activeSection == 2 }"
           v-show="activeSection == 2"
           class="fullpage partner-together w-100"
         >
@@ -319,8 +363,10 @@ export default {
       <!-- Insights-->
 
       <Transition mode="out-in">
-        <section v-show="activeSection == 3" class="fullpage w-100 section-insight"
-        :class="{active : activeSection == 3}"
+        <section
+          v-show="activeSection == 3"
+          class="fullpage w-100 section-insight"
+          :class="{ active: activeSection == 3 }"
         >
           <div class="w-100 container-insight">
             <div class="content-insights m-0">
@@ -341,10 +387,10 @@ export default {
             >
               <div class="d-flex m-0 p-0 w-100 justify-content-center">
                 <buttom-primary
-                    class="d-flex justify-content-center align-items-start"
-                    text_buttom="Meet the Team"
-                    link_buttom="/team"
-                  ></buttom-primary>
+                  class="d-flex justify-content-center align-items-start"
+                  text_buttom="Meet the Team"
+                  link_buttom="/team"
+                ></buttom-primary>
               </div>
             </div>
           </div>
@@ -354,38 +400,36 @@ export default {
   </main>
 </template>
 <style>
-@media(min-width:768px){
-.v-enter-active,
-.v-leave-active {
-  -webkit-animation: slide-in-bottom 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)
-    both;
-  animation: slide-in-bottom 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-  -webkit-backface-visibility: hidden; 
-  backface-visibility: hidden;
-  z-index: 100;
-  
+@media (min-width: 768px) {
+  .v-enter-active,
+  .v-leave-active {
+    -webkit-animation: slide-in-bottom 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+      both;
+    animation: slide-in-bottom 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    z-index: 100;
+  }
+  .v-enter-from,
+  .v-leave-to {
+    -webkit-animation: slide-in-top 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+      reverse forwards;
+    animation: slide-in-top 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse
+      forwards;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
 }
-.v-enter-from,
-.v-leave-to {
-  -webkit-animation: slide-in-top 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)
-    reverse forwards;
-  animation: slide-in-top 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse
-    forwards;
-  -webkit-backface-visibility: hidden; 
-  backface-visibility: hidden;
-}
-}
-.hero-image{
+.hero-image {
   z-index: 50;
 }
 
-.fullpage{
-  display: block!important;
+.fullpage {
+  display: block !important;
   z-index: 1;
 }
-.fullpage.active{
+.fullpage.active {
   z-index: 99;
-
 }
 @-webkit-keyframes slide-in-bottom {
   0% {
@@ -404,7 +448,6 @@ export default {
     -webkit-transform: translateY(100px);
     transform: translateY(100px);
     opacity: 0;
-  
   }
   100% {
     -webkit-transform: translateY(0);
@@ -633,7 +676,7 @@ h1.title-home {
 }
 
 @media (max-width: 767px) {
-  .read-more-insight{
+  .read-more-insight {
     margin-bottom: 15px;
   }
   .homePage .content-insights {

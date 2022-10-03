@@ -14,6 +14,7 @@ export default {
       touchStartY: 0,
       sectionOffsetO: {},
       cantSections: 0,
+      mousePoint: 0,
     };
   },
   head: {
@@ -94,10 +95,47 @@ export default {
       }, 400);
       this.hideFooter();
     },
+    touchStart(e) {
+    
+
+      this.touchStartY = e.touches[0].clientY;
+    },
+    touchMove(e) {
+      if (this.inMove) return false;
+    
+
+      const currentY = e.touches[0].clientY;
+
+      if (this.touchStartY < currentY) {
+        this.moveDown();
+      } else {
+        this.moveUp();
+      }
+
+      this.touchStartY = 0;
+      return false;
+    },
+    mouseUpHandler(e) {
+      if (this.mousePoint > e.pageY) {
+        this.moveUp();
+      } else if (this.mousePoint < e.pageY) {
+        this.moveDown();
+      }
+      e.preventDefault();
+    },
+    mouseDownHandler(e) {
+      this.mousePoint = e.pageY;
+      e.preventDefault();
+      
+    },
   },
   destroyed() {
     window.removeEventListener("mousewheel", this.handleMouseWheel); 
     window.removeEventListener("DOMMouseScroll", this.handleMouseWheelDOM); 
+    window.removeEventListener("touchstart", this.touchStart); // mobile devices
+    window.removeEventListener("touchmove", this.touchMove); // mobile devices
+    document.removeEventListener("mouseup", this.mouseUpHandler);
+    document.removeEventListener("mousedown", this.mouseDownHandler);
   },
   async asyncData() {
     const insig = await client.getEntries({
@@ -135,6 +173,12 @@ export default {
 
     window.addEventListener("DOMMouseScroll", this.handleMouseWheelDOM); // Mozilla Firefox
     window.addEventListener("mousewheel", this.handleMouseWheel); // Other browsers
+
+    window.addEventListener("touchstart", this.touchStart, { passive: false }); // mobile devices
+    window.addEventListener("touchmove", this.touchMove, { passive: false }); // mobile devices
+
+    document.addEventListener("mouseup", this.mouseUpHandler);
+    document.addEventListener("mousedown", this.mouseDownHandler);
 
     this.calculateSectionOffsets();
   },

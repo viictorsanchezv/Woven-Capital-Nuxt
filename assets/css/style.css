@@ -1,8 +1,12 @@
 *{
     font-family: "Poppins", Sans-serif;
     font-size: 14px;
+    pointer-events: auto;
+    cursor: context-menu;
 }
-
+a, a h1, a h2, a h3, a h4, a h5, a h6, a span, a p, a div, a img, a video{
+    cursor: pointer;
+}
 :root{
     --bg--primary: #21CB25;
     --color--secondary: #313131;
