@@ -18,6 +18,7 @@ export default {
       touchStartY: 0,
       sectionOffsetO: {},
       mousePoint: 0,
+      oldScrollY : 0,
     };
   },
   head: {
@@ -59,15 +60,26 @@ export default {
       }
     },
     handleMouseWheel: function (e) {
-  
-      if (e.wheelDelta < 30 && !this.inMove) {
+    
+      if ( (e.wheelDelta <= -30 && !this.inMove) ) {
+       
         this.moveUp();
-      } else if (e.wheelDelta > 30 && !this.inMove) {
+      } else if (e.wheelDelta >= 30 && !this.inMove) {
+       
         this.moveDown();
       }
+      else if ( (e.wheelDelta < 0 && !this.inMove) ) {
+      
+        this.moveDown();
+      } else if (e.wheelDelta > 0 && !this.inMove) {
+    
+        this.moveUp();
+      }
+
       return false;
     },
     handleMouseWheelDOM: function (e) {
+    
       if (e.detail > 0 && !this.inMove) {
         this.moveUp();
       } else if (e.detail < 0 && !this.inMove) {
@@ -105,12 +117,13 @@ export default {
     },
 
     touchStart(e) {
-     
+       console.log("2");
       this.touchStartY = e.touches[0].clientY;
     },
     touchMove(e) {
+      console.log("1");
       if (this.inMove) return false;
-      
+
       const currentY = e.touches[0].clientY;
 
       if (this.touchStartY < currentY) {
@@ -120,50 +133,53 @@ export default {
       }
 
       this.touchStartY = 0;
+      e.preventDefault();
       return false;
     },
     mouseUpHandler(e) {
-  
+     
+
       if (this.mousePoint > e.pageY) {
         this.moveUp();
-      } else if (this.mousePoint < e.pageY) {
+      } else if (this.mousePoint <= e.pageY) {
         this.moveDown();
       }
 
       e.preventDefault();
-      
+      return false;
     },
     mouseDownHandler(e) {
       this.mousePoint = e.pageY;
       e.preventDefault();
-    
-
     },
+   
   },
   mounted() {
     this.calculateSectionOffsets();
     this.hideFooter();
+    this.oldScrollY = window.scrollY;
 
     document.getElementById("footer-container").style.display = "none";
 
-    window.addEventListener("DOMMouseScroll", this.handleMouseWheelDOM); // Mozilla Firefox
     window.addEventListener("mousewheel", this.handleMouseWheel); // Other browsers
+    window.addEventListener("DOMMouseScroll", this.handleMouseWheelDOM); // Mozilla Firefox
     window.addEventListener("touchstart", this.touchStart, { passive: false }); // mobile devices
     window.addEventListener("touchmove", this.touchMove, { passive: false }); // mobile devices
 
     window.addEventListener("mouseup", this.mouseUpHandler);
     window.addEventListener("mousedown", this.mouseDownHandler);
-    
 
+    window.addEventListener("scroll", this.onscrollHandle);
   },
   destroyed() {
-    
     window.removeEventListener("mousewheel", this.handleMouseWheel); // Other browsers
     window.removeEventListener("DOMMouseScroll", this.handleMouseWheelDOM); // Mozilla Firefox
     window.removeEventListener("touchstart", this.touchStart); // mobile devices
     window.removeEventListener("touchmove", this.touchMove); // mobile devices
     window.removeEventListener("mouseup", this.mouseUpHandler);
     window.removeEventListener("mousedown", this.mouseDownHandler);
+
+   
   },
   async asyncData() {
     const portf = await client.getEntries({
@@ -218,7 +234,7 @@ export default {
                     />
                   </a>
                   <a
-                    href="https://www.woven-planet.global/"
+                    href="https://www.woven-city.global/"
                     class="woven-city logo"
                     target="_blank"
                   >
@@ -251,7 +267,7 @@ export default {
                   </div>
                   <h1 class="title-home">Building Mobility at Scale</h1>
                   <buttom-primary
-                    class="d-flex justify-content-center align-items-start"
+                    class="d-flex justify-content-center align-items-start text-center"
                     text_buttom="Read our Story"
                     link_buttom="/about"
                   ></buttom-primary>
@@ -305,7 +321,7 @@ export default {
                 <p class="text-medium text-portfolio">Our Portfolio</p>
 
                 <div class="d-flex m-0 p-0 w-100 justify-content-center">
-                  <a href="/portfolio" class=" h-100 m-0 p-0">
+                  <a href="/portfolio" class="h-100 m-0 p-0">
                     <img src="../assets/image/chevron-down.png" alt="" />
                   </a>
                 </div>
@@ -419,14 +435,19 @@ export default {
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
   }
+  .fullpage {
+    opacity: 0;
+  }
+  .fullpage.active {
+    opacity: 1;
+  }
 }
 .hero-image {
   z-index: 50;
 }
-
 .fullpage {
   display: block !important;
-  z-index: 1;
+  z-index: 0;
 }
 .fullpage.active {
   z-index: 99;

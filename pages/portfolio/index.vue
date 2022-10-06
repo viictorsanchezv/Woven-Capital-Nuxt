@@ -107,14 +107,25 @@ export default {
       let elemtExt =
         document.getElementsByClassName("col-content")[this.activeSection];
       if (
-        e.wheelDelta < 30 &&
+        e.wheelDelta < -30 &&
         !this.inMove &&
         elemtExt.offsetHeight + elemtExt.scrollTop >= elemtInt.scrollHeight - 1
       ) {
         this.moveUp();
       } else if (e.wheelDelta > 30 && !this.inMove && elemtExt.scrollTop <= 0) {
         this.moveDown();
+      } else if (
+        e.wheelDelta < 0 &&
+        !this.inMove &&
+        elemtExt.offsetHeight + elemtExt.scrollTop >= elemtInt.scrollHeight - 1
+      ) {
+        this.moveDown();
+      } else if (e.wheelDelta > 0 && !this.inMove && elemtExt.scrollTop <= 0) {
+        this.moveUp();
       }
+      setTimeout(() => {
+        e.preventDefault();
+      }, 100);
       return false;
     },
     handleMouseWheelDOM: function (e) {
@@ -157,7 +168,7 @@ export default {
 
       this.activeSection = id;
       this.inMove = true;
-      
+
       setTimeout(() => {
         this.inMove = false;
       }, 400);
@@ -167,13 +178,10 @@ export default {
       this.activeSection = value;
     },
     touchStart(e) {
-     
-
       this.touchStartY = e.touches[0].clientY;
     },
     touchMove(e) {
       if (this.inMove) return false;
-     
 
       const currentY = e.touches[0].clientY;
 
@@ -197,8 +205,16 @@ export default {
     mouseDownHandler(e) {
       this.mousePoint = e.pageY;
       e.preventDefault();
-      
     },
+    endedVideo(event){
+     let video = event.srcElement;
+  
+    video.classList.add("remove-video");
+    console.log(video.nextSibling.nextElementSibling);
+    video.nextSibling.nextElementSibling.classList.remove("remove-video");
+     
+     
+    }
   },
   mounted() {
     this.calculateSectionOffsets();
@@ -247,7 +263,7 @@ export default {
         <Transition :key="index" mode="out-in">
           <section-columns
             class="fullpage"
-            :class="{active : activeSection == index }"
+            :class="{ active: activeSection == index }"
             :id="portfolio.fields.slug"
             :title="portfolio.fields.title"
             v-show="activeSection == index"
@@ -256,24 +272,35 @@ export default {
               <div
                 class="col-md-6 col-12 border-box p-0 justify-content-start vh-100 col-sticky"
               >
-               <img
+                <img
                   class="vh-50 pt-0 w-100 object-cover pb-5x"
                   :src="portfolio.fields.mediaTop.fields.file.url"
                   alt=""
                 />
-                <img v-if="portfolio.fields.mediaBottom.fields.file.contentType == 'image/png'"
+                <img
+                  v-if="
+                    portfolio.fields.mediaBottom.fields.file.contentType ==
+                    'image/png'
+                  "
                   class="vh-50 w-100 object-cover"
                   :src="portfolio.fields.mediaBottom.fields.file.url"
                   alt=""
                 />
-                <video v-else-if="portfolio.fields.mediaBottom.fields.file.contentType == 'video/mp4'"
-                  class="w-100 object-cover vh-50"
-                  :src="portfolio.fields.mediaBottom.fields.file.url"
-                  autoplay="false"
-                  muted="false"
-                  controls
-              ></video>
-                
+                <template v-else-if="portfolio.fields.mediaBottom.fields.file.contentType == 'video/mp4'">
+                  <video
+                    class="w-100 object-cover vh-50 video-poster"
+                    autoplay="false"
+                    muted="false"
+                    @ended="endedVideo($event)"
+                    :src="portfolio.fields.mediaBottom.fields.file.url"
+                    :poster="portfolio.fields.posterVideo.fields.file.url"
+                  ></video>
+                  <img
+                    class="vh-50 w-100 object-cover img-poster remove-video"
+                    :src="portfolio.fields.posterVideo.fields.file.url"
+                    alt=""
+                  />
+                </template>
               </div>
             </template>
             <template #right>
@@ -287,9 +314,9 @@ export default {
                     :linkWeb="portfolio.fields.link"
                     :linkLinkedin="portfolio.fields.linkedinUrl"
                   ></portfolio-title>
-                   <div
-                    v-if=" portfolio.fields.content"
-                    v-html="$md.render( portfolio.fields.content)"
+                  <div
+                    v-if="portfolio.fields.content"
+                    v-html="$md.render(portfolio.fields.content)"
                     class="post_insight-content text-small"
                   ></div>
                   <div class="info-wrapper mb-5 text-small">
@@ -324,11 +351,11 @@ export default {
         </Transition>
       </template>
 
-      <Transition  mode="out-in">
+      <Transition mode="out-in">
         <section-columns
           id="lp-investiments"
           class="fullpage"
-          :class="{active : activeSection == this.offsets.length - 1}"
+          :class="{ active: activeSection == this.offsets.length - 1 }"
           title="LP Investments"
           v-show="activeSection == offsets.length - 1"
         >
@@ -402,35 +429,51 @@ export default {
 </template>
 
 <style scoped>
-@media(min-width:768px){
-.v-enter-active,
-.v-leave-active {
-  -webkit-animation: slide-in-bottom 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)
-    both;
-  animation: slide-in-bottom 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-  -webkit-backface-visibility: hidden; 
-  backface-visibility: hidden;
-  z-index: 100;
-  
+.remove-video{
+  display: none;
 }
-.v-enter-from,
-.v-leave-to {
-  -webkit-animation: slide-in-top 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)
-    reverse forwards;
-  animation: slide-in-top 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse
-    forwards;
-  -webkit-backface-visibility: hidden; 
-  backface-visibility: hidden;
-  z-index: 99;
+.img-poster{
+  position: absolute;
+  left: 0;
+  z-index: 0;
+  bottom: 0;
 }
+.video-poster{
+  z-index: 2;
 }
-.fullpage{
-  display: block!important;
+@media (min-width: 768px) {
+  .v-enter-active,
+  .v-leave-active {
+    -webkit-animation: slide-in-bottom 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+      both;
+    animation: slide-in-bottom 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    z-index: 100;
+  }
+  .v-enter-from,
+  .v-leave-to {
+    -webkit-animation: slide-in-top 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+      reverse forwards;
+    animation: slide-in-top 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse
+      forwards;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    z-index: 99;
+  }
+  .fullpage {
+    opacity: 0;
+  }
+  .fullpage.active {
+    opacity: 1;
+  }
+}
+.fullpage {
+  display: block !important;
   z-index: 88;
 }
-.fullpage.active{
+.fullpage.active {
   z-index: 99;
-
 }
 @-webkit-keyframes slide-in-bottom {
   0% {
@@ -449,7 +492,6 @@ export default {
     -webkit-transform: translateY(100px);
     transform: translateY(100px);
     opacity: 0;
-  
   }
   100% {
     -webkit-transform: translateY(0);

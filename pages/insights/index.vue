@@ -25,7 +25,7 @@ export default {
   },
   methods: {
     dateForm(dateI) {
-      const options = { year: "numeric", month: 'long', day: "numeric" };
+      const options = { year: "numeric", month: "long", day: "numeric" };
       const month = new Date(dateI);
 
       return new Date(month).toLocaleDateString("en", options);
@@ -52,11 +52,19 @@ export default {
       }
     },
     handleMouseWheel: function (e) {
-      if (e.wheelDelta < 30 && !this.inMove) {
+      if (e.wheelDelta <= -30 && !this.inMove) {
         this.moveUp();
-      } else if (e.wheelDelta > 30 && !this.inMove) {
+      } else if (e.wheelDelta >= 30 && !this.inMove) {
         this.moveDown();
+      } else if (e.wheelDelta < 0 && !this.inMove) {
+        this.moveDown();
+      } else if (e.wheelDelta > 0 && !this.inMove) {
+        this.moveUp();
       }
+
+      setTimeout(() => {
+        e.preventDefault();
+      }, 100);
       return false;
     },
     handleMouseWheelDOM: function (e) {
@@ -92,17 +100,14 @@ export default {
       this.inMove = true;
       setTimeout(() => {
         this.inMove = false;
-      }, 400);
+      }, 1000);
       this.hideFooter();
     },
     touchStart(e) {
-    
-
       this.touchStartY = e.touches[0].clientY;
     },
     touchMove(e) {
       if (this.inMove) return false;
-    
 
       const currentY = e.touches[0].clientY;
 
@@ -126,14 +131,13 @@ export default {
     mouseDownHandler(e) {
       this.mousePoint = e.pageY;
       e.preventDefault();
-      
     },
   },
   destroyed() {
-    window.removeEventListener("mousewheel", this.handleMouseWheel); 
-    window.removeEventListener("DOMMouseScroll", this.handleMouseWheelDOM); 
-    window.removeEventListener("touchstart", this.touchStart); // mobile devices
-    window.removeEventListener("touchmove", this.touchMove); // mobile devices
+    window.removeEventListener("mousewheel", this.handleMouseWheel);
+    window.removeEventListener("DOMMouseScroll", this.handleMouseWheelDOM);
+    window.removeEventListener("touchstart", this.touchStart);
+    window.removeEventListener("touchmove", this.touchMove);
     document.removeEventListener("mouseup", this.mouseUpHandler);
     document.removeEventListener("mousedown", this.mouseDownHandler);
   },
@@ -152,11 +156,11 @@ export default {
     if (result > 0) {
       resulArr = insig.items.splice(insig.items.length - result, result);
     }
-   
+
     const numbSections = insig.items.length / 3;
 
-    for (let i = numbSections -1 ; i >= 0; i--) {
-      arrayInsig[i] = insig.items.splice(  insig.items.length - ctPost, ctPost );
+    for (let i = numbSections - 1; i >= 0; i--) {
+      arrayInsig[i] = insig.items.splice(insig.items.length - ctPost, ctPost);
     }
 
     return {
@@ -188,53 +192,48 @@ export default {
 <template>
   <main class="content-main insights-page">
     <div class="w-100 container-insights">
-      
-      <template v-for="(arrayI, index) in insightArray"  >
-        <Transition :key="index"  mode="out-in">
-          <section 
-          :class="{active : activeSection == index }"
+      <template v-for="(arrayI, index) in insightArray">
+        <Transition :key="index" mode="out-in">
+          <section
+            :class="{ active: activeSection == index }"
             class="content-insights fullpage"
             v-show="activeSection == index"
           >
-          <div class="content-insights">
-
-          
-            <template v-for="(post, index) in arrayI">
-              <card-insights
-                :key="index"
-                :titleInsights="post.fields.title"
-                :slugInsights="post.fields.urlSlug"
-                :externalslugInsights="post.fields.externalLink"
-                :imageInsights="post.fields.coverImage.fields.file.url"
-                :dateInsights="dateForm(post.fields.publishDate)"
-              >
-              </card-insights>
-            </template>
+            <div class="content-insights">
+              <template v-for="(post, index) in arrayI">
+                <card-insights
+                  :key="index"
+                  :titleInsights="post.fields.title"
+                  :slugInsights="post.fields.urlSlug"
+                  :externalslugInsights="post.fields.externalLink"
+                  :imageInsights="post.fields.coverImage.fields.file.url"
+                  :dateInsights="dateForm(post.fields.publishDate)"
+                >
+                </card-insights>
+              </template>
             </div>
           </section>
         </Transition>
       </template>
-      <Transition  mode="out-in">
+      <Transition mode="out-in">
         <section
           v-show="activeSection == cantSections"
           class="result-insights fullpage"
-          :class="{active : activeSection == this.offsets.length - 1}"
+          :class="{ active: activeSection == this.offsets.length - 1 }"
           v-if="this.insightsResult.length > 0"
         >
-        <div class="result-insights">
-
-        
-          <template v-for="(result, index) in this.insightsResult">
-            <card-insights
-              :key="index"
-              :titleInsights="result.fields.title"
-              :slugInsights="result.fields.urlSlug"
-              :externalslugInsights="result.fields.externalLink"
-              :imageInsights="result.fields.coverImage.fields.file.url"
-              :dateInsights="dateForm(result.fields.publishDate)"
-            >
-            </card-insights>
-          </template>
+          <div class="result-insights">
+            <template v-for="(result, index) in this.insightsResult">
+              <card-insights
+                :key="index"
+                :titleInsights="result.fields.title"
+                :slugInsights="result.fields.urlSlug"
+                :externalslugInsights="result.fields.externalLink"
+                :imageInsights="result.fields.coverImage.fields.file.url"
+                :dateInsights="dateForm(result.fields.publishDate)"
+              >
+              </card-insights>
+            </template>
           </div>
         </section>
       </Transition>
@@ -242,35 +241,39 @@ export default {
   </main>
 </template>
 <style scoped>
-@media(min-width:768px){
-.v-enter-active,
-.v-leave-active {
-  -webkit-animation: slide-in-bottom 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)
-    both;
-  animation: slide-in-bottom 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-  -webkit-backface-visibility: hidden; 
-  backface-visibility: hidden;
-  z-index: 100;
-  
+@media (min-width: 768px) {
+  .v-enter-active,
+  .v-leave-active {
+    -webkit-animation: slide-in-bottom 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+      both;
+    animation: slide-in-bottom 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    z-index: 100;
+  }
+  .v-enter-from,
+  .v-leave-to {
+    -webkit-animation: slide-in-top 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+      reverse forwards;
+    animation: slide-in-top 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse
+      forwards;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    z-index: 99;
+  }
+  .fullpage {
+    opacity: 0;
+  }
+  .fullpage.active {
+    opacity: 1;
+  }
 }
-.v-enter-from,
-.v-leave-to {
-  -webkit-animation: slide-in-top 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)
-    reverse forwards;
-  animation: slide-in-top 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse
-    forwards;
-  -webkit-backface-visibility: hidden; 
-  backface-visibility: hidden;
-  z-index: 99;
-}
-}
-.fullpage{
-  display: block!important;
+.fullpage {
+  display: block !important;
   z-index: 88;
 }
-.fullpage.active{
+.fullpage.active {
   z-index: 99;
-
 }
 @-webkit-keyframes slide-in-bottom {
   0% {
@@ -289,7 +292,6 @@ export default {
     -webkit-transform: translateY(100px);
     transform: translateY(100px);
     opacity: 0;
-  
   }
   100% {
     -webkit-transform: translateY(0);
@@ -338,7 +340,7 @@ section.content-insights.fullPage {
   margin-top: 0px;
   display: flex;
 }
-main.insights-page .fullpage{
+main.insights-page .fullpage {
   overflow: hidden;
 }
 @media (min-width: 768px) and (max-width: 1024px) {
@@ -353,7 +355,6 @@ main.insights-page .fullpage{
   }
 }
 @media (min-width: 768px) {
-  
   .fullpage {
     height: 100vh;
     width: 100%;

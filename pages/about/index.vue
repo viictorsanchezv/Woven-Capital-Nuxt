@@ -122,7 +122,6 @@ export default {
             src="@/assets/video/overview.mp4"
             autoplay="false"
             muted="false"
-            controls
           ></video>
           <img
             class="vh-50 pt-5x w-100 object-cover object-center"
@@ -134,7 +133,7 @@ export default {
       <template #right>
         <div class="col-md-6 col-12 border-box p-7">
           <title-secundary
-            class="mb-4 limit-width"
+            class="mb-4 limit-width text-start"
             titleH2="Capital is only the "
             spanTitleH2="starting point"
           ></title-secundary>
@@ -182,7 +181,7 @@ export default {
       <template #left>
         <div class="col-md-6 col-12 m-0 border-box p-7">
           <title-secundary
-            class="mb-5 justify-content-start p-0"
+            class="mb-5 justify-content-start p-0 text-start"
             titleH2="Our "
             spanTitleH2="Commitment"
           ></title-secundary>
