@@ -28,10 +28,55 @@ export default {
       activeScrollUp: false,
       activeScrollDown: false,
       mousePoint: 0,
+      metaContent: {},
     };
   },
-  head: {
-    title: "Portfolio - Woven Capital",
+  head() {
+    if (
+      this.metaContent[0] &&
+      this.metaContent[0].fields.title &&
+      this.metaContent[0].fields.description &&
+      this.metaContent[0].fields.image.fields.file.url
+    ) {
+      return {
+        title: this.metaContent[0].fields.title,
+        meta: [
+          {
+            name: "description",
+            content: this.metaContent[0].fields.description,
+          },
+          {
+            hid: "og:image",
+            content: this.metaContent[0].fields.image.fields.file.url,
+          },
+          {
+            name: "keywords",
+            content: this.metaContent[0].fields.description,
+          },
+          { hid: "og:title", content: this.metaContent[0].fields.title },
+          {
+            hid: "og:image",
+            content: this.metaContent[0].fields.image.fields.file.url,
+          },
+          {
+            hid: "og:description",
+            content: this.metaContent[0].fields.description,
+          },
+          {
+            name: "twitter:title",
+            content: this.metaContent[0].fields.title,
+          },
+          {
+            name: "twitter:description",
+            content: this.metaContent[0].fields.description,
+          },
+          {
+            name: "twitter:image",
+            content: this.metaContent[0].fields.image.fields.file.url,
+          },
+        ],
+      };
+    }
   },
   async asyncData() {
     let dataInfo = [];
@@ -63,10 +108,16 @@ export default {
       return element.items;
     });
 
+    const metaPage = await client.getEntries({
+      content_type: "metaPage",
+      "fields.slugPage": "portfolio",
+    });
+
     return {
       portfoliosCont: portf.items,
       investmentsCont: investmentsC.items,
       insightsPortf: dataInfo,
+      metaContent: metaPage.items,
     };
   },
   methods: {
@@ -83,7 +134,9 @@ export default {
       let sectionsLength = sections.length;
 
       if (this.activeSection == this.offsets.length - 1) {
-        footerS.style.display = "block";
+         setTimeout(() => {
+          footerS.style.display = "block";
+        }, 1000);
       } else {
         footerS.style.display = "none";
       }
@@ -206,15 +259,12 @@ export default {
       this.mousePoint = e.pageY;
       e.preventDefault();
     },
-    endedVideo(event){
-     let video = event.srcElement;
-  
-    video.classList.add("remove-video");
-    console.log(video.nextSibling.nextElementSibling);
-    video.nextSibling.nextElementSibling.classList.remove("remove-video");
-     
-     
-    }
+    endedVideo(event) {
+      let video = event.srcElement;
+
+      video.classList.add("remove-video");
+      video.nextSibling.nextElementSibling.classList.remove("remove-video");
+    },
   },
   mounted() {
     this.calculateSectionOffsets();
@@ -286,11 +336,16 @@ export default {
                   :src="portfolio.fields.mediaBottom.fields.file.url"
                   alt=""
                 />
-                <template v-else-if="portfolio.fields.mediaBottom.fields.file.contentType == 'video/mp4'">
+                <template
+                  v-else-if="
+                    portfolio.fields.mediaBottom.fields.file.contentType ==
+                    'video/mp4'
+                  "
+                >
                   <video
                     class="w-100 object-cover vh-50 video-poster"
                     autoplay="false"
-                    muted="false"
+                    controls
                     @ended="endedVideo($event)"
                     :src="portfolio.fields.mediaBottom.fields.file.url"
                     :poster="portfolio.fields.posterVideo.fields.file.url"
@@ -429,16 +484,16 @@ export default {
 </template>
 
 <style scoped>
-.remove-video{
+.remove-video {
   display: none;
 }
-.img-poster{
+.img-poster {
   position: absolute;
   left: 0;
   z-index: 0;
   bottom: 0;
 }
-.video-poster{
+.video-poster {
   z-index: 2;
 }
 @media (min-width: 768px) {

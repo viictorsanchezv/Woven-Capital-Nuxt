@@ -4,24 +4,76 @@ import client from "@/plugins/contentful.js";
 
 export default {
   data() {
-    return {};
+    return {
+      metaContent: {},
+      teamCont: {},
+    };
   },
   components: {
     titleSecundary,
   },
-  head: {
-    title: "Team - Woven Capital",
+  head() {
+    if (
+      this.metaContent[0] &&
+      this.metaContent[0].fields.title &&
+      this.metaContent[0].fields.description &&
+      this.metaContent[0].fields.image.fields.file.url
+    ) {
+      return {
+        title: this.metaContent[0].fields.title,
+        meta: [
+          {
+            name: "description",
+            content: this.metaContent[0].fields.description,
+          },
+          {
+            hid: "og:image",
+            content: this.metaContent[0].fields.image.fields.file.url,
+          },
+          {
+            name: "keywords",
+            content: this.metaContent[0].fields.description,
+          },
+          { hid: "og:title", content: this.metaContent[0].fields.title },
+          {
+            hid: "og:image",
+            content: this.metaContent[0].fields.image.fields.file.url,
+          },
+          {
+            hid: "og:description",
+            content: this.metaContent[0].fields.description,
+          },
+          {
+            name: "twitter:title",
+            content: this.metaContent[0].fields.title,
+          },
+          {
+            name: "twitter:description",
+            content: this.metaContent[0].fields.description,
+          },
+          {
+            name: "twitter:image",
+            content: this.metaContent[0].fields.image.fields.file.url,
+          },
+        ],
+      };
+    }
   },
-  asyncData() {
-    return client
-      .getEntries({
-        content_type: "teamNwc",
-        order: "fields.order",
-      })
-      .then((entries) => {
-        return { posts: entries.items };
-      })
-      .catch((e) => console.log(e));
+  async asyncData() {
+    const team = await client.getEntries({
+      content_type: "teamNwc",
+      order: "fields.order",
+    });
+
+    const metaPage = await client.getEntries({
+      content_type: "metaPage",
+      "fields.slugPage": "team",
+    });
+
+    return {
+      teamCont: team.items,
+      metaContent: metaPage.items,
+    };
   },
   mounted() {
     document.getElementById("footer-container").style.display = "block";
@@ -49,7 +101,7 @@ export default {
         </div>
         <div class="container-team p-0">
           <card-Team
-            v-for="(team, index) in posts"
+            v-for="(team, index) in teamCont"
             :key="index"
             :teamName="team.fields.title"
             :teamJob="team.fields.designation"

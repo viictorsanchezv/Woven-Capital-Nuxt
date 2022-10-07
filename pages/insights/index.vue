@@ -37,7 +37,9 @@ export default {
       let sectionsLength = sections.length;
 
       if (this.activeSection == this.offsets.length - 1) {
-        footerS.style.display = "block";
+         setTimeout(() => {
+          footerS.style.display = "block";
+        }, 1000);
       } else {
         footerS.style.display = "none";
       }

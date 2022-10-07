@@ -2,23 +2,70 @@
 import titleSecundary from "@/components/TitleSecundary.vue";
 import SectionColumns from "@/components/SectionColumns.vue";
 import ImageCard from "@/components/ImageCard.vue";
+import client from "@/plugins/contentful.js";
+
 export default {
   data() {
     return {
       imageCardInfo: [],
+      metaContent: {},
     };
   },
-  head: {
-    title: "About - Woven Capital",
+  head() {
+    if (
+      this.metaContent[0] &&
+      this.metaContent[0].fields.title &&
+      this.metaContent[0].fields.description &&
+      this.metaContent[0].fields.image.fields.file.url
+    ) {
+      return {
+        title: this.metaContent[0].fields.title,
+        meta: [
+          {
+            name: "description",
+            content: this.metaContent[0].fields.description,
+          },
+          {
+            hid: "og:image",
+            content: this.metaContent[0].fields.image.fields.file.url,
+          },
+          {
+            name: "keywords",
+            content: this.metaContent[0].fields.description,
+          },
+          { hid: "og:title", content: this.metaContent[0].fields.title },
+          {
+            hid: "og:image",
+            content: this.metaContent[0].fields.image.fields.file.url,
+          },
+          {
+            hid: "og:description",
+            content: this.metaContent[0].fields.description,
+          },
+          {
+            name: "twitter:title",
+            content: this.metaContent[0].fields.title,
+          },
+          {
+            name: "twitter:description",
+            content: this.metaContent[0].fields.description,
+          },
+          {
+            name: "twitter:image",
+            content: this.metaContent[0].fields.image.fields.file.url,
+          },
+        ],
+      };
+    }
   },
   components: {
     titleSecundary,
     SectionColumns,
     ImageCard,
   },
-   mounted() {
+  mounted() {
     document.getElementById("footer-container").style.display = "block";
-   },
+  },
   created() {
     this.imageCardInfo.push({
       image: "/about/IA.png",
@@ -56,6 +103,16 @@ export default {
       imageAlt: "Woven City",
     });
   },
+  async asyncData() {
+    const metaPage = await client.getEntries({
+      content_type: "metaPage",
+      "fields.slugPage": "about",
+    });
+
+    return {
+      metaContent: metaPage.items,
+    };
+  },
 };
 </script>
 
@@ -75,12 +132,16 @@ export default {
           </p>
           <p class="text-sect text-small">
             As the $800 million investment arm of the
-            <a target="_blank"
+            <a
+              target="_blank"
               href="https://www.woven-planet.global/"
               class="text-green text-small"
               >Woven Planet</a
             >, founded by
-            <a target="_blank" href="https://global.toyota/en/" class="text-green text-small"
+            <a
+              target="_blank"
+              href="https://global.toyota/en/"
+              class="text-green text-small"
               >Toyota Motor Corporation</a
             >, our aim is to broaden the group’s global reach and accelerate
             innovation by investing in exceptional growth-stage ventures.
@@ -121,7 +182,7 @@ export default {
             class="w-100 object-cover vh-50"
             src="@/assets/video/overview.mp4"
             autoplay="false"
-            muted="false"
+            controls
           ></video>
           <img
             class="vh-50 pt-5x w-100 object-cover object-center"
@@ -157,7 +218,7 @@ export default {
       </template>
     </section-columns>
 
-    <section class="m-3p row p-6p ">
+    <section class="m-3p row p-6p">
       <div class="text-center col-12 mt-0 mb-5 ml-0 mr-0 p-0">
         <title-secundary
           class="mb-4 justify-content-center"
@@ -197,9 +258,11 @@ export default {
         </div>
       </template>
       <template #right>
-        <div class="col-md-6 col-12 border-box p-0 section-sticky top-0 commitment">
+        <div
+          class="col-md-6 col-12 border-box p-0 section-sticky top-0 commitment"
+        >
           <img
-            class=" w-100 ima-comm object-cover object-top"
+            class="w-100 ima-comm object-cover object-top"
             src="@/assets/image/about/Rectangle-405.png"
             alt=""
           />
@@ -210,8 +273,8 @@ export default {
 </template>
 
 <style scoped>
-.ima-comm, 
-.commitment{
+.ima-comm,
+.commitment {
   height: 100vh;
 }
 p.text-sect,
@@ -258,11 +321,11 @@ a:hover {
   .section-sticky {
     position: relative;
   }
-  .ima-comm, 
-  .commitment{
+  .ima-comm,
+  .commitment {
     height: 50vh;
   }
-  .p-6p{
+  .p-6p {
     padding: 40px;
     margin: 0;
   }

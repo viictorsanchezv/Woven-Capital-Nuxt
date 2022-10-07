@@ -8,8 +8,47 @@ export default {
       insightCont: {},
     };
   },
-  head: {
-    title: "Insight - Woven Capital",
+  head() {
+    if (this.insightCont[0] && this.insightCont[0].fields.titleMeta && this.insightCont[0].fields.descriptionMeta && this.insightCont[0].fields.imageMeta.fields.file.url) {
+      return {
+        title: this.insightCont[0].fields.titleMeta,
+        meta: [
+          {
+            name: "description",
+            content: this.insightCont[0].fields.descriptionMeta,
+          },
+          {
+            hid: "og:image",
+            content: this.insightCont[0].fields.imageMeta.fields.file.url,
+          },
+          {
+            name: "keywords",
+            content: this.insightCont[0].fields.descriptionMeta
+          },
+          { hid: "og:title", content: this.insightCont[0].fields.titleMeta },
+          {
+            hid: "og:image",
+            content: this.insightCont[0].fields.imageMeta.fields.file.url
+          },
+          {
+            hid: "og:description",
+            content: this.insightCont[0].fields.descriptionMeta
+          },
+          {
+            name: "twitter:title",
+            content: this.insightCont[0].fields.titleMeta,
+          },
+          {
+            name: "twitter:description",
+            content: this.insightCont[0].fields.descriptionMeta
+          },
+          {
+            name: "twitter:image",
+            content: this.insightCont[0].fields.imageMeta.fields.file.url
+          },
+        ],
+      };
+    }
   },
   async asyncData({ params, error }) {
     const insightP = await client.getEntries({

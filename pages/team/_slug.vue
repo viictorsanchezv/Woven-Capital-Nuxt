@@ -13,22 +13,63 @@ export default {
   components: {
     SectionColumns,
   },
-  head: {
-    title: "Team - Woven Capital",
+  head() {
+    if (this.teamCont[0] && this.teamCont[0].fields.titleMeta && this.teamCont[0].fields.descriptionMeta && this.teamCont[0].fields.imageMeta.fields.file.url) {
+      return {
+        title: this.teamCont[0].fields.titleMeta,
+        meta: [
+          {
+            name: "description",
+            content: this.teamCont[0].fields.descriptionMeta,
+          },
+          {
+            hid: "og:image",
+            content: this.teamCont[0].fields.imageMeta.fields.file.url,
+          },
+          {
+            name: "keywords",
+            content: this.teamCont[0].fields.descriptionMeta
+          },
+          { hid: "og:title", content: this.teamCont[0].fields.titleMeta },
+          {
+            hid: "og:image",
+            content: this.teamCont[0].fields.imageMeta.fields.file.url
+          },
+          {
+            hid: "og:description",
+            content: this.teamCont[0].fields.descriptionMeta
+          },
+          {
+            name: "twitter:title",
+            content: this.teamCont[0].fields.titleMeta,
+          },
+          {
+            name: "twitter:description",
+            content: this.teamCont[0].fields.descriptionMeta
+          },
+          {
+            name: "twitter:image",
+            content: this.teamCont[0].fields.imageMeta.fields.file.url
+          },
+        ],
+      };
+    }
   },
   async asyncData({ params, error }) {
+
     const teamItem = await client.getEntries({
       content_type: "teamNwc",
       "fields.slug": params.slug,
     });
+
     const insights = await client.getEntries({
       content_type: "insightsNwc",
       "fields.author": params.slug,
       limit: "2",
       order: "-fields.publishDate",
     });
-    if(!teamItem.items[0] )
-    {
+
+    if(!teamItem.items[0] ){
       error ({ statusCode: 404, mensaje: 'Publicación no encontrada' }) ;
     }
 
@@ -46,7 +87,7 @@ export default {
         <div
           class="col-md-6 col-12 border-box p-0 justify-content-start image-profile"
         >
-          <img
+          <img v-if="teamCont[0].fields.image.fields.file.url"
             class=" object-cover m-0 p-0 team-image"
             :src="teamCont[0].fields.image.fields.file.url"
             alt=""
@@ -55,7 +96,7 @@ export default {
       </template>
       <template #right>
         <div class="col-md-6 col-12 border-box p-7">
-          <h1 class="h1-45 name-team">{{ teamCont[0].fields.title }}</h1>
+          <h1 v-if="teamCont[0].fields.title" class="h1-45 name-team">{{ teamCont[0].fields.title }}</h1>
           <p class="text-medium job-team">
             {{ teamCont[0].fields.designation }}
           </p>
@@ -75,7 +116,7 @@ export default {
               />
             </a>
           </div>
-          <p class="desc-team text-small mt-4">
+          <p v-if="teamCont[0].fields.description" class="desc-team text-small mt-4">
             {{ teamCont[0].fields.description }}
           </p>
           <hr class="mb-4" />

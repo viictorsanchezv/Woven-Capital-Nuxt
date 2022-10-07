@@ -18,11 +18,57 @@ export default {
       touchStartY: 0,
       sectionOffsetO: {},
       mousePoint: 0,
-      oldScrollY : 0,
+      canMove: true,
+      metaContent: {},
+      sensi: 8,
     };
   },
-  head: {
-    title: "Woven Capital",
+  head() {
+    if (
+      this.metaContent[0] &&
+      this.metaContent[0].fields.title &&
+      this.metaContent[0].fields.description &&
+      this.metaContent[0].fields.image.fields.file.url
+    ) {
+      return {
+        title: this.metaContent[0].fields.title,
+        meta: [
+          {
+            name: "description",
+            content: this.metaContent[0].fields.description,
+          },
+          {
+            hid: "og:image",
+            content: this.metaContent[0].fields.image.fields.file.url,
+          },
+          {
+            name: "keywords",
+            content: this.metaContent[0].fields.description,
+          },
+          { hid: "og:title", content: this.metaContent[0].fields.title },
+          {
+            hid: "og:image",
+            content: this.metaContent[0].fields.image.fields.file.url,
+          },
+          {
+            hid: "og:description",
+            content: this.metaContent[0].fields.description,
+          },
+          {
+            name: "twitter:title",
+            content: this.metaContent[0].fields.title,
+          },
+          {
+            name: "twitter:description",
+            content: this.metaContent[0].fields.description,
+          },
+          {
+            name: "twitter:image",
+            content: this.metaContent[0].fields.image.fields.file.url,
+          },
+        ],
+      };
+    }
   },
   components: {
     ButtomPrimary,
@@ -45,7 +91,9 @@ export default {
       let sectionsLength = sections.length;
 
       if (this.activeSection == this.offsets.length - 1) {
-        footerS.style.display = "block";
+        setTimeout(() => {
+          footerS.style.display = "block";
+        }, 1000);
       } else {
         footerS.style.display = "none";
       }
@@ -59,41 +107,62 @@ export default {
         this.offsets.push(sectionOffset);
       }
     },
-    handleMouseWheel: function (e) {
-    
-      if ( (e.wheelDelta <= -30 && !this.inMove) ) {
-       
-        this.moveUp();
-      } else if (e.wheelDelta >= 30 && !this.inMove) {
-       
-        this.moveDown();
-      }
-      else if ( (e.wheelDelta < 0 && !this.inMove) ) {
-      
-        this.moveDown();
-      } else if (e.wheelDelta > 0 && !this.inMove) {
-    
-        this.moveUp();
-      }
+    throttle(fn, wait) {
+      var time = Date.now();
 
+      return function (event) {
+        if (Math.abs(event.deltaY) < 4) return;
+
+        if (time + wait - Date.now() < 0) {
+          fn(event);
+          time = Date.now();
+        }
+      };
+    },
+    handleMouseWheel: function (e) {
+      if (this.canMove === true) {
+        this.canMove = false;
+
+        if (e.wheelDeltaY <= -this.sensi && !this.canMove) {
+          this.sensi = 1000;
+          this.moveUp();
+        } else if (e.wheelDeltaY >= this.sensi && !this.canMove) {
+          this.sensi = 1000;
+
+          this.moveDown();
+        }
+        setTimeout(() => {
+          this.sensi = 8;
+          this.canMove = true;
+        }, 1000);
+      }
       return false;
     },
     handleMouseWheelDOM: function (e) {
-    
-      if (e.detail > 0 && !this.inMove) {
-        this.moveUp();
-      } else if (e.detail < 0 && !this.inMove) {
-        this.moveDown();
+      if (this.canMove === true) {
+        this.canMove = false;
+
+        if (e.detail <= -this.sensi && !this.canMove) {
+          this.sensi = 1000;
+          this.moveUp();
+        } else if (e.detail >= this.sensi && !this.canMove) {
+          this.sensi = 1000;
+
+          this.moveDown();
+        }
+        setTimeout(() => {
+          this.sensi = 8;
+          this.canMove = true;
+        }, 1000);
       }
+      return false;
 
       return false;
     },
     moveDown() {
       this.inMove = true;
       this.activeSection--;
-
       if (this.activeSection < 0) this.activeSection = 0;
-
       this.scrollToSection(this.activeSection, true);
     },
     moveUp() {
@@ -102,49 +171,39 @@ export default {
 
       if (this.activeSection > this.offsets.length - 1)
         this.activeSection = this.offsets.length - 1;
-
       this.scrollToSection(this.activeSection, true);
     },
     scrollToSection(id, force = false) {
       if (this.inMove && !force) return false;
-
       this.activeSection = id;
       this.inMove = true;
+
       setTimeout(() => {
         this.inMove = false;
-      }, 400);
+      }, 1000);
       this.hideFooter();
     },
-
     touchStart(e) {
-       console.log("2");
       this.touchStartY = e.touches[0].clientY;
     },
     touchMove(e) {
-      console.log("1");
       if (this.inMove) return false;
-
       const currentY = e.touches[0].clientY;
-
       if (this.touchStartY < currentY) {
         this.moveDown();
       } else {
         this.moveUp();
       }
-
       this.touchStartY = 0;
       e.preventDefault();
       return false;
     },
     mouseUpHandler(e) {
-     
-
       if (this.mousePoint > e.pageY) {
         this.moveUp();
       } else if (this.mousePoint <= e.pageY) {
         this.moveDown();
       }
-
       e.preventDefault();
       return false;
     },
@@ -152,34 +211,40 @@ export default {
       this.mousePoint = e.pageY;
       e.preventDefault();
     },
-   
   },
   mounted() {
     this.calculateSectionOffsets();
     this.hideFooter();
-    this.oldScrollY = window.scrollY;
-
     document.getElementById("footer-container").style.display = "none";
+    
+    window.addEventListener(
+      "mousewheel",
+      this.throttle(this.handleMouseWheel, 500)
+    );
+    window.addEventListener(
+      "DOMMouseScroll",
+      this.throttle(this.handleMouseWheelDOM, 500)
+    );
 
-    window.addEventListener("mousewheel", this.handleMouseWheel); // Other browsers
-    window.addEventListener("DOMMouseScroll", this.handleMouseWheelDOM); // Mozilla Firefox
-    window.addEventListener("touchstart", this.touchStart, { passive: false }); // mobile devices
-    window.addEventListener("touchmove", this.touchMove, { passive: false }); // mobile devices
-
+    window.addEventListener("touchstart", this.touchStart, { passive: false });
+    window.addEventListener("touchmove", this.touchMove, { passive: false });
     window.addEventListener("mouseup", this.mouseUpHandler);
     window.addEventListener("mousedown", this.mouseDownHandler);
-
-    window.addEventListener("scroll", this.onscrollHandle);
   },
   destroyed() {
-    window.removeEventListener("mousewheel", this.handleMouseWheel); // Other browsers
-    window.removeEventListener("DOMMouseScroll", this.handleMouseWheelDOM); // Mozilla Firefox
-    window.removeEventListener("touchstart", this.touchStart); // mobile devices
-    window.removeEventListener("touchmove", this.touchMove); // mobile devices
+    window.removeEventListener(
+      "mousewheel",
+      this.throttle(this.handleMouseWheel, 1000)
+    );
+    window.removeEventListener(
+      "DOMMouseScroll",
+      this.throttle(this.handleMouseWheelDOM, 500)
+    );
+    window.removeEventListener("touchstart", this.touchStart);
+    window.removeEventListener("touchmove", this.touchMove);
     window.removeEventListener("mouseup", this.mouseUpHandler);
     window.removeEventListener("mousedown", this.mouseDownHandler);
-
-   
+    window.removeEventListener("onscroll", this.onscrollHandle);
   },
   async asyncData() {
     const portf = await client.getEntries({
@@ -197,10 +262,16 @@ export default {
       content_type: "pressReleasesNwc",
     });
 
+    const metaPage = await client.getEntries({
+      content_type: "metaPage",
+      "fields.slugPage": "home",
+    });
+
     return {
       portfoliosCont: portf.items,
       insightsCont: insig.items,
       pressReleasesCont: pressReleases.items,
+      metaContent: metaPage.items,
     };
   },
 };
@@ -208,7 +279,6 @@ export default {
 <template>
   <main class="homePage">
     <div class="container-homepage">
-      <!-- hero image -->
       <Transition mode="out-in">
         <section
           v-show="activeSection == 0"
@@ -285,7 +355,7 @@ export default {
           </div>
         </section>
       </Transition>
-      <!-- portfolio -->
+
       <Transition mode="out-in">
         <section
           v-show="activeSection == 1"
@@ -340,7 +410,7 @@ export default {
           </div>
         </section>
       </Transition>
-      <!-- partner -->
+
       <Transition mode="out-in">
         <section
           :class="{ active: activeSection == 2 }"
@@ -376,7 +446,6 @@ export default {
           </div>
         </section>
       </Transition>
-      <!-- Insights-->
 
       <Transition mode="out-in">
         <section

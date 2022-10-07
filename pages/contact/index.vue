@@ -1,13 +1,72 @@
 <script>
 import ButtomPrimary from "@/components/ButtomPrimary.vue";
 import titleSecundary from "@/components/TitleSecundary.vue";
+import client from "@/plugins/contentful.js";
 export default {
   components: {
     ButtomPrimary,
     titleSecundary,
+    metaContent: {},
   },
-  head: {
-    title: "Contact - Woven Capital",
+  head() {
+    if (
+      this.metaContent[0] &&
+      this.metaContent[0].fields.title &&
+      this.metaContent[0].fields.description &&
+      this.metaContent[0].fields.image.fields.file.url
+    ) {
+      return {
+        title: this.metaContent[0].fields.title,
+        meta: [
+          {
+            name: "description",
+            content: this.metaContent[0].fields.description,
+          },
+          {
+            hid: "og:image",
+            content: this.metaContent[0].fields.image.fields.file.url,
+          },
+          {
+            name: "keywords",
+            content: this.metaContent[0].fields.description,
+          },
+          { hid: "og:title", content: this.metaContent[0].fields.title },
+          {
+            hid: "og:image",
+            content: this.metaContent[0].fields.image.fields.file.url,
+          },
+          {
+            hid: "og:description",
+            content: this.metaContent[0].fields.description,
+          },
+          {
+            name: "twitter:title",
+            content: this.metaContent[0].fields.title,
+          },
+          {
+            name: "twitter:description",
+            content: this.metaContent[0].fields.description,
+          },
+          {
+            name: "twitter:image",
+            content: this.metaContent[0].fields.image.fields.file.url,
+          },
+        ],
+      };
+    }
+  },
+   async asyncData() {
+
+   
+
+    const metaPage = await client.getEntries({
+      content_type: "metaPage",
+      "fields.slugPage": "contact",
+    });
+
+    return {
+      metaContent: metaPage.items,
+    };
   },
    mounted() {
     document.getElementById("footer-container").style.display = "block";

@@ -76,7 +76,7 @@ export default {
       required: true,
       type: "textarea",
       placeholder:
-        "Briefly describe the problem your company solves (360 characters max)",
+        "Briefly describe the problem your company solves ",
       column: 1,
     });
 
@@ -86,7 +86,7 @@ export default {
       required: true,
       type: "textarea",
       placeholder:
-        "At what stage is your venture? (ie. Idea, Product development, Post product, Post revenue) (360 characters max)",
+        "At what stage is your venture? (ie. Idea, Product development, Post product, Post revenue) ",
       column: 1,
     });
 
@@ -96,7 +96,7 @@ export default {
       required: true,
       type: "textarea",
       placeholder:
-        "To date, how much have you raised, and from whom? (160 characters max)",
+        "To date, how much have you raised, and from whom? ",
       column: 1,
     });
 

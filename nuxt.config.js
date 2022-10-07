@@ -3,65 +3,26 @@ const client = require('./plugins/contentful')
 
 export default {
   generate: { fallback: true },
-  // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-   
     title: "Woven Capital Management Company, LLC",
     meta: [
       { charset: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       {
-        name: "keywords",
-        content:
-          "Woven Capital Management Company, LLC, Venture Capital and Private Equity Principals, Woven Capital, Toyota motor corporation, TRI-AD, Woven Alpha, Woven Core",
-      },
-      {
-        name: "description",
-        content:
-          "Woven Capital, a subsidiary of Toyota, invests in growth-stage companies that are developing innovative technologies and business models in areas such as autonomous mobility, automation, artificial intelligence, machine learning, data and analytics, connectivity, and smart cities.",
-      },
-      {
         name: "copyright",
         content:
           "(C) Woven Capital Management Company, LLC. All Rights Reserved.",
       },
-
       { name: "author", content: "Woven Capital Management Company, LLC" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
-
-      { hid: "og:title", content: "Woven Capital Management Company, LLC" },
+    
       { hid: "og:type", content: "website" },
-      {
-        hid: "og:image",
-        content:
-          "https://images.ctfassets.net/jd4luwtpe1x4/1swjfQXNi7LVZbIh23rXgq/332879c3a490c818867326559e586053/logo_image.jpg",
-      },
+      
       { hid: "og:url", content: "https://woven.vc/" },
       { hid: "og:site_name", content: "Woven Capital" },
-      {
-        hid: "og:description",
-        content:
-          "Woven Capital, a subsidiary of Toyota, invests in growth-stage companies that are developing innovative technologies and business models in areas such as autonomous mobility, automation, artificial intelligence, machine learning, data and analytics, connectivity, and smart cities.",
-      },
-
       { name: "twitter:card", content: "summary_large_image" },
       {
         name: "twitter:image:alt",
         content: "Woven Capital Management Company, LLC.",
-      },
-      {
-        name: "twitter:title",
-        content: "Woven Capital Management Company, LLC.",
-      },
-      {
-        name: "twitter:description",
-        content:
-          "Woven Capital, a subsidiary of Toyota, invests in growth-stage companies that are developing innovative technologies and business models in areas such as autonomous mobility, automation, artificial intelligence, machine learning, data and analytics, connectivity, and smart cities.",
-      },
-      {
-        name: "twitter:image",
-        content:
-          "https://images.ctfassets.net/jd4luwtpe1x4/1swjfQXNi7LVZbIh23rXgq/332879c3a490c818867326559e586053/logo_image.jpg",
       },
     ],
     htmlAttrs: {
