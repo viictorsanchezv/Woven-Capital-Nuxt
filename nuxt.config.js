@@ -47,6 +47,9 @@ export default {
   plugins: [
     '@/plugins/bootstrap-vue',
     '@/plugins/contentful.js',
+    {
+      src:"plugins/vue-cookies-consent.js", mode:'client'
+    }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -58,7 +61,8 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
-    '@nuxtjs/dotenv', '@nuxtjs/markdownit',
+    '@nuxtjs/dotenv', 
+    '@nuxtjs/markdownit',
   ],
   markdownit: {
     injected: true,

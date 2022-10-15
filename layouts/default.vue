@@ -6,6 +6,7 @@
         <Nuxt class="content-main"/>
         <!-- footer -->
         <TheFooter class="content-main"/>
+        <CookiesConsent/>
     </div>
 </template>
 <style>
