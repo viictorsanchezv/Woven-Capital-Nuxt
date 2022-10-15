@@ -4,7 +4,7 @@ const client = require('./plugins/contentful')
 export default {
   generate: { fallback: true },
   head: {
-    title: "Woven Capital Management Company, LLC",
+    title: "Woven Capital Management Company, LLC.",
     meta: [
       { charset: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },

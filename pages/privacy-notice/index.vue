@@ -1,11 +1,71 @@
 <script>
+import client from "@/plugins/contentful.js";
 export default {
-  head: {
-    title: "Privacy Notice - Woven Capital",
+  data() {
+    return {
+      metaContent: {},
+    };
   },
-   mounted() {
+  head() {
+    if (
+      this.metaContent[0] &&
+      this.metaContent[0].fields.title &&
+      this.metaContent[0].fields.description &&
+      this.metaContent[0].fields.image.fields.file.url
+    ) {
+      return {
+        title: this.metaContent[0].fields.title,
+        meta: [
+          {
+            name: "description",
+            content: this.metaContent[0].fields.description,
+          },
+          {
+            hid: "og:image",
+            content: this.metaContent[0].fields.image.fields.file.url,
+          },
+          {
+            name: "keywords",
+            content: this.metaContent[0].fields.description,
+          },
+          { hid: "og:title", content: this.metaContent[0].fields.title },
+          {
+            hid: "og:image",
+            content: this.metaContent[0].fields.image.fields.file.url,
+          },
+          {
+            hid: "og:description",
+            content: this.metaContent[0].fields.description,
+          },
+          {
+            name: "twitter:title",
+            content: this.metaContent[0].fields.title,
+          },
+          {
+            name: "twitter:description",
+            content: this.metaContent[0].fields.description,
+          },
+          {
+            name: "twitter:image",
+            content: this.metaContent[0].fields.image.fields.file.url,
+          },
+        ],
+      };
+    }
+  },
+  mounted() {
     document.getElementById("footer-container").style.display = "block";
-   }
+  },
+  async asyncData() {
+    const metaPage = await client.getEntries({
+      content_type: "metaPage",
+      "fields.slugPage": "privacy-notice",
+    });
+
+    return {
+      metaContent: metaPage.items,
+    };
+  },
 };
 </script>
 <template>
@@ -321,10 +381,14 @@ export default {
           entities may use cookies and other tracking technologies, such as web
           beacons or local storage objects (LSOs), to perform their services. To
           learn more about Google’s privacy practices, please review the Google
-          Privacy Policy at <a href="https://www.google.com/policies/privacy/" target="_blank">https://www.google.com/policies/privacy/</a>. You can
-          also download the Google Analytics Opt-out Browser Add-on to prevent
-          their data from being used by Google Analytics at
-          <a href="https://tools.google.com/dlpage/gaoptout" target="_blank">https://tools.google.com/dlpage/gaoptout</a>.
+          Privacy Policy at
+          <a href="https://www.google.com/policies/privacy/" target="_blank"
+            >https://www.google.com/policies/privacy/</a
+          >. You can also download the Google Analytics Opt-out Browser Add-on
+          to prevent their data from being used by Google Analytics at
+          <a href="https://tools.google.com/dlpage/gaoptout" target="_blank"
+            >https://tools.google.com/dlpage/gaoptout</a
+          >.
         </p>
         <p class="mb-4 text-small">
           <span class="text-small f-600"> Do-Not-Track.</span> Currently, our
@@ -384,7 +448,8 @@ export default {
         <p class="mb-0 f-600 text-small">Contact Us</p>
         <p class="mb-4 text-small">
           If you have questions about the privacy aspects of our Services or
-          would like to make a complaint, please contact us at <a href="mailto:hello@woven.vc">hello@woven.vc</a>.
+          would like to make a complaint, please contact us at
+          <a href="mailto:hello@woven.vc">hello@woven.vc</a>.
         </p>
       </section>
 
@@ -455,7 +520,8 @@ export default {
           described in this Notice and to comply with applicable legal, tax or
           accounting obligations. If you have further questions about the
           security or retention of personal information you have submitted to
-          us, please email us at <a href="mailto:hello@woven.vc">hello@woven.vc</a>.
+          us, please email us at
+          <a href="mailto:hello@woven.vc">hello@woven.vc</a>.
         </p>
 
         <p class="mb-4 text-small">
@@ -570,9 +636,10 @@ export default {
         <p class="mb-4 text-small">
           <span class="f-600 text-small"> How to Exercise Your Rights.</span> If
           you would like to exercise any of the rights described above, please
-          send us a request at <a href="mailto:hello@woven.vc">hello@woven.vc</a>. In your message, please indicate
-          the right you would like to exercise and the information that you
-          would like to access, review, correct, or delete.
+          send us a request at
+          <a href="mailto:hello@woven.vc">hello@woven.vc</a>. In your message,
+          please indicate the right you would like to exercise and the
+          information that you would like to access, review, correct, or delete.
         </p>
         <p class="mb-4 text-small">
           We may ask you for additional information to confirm your identity and

@@ -15,10 +15,55 @@ export default {
       sectionOffsetO: {},
       cantSections: 0,
       mousePoint: 0,
+      metaContent: {},
     };
   },
-  head: {
-    title: "Insight - Woven Capital",
+  head() {
+    if (
+      this.metaContent[0] &&
+      this.metaContent[0].fields.title &&
+      this.metaContent[0].fields.description &&
+      this.metaContent[0].fields.image.fields.file.url
+    ) {
+      return {
+        title: this.metaContent[0].fields.title,
+        meta: [
+          {
+            name: "description",
+            content: this.metaContent[0].fields.description,
+          },
+          {
+            hid: "og:image",
+            content: this.metaContent[0].fields.image.fields.file.url,
+          },
+          {
+            name: "keywords",
+            content: this.metaContent[0].fields.description,
+          },
+          { hid: "og:title", content: this.metaContent[0].fields.title },
+          {
+            hid: "og:image",
+            content: this.metaContent[0].fields.image.fields.file.url,
+          },
+          {
+            hid: "og:description",
+            content: this.metaContent[0].fields.description,
+          },
+          {
+            name: "twitter:title",
+            content: this.metaContent[0].fields.title,
+          },
+          {
+            name: "twitter:description",
+            content: this.metaContent[0].fields.description,
+          },
+          {
+            name: "twitter:image",
+            content: this.metaContent[0].fields.image.fields.file.url,
+          },
+        ],
+      };
+    }
   },
   components: {
     CardInsights,
@@ -165,11 +210,17 @@ export default {
       arrayInsig[i] = insig.items.splice(insig.items.length - ctPost, ctPost);
     }
 
+    const metaPage = await client.getEntries({
+      content_type: "metaPage",
+      "fields.slugPage": "insights",
+    });
+
     return {
       insightsCont: insig.items,
       insightsResult: resulArr,
       cantSections: numbSections,
       insightArray: arrayInsig,
+      metaContent: metaPage.items,
     };
   },
   mounted() {

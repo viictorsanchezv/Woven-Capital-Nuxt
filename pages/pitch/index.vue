@@ -1,15 +1,62 @@
 <script>
 import InputGroup from "@/components/InputGroup.vue";
 import ButtomPrimary from "@/components/ButtomPrimary.vue";
+import client from "@/plugins/contentful.js";
+
 export default {
   name: "PitchPage",
   data() {
     return {
       inputData: [],
-    }
+      metaContent: {},
+    };
   },
-  head: {
-    title: "Pitch - Woven Capital",
+  head() {
+    if (
+      this.metaContent[0] &&
+      this.metaContent[0].fields.title &&
+      this.metaContent[0].fields.description &&
+      this.metaContent[0].fields.image.fields.file.url
+    ) {
+      return {
+        title: this.metaContent[0].fields.title,
+        meta: [
+          {
+            name: "description",
+            content: this.metaContent[0].fields.description,
+          },
+          {
+            hid: "og:image",
+            content: this.metaContent[0].fields.image.fields.file.url,
+          },
+          {
+            name: "keywords",
+            content: this.metaContent[0].fields.description,
+          },
+          { hid: "og:title", content: this.metaContent[0].fields.title },
+          {
+            hid: "og:image",
+            content: this.metaContent[0].fields.image.fields.file.url,
+          },
+          {
+            hid: "og:description",
+            content: this.metaContent[0].fields.description,
+          },
+          {
+            name: "twitter:title",
+            content: this.metaContent[0].fields.title,
+          },
+          {
+            name: "twitter:description",
+            content: this.metaContent[0].fields.description,
+          },
+          {
+            name: "twitter:image",
+            content: this.metaContent[0].fields.image.fields.file.url,
+          },
+        ],
+      };
+    }
   },
   components: {
     InputGroup,
@@ -75,8 +122,7 @@ export default {
       label: "Value Proposition",
       required: true,
       type: "textarea",
-      placeholder:
-        "Briefly describe the problem your company solves ",
+      placeholder: "Briefly describe the problem your company solves ",
       column: 1,
     });
 
@@ -95,8 +141,7 @@ export default {
       label: "Investment",
       required: true,
       type: "textarea",
-      placeholder:
-        "To date, how much have you raised, and from whom? ",
+      placeholder: "To date, how much have you raised, and from whom? ",
       column: 1,
     });
 
@@ -109,9 +154,18 @@ export default {
       column: 1,
     });
   },
-   mounted() {
+  mounted() {
     document.getElementById("footer-container").style.display = "block";
-   }
+  },
+  async asyncData() {
+    const metaPage = await client.getEntries({
+      content_type: "metaPage",
+      "fields.slugPage": "pitch",
+    });
+    return {
+      metaContent: metaPage.items,
+    };
+  },
 };
 </script>
 <template>
@@ -182,7 +236,7 @@ h1.title-pitch {
   left: 10%;
   max-width: 485px;
 }
-.sect-image{
+.sect-image {
   height: 100vh;
 }
 @media (min-width: 1441px) {
@@ -198,9 +252,9 @@ h1.title-pitch {
   }
 }
 @media (max-width: 768px) {
-  .sect-image{
-  height: 100%;
-}
+  .sect-image {
+    height: 100%;
+  }
   h1.title-pitch {
     width: 100%;
     font-size: 35px;
