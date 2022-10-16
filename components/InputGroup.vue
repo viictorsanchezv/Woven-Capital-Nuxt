@@ -10,6 +10,7 @@
       :id="inputInfo.id"
       :placeholder="inputInfo.placeholder"
       :required="inputInfo.required"
+      :v-model="inputInfo.vmodel"
     />
     <textarea
       :required="inputInfo.required"
@@ -18,6 +19,7 @@
       :placeholder="inputInfo.placeholder"
       :id="inputInfo.id"
       rows="5"
+      :v-model="inputInfo.vmodel"
     ></textarea>
   </div>
 </template>

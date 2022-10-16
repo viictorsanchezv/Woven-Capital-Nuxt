@@ -2,7 +2,14 @@
 import ButtomPrimary from "@/components/ButtomPrimary.vue";
 import titleSecundary from "@/components/TitleSecundary.vue";
 import client from "@/plugins/contentful.js";
+import axios from "axios";
+
 export default {
+  data() {
+    return {
+      email: "",
+    };
+  },
   components: {
     ButtomPrimary,
     titleSecundary,
@@ -55,10 +62,7 @@ export default {
       };
     }
   },
-   async asyncData() {
-
-   
-
+  async asyncData() {
     const metaPage = await client.getEntries({
       content_type: "metaPage",
       "fields.slugPage": "contact",
@@ -68,9 +72,36 @@ export default {
       metaContent: metaPage.items,
     };
   },
-   mounted() {
+  mounted() {
     document.getElementById("footer-container").style.display = "block";
-   }
+  },
+  methods: {
+    onSubmit() {
+      let data = {
+        email: this.email,
+      };
+      axios
+        .post(
+          "https://getform.io/f/cc7bd9e1-14e8-4131-a380-dd5b41f7059c",
+          data,
+          {
+            headers: {
+              Accept: "application/json",
+            },
+          }
+        )
+        .then(
+          (response) => {
+            this.isSuccess = response.data.success ? true : false;
+            document.getElementById("form-contact").style.display= "none";
+            document.getElementById("text-contact").style.display= "block";
+          },
+          (response) => {
+            // Error
+          }
+        );
+    },
+  },
 };
 </script>
 
@@ -138,26 +169,42 @@ export default {
         <h4 class="text-medium wight-600 mb-3">
           Stay <span class="text-green text-medium wight-600">connected</span>
         </h4>
-        <form class="mb-4" @submit.prevent="">
+        <form
+          class="mb-4"
+          accept-charset="UTF-8"
+          v-on:submit.prevent="onSubmit()"
+          method="POST"
+          id="form-contact"
+        >
           <div>
             <input
               type="email"
               placeholder="Enter your email"
               name="email"
               id="email"
+              v-model="email"
+              required
             />
-            <a
+            <button
               class="button-primary content-text text-decoration-none"
-              role="button"
-              >Subscribe</a
+              type="submit"
             >
+              Subscribe
+            </button>
           </div>
         </form>
+        <h2 id="text-contact">we have received your email, we will contact you as soon as possible.</h2>
         <p class="info-p">
           This submission constitutes my consent to Woven Capital Management
           Company, LLC, and its affiliates sending me news and updates by email.
-          I understand that I can opt out at any time. View <a href="/privacy-notice">Privacy Policy</a> for
-          more information. <a href="https://www.woven-planet.global/en/woven-capital-contact" target="_blank"> Form 20-2</a>.
+          I understand that I can opt out at any time. View
+          <a href="/privacy-notice">Privacy Policy</a> for more information.
+          <a
+            href="https://www.woven-planet.global/en/woven-capital-contact"
+            target="_blank"
+          >
+            Form 20-2</a
+          >.
         </p>
       </div>
     </section>
@@ -165,6 +212,28 @@ export default {
 </template>
 
 <style scoped>
+button.button-primary {
+    font-weight: 500;
+    font-style: normal;
+    background-color: var(--color--secondary);
+    border-radius: 4px;
+    padding: 8px 16px;
+    color: var(--color-white)!important;
+    font-size: 16px;
+    max-width: 120px;
+    border: 0;
+}
+button.button-primary:hover {
+    background-color: var(--color-btn-hover);
+    color: var(--color-white);
+    border: 0;
+}
+#form-contact{
+  display: block;
+}
+#text-contact{
+  display: none;
+}
 .contact-page {
   min-height: calc(100vh - 74px);
 }
@@ -197,7 +266,8 @@ span.wight-600 {
 input#email {
   width: 53%;
 }
-.info-p, .info-p a {
+.info-p,
+.info-p a {
   font-size: 12px;
   padding-right: 0;
   max-width: 519px;
