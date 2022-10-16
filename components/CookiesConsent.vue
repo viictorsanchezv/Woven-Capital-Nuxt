@@ -28,7 +28,7 @@ export default {
   border-radius: 0 !important;
   display: flex;
   justify-content: center;
-  padding: 20px !important;
+  padding: 0px !important;
 }
 .cookies-consent .vcc-window__grid {
   display: flex !important;
@@ -36,6 +36,7 @@ export default {
   justify-content: flex-start;
   align-items: flex-start;
   max-width: 920px;
+  padding: 20px !important;
 }
 .cookies-consent p.vcc-window__title {
   font-size: 12px;
