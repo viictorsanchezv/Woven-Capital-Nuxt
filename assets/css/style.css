@@ -1,6 +1,11 @@
 *{
     font-family: "Poppins", Sans-serif;
     font-size: 14px;
+    pointer-events: auto;
+    cursor: context-menu;
+}
+a, a h1, a h2, a h3, a h4, a h5, a h6, a span, a p, a div, a img, a video{
+    cursor: pointer;
 }
 :root{
     --bg--primary: #21CB25;
@@ -9,6 +14,37 @@
     --color--accent: #61CE70;
     --color-white: #ffffff;
     --color-btn-hover:#15A419;
+}
+main.content-main a:not(.button-primary, .refPortfolio, .text-new, .author-post){
+    color: var( --bg--primary)!important;
+}
+.post_insight-content div.content-background{
+    display: flex;
+    margin-bottom: 15px;
+    align-items: center;
+    background: linear-gradient(90deg, rgba(49,49,49,1) 40%, rgba(255,255,255,1) 40%, rgba(255,255,255,1) 100%);
+}
+.post_insight-content div.content-background .leftS, 
+.post_insight-content div.content-background2 .rightS{
+    width: 40%;
+    padding: 3%;
+    display: flex;
+    align-items: center;
+    color: #fff;
+}
+.post_insight-content div.content-background .rightS{
+    width: 60%;
+    padding-left: 20px;
+}
+.post_insight-content div.content-background2{
+    display: flex; 
+    margin-bottom: 15px;
+    align-items: center; ;
+    background: linear-gradient(90deg, rgba(255,255,255,1) 60%, rgba(49,49,49,1) 60%, rgba(49,49,49,1) 100%);
+}
+.post_insight-content div.content-background2 .leftS{
+    width: 60%;
+    padding-right: 20px;
 }
 .text-12{
     font-style: normal;
@@ -19,21 +55,15 @@
 .text-small{
     font-style: normal;
     font-weight: 400;
-    font-size: 18px;
-    line-height: 32px;
 }
 .text-medium{
     font-style: normal;
     font-weight: 400;
-    font-size: 24px;
-    line-height: 38px;
 }
 h1.h1-45, 
 span.h1-45{
-    font-size: 45px;
     font-weight: 500;
     font-style: normal;
-    line-height: 51.75px;
     letter-spacing: -2px;
 }
 
@@ -69,41 +99,76 @@ padding-bottom: 5px;
 div.p-5rem{
     padding: 5rem;
 }
-
+div.p-7{
+    padding: 7%;
+}
 .top-0{
     top: 0;
 }
 .lef-0{
     left: 0;
 }
-
-@media(max-width:768px){
-    .hero-image h1.title-home {
-        width: 100%!important;
-        font-size: 46px;
-        line-height: 49px;
-        text-align: center;
-        margin-bottom: 31px;
-        padding: 10px;
+@media(min-width: 1441px){
+    .text-medium{
+        font-size: 24px;
+        line-height: 38px;
     }
-    .content-hero img {
-        max-width: 100%;
-        object-fit: contain;
-        padding: 6px;
+    .text-small, .text-small p, .text-small a{
+        font-size: 18px;
+        line-height: 32px;
     }
-    .our-portfolio {
-        padding: 40px 0px 0px 0px!important;
-    }
-    h2.title-secundary, h2.title-secundary span {
-        width: 100%!important;
-        font-size: 30px!important;
-        text-align: center;
-        line-height: 39px!important;
-    }
-    p.text-medium.text-portfolio {
-        text-align: center;
-    }
-    .our-portfolio {
-        text-align: center;
+    h1.h1-45, 
+    span.h1-45{
+        font-size: 45px;
+        line-height: 51.75px;
     }
 }
+@media(max-width: 1440px){
+    p, strong, span {
+        font-size: 16px;
+    }
+    .text-medium{
+        font-size: 20px;
+        line-height: 30px;
+    }
+    .text-small, .text-small p, .text-small a{
+        font-size: 16px;
+        line-height: 24px;
+    }
+    h1.h1-45, 
+    span.h1-45{
+        font-size: 40px;
+        line-height: 48px;
+    }
+}
+@media(max-width: 768px){
+    div.p-7{
+        padding: 60px 40px 40px;
+    }
+    h1.h1-45, 
+    span.h1-45{
+        font-size: 35px;
+        line-height: 39px;
+    }
+    
+}
+@media(max-width:1058px){
+    .post_insight-content div.content-background, 
+    .post_insight-content div.content-background2{
+        display: block;
+        background: white;
+    } 
+    .post_insight-content div.content-background .rightS, 
+    .post_insight-content div.content-background2 .leftS{
+        width: 100%;
+        margin:  0 0 10px 0 ;
+        padding: 0;
+    }
+    .post_insight-content div.content-background .leftS, 
+    .post_insight-content div.content-background2 .rightS{
+        background: #313131;
+        width: 100%;
+        margin:  0 0 10px 0 ;
+    }
+}
+

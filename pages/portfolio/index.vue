@@ -1,212 +1,710 @@
 <script>
-import PortfolioHeader from '@/components/PortfolioHeader.vue';
-import SectionColumns from '@/components/SectionColumns.vue';
-import PortfolioTitle from '@/components/PortfolioTitle.vue';
-import CompanyNews from '@/components/CompanyNews.vue';
+import PortfolioHeader from "@/components/PortfolioHeader.vue";
+import SectionColumns from "@/components/SectionColumns.vue";
+import PortfolioTitle from "@/components/PortfolioTitle.vue";
+import CompanyNews from "@/components/CompanyNews.vue";
+import client from "@/plugins/contentful.js";
 
 export default {
   components: {
     PortfolioHeader,
     SectionColumns,
     PortfolioTitle,
-    CompanyNews
+    CompanyNews,
   },
   data() {
     return {
-      nuro: [
-        {
-          title: 'Woven Capital Makes Its First Investment, Backing Nuro',
-          description: 'Woven Capital, an $800 million global investment fund that supports growth-stage companies in mobility, made an equity investment in Nuro...'
-        },
-        {
-          title: 'TechCrunch: Woven Capital kicks off portfolio with investment in autonomous delivery company Nuro',
-          description: 'Woven Capital, the investment arm of Toyota’s innovation-focused subsidiary Woven Planet, has announced an investment into Silicon...'
-        }
-      ],
-      ridecell: [
-        {
-          title: 'Woven Capital Invests in Ridecell to Accelerate Global Growth in IoT-driven Automation for Mobility and Fleet Businesses',
-          description: 'Woven Capital, L.P. today announced that it has made an investment in Ridecell Inc., a leading platform powering digital transformations and IoT...'
-        }
-      ],
-      whill: [
-        {
-          title: 'WHILL Secures Funding from Woven Capital to Scale Short-Distance Mobility Service Globally',
-          description: 'WHILL, Inc., a leading developer and service provider of short-distance mobility, announced today it closed new funding led by a strategic...'
-        }
-      ]
+      portfoliosCont: {},
+      investmentsCont: {},
+      insightsPortf: {},
+      slide: 0,
+      sliding: null,
+      inMove: false,
+      activeSection: 0,
+      offsets: [],
+      touchStartY: 0,
+      sectionOffsetO: {},
+      dirScroll: 0,
+      activeScrollUp: false,
+      activeScrollDown: false,
+      mousePoint: 0,
+      metaContent: {},
+    };
+  },
+  head() {
+    if (
+      this.metaContent[0] &&
+      this.metaContent[0].fields.title &&
+      this.metaContent[0].fields.description &&
+      this.metaContent[0].fields.image.fields.file.url
+    ) {
+      return {
+        title: this.metaContent[0].fields.title,
+        meta: [
+          {
+            name: "description",
+            content: this.metaContent[0].fields.description,
+          },
+          {
+            hid: "og:image",
+            content: this.metaContent[0].fields.image.fields.file.url,
+          },
+          {
+            name: "keywords",
+            content: this.metaContent[0].fields.description,
+          },
+          { hid: "og:title", content: this.metaContent[0].fields.title },
+          {
+            hid: "og:image",
+            content: this.metaContent[0].fields.image.fields.file.url,
+          },
+          {
+            hid: "og:description",
+            content: this.metaContent[0].fields.description,
+          },
+          {
+            name: "twitter:title",
+            content: this.metaContent[0].fields.title,
+          },
+          {
+            name: "twitter:description",
+            content: this.metaContent[0].fields.description,
+          },
+          {
+            name: "twitter:image",
+            content: this.metaContent[0].fields.image.fields.file.url,
+          },
+        ],
+      };
     }
-  }
-}
+  },
+  async asyncData() {
+    let dataInfo = [];
+    const promiseArray = [];
+
+    const portf = await client.getEntries({
+      content_type: "portfolioNwc",
+      order: "fields.order",
+    });
+
+    const investmentsC = await client.getEntries({
+      content_type: "investmentsNwc",
+    });
+
+    portf.items.forEach((portfolio) => {
+      promiseArray.push(
+        client.getEntries({
+          content_type: "insightsNwc",
+          "fields.company": portfolio.fields.slug,
+          limit: "2",
+          order: "-fields.publishDate",
+        })
+      );
+    });
+
+    dataInfo = await Promise.all(promiseArray);
+
+    dataInfo = dataInfo.map((element) => {
+      return element.items;
+    });
+
+    const metaPage = await client.getEntries({
+      content_type: "metaPage",
+      "fields.slugPage": "portfolio",
+    });
+
+    return {
+      portfoliosCont: portf.items,
+      investmentsCont: investmentsC.items,
+      insightsPortf: dataInfo,
+      metaContent: metaPage.items,
+    };
+  },
+  methods: {
+    onSlideStart(slide) {
+      this.sliding = true;
+    },
+    onSlideEnd(slide) {
+      this.sliding = false;
+    },
+    hideFooter() {
+      let footerS = document.getElementById("footer-container");
+
+      let sections = document.getElementsByClassName("fullpage");
+      let sectionsLength = sections.length;
+
+      if (this.activeSection == this.offsets.length - 1) {
+         setTimeout(() => {
+          footerS.style.display = "block";
+        }, 1000);
+      } else {
+        footerS.style.display = "none";
+      }
+    },
+    calculateSectionOffsets() {
+      let sections = document.getElementsByClassName("fullpage");
+      let length = sections.length;
+
+      for (let i = 0; i < length; i++) {
+        this.sectionOffsetO = {
+          title: sections[i].title,
+          sectionOffset: sections[i].offsetTop,
+        };
+
+        this.offsets.push(this.sectionOffsetO);
+      }
+    },
+    handleMouseWheel: function (e) {
+      let elemtInt =
+        document.getElementsByClassName("section-content")[this.activeSection];
+      let elemtExt =
+        document.getElementsByClassName("col-content")[this.activeSection];
+      if (
+        e.wheelDelta < -30 &&
+        !this.inMove &&
+        elemtExt.offsetHeight + elemtExt.scrollTop >= elemtInt.scrollHeight - 1
+      ) {
+        this.moveUp();
+      } else if (e.wheelDelta > 30 && !this.inMove && elemtExt.scrollTop <= 0) {
+        this.moveDown();
+      } else if (
+        e.wheelDelta < 0 &&
+        !this.inMove &&
+        elemtExt.offsetHeight + elemtExt.scrollTop >= elemtInt.scrollHeight - 1
+      ) {
+        this.moveDown();
+      } else if (e.wheelDelta > 0 && !this.inMove && elemtExt.scrollTop <= 0) {
+        this.moveUp();
+      }
+      setTimeout(() => {
+        e.preventDefault();
+      }, 100);
+      return false;
+    },
+    handleMouseWheelDOM: function (e) {
+      let elemtInt =
+        document.getElementsByClassName("section-content")[this.activeSection];
+      let elemtExt =
+        document.getElementsByClassName("col-content")[this.activeSection];
+
+      if (
+        e.detail > 0 &&
+        !this.inMove &&
+        elemtExt.offsetHeight + elemtExt.scrollTop >= elemtInt.scrollHeight - 1
+      ) {
+        this.moveUp();
+      } else if (e.detail < 0 && !this.inMove && elemtExt.scrollTop <= 0) {
+        this.moveDown();
+      }
+
+      return false;
+    },
+    moveDown() {
+      this.inMove = true;
+      this.activeSection--;
+
+      if (this.activeSection < 0) this.activeSection = 0;
+
+      this.scrollToSection(this.activeSection, true);
+    },
+    moveUp() {
+      this.inMove = true;
+      this.activeSection++;
+
+      if (this.activeSection > this.offsets.length - 1)
+        this.activeSection = this.offsets.length - 1;
+
+      this.scrollToSection(this.activeSection, true);
+    },
+    scrollToSection(id, force = false) {
+      if (this.inMove && !force) return false;
+
+      this.activeSection = id;
+      this.inMove = true;
+
+      setTimeout(() => {
+        this.inMove = false;
+      }, 400);
+      this.hideFooter();
+    },
+    handleSection(value) {
+      this.activeSection = value;
+    },
+    touchStart(e) {
+      this.touchStartY = e.touches[0].clientY;
+    },
+    touchMove(e) {
+      if (this.inMove) return false;
+
+      const currentY = e.touches[0].clientY;
+
+      if (this.touchStartY < currentY) {
+        this.moveDown();
+      } else {
+        this.moveUp();
+      }
+
+      this.touchStartY = 0;
+      return false;
+    },
+    mouseUpHandler(e) {
+      if (this.mousePoint > e.pageY) {
+        this.moveUp();
+      } else if (this.mousePoint < e.pageY) {
+        this.moveDown();
+      }
+      e.preventDefault();
+    },
+    mouseDownHandler(e) {
+      this.mousePoint = e.pageY;
+      e.preventDefault();
+    },
+    endedVideo(event) {
+      let video = event.srcElement;
+
+      video.classList.add("remove-video");
+      video.nextSibling.nextElementSibling.classList.remove("remove-video");
+    },
+  },
+  mounted() {
+    this.calculateSectionOffsets();
+    this.hideFooter();
+
+    if (this.$route.hash == "#nuro") {
+      this.activeSection = 0;
+    } else if (this.$route.hash == "#ridecell") {
+      this.activeSection = 1;
+    } else if (this.$route.hash == "#whill") {
+      this.activeSection = 2;
+    }
+
+    document.getElementById("footer-container").style.display = "none";
+
+    window.addEventListener("DOMMouseScroll", this.handleMouseWheelDOM); // Mozilla Firefox
+    window.addEventListener("mousewheel", this.handleMouseWheel); // Other browsers
+    window.addEventListener("touchstart", this.touchStart, { passive: false }); // mobile devices
+    window.addEventListener("touchmove", this.touchMove, { passive: false }); // mobile devices
+
+    document.addEventListener("mouseup", this.mouseUpHandler);
+    document.addEventListener("mousedown", this.mouseDownHandler);
+  },
+  destroyed() {
+    window.removeEventListener("mousewheel", this.handleMouseWheel); // Other browsers
+    window.removeEventListener("DOMMouseScroll", this.handleMouseWheelDOM); // Mozilla Firefox
+    window.removeEventListener("touchstart", this.touchStart); // mobile devices
+    window.removeEventListener("touchmove", this.touchMove); // mobile devices
+    document.removeEventListener("mouseup", this.mouseUpHandler);
+    document.removeEventListener("mousedown", this.mouseDownHandler);
+  },
+};
 </script>
 
 <template>
-  <main>
-    <portfolio-header></portfolio-header>
-    <section-columns id="nuro">
-      <template #left>
-        <div class="col-md-6 col-12 border-box p-0 justify-content-start position-sticky vh-100 top-0">
-          <img
-            class="vh-50 pb-5x w-100 object-cover"
-            src="@/assets/image/portfolio/rectangle-414.png"
-            alt=""
-          />
-          <img
-            class="vh-50 pt-5x w-100 object-cover"
-            src="@/assets/image/portfolio/rectangle-416.png"
-            alt=""
-          />
-        </div>
+  <main class="portfolio">
+    <div class="container-portfolio">
+      <!-- <portfolio-header
+        :offsets="offsets"
+        :activeSection="activeSection"
+        v-on:sectActive="handleSection"
+      >
+      </portfolio-header> -->
+
+      <template v-for="(portfolio, index) in portfoliosCont">
+        <Transition :key="index" mode="out-in">
+          <section-columns
+            class="fullpage"
+            :class="{ active: activeSection == index }"
+            :id="portfolio.fields.slug"
+            :title="portfolio.fields.title"
+            v-show="activeSection == index"
+          >
+            <template #left>
+              <div
+                class="col-md-6 col-12 border-box p-0 justify-content-start vh-100 col-sticky"
+              >
+                <img
+                  class="vh-50 pt-0 w-100 object-cover pb-5x"
+                  :src="portfolio.fields.mediaTop.fields.file.url"
+                  alt=""
+                />
+                <img
+                  v-if="
+                    portfolio.fields.mediaBottom.fields.file.contentType ==
+                    'image/png'
+                  "
+                  class="vh-50 w-100 object-cover"
+                  :src="portfolio.fields.mediaBottom.fields.file.url"
+                  alt=""
+                />
+                <template
+                  v-else-if="
+                    portfolio.fields.mediaBottom.fields.file.contentType ==
+                    'video/mp4'
+                  "
+                >
+                  <video
+                    class="w-100 object-cover vh-50 video-poster"
+                    autoplay="false"
+                    controls
+                    @ended="endedVideo($event)"
+                    :src="portfolio.fields.mediaBottom.fields.file.url"
+                    :poster="portfolio.fields.posterVideo.fields.file.url"
+                  ></video>
+                  <img
+                    class="vh-50 w-100 object-cover img-poster remove-video"
+                    :src="portfolio.fields.posterVideo.fields.file.url"
+                    alt=""
+                  />
+                </template>
+              </div>
+            </template>
+            <template #right>
+              <div
+                class="overflow-y-auto col-md-6 col-12 border-box p-0 col-content w-100"
+              >
+                <div class="p-14 m-0 section-content">
+                  <portfolio-title
+                    :title="portfolio.fields.location"
+                    :image="portfolio.fields.logoblack.fields.file.url"
+                    :linkWeb="portfolio.fields.link"
+                    :linkLinkedin="portfolio.fields.linkedinUrl"
+                  ></portfolio-title>
+                  <div
+                    v-if="portfolio.fields.content"
+                    v-html="$md.render(portfolio.fields.content)"
+                    class="post_insight-content text-small"
+                  ></div>
+                  <div class="info-wrapper mb-5 text-small">
+                    <p>
+                      {{ portfolio.fields.testimonial }}
+                    </p>
+                  </div>
+                  <div class="text-center mb-4">
+                    <h5 class="m-0">
+                      {{ portfolio.fields.authorTestimonial }}
+                    </h5>
+                    <p>{{ portfolio.fields.designationTestimonial }}</p>
+                  </div>
+
+                  <hr class="mb-4" />
+
+                  <template v-if="insightsPortf[index].length > 0">
+                    <h5 class="company-new-title mb-4 text-medium">
+                      Company News
+                    </h5>
+
+                    <company-news
+                      v-for="(item, index) in insightsPortf[index]"
+                      :key="index"
+                      :companyInfo="item"
+                    ></company-news>
+                  </template>
+                </div>
+              </div>
+            </template>
+          </section-columns>
+        </Transition>
       </template>
-      <template  #right>
-        <div class="overflow-y-auto col-md-6 col-12 mt-5 border-box p-5rem pb-0">
-          <portfolio-title title="Mountain View, CA, USA" image="nuro.png"></portfolio-title>
-          <p class="portfolio-description mb-5">Nuro is the leader in autonomous delivery using robotics to improve everyday life. The company's fleet of on-road vehicles that are fully autonomous and require no human riders are designed to deliver everyday goods to consumers, ranging from groceries to pizzas to prescriptions in a way that is quick, affordable—and most importantly—safe.</p>
-          <div class="info-wrapper mb-5">
-            <p>“Woven Capital's focus on safe mobility and leading-edge technology, as well as their roots in Toyota, make them an ideal investment partner. Their team has a deep understanding and appreciation of our work to create a real-world, autonomous delivery service. And with their backing, we are excited to shape the future of mobility and improve people's lives.”</p>
-          </div>
-          <div class="text-center mb-4">
-            <h5 class="m-0">Dave Ferguson</h5>
-            <p>President and Co-Founder, Nuro</p>
-          </div>
-          <hr class="mb-4">
-          <h5 class="company-new-title mb-4">Company News</h5>
-          <company-news v-for="(item, index) in nuro" :key="index" :companyInfo="item"></company-news>
-        </div>
-      </template>
-    </section-columns >
-    <section-columns id="ridecell">
-      <template #left>
-        <div class="col-md-6 col-12 border-box p-0 justify-content-start position-sticky vh-100 top-0">
-          <img
-            class="vh-50 pb-5x w-100 object-cover"
-            src="@/assets/image/portfolio/rectangle-580.png"
-            alt=""
-          />
-          <img
-            class="vh-50 pt-5x w-100 object-cover"
-            src="@/assets/image/portfolio/rectangle-581.png"
-            alt=""
-          />
-        </div>
-      </template>
-      <template  #right>
-        <div class="overflow-y-auto col-md-6 col-12  border-box p-5rem pb-0">
-          <portfolio-title title="San Francisco, CA, USA" image="ridecell.png"></portfolio-title>
-          <p class="portfolio-description mb-5">Ridecell is a leading platform powering digital transformations and IoT automation for fleet-driven businesses. The company’s IoT-driven automation and mobility platform helps businesses modernize and monetize their fleets by combining data insights with digital vehicle control to turn today’s manual processes into automated workflows, which improves efficiency and control for shared services, motorpool, rental, and logistics fleets.</p>
-          <div class="info-wrapper mb-5">
-            <p>"This investment with Woven Capital will be highly strategic as Ridecell continues to expand into new markets. We are excited to have Woven Capital as our investor to bring Ridecell automation and mobility innovations that use automation and digital vehicle control to help create safe and secure mobility.”</p>
-          </div>
-          <div class="text-center mb-4">
-            <h5 class="m-0">Aarjav Trivedi</h5>
-            <p>Founder & CEO, Ridecell</p>
-          </div>
-          <hr class="mb-4">
-          <h5 class="company-new-title mb-4">Company News</h5>
-          <company-news v-for="(item, index) in ridecell" :key="index" :companyInfo="item"></company-news>
-        </div>
-      </template>
-    </section-columns>
-    <section-columns id="whill">
-      <template #left>
-        <div class="col-md-6 col-12 border-box p-0 justify-content-start position-sticky vh-100 top-0">
-          <img
-            class="vh-50 pb-5x w-100 object-cover"
-            src="@/assets/image/portfolio/rectangle-583.png"
-            alt=""
-          />
-          <img
-            class="vh-50 pt-5x w-100 object-cover"
-            src="@/assets/image/portfolio/rectangle-584.png"
-            alt=""
-          />
-        </div>
-      </template>
-      <template  #right>
-        <div class="overflow-y-auto col-md-6 col-12  border-box p-5rem pb-0">
-          <portfolio-title title="Tokyo, Japan" image="whill.png"></portfolio-title>
-          <p class="portfolio-description mb-4">It all began with a single user’s voice: “I’ve given up on even going to the grocery store just two blocks away.”</p>
-          <p class="portfolio-description mb-4">In 2010, this statement from a close friend was the start of it all. He was a wheelchair user who didn’t like the negative attention he received while out in public. WHILL’s founders knew him to be an amazingly independent, fun-loving, and social person, and they were determined to create a mobility device that would allow him to live his life with confidence and enthusiasm.</p>
-          <p class="portfolio-description mb-4">This is why they founded WHILL.</p>
-          <p class="portfolio-description mb-4">Since that time, WHILL’s mission has been to transform today’s antiquated power wheelchair and scooter experiences into a new kind of empowering device: an intelligent personal electric vehicle (EV). Named one of TIME’s Best Inventions of 2018, WHILL is reinventing the personal mobility industry by combining state-of-the-art technology with aesthetically pleasing design.</p>
-          <hr class="mb-4">
-          <h5 class="company-new-title mb-4">Company News</h5>
-          <company-news v-for="(item, index) in whill" :key="index" :companyInfo="item"></company-news>
-        </div>
-      </template>
-    </section-columns>
-    <section-columns id="lp-investiments">
-      <template #left>
-        <div class="col-md-6 col-12 border-box p-0 justify-content-start position-sticky vh-100 top-0">
-          <img
-            class="vh-50 pb-5x w-100 object-cover"
-            src="@/assets/image/portfolio/rectangle-619.png"
-            alt=""
-          />
-          <img
-            class="vh-50 pt-5x w-100 object-cover"
-            src="@/assets/image/portfolio/rectangle-619.png"
-            alt=""
-          />
-        </div>
-      </template>
-      <template  #right>
-        <div class="overflow-y-auto col-md-6 col-12  border-box p-5rem pb-0">
-          <portfolio-title :icons="false" title="" image="lp-Investments.png"></portfolio-title>
-          <p class="portfolio-description mb-5 pb-5">Fund-of-Fund investments in early-stage venture funds that complement our geographic coverage.</p>
-          <div class="img-wrapper d-flex justify-content-between mt-5">
-            <img src="@/assets/image/portfolio/ballistic.png" alt="">
-            <img src="@/assets/image/portfolio/2150.png" alt="">
-            <img src="@/assets/image/portfolio/uppartners.png" alt="">
-          </div>
-        </div>
-      </template>
-    </section-columns>
+
+      <Transition mode="out-in">
+        <section-columns
+          id="lp-investiments"
+          class="fullpage"
+          :class="{ active: activeSection == this.offsets.length - 1 }"
+          title="LP Investments"
+          v-show="activeSection == offsets.length - 1"
+        >
+          <template #left>
+            <div
+              class="col-md-6 col-12 border-box p-0 justify-content-start col-sticky vh-100"
+            >
+              <img
+                class="vh-50 pb-5x w-100 object-cover"
+                :src="investmentsCont[0].fields.coverImage.fields.file.url"
+                alt=""
+              />
+
+              <div class="vh-50 section-carousel">
+                <b-carousel
+                  id="carousel-1"
+                  v-model="slide"
+                  :interval="4000"
+                  style="text-shadow: 1px 1px 2px #333"
+                  class="w-100 h-100"
+                  img-width="100"
+                  img-height="100"
+                  @sliding-start="onSlideStart"
+                  @sliding-end="onSlideEnd"
+                >
+                  <template
+                    v-for="(gallery, index) in investmentsCont[0].fields
+                      .galleryImages"
+                  >
+                    <b-carousel-slide :key="index">
+                      <template #img>
+                        <img
+                          :src="gallery.fields.file.url"
+                          alt=""
+                          class="vh-50 image-slide d-block w-100"
+                        />
+                      </template>
+                    </b-carousel-slide>
+                  </template>
+                </b-carousel>
+              </div>
+            </div>
+          </template>
+          <template #right>
+            <div
+              class="overflow-y-auto col-md-6 col-12 border-box p-0 col-content"
+            >
+              <div class="p-14 m-0 section-content">
+                <title-secundary
+                  class="justify-content-start"
+                  :titleH2="investmentsCont[0].fields.title"
+                  spanTitleH2=""
+                ></title-secundary>
+                <p class="portfolio-description text-small">
+                  {{ investmentsCont[0].fields.description }}
+                </p>
+                <div class="img-wrapper-logo">
+                  <template
+                    v-for="(logo, index) in investmentsCont[0].fields.logos"
+                  >
+                    <img :key="index" :src="logo.fields.file.url" alt="" />
+                  </template>
+                </div>
+              </div>
+            </div>
+          </template>
+        </section-columns>
+      </Transition>
+    </div>
   </main>
 </template>
+
 <style scoped>
-      .info-wrapper {
-      border-left : 3px solid var(--bg--primary);
-      padding-left: 2rem;
-    }
+.remove-video {
+  display: none;
+}
+.img-poster {
+  position: absolute;
+  left: 0;
+  z-index: 0;
+  bottom: 0;
+}
+.video-poster {
+  z-index: 2;
+}
+@media (min-width: 768px) {
+  .v-enter-active,
+  .v-leave-active {
+    -webkit-animation: slide-in-bottom 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+      both;
+    animation: slide-in-bottom 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    z-index: 100;
+  }
+  .v-enter-from,
+  .v-leave-to {
+    -webkit-animation: slide-in-top 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+      reverse forwards;
+    animation: slide-in-top 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse
+      forwards;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    z-index: 99;
+  }
+  .fullpage {
+    opacity: 0;
+  }
+  .fullpage.active {
+    opacity: 1;
+  }
+}
+.fullpage {
+  display: block !important;
+  z-index: 88;
+}
+.fullpage.active {
+  z-index: 99;
+}
+@-webkit-keyframes slide-in-bottom {
+  0% {
+    -webkit-transform: translateY(100px);
+    transform: translateY(100px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes slide-in-bottom {
+  0% {
+    -webkit-transform: translateY(100px);
+    transform: translateY(100px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
 
-    p.portfolio-description {
-      font-weight:400;
-      font-size:18px;
-      line-height: 32px;
-    }
+@-webkit-keyframes slide-in-top {
+  0% {
+    -webkit-transform: translateY(-100px);
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes slide-in-top {
+  0% {
+    -webkit-transform: translateY(-100px);
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
 
-    .info-wrapper p {
-      font-size: 18px;
-      font-weight: 600;
-      line-height: 32px;
-    }
+.container-portfolio {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  justify-content: center;
+  display: flex;
+}
 
-    div.text-center h5 {
-      font-style: normal;
-      font-weight: 400;
-      font-size: 18px;
-      line-height: 32px;
-      text-align: center;
-      color: #313131;
-    }
+div.p-14 {
+  padding: 14%;
+}
+main.portfolio {
+  overflow: hidden;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.fullpage {
+  height: 100vh;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.image-slide {
+  object-fit: cover;
+  object-position: top;
+}
+.portfolio-description {
+  margin-bottom: 50px;
+}
+#lp-investiments .img-wrapper-logo {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+#lp-investiments .img-wrapper-logo img {
+  object-fit: contain;
+  width: 33.33%;
+  padding: 0 20px 0 0;
+  height: 60px;
+}
 
-    div.text-center p {
-      font-style: normal;
-      font-weight: 400;
-      font-size: 18px;
-      line-height: 32px;
-      color: #818181;
-    }
+p.portfolio-description {
+  font-weight: 400;
+}
+.info-wrapper {
+  border-left: 3px solid var(--bg--primary);
+  padding-left: 2rem;
+  margin-top: 8px;
+}
+.info-wrapper p {
+  font-weight: 600;
+}
 
-    .company-new-title {
-      font-weight: 600;
-      font-size: 24px;
-      line-height: 34px;
-      color: #313131;
-    }
+div.text-center h5 {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 32px;
+  text-align: center;
+  color: #313131;
+}
 
-    .img-wrapper img {
-      width: 30%;
-    }
+div.text-center p {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 32px;
+  color: #818181;
+}
+
+.company-new-title {
+  font-weight: 600;
+  color: #313131;
+}
+.col-sticky {
+  position: sticky;
+  top: 0;
+}
+.col-content {
+  margin-top: 0;
+  overflow-y: auto;
+  height: 100%;
+}
+@media (min-width: 768px) and (max-width: 1024px) {
+  main.portfolio {
+    margin-top: 75px;
+    height: calc(100vh - 75px);
+  }
+}
+
+@media (max-width: 767px) {
+  .container-portfolio {
+    display: block;
+  }
+  .fullpage {
+    display: block !important;
+    position: relative;
+  }
+  div.p-14 {
+    padding: 60px 40px 40px;
+  }
+  .col-sticky {
+    position: relative;
+    top: unset;
+    order: 1;
+  }
+  .col-content {
+    order: 2;
+    margin: 0;
+    padding: 40px;
+  }
+  #lp-investiments .img-wrapper-logo img {
+    width: 50%;
+    padding: 20px 0;
+    height: 100px;
+  }
+  main.portfolio {
+    overflow: unset;
+    height: 100%;
+  }
+  .fullpage {
+    height: 100%;
+  }
+}
 </style>
