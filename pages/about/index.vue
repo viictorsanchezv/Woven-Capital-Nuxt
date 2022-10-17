@@ -182,6 +182,7 @@ export default {
             class="w-100 object-cover vh-50"
             src="@/assets/video/overview.mp4"
             autoplay="false"
+            muted="false"
             controls
           ></video>
           <img

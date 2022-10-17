@@ -84,168 +84,8 @@ export default {
 
       return new Date(month).toLocaleDateString("en", options);
     },
-    hideFooter() {
-      let footerS = document.getElementById("footer-container");
-
-      let sections = document.getElementsByClassName("fullpage");
-      let sectionsLength = sections.length;
-
-      if (this.activeSection == this.offsets.length - 1) {
-        setTimeout(() => {
-          footerS.style.display = "block";
-        }, 1000);
-      } else {
-        footerS.style.display = "none";
-      }
-    },
-    calculateSectionOffsets() {
-      let sections = document.getElementsByClassName("fullpage");
-      let length = sections.length;
-
-      for (let i = 0; i < length; i++) {
-        let sectionOffset = sections[i].offsetTop;
-        this.offsets.push(sectionOffset);
-      }
-    },
-    throttle(fn, wait) {
-      var time = Date.now();
-
-      return function (event) {
-        if (Math.abs(event.deltaY) < 4) return;
-
-        if (time + wait - Date.now() < 0) {
-          fn(event);
-          time = Date.now();
-        }
-      };
-    },
-    handleMouseWheel: function (e) {
-      if (this.canMove === true) {
-        this.canMove = false;
-
-        if (e.wheelDeltaY <= -this.sensi && !this.canMove) {
-          this.sensi = 1000;
-          this.moveUp();
-        } else if (e.wheelDeltaY >= this.sensi && !this.canMove) {
-          this.sensi = 1000;
-
-          this.moveDown();
-        }
-        setTimeout(() => {
-          this.sensi = 8;
-          this.canMove = true;
-        }, 1000);
-      }
-      return false;
-    },
-    handleMouseWheelDOM: function (e) {
-      if (this.canMove === true) {
-        this.canMove = false;
-
-        if (e.detail <= -this.sensi && !this.canMove) {
-          this.sensi = 1000;
-          this.moveUp();
-        } else if (e.detail >= this.sensi && !this.canMove) {
-          this.sensi = 1000;
-
-          this.moveDown();
-        }
-        setTimeout(() => {
-          this.sensi = 8;
-          this.canMove = true;
-        }, 1000);
-      }
-      return false;
-
-      return false;
-    },
-    moveDown() {
-      this.inMove = true;
-      this.activeSection--;
-      if (this.activeSection < 0) this.activeSection = 0;
-      this.scrollToSection(this.activeSection, true);
-    },
-    moveUp() {
-      this.inMove = true;
-      this.activeSection++;
-
-      if (this.activeSection > this.offsets.length - 1)
-        this.activeSection = this.offsets.length - 1;
-      this.scrollToSection(this.activeSection, true);
-    },
-    scrollToSection(id, force = false) {
-      if (this.inMove && !force) return false;
-      this.activeSection = id;
-      this.inMove = true;
-
-      setTimeout(() => {
-        this.inMove = false;
-      }, 1000);
-      this.hideFooter();
-    },
-    touchStart(e) {
-      this.touchStartY = e.touches[0].clientY;
-    },
-    touchMove(e) {
-      if (this.inMove) return false;
-      const currentY = e.touches[0].clientY;
-      if (this.touchStartY < currentY) {
-        this.moveDown();
-      } else {
-        this.moveUp();
-      }
-      this.touchStartY = 0;
-      e.preventDefault();
-      return false;
-    },
-    mouseUpHandler(e) {
-      if (this.mousePoint > e.pageY) {
-        this.moveUp();
-      } else if (this.mousePoint <= e.pageY) {
-        this.moveDown();
-      }
-      e.preventDefault();
-      return false;
-    },
-    mouseDownHandler(e) {
-      this.mousePoint = e.pageY;
-      e.preventDefault();
-    },
   },
-  mounted() {
-    this.calculateSectionOffsets();
-    this.hideFooter();
-    document.getElementById("footer-container").style.display = "none";
-    
-    window.addEventListener(
-      "mousewheel",
-      this.throttle(this.handleMouseWheel, 500)
-    );
-    window.addEventListener(
-      "DOMMouseScroll",
-      this.throttle(this.handleMouseWheelDOM, 500)
-    );
-
-    window.addEventListener("touchstart", this.touchStart, { passive: false });
-    window.addEventListener("touchmove", this.touchMove, { passive: false });
-    window.addEventListener("mouseup", this.mouseUpHandler);
-    window.addEventListener("mousedown", this.mouseDownHandler);
-  },
-  destroyed() {
-    window.removeEventListener(
-      "mousewheel",
-      this.throttle(this.handleMouseWheel, 1000)
-    );
-    window.removeEventListener(
-      "DOMMouseScroll",
-      this.throttle(this.handleMouseWheelDOM, 500)
-    );
-    window.removeEventListener("touchstart", this.touchStart);
-    window.removeEventListener("touchmove", this.touchMove);
-    window.removeEventListener("mouseup", this.mouseUpHandler);
-    window.removeEventListener("mousedown", this.mouseDownHandler);
-    window.removeEventListener("onscroll", this.onscrollHandle);
-  },
+  
   async asyncData() {
     const portf = await client.getEntries({
       content_type: "portfolioNwc",
@@ -279,10 +119,8 @@ export default {
 <template>
   <main class="homePage">
     <div class="container-homepage">
-      <Transition mode="out-in">
+     
         <section
-          v-show="activeSection == 0"
-          :class="{ active: activeSection == 0 }"
           class="fullpage hero-image vh-hero d-flex flex-column align-items-center w-100"
         >
           <div class="position-relative w-100 hero-container">
@@ -354,12 +192,8 @@ export default {
             ></video>
           </div>
         </section>
-      </Transition>
-
-      <Transition mode="out-in">
+   
         <section
-          v-show="activeSection == 1"
-          :class="{ active: activeSection == 1 }"
           class="fullpage our-portfolio w-100"
         >
           <div class="position-relative w-100 portf-col">
@@ -409,12 +243,8 @@ export default {
             </div>
           </div>
         </section>
-      </Transition>
-
-      <Transition mode="out-in">
+     
         <section
-          :class="{ active: activeSection == 2 }"
-          v-show="activeSection == 2"
           class="fullpage partner-together w-100"
         >
           <div class="position-relative w-100 m-0 p-0">
@@ -445,13 +275,9 @@ export default {
             </div>
           </div>
         </section>
-      </Transition>
-
-      <Transition mode="out-in">
+     
         <section
-          v-show="activeSection == 3"
           class="fullpage w-100 section-insight"
-          :class="{ active: activeSection == 3 }"
         >
           <div class="w-100 container-insight">
             <div class="content-insights m-0">
@@ -480,37 +306,12 @@ export default {
             </div>
           </div>
         </section>
-      </Transition>
+     
     </div>
   </main>
 </template>
 <style>
-@media (min-width: 768px) {
-  .v-enter-active,
-  .v-leave-active {
-    -webkit-animation: slide-in-bottom 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)
-      both;
-    animation: slide-in-bottom 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    z-index: 100;
-  }
-  .v-enter-from,
-  .v-leave-to {
-    -webkit-animation: slide-in-top 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)
-      reverse forwards;
-    animation: slide-in-top 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse
-      forwards;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-  }
-  .fullpage {
-    opacity: 0;
-  }
-  .fullpage.active {
-    opacity: 1;
-  }
-}
+
 .hero-image {
   z-index: 50;
 }
@@ -521,56 +322,6 @@ export default {
 .fullpage.active {
   z-index: 99;
 }
-@-webkit-keyframes slide-in-bottom {
-  0% {
-    -webkit-transform: translateY(100px);
-    transform: translateY(100px);
-    opacity: 0;
-  }
-  100% {
-    -webkit-transform: translateY(0);
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-@keyframes slide-in-bottom {
-  0% {
-    -webkit-transform: translateY(100px);
-    transform: translateY(100px);
-    opacity: 0;
-  }
-  100% {
-    -webkit-transform: translateY(0);
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-@-webkit-keyframes slide-in-top {
-  0% {
-    -webkit-transform: translateY(-100px);
-    transform: translateY(-100px);
-    opacity: 0;
-  }
-  100% {
-    -webkit-transform: translateY(0);
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-@keyframes slide-in-top {
-  0% {
-    -webkit-transform: translateY(-100px);
-    transform: translateY(-100px);
-    opacity: 0;
-  }
-  100% {
-    -webkit-transform: translateY(0);
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
 p.text-insight {
   margin: 0;
   line-height: 26px;
@@ -688,6 +439,8 @@ h1.title-home {
 }
 .partner-together img {
   height: 54vh;
+  width: 100%;
+  object-fit: contain;
 }
 
 @media (min-width: 1441px) {
@@ -742,17 +495,12 @@ h1.title-home {
     height: 100vh;
   }
   .fullpage {
-    height: 100vh;
     width: 100%;
     top: 0;
     left: 0;
     background: white;
-    position: absolute;
-    overflow: hidden;
   }
   main.homePage {
-    overflow: auto;
-    height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;

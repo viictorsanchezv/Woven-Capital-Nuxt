@@ -75,119 +75,8 @@ export default {
 
       return new Date(month).toLocaleDateString("en", options);
     },
-    hideFooter() {
-      let footerS = document.getElementById("footer-container");
-
-      let sections = document.getElementsByClassName("fullpage");
-      let sectionsLength = sections.length;
-
-      if (this.activeSection == this.offsets.length - 1) {
-         setTimeout(() => {
-          footerS.style.display = "block";
-        }, 1000);
-      } else {
-        footerS.style.display = "none";
-      }
-    },
-    calculateSectionOffsets() {
-      let sections = document.getElementsByClassName("fullpage");
-      let length = sections.length;
-
-      for (let i = 0; i < length; i++) {
-        let sectionOffset = sections[i].offsetTop;
-        this.offsets.push(sectionOffset);
-      }
-    },
-    handleMouseWheel: function (e) {
-      if (e.wheelDelta <= -30 && !this.inMove) {
-        this.moveUp();
-      } else if (e.wheelDelta >= 30 && !this.inMove) {
-        this.moveDown();
-      } else if (e.wheelDelta < 0 && !this.inMove) {
-        this.moveDown();
-      } else if (e.wheelDelta > 0 && !this.inMove) {
-        this.moveUp();
-      }
-
-      setTimeout(() => {
-        e.preventDefault();
-      }, 100);
-      return false;
-    },
-    handleMouseWheelDOM: function (e) {
-      if (e.detail > 0 && !this.inMove) {
-        this.moveUp();
-      } else if (e.detail < 0 && !this.inMove) {
-        this.moveDown();
-      }
-
-      return false;
-    },
-    moveDown() {
-      this.inMove = true;
-      this.activeSection--;
-
-      if (this.activeSection < 0) this.activeSection = 0;
-
-      this.scrollToSection(this.activeSection, true);
-    },
-    moveUp() {
-      this.inMove = true;
-      this.activeSection++;
-
-      if (this.activeSection > this.offsets.length - 1)
-        this.activeSection = this.offsets.length - 1;
-
-      this.scrollToSection(this.activeSection, true);
-    },
-    scrollToSection(id, force = false) {
-      if (this.inMove && !force) return false;
-
-      this.activeSection = id;
-      this.inMove = true;
-      setTimeout(() => {
-        this.inMove = false;
-      }, 1000);
-      this.hideFooter();
-    },
-    touchStart(e) {
-      this.touchStartY = e.touches[0].clientY;
-    },
-    touchMove(e) {
-      if (this.inMove) return false;
-
-      const currentY = e.touches[0].clientY;
-
-      if (this.touchStartY < currentY) {
-        this.moveDown();
-      } else {
-        this.moveUp();
-      }
-
-      this.touchStartY = 0;
-      return false;
-    },
-    mouseUpHandler(e) {
-      if (this.mousePoint > e.pageY) {
-        this.moveUp();
-      } else if (this.mousePoint < e.pageY) {
-        this.moveDown();
-      }
-      e.preventDefault();
-    },
-    mouseDownHandler(e) {
-      this.mousePoint = e.pageY;
-      e.preventDefault();
-    },
   },
-  destroyed() {
-    window.removeEventListener("mousewheel", this.handleMouseWheel);
-    window.removeEventListener("DOMMouseScroll", this.handleMouseWheelDOM);
-    window.removeEventListener("touchstart", this.touchStart);
-    window.removeEventListener("touchmove", this.touchMove);
-    document.removeEventListener("mouseup", this.mouseUpHandler);
-    document.removeEventListener("mousedown", this.mouseDownHandler);
-  },
+  
   async asyncData() {
     const insig = await client.getEntries({
       content_type: "insightsNwc",
@@ -223,34 +112,17 @@ export default {
       metaContent: metaPage.items,
     };
   },
-  mounted() {
-    this.hideFooter();
 
-    document.getElementById("footer-container").style.display = "none";
-
-    window.addEventListener("DOMMouseScroll", this.handleMouseWheelDOM); // Mozilla Firefox
-    window.addEventListener("mousewheel", this.handleMouseWheel); // Other browsers
-
-    window.addEventListener("touchstart", this.touchStart, { passive: false }); // mobile devices
-    window.addEventListener("touchmove", this.touchMove, { passive: false }); // mobile devices
-
-    document.addEventListener("mouseup", this.mouseUpHandler);
-    document.addEventListener("mousedown", this.mouseDownHandler);
-
-    this.calculateSectionOffsets();
-  },
 };
 </script>
 
 <template>
   <main class="content-main insights-page">
     <div class="w-100 container-insights">
-      <template v-for="(arrayI, index) in insightArray">
-        <Transition :key="index" mode="out-in">
-          <section
-            :class="{ active: activeSection == index }"
+      <template v-for="(arrayI, index) in insightArray" >
+      
+          <section :key="index"
             class="content-insights fullpage"
-            v-show="activeSection == index"
           >
             <div class="content-insights">
               <template v-for="(post, index) in arrayI">
@@ -266,13 +138,11 @@ export default {
               </template>
             </div>
           </section>
-        </Transition>
+       
       </template>
-      <Transition mode="out-in">
+      
         <section
-          v-show="activeSection == cantSections"
           class="result-insights fullpage"
-          :class="{ active: activeSection == this.offsets.length - 1 }"
           v-if="this.insightsResult.length > 0"
         >
           <div class="result-insights">
@@ -289,94 +159,11 @@ export default {
             </template>
           </div>
         </section>
-      </Transition>
+   
     </div>
   </main>
 </template>
 <style scoped>
-@media (min-width: 768px) {
-  .v-enter-active,
-  .v-leave-active {
-    -webkit-animation: slide-in-bottom 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)
-      both;
-    animation: slide-in-bottom 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    z-index: 100;
-  }
-  .v-enter-from,
-  .v-leave-to {
-    -webkit-animation: slide-in-top 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)
-      reverse forwards;
-    animation: slide-in-top 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse
-      forwards;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    z-index: 99;
-  }
-  .fullpage {
-    opacity: 0;
-  }
-  .fullpage.active {
-    opacity: 1;
-  }
-}
-.fullpage {
-  display: block !important;
-  z-index: 88;
-}
-.fullpage.active {
-  z-index: 99;
-}
-@-webkit-keyframes slide-in-bottom {
-  0% {
-    -webkit-transform: translateY(100px);
-    transform: translateY(100px);
-    opacity: 0;
-  }
-  100% {
-    -webkit-transform: translateY(0);
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-@keyframes slide-in-bottom {
-  0% {
-    -webkit-transform: translateY(100px);
-    transform: translateY(100px);
-    opacity: 0;
-  }
-  100% {
-    -webkit-transform: translateY(0);
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-@-webkit-keyframes slide-in-top {
-  0% {
-    -webkit-transform: translateY(-100px);
-    transform: translateY(-100px);
-    opacity: 0;
-  }
-  100% {
-    -webkit-transform: translateY(0);
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-@keyframes slide-in-top {
-  0% {
-    -webkit-transform: translateY(-100px);
-    transform: translateY(-100px);
-    opacity: 0;
-  }
-  100% {
-    -webkit-transform: translateY(0);
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
 
 .content-insights {
   display: grid;
@@ -395,29 +182,20 @@ section.content-insights.fullPage {
 }
 main.insights-page .fullpage {
   overflow: hidden;
+  height: 100vh;
+  width: 100%;
 }
 @media (min-width: 768px) and (max-width: 1024px) {
   main.insights-page {
     margin-top: 85px;
-    height: calc(100vh - 85px);
-  }
-}
-@media (min-width: 1024px) {
-  main.insights-page {
-    height: 100vh;
   }
 }
 @media (min-width: 768px) {
   .fullpage {
-    height: 100vh;
     width: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
     background: white;
   }
   main.insights-page {
-    overflow: hidden;
     display: flex;
     flex-direction: column;
     align-items: center;

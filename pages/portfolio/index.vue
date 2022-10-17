@@ -127,138 +127,7 @@ export default {
     onSlideEnd(slide) {
       this.sliding = false;
     },
-    hideFooter() {
-      let footerS = document.getElementById("footer-container");
 
-      let sections = document.getElementsByClassName("fullpage");
-      let sectionsLength = sections.length;
-
-      if (this.activeSection == this.offsets.length - 1) {
-         setTimeout(() => {
-          footerS.style.display = "block";
-        }, 1000);
-      } else {
-        footerS.style.display = "none";
-      }
-    },
-    calculateSectionOffsets() {
-      let sections = document.getElementsByClassName("fullpage");
-      let length = sections.length;
-
-      for (let i = 0; i < length; i++) {
-        this.sectionOffsetO = {
-          title: sections[i].title,
-          sectionOffset: sections[i].offsetTop,
-        };
-
-        this.offsets.push(this.sectionOffsetO);
-      }
-    },
-    handleMouseWheel: function (e) {
-      let elemtInt =
-        document.getElementsByClassName("section-content")[this.activeSection];
-      let elemtExt =
-        document.getElementsByClassName("col-content")[this.activeSection];
-      if (
-        e.wheelDelta < -30 &&
-        !this.inMove &&
-        elemtExt.offsetHeight + elemtExt.scrollTop >= elemtInt.scrollHeight - 1
-      ) {
-        this.moveUp();
-      } else if (e.wheelDelta > 30 && !this.inMove && elemtExt.scrollTop <= 0) {
-        this.moveDown();
-      } else if (
-        e.wheelDelta < 0 &&
-        !this.inMove &&
-        elemtExt.offsetHeight + elemtExt.scrollTop >= elemtInt.scrollHeight - 1
-      ) {
-        this.moveDown();
-      } else if (e.wheelDelta > 0 && !this.inMove && elemtExt.scrollTop <= 0) {
-        this.moveUp();
-      }
-      setTimeout(() => {
-        e.preventDefault();
-      }, 100);
-      return false;
-    },
-    handleMouseWheelDOM: function (e) {
-      let elemtInt =
-        document.getElementsByClassName("section-content")[this.activeSection];
-      let elemtExt =
-        document.getElementsByClassName("col-content")[this.activeSection];
-
-      if (
-        e.detail > 0 &&
-        !this.inMove &&
-        elemtExt.offsetHeight + elemtExt.scrollTop >= elemtInt.scrollHeight - 1
-      ) {
-        this.moveUp();
-      } else if (e.detail < 0 && !this.inMove && elemtExt.scrollTop <= 0) {
-        this.moveDown();
-      }
-
-      return false;
-    },
-    moveDown() {
-      this.inMove = true;
-      this.activeSection--;
-
-      if (this.activeSection < 0) this.activeSection = 0;
-
-      this.scrollToSection(this.activeSection, true);
-    },
-    moveUp() {
-      this.inMove = true;
-      this.activeSection++;
-
-      if (this.activeSection > this.offsets.length - 1)
-        this.activeSection = this.offsets.length - 1;
-
-      this.scrollToSection(this.activeSection, true);
-    },
-    scrollToSection(id, force = false) {
-      if (this.inMove && !force) return false;
-
-      this.activeSection = id;
-      this.inMove = true;
-
-      setTimeout(() => {
-        this.inMove = false;
-      }, 400);
-      this.hideFooter();
-    },
-    handleSection(value) {
-      this.activeSection = value;
-    },
-    touchStart(e) {
-      this.touchStartY = e.touches[0].clientY;
-    },
-    touchMove(e) {
-      if (this.inMove) return false;
-
-      const currentY = e.touches[0].clientY;
-
-      if (this.touchStartY < currentY) {
-        this.moveDown();
-      } else {
-        this.moveUp();
-      }
-
-      this.touchStartY = 0;
-      return false;
-    },
-    mouseUpHandler(e) {
-      if (this.mousePoint > e.pageY) {
-        this.moveUp();
-      } else if (this.mousePoint < e.pageY) {
-        this.moveDown();
-      }
-      e.preventDefault();
-    },
-    mouseDownHandler(e) {
-      this.mousePoint = e.pageY;
-      e.preventDefault();
-    },
     endedVideo(event) {
       let video = event.srcElement;
 
@@ -266,36 +135,8 @@ export default {
       video.nextSibling.nextElementSibling.classList.remove("remove-video");
     },
   },
-  mounted() {
-    this.calculateSectionOffsets();
-    this.hideFooter();
-
-    if (this.$route.hash == "#nuro") {
-      this.activeSection = 0;
-    } else if (this.$route.hash == "#ridecell") {
-      this.activeSection = 1;
-    } else if (this.$route.hash == "#whill") {
-      this.activeSection = 2;
-    }
-
-    document.getElementById("footer-container").style.display = "none";
-
-    window.addEventListener("DOMMouseScroll", this.handleMouseWheelDOM); // Mozilla Firefox
-    window.addEventListener("mousewheel", this.handleMouseWheel); // Other browsers
-    window.addEventListener("touchstart", this.touchStart, { passive: false }); // mobile devices
-    window.addEventListener("touchmove", this.touchMove, { passive: false }); // mobile devices
-
-    document.addEventListener("mouseup", this.mouseUpHandler);
-    document.addEventListener("mousedown", this.mouseDownHandler);
-  },
-  destroyed() {
-    window.removeEventListener("mousewheel", this.handleMouseWheel); // Other browsers
-    window.removeEventListener("DOMMouseScroll", this.handleMouseWheelDOM); // Mozilla Firefox
-    window.removeEventListener("touchstart", this.touchStart); // mobile devices
-    window.removeEventListener("touchmove", this.touchMove); // mobile devices
-    document.removeEventListener("mouseup", this.mouseUpHandler);
-    document.removeEventListener("mousedown", this.mouseDownHandler);
-  },
+ 
+ 
 };
 </script>
 
@@ -310,13 +151,12 @@ export default {
       </portfolio-header> -->
 
       <template v-for="(portfolio, index) in portfoliosCont">
-        <Transition :key="index" mode="out-in">
-          <section-columns
+        
+          <section-columns :key="index"
             class="fullpage"
             :class="{ active: activeSection == index }"
             :id="portfolio.fields.slug"
             :title="portfolio.fields.title"
-            v-show="activeSection == index"
           >
             <template #left>
               <div
@@ -345,6 +185,7 @@ export default {
                   <video
                     class="w-100 object-cover vh-50 video-poster"
                     autoplay="false"
+                    muted="false"
                     controls
                     @ended="endedVideo($event)"
                     :src="portfolio.fields.mediaBottom.fields.file.url"
@@ -403,16 +244,14 @@ export default {
               </div>
             </template>
           </section-columns>
-        </Transition>
+       
       </template>
-
-      <Transition mode="out-in">
         <section-columns
           id="lp-investiments"
           class="fullpage"
           :class="{ active: activeSection == this.offsets.length - 1 }"
           title="LP Investments"
-          v-show="activeSection == offsets.length - 1"
+        
         >
           <template #left>
             <div
@@ -478,7 +317,7 @@ export default {
             </div>
           </template>
         </section-columns>
-      </Transition>
+    
     </div>
   </main>
 </template>
@@ -496,114 +335,25 @@ export default {
 .video-poster {
   z-index: 2;
 }
-@media (min-width: 768px) {
-  .v-enter-active,
-  .v-leave-active {
-    -webkit-animation: slide-in-bottom 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)
-      both;
-    animation: slide-in-bottom 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    z-index: 100;
-  }
-  .v-enter-from,
-  .v-leave-to {
-    -webkit-animation: slide-in-top 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)
-      reverse forwards;
-    animation: slide-in-top 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse
-      forwards;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    z-index: 99;
-  }
-  .fullpage {
-    opacity: 0;
-  }
-  .fullpage.active {
-    opacity: 1;
-  }
-}
-.fullpage {
-  display: block !important;
-  z-index: 88;
-}
-.fullpage.active {
-  z-index: 99;
-}
-@-webkit-keyframes slide-in-bottom {
-  0% {
-    -webkit-transform: translateY(100px);
-    transform: translateY(100px);
-    opacity: 0;
-  }
-  100% {
-    -webkit-transform: translateY(0);
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-@keyframes slide-in-bottom {
-  0% {
-    -webkit-transform: translateY(100px);
-    transform: translateY(100px);
-    opacity: 0;
-  }
-  100% {
-    -webkit-transform: translateY(0);
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-@-webkit-keyframes slide-in-top {
-  0% {
-    -webkit-transform: translateY(-100px);
-    transform: translateY(-100px);
-    opacity: 0;
-  }
-  100% {
-    -webkit-transform: translateY(0);
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-@keyframes slide-in-top {
-  0% {
-    -webkit-transform: translateY(-100px);
-    transform: translateY(-100px);
-    opacity: 0;
-  }
-  100% {
-    -webkit-transform: translateY(0);
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
 .container-portfolio {
   width: 100%;
   height: 100%;
   position: relative;
   justify-content: center;
   display: flex;
+  flex-direction: column;
 }
 
 div.p-14 {
   padding: 14%;
 }
 main.portfolio {
-  overflow: hidden;
-  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 .fullpage {
-  height: 100vh;
   width: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
 }
 .image-slide {
   object-fit: cover;
@@ -669,7 +419,6 @@ div.text-center p {
 @media (min-width: 768px) and (max-width: 1024px) {
   main.portfolio {
     margin-top: 75px;
-    height: calc(100vh - 75px);
   }
 }
 
