@@ -135,8 +135,6 @@ export default {
       video.nextSibling.nextElementSibling.classList.remove("remove-video");
     },
   },
- 
- 
 };
 </script>
 
@@ -151,173 +149,196 @@ export default {
       </portfolio-header> -->
 
       <template v-for="(portfolio, index) in portfoliosCont">
-        
-          <section-columns :key="index"
-            class="fullpage"
-            :class="{ active: activeSection == index }"
-            :id="portfolio.fields.slug"
-            :title="portfolio.fields.title"
-          >
-            <template #left>
-              <div
-                class="col-md-6 col-12 border-box p-0 justify-content-start vh-100 col-sticky"
-              >
-                <img
-                  class="vh-50 pt-0 w-100 object-cover pb-5x"
-                  :src="portfolio.fields.mediaTop.fields.file.url"
-                  alt=""
-                />
-                <img
-                  v-if="
-                    portfolio.fields.mediaBottom.fields.file.contentType ==
-                    'image/png'
-                  "
-                  class="vh-50 w-100 object-cover"
-                  :src="portfolio.fields.mediaBottom.fields.file.url"
-                  alt=""
-                />
-                <template
-                  v-else-if="
-                    portfolio.fields.mediaBottom.fields.file.contentType ==
-                    'video/mp4'
-                  "
-                >
-                  <video
-                    class="w-100 object-cover vh-50 video-poster"
-                    autoplay="false"
-                    muted="false"
-                    controls
-                    @ended="endedVideo($event)"
-                    :src="portfolio.fields.mediaBottom.fields.file.url"
-                    :poster="portfolio.fields.posterVideo.fields.file.url"
-                  ></video>
-                  <img
-                    class="vh-50 w-100 object-cover img-poster remove-video"
-                    :src="portfolio.fields.posterVideo.fields.file.url"
-                    alt=""
-                  />
-                </template>
-              </div>
-            </template>
-            <template #right>
-              <div
-                class="overflow-y-auto col-md-6 col-12 border-box p-0 col-content w-100"
-              >
-                <div class="p-14 m-0 section-content">
-                  <portfolio-title
-                    :title="portfolio.fields.location"
-                    :image="portfolio.fields.logoblack.fields.file.url"
-                    :linkWeb="portfolio.fields.link"
-                    :linkLinkedin="portfolio.fields.linkedinUrl"
-                  ></portfolio-title>
-                  <div
-                    v-if="portfolio.fields.content"
-                    v-html="$md.render(portfolio.fields.content)"
-                    class="post_insight-content text-small"
-                  ></div>
-                  <div class="info-wrapper mb-5 text-small">
-                    <p>
-                      {{ portfolio.fields.testimonial }}
-                    </p>
-                  </div>
-                  <div class="text-center mb-4">
-                    <h5 class="m-0">
-                      {{ portfolio.fields.authorTestimonial }}
-                    </h5>
-                    <p>{{ portfolio.fields.designationTestimonial }}</p>
-                  </div>
-
-                  <hr class="mb-4" />
-
-                  <template v-if="insightsPortf[index].length > 0">
-                    <h5 class="company-new-title mb-4 text-medium">
-                      Company News
-                    </h5>
-
-                    <company-news
-                      v-for="(item, index) in insightsPortf[index]"
-                      :key="index"
-                      :companyInfo="item"
-                    ></company-news>
-                  </template>
-                </div>
-              </div>
-            </template>
-          </section-columns>
-       
-      </template>
         <section-columns
-          id="lp-investiments"
+          :key="index"
           class="fullpage"
-          :class="{ active: activeSection == this.offsets.length - 1 }"
-          title="LP Investments"
-        
+          :class="{ active: activeSection == index }"
+          :id="portfolio.fields.slug"
+          :title="portfolio.fields.title"
         >
           <template #left>
             <div
-              class="col-md-6 col-12 border-box p-0 justify-content-start col-sticky vh-100"
+              class="col-md-6 col-12 border-box p-0 justify-content-start vh-100 col-sticky"
             >
               <img
-                class="vh-50 pb-5x w-100 object-cover"
-                :src="investmentsCont[0].fields.coverImage.fields.file.url"
+                v-if="
+                  portfolio.fields.mediaTop.fields.file.contentType ==
+                  'image/png'
+                "
+                class="vh-50 pt-0 w-100 object-cover pb-5x"
+                :src="portfolio.fields.mediaTop.fields.file.url"
                 alt=""
               />
+              <template
+                v-else-if="
+                  portfolio.fields.mediaTop.fields.file.contentType ==
+                  'video/mp4'
+                "
+              >
+                <video
+                  class="w-100 object-cover vh-50 video-poster pb-5x"
+                  autoplay="false"
+                  muted="false"
+                  controls
+                  @ended="endedVideo($event)"
+                  :src="portfolio.fields.mediaTop.fields.file.url"
+                  :poster="portfolio.fields.mediaTop.fields.file.url"
+                ></video>
 
-              <div class="vh-50 section-carousel">
-                <b-carousel
-                  id="carousel-1"
-                  v-model="slide"
-                  :interval="4000"
-                  style="text-shadow: 1px 1px 2px #333"
-                  class="w-100 h-100"
-                  img-width="100"
-                  img-height="100"
-                  @sliding-start="onSlideStart"
-                  @sliding-end="onSlideEnd"
-                >
-                  <template
-                    v-for="(gallery, index) in investmentsCont[0].fields
-                      .galleryImages"
-                  >
-                    <b-carousel-slide :key="index">
-                      <template #img>
-                        <img
-                          :src="gallery.fields.file.url"
-                          alt=""
-                          class="vh-50 image-slide d-block w-100"
-                        />
-                      </template>
-                    </b-carousel-slide>
-                  </template>
-                </b-carousel>
-              </div>
+                <img
+                  class="vh-50 w-100 object-cover img-poster-top remove-video pb-5x"
+                  :src="portfolio.fields.posterVideo.fields.file.url"
+                  alt=""
+                />
+              </template>
+              <img
+                v-if="
+                  portfolio.fields.mediaBottom.fields.file.contentType ==
+                  'image/png'
+                "
+                class="vh-50 w-100 object-cover"
+                :src="portfolio.fields.mediaBottom.fields.file.url"
+                alt=""
+              />
+              <template
+                v-else-if="
+                  portfolio.fields.mediaBottom.fields.file.contentType ==
+                  'video/mp4'
+                "
+              >
+                <video
+                  class="w-100 object-cover vh-50 video-poster"
+                  autoplay="false"
+                  muted="false"
+                  controls
+                  @ended="endedVideo($event)"
+                  :src="portfolio.fields.mediaBottom.fields.file.url"
+                  :poster="portfolio.fields.posterVideo.fields.file.url"
+                ></video>
+                <img
+                  class="vh-50 w-100 object-cover img-poster-bottom remove-video"
+                  :src="portfolio.fields.posterVideo.fields.file.url"
+                  alt=""
+                />
+              </template>
             </div>
           </template>
           <template #right>
             <div
-              class="overflow-y-auto col-md-6 col-12 border-box p-0 col-content"
+              class="overflow-y-auto col-md-6 col-12 border-box p-0 col-content w-100"
             >
               <div class="p-14 m-0 section-content">
-                <title-secundary
-                  class="justify-content-start"
-                  :titleH2="investmentsCont[0].fields.title"
-                  spanTitleH2=""
-                ></title-secundary>
-                <p class="portfolio-description text-small">
-                  {{ investmentsCont[0].fields.description }}
-                </p>
-                <div class="img-wrapper-logo">
-                  <template
-                    v-for="(logo, index) in investmentsCont[0].fields.logos"
-                  >
-                    <img :key="index" :src="logo.fields.file.url" alt="" />
-                  </template>
+                <portfolio-title
+                  :title="portfolio.fields.location"
+                  :image="portfolio.fields.logoblack.fields.file.url"
+                  :linkWeb="portfolio.fields.link"
+                  :linkLinkedin="portfolio.fields.linkedinUrl"
+                ></portfolio-title>
+                <div
+                  v-if="portfolio.fields.content"
+                  v-html="$md.render(portfolio.fields.content)"
+                  class="post_insight-content text-small"
+                ></div>
+                <div class="info-wrapper mb-5 text-small">
+                  <p>
+                    {{ portfolio.fields.testimonial }}
+                  </p>
                 </div>
+                <div class="text-center mb-4">
+                  <h5 class="m-0">
+                    {{ portfolio.fields.authorTestimonial }}
+                  </h5>
+                  <p>{{ portfolio.fields.designationTestimonial }}</p>
+                </div>
+
+                <hr class="mb-4" />
+
+                <template v-if="insightsPortf[index].length > 0">
+                  <h5 class="company-new-title mb-4 text-medium">
+                    Company News
+                  </h5>
+
+                  <company-news
+                    v-for="(item, index) in insightsPortf[index]"
+                    :key="index"
+                    :companyInfo="item"
+                  ></company-news>
+                </template>
               </div>
             </div>
           </template>
         </section-columns>
-    
+      </template>
+      <section-columns
+        id="lp-investiments"
+        class="fullpage"
+        :class="{ active: activeSection == this.offsets.length - 1 }"
+        title="LP Investments"
+      >
+        <template #left>
+          <div
+            class="col-md-6 col-12 border-box p-0 justify-content-start col-sticky vh-100"
+          >
+            <img
+              class="vh-50 pb-5x w-100 object-cover"
+              :src="investmentsCont[0].fields.coverImage.fields.file.url"
+              alt=""
+            />
+
+            <div class="vh-50 section-carousel">
+              <b-carousel
+                id="carousel-1"
+                v-model="slide"
+                :interval="4000"
+                style="text-shadow: 1px 1px 2px #333"
+                class="w-100 h-100"
+                img-width="100"
+                img-height="100"
+                @sliding-start="onSlideStart"
+                @sliding-end="onSlideEnd"
+              >
+                <template
+                  v-for="(gallery, index) in investmentsCont[0].fields
+                    .galleryImages"
+                >
+                  <b-carousel-slide :key="index">
+                    <template #img>
+                      <img
+                        :src="gallery.fields.file.url"
+                        alt=""
+                        class="vh-50 image-slide d-block w-100"
+                      />
+                    </template>
+                  </b-carousel-slide>
+                </template>
+              </b-carousel>
+            </div>
+          </div>
+        </template>
+        <template #right>
+          <div
+            class="overflow-y-auto col-md-6 col-12 border-box p-0 col-content"
+          >
+            <div class="p-14 m-0 section-content">
+              <title-secundary
+                class="justify-content-start"
+                :titleH2="investmentsCont[0].fields.title"
+                spanTitleH2=""
+              ></title-secundary>
+              <p class="portfolio-description text-small">
+                {{ investmentsCont[0].fields.description }}
+              </p>
+              <div class="img-wrapper-logo">
+                <template
+                  v-for="(logo, index) in investmentsCont[0].fields.logos"
+                >
+                  <img :key="index" :src="logo.fields.file.url" alt="" />
+                </template>
+              </div>
+            </div>
+          </div>
+        </template>
+      </section-columns>
     </div>
   </main>
 </template>
@@ -326,11 +347,14 @@ export default {
 .remove-video {
   display: none;
 }
-.img-poster {
+.img-poster-bottom {
   position: absolute;
   left: 0;
   z-index: 0;
   bottom: 0;
+}
+.img-poster-top {
+  z-index: 0;
 }
 .video-poster {
   z-index: 2;
