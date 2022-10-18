@@ -193,7 +193,7 @@ export default {
             </button>
           </div>
         </form>
-        <h2 id="text-contact">we have received your email, we will contact you as soon as possible.</h2>
+        <h2 id="text-contact">Thank you for submitting.</h2>
         <p class="info-p">
           This submission constitutes my consent to Woven Capital Management
           Company, LLC, and its affiliates sending me news and updates by email.

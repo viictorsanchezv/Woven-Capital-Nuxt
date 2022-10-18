@@ -289,7 +289,7 @@ export default {
         </div>
 
         <h2 id="text-pitch">
-          we have received your email, we will contact you as soon as possible.
+          Thank you for submitting.
         </h2>
       </div>
     </section>
