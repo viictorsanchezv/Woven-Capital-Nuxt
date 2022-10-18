@@ -40,7 +40,7 @@ export default {
 }
 .cookies-consent p.vcc-window__title {
   font-size: 12px;
-  line-height: 24px;
+  line-height: 16px;
   font-weight: 600;
   font-family: "Poppins";
 }
@@ -49,7 +49,7 @@ export default {
 }
 .cookies-consent .vcc-window__description p {
   font-size: 12px;
-  line-height: 24px;
+  line-height: 16px;
   font-weight: 400;
   font-family: "Poppins";
 }
