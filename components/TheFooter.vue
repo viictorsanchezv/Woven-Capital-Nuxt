@@ -39,6 +39,9 @@ export default {
   
 </template>
 <style scoped>
+footer .list-group .list-item:nth-child(4){
+display: none;
+}
 footer .company .content-text {
   font-size: 16px;
   font-weight: 400;

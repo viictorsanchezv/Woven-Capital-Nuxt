@@ -237,7 +237,7 @@ export default {
               <textarea
                 required
                 class="rounded w-100"
-                placeholder="o date, how much have you raised, and from whom? "
+                placeholder="To date, how much have you raised, and from whom? "
                 id="investment"
                 rows="5"
                 v-model="investment"

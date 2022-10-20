@@ -79,9 +79,17 @@ p.designation{
 }
 @media (max-width: 539px) {
   .container-team {
-    grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(50%, 1fr));
     grid-gap: 0;
     gap: 0;
+  }
+  h4.team-name {
+    line-height: 20px;
+    font-size: 17px;
+  }
+  p.designation {
+    font-size: 12px!important;
+    line-height: 16px!important;
   }
 }
 @media (max-width: 900px) {
@@ -89,4 +97,17 @@ p.designation{
     width: 100% !important;
   }
 }
+@media (max-width: 767px) {
+  .content-team img {
+    width: 100px;
+    height: 100px;
+    }
+}
+@media (max-width: 300px){
+  .container-team {
+      grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+     
+  }
+}
+
 </style>

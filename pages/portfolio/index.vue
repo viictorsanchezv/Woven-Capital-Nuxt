@@ -344,6 +344,7 @@ export default {
 </template>
 
 <style scoped>
+
 .remove-video {
   display: none;
 }
@@ -447,6 +448,12 @@ div.text-center p {
 }
 
 @media (max-width: 767px) {
+  .portfolio .col-sticky{
+    order: 2;
+  }
+  .portfolio .col-content{
+    order: 1;
+  }
   .container-portfolio {
     display: block;
   }

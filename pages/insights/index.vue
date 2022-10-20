@@ -120,9 +120,8 @@ export default {
   <main class="content-main insights-page">
     <div class="w-100 container-insights">
       <template v-for="(arrayI, index) in insightArray" >
-      
           <section :key="index"
-            class="content-insights fullpage"
+            class=" fullpage"
           >
             <div class="content-insights">
               <template v-for="(post, index) in arrayI">
@@ -138,7 +137,6 @@ export default {
               </template>
             </div>
           </section>
-       
       </template>
       
         <section
@@ -168,7 +166,7 @@ export default {
 .content-insights {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(49%, 1fr));
-  grid-auto-rows: calc(50vh - 5px);
+  grid-auto-rows: calc(50vh - 10px);
   grid-gap: 10px;
   margin: 0;
 }
@@ -179,6 +177,7 @@ section.content-insights.fullPage {
   height: 100vh;
   margin-top: 0px;
   display: flex;
+  width: 100%;
 }
 main.insights-page .fullpage {
   overflow: hidden;
@@ -208,7 +207,7 @@ main.insights-page .fullpage {
 }
 @media (max-width: 768px) {
   .content-insights {
-    grid-template-columns: repeat(auto-fill, minmax(50%, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(49%, 1fr));
     grid-auto-rows: 400px;
     grid-gap: 20px;
     margin-bottom: 10px;

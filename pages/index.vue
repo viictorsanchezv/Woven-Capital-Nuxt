@@ -293,15 +293,17 @@ export default {
                 </card-insights>
               </template>
             </div>
-            <div
-              class="d-flex justify-content-center flex-column align-item-center text-center p-2 read-more-insight"
-            >
-              <div class="d-flex m-0 p-0 w-100 justify-content-center">
-                <buttom-primary
-                  class="d-flex justify-content-center align-items-start"
-                  text_buttom="Meet the Team"
-                  link_buttom="/team"
-                ></buttom-primary>
+            <div class="hide-team">
+              <div
+                class=" d-flex justify-content-center flex-column align-item-center text-center p-2 read-more-insight"
+              >
+                <div class="d-flex m-0 p-0 w-100 justify-content-center">
+                  <buttom-primary
+                    class="d-flex justify-content-center align-items-start"
+                    text_buttom="Meet the Team"
+                    link_buttom="/team"
+                  ></buttom-primary>
+                </div>
               </div>
             </div>
           </div>
@@ -311,7 +313,9 @@ export default {
   </main>
 </template>
 <style>
-
+.hide-team{
+  display: none;
+}
 .hero-image {
   z-index: 50;
 }
@@ -482,8 +486,8 @@ h1.title-home {
 }
 @media (min-width: 768px) {
   .homePage .content-insights {
-    grid-auto-rows: calc(45vh - 5px);
-    height: 90vh;
+    grid-auto-rows: calc(50vh - 5px);
+    height: 100vh;
   }
   .read-more-insight {
     height: 10vh;

@@ -291,6 +291,9 @@ form input {
   word-break: break-word;
 }
 @media (max-width: 767px) {
+  .info-wrapper{
+    margin-bottom: 15px;
+  }
   .content-contact,
   .col-info {
     padding: 7%;
