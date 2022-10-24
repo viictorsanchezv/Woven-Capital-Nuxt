@@ -1,5 +1,6 @@
 <script>
 import titleSecundary from "@/components/TitleSecundary.vue";
+import cardTeam from "@/components/CardTeam.vue";
 import client from "@/plugins/contentful.js";
 
 export default {
@@ -11,6 +12,7 @@ export default {
   },
   components: {
     titleSecundary,
+    cardTeam,
   },
   head() {
     if (
@@ -75,9 +77,7 @@ export default {
       metaContent: metaPage.items,
     };
   },
-  mounted() {
-    document.getElementById("footer-container").style.display = "block";
-  },
+ 
 };
 </script>
 <template>
@@ -100,7 +100,7 @@ export default {
           </div>
         </div>
         <div class="container-team p-0">
-          <card-Team
+          <card-team
             v-for="(team, index) in teamCont"
             :key="index"
             :teamName="team.fields.title"
@@ -109,7 +109,7 @@ export default {
             :teamEmail="team.fields.emailId"
             :teamSlug="team.fields.slug"
           >
-          </card-Team>
+          </card-team>
         </div>
       </div>
     </section>

@@ -131,7 +131,7 @@ export default {
       <div class="col-12 col-md-6 sect-image section-sticky top-0">
         <img
           class="h-100 w-100 img-pitch"
-          src="@/assets/image/pitch/frame-1.png"
+          src="@/assets/image/pitch/pitch.png"
           alt=""
         />
         <h1 class="title-pitch">Tell us about your company</h1>
@@ -379,8 +379,8 @@ h1.title-pitch {
   padding: 7% 7% 7% 4%;
 }
 .img-pitch {
-  object-fit: contain;
-  object-position: top;
+  object-fit: cover;
+  object-position: right;
 }
 .sect-image {
   padding: 0 5% 5% 5% 0;

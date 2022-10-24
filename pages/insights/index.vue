@@ -206,10 +206,14 @@ main.insights-page .fullpage {
   }
 }
 @media (max-width: 768px) {
+  main.insights-page .fullpage {
+    height: 100%;
+    width: 100%;
+}
   .content-insights {
     grid-template-columns: repeat(auto-fill, minmax(49%, 1fr));
     grid-auto-rows: 400px;
-    grid-gap: 20px;
+    grid-gap: 10px;
     margin-bottom: 10px;
   }
   .result-insights {

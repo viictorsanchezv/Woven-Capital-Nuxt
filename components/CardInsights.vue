@@ -169,7 +169,7 @@ export default {
 }
 @media (max-width: 767px) {
   .result-insights .card-view:nth-child(2) {
-    margin: 20px 0 0 0;
+    margin: 10px 0 0 0;
   }
   .result-insights .card-view:nth-child(1) {
     margin: 0px 0 0 0;

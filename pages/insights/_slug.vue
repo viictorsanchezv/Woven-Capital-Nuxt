@@ -1,6 +1,5 @@
 <script>
 import client from "@/plugins/contentful.js";
-import Error404 from "@/layouts/error.vue";
 export default {
   data() {
     return {
@@ -160,11 +159,17 @@ export default {
             ></div>
 
             <div class="author-information" v-if="teamInsight[0]">
-              <img
+              <a
+                  v-if="teamInsight[0].fields.slug"
+                  :href="`/team/${teamInsight[0].fields.slug}`"
+                  class="text-small author-post">
+                <img
                 v-if="teamInsight[0].fields.profilePic.fields.file.url"
                 :src="teamInsight[0].fields.profilePic.fields.file.url"
                 alt=""
               />
+              </a>
+             
               <div class="information">
                 <h5 class="title-author">About the Author</h5>
                 <p
