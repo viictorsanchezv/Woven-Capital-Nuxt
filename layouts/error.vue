@@ -4,7 +4,7 @@
       <div class="col-12 col-md-6 sect-image h-100">
         <img class="img-error" src="@/assets/image/error.png" alt="" />
       </div>
-      <div class="col-12 col-md-6 content-error  h-100">
+      <div class="col-12 col-md-6 content-error h-100">
         <p class="text-medium desc-error">Page not found</p>
         <h1 class="title-error">Error 404</h1>
         <p class="text-medium desc-error mb-4">
@@ -18,14 +18,17 @@
         ></buttom-primary>
       </div>
     </section>
-    <NuxtLink v-else to="/">Home page</NuxtLink>
+    <div v-else style="display: none">
+      <p>{{ error }}</p>
+    </div>
   </main>
 </template>
 
 <script>
+import ButtomPrimary from "@/components/ButtomPrimary.vue";
 export default {
   props: ["error"],
-  layout: 'error',
+  layout: "error",
   mounted() {
     const footerH = document.getElementById("footer-container");
     const footerHeight = footerH.clientHeight;
@@ -34,6 +37,9 @@ export default {
       sectionError.style.height = "calc(100vh - " + footerHeight + "px)";
     }
   },
+  components: {
+    ButtomPrimary,
+  }
 };
 </script>
 
@@ -41,7 +47,7 @@ export default {
 #error-404 {
   display: flex;
   align-items: center;
- min-height: 50vh;
+  min-height: 50vh;
 }
 
 .sect-image {
@@ -77,7 +83,7 @@ h1.title-error {
 .img-error {
   object-fit: cover;
 }
-.buttom-error{
+.buttom-error {
   justify-content: start;
 }
 @media (min-width: 1441px) {
@@ -107,8 +113,8 @@ h1.title-error {
     width: 100%;
     max-width: 100%;
   }
-  .buttom-error{
-  justify-content: center;
-}
+  .buttom-error {
+    justify-content: center;
+  }
 }
 </style>

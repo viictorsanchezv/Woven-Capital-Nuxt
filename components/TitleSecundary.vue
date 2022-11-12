@@ -13,7 +13,7 @@ export default {
 <template>
   <div class="d-flex mt-0 mr-0 ml-0 p-0 w-100 container-secundary">
     <h2 class="title-secundary">
-      {{ titleH2 }} <span> {{ spanTitleH2 }} </span>
+      {{ titleH2 }} <span v-if="spanTitleH2 != ''"> {{ spanTitleH2 }} </span>
     </h2>
   </div>
 </template>

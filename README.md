@@ -1,4 +1,38 @@
-# Woven-Capital-Nuxt
+[![https://github.com/woven-planet/woven-capital-website/actions/workflows/prod.yml/badge.svg?branch=main](https://github.com/woven-planet/woven-capital-website/actions/workflows/prod.yml/badge.svg?branch=main)](https://github.com/woven-planet/woven-capital-website/actions/workflows/prod.yml)
+
+# Woven Capital Website
+This is a repo for releasing the static website to AWS S3 bucket for https://www.woven-capital.global.
+
+Please put all the website source code to the root of this repository.
+
+`.github/workflows` is the github actions for building of the source code and the deployment pipeline to upload the static website to AWS S3 bucket.
+
+Note: A pull request and approval are required to merge to the main branch.
+
+![img](https://github.com/woven-planet/woven-capital-website/blob/main/woven-capital-website-diagram.png)
+
+## For Development
+### To test your code on Dev site: 
+1. Git clone and check out your own branch from the `main` branch.
+1. Update the website source code into root directory of this repository.
+1. Push your code to your remote branch. No approval or pull request is required.
+1. After pushing to the remote branch, the github actions will be triggered automatically and push the code into the development website. And you can see the updates from the [development website](http://d217og2ua49kfp.cloudfront.net).
+
+### To push your code into the Prod site:
+1. Make sure your code is ready and tested in the Dev site.
+1. Make a pull request to `main` branch, and get approval from the repo owner. Please address the comment from the reviewer if any.
+1. After getting the approval, the github actions will be triggered and push the code into the staging website.
+1. Final check from the [staging website](d61oup7ogw0qo.cloudfront.net) site by the repo owner.
+1. Approve the `deployment to the production` step from github actions by the repo owner and the code will be pushed into the production site.
+1. Confirm the change from the [production website](https://www.woven-capital.global) and done. 
+
+### Rollback Procedure:
+1. Contact the repo owner to revert the commit from the `main` branch to the previous healthy commit.
+1. The github actions will be triggered and push the code into the staging website.
+1. Final check from the [staging website](d61oup7ogw0qo.cloudfront.net) site by the repo owner.
+1. Approve the `deployment to the production` step from github actions by the repo owner and the code will be pushed into the production site.
+1. Confirm the rollback change from the [production website](https://www.woven-capital.global) and done.
+
 
 ## Build Setup
 

@@ -63,9 +63,6 @@ export default {
     SectionColumns,
     ImageCard,
   },
-  mounted() {
-    document.getElementById("footer-container").style.display = "block";
-  },
   created() {
     this.imageCardInfo.push({
       image: "/about/IA.png",

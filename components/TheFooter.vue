@@ -39,8 +39,12 @@ export default {
   
 </template>
 <style scoped>
-footer .list-group .list-item:nth-child(4){
-display: none;
+
+#footer-container{
+  min-height: 74px;
+  display: flex;
+  align-items: center;
+  z-index: 9;
 }
 footer .company .content-text {
   font-size: 16px;
@@ -69,7 +73,7 @@ footer .company {
 }
 @media (min-width: 1280px) {
   .content-footer {
-    padding: 25px 42px;
+    padding: 1% 3%;
   }
 }
 @media (max-width: 1280px) {
@@ -77,7 +81,7 @@ footer .company {
     padding: 25px 32px;
   }
 }
-@media (max-width: 1200px) {
+@media (max-width: 1210px) {
   .footer-items,
   .company {
     width: 100%;
@@ -89,6 +93,9 @@ footer .company {
   .company .content-text {
     text-align: center;
     margin-top: 20px;
+  }
+  .content-footer {
+    padding: 25px 42px;
   }
 }
 @media (max-width: 768px) {

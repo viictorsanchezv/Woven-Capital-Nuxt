@@ -72,9 +72,6 @@ export default {
       metaContent: metaPage.items,
     };
   },
-  mounted() {
-    document.getElementById("footer-container").style.display = "block";
-  },
   methods: {
     onSubmit() {
       let data = {
@@ -93,8 +90,8 @@ export default {
         .then(
           (response) => {
             this.isSuccess = response.data.success ? true : false;
-            document.getElementById("form-contact").style.display = "none";
-            document.getElementById("text-contact").style.display = "block";
+            document.getElementById("form-contact").style.display= "none";
+            document.getElementById("text-contact").style.display= "block";
           },
           (response) => {
             // Error
@@ -169,64 +166,30 @@ export default {
         <h4 class="text-medium wight-600 mb-3">
           Stay <span class="text-green text-medium wight-600">connected</span>
         </h4>
-        <div id="mc_embed_signup">
-          <form
-            action="https://victorsanchezdev.us21.list-manage.com/subscribe/post?u=932311c109f0f40bbee942eda&amp;id=1699fbb953&amp;f_id=000dc3e1f0"
-            method="post"
-            id="mc-embedded-subscribe-form"
-            name="mc-embedded-subscribe-form"
-            class="validate"
-            target="_self"
-          >
-            <div id="mc_embed_signup_scroll">
-              <div class="mc-field-group">
-                
-                <input
-                  type="email"
-                  value=""
-                  name="EMAIL"
-                  class="required email"
-                  id="mce-EMAIL"
-                  placeholder="Enter your email"
-                  required
-                />
-                <div class="clear foot">
-                  <input
-                    type="submit"
-                    value="Subscribe"
-                    name="subscribe"
-                    id="mc-embedded-subscribe"
-                    class="button"
-                  />
-                
-                </div>
-                <span id="mce-EMAIL-HELPERTEXT" class="helper_text"></span>
-              </div>
-              <div id="mce-responses" class="clear foot">
-                <div
-                  class="response"
-                  id="mce-error-response"
-                  style="display: none"
-                ></div>
-                <div
-                  class="response"
-                  id="mce-success-response"
-                  style="display: none"
-                ></div>
-              </div>
-              <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-              <div style="position: absolute; left: -5000px" aria-hidden="true">
-                <input
-                  type="text"
-                  name="b_932311c109f0f40bbee942eda_1699fbb953"
-                  tabindex="-1"
-                  value=""
-                />
-              </div>
-            </div>
-          </form>
-        </div>
-
+        <form
+          class="mb-4"
+          accept-charset="UTF-8"
+          v-on:submit.prevent="onSubmit()"
+          method="POST"
+          id="form-contact"
+        >
+          <div>
+            <input
+              type="email"
+              placeholder="Enter your email"
+              name="email"
+              id="email"
+              v-model="email"
+              required
+            />
+            <button
+              class="button-primary content-text text-decoration-none"
+              type="submit"
+            >
+              Subscribe
+            </button>
+          </div>
+        </form>
         <h2 id="text-contact">Thank you for submitting.</h2>
         <p class="info-p">
           This submission constitutes my consent to Woven Capital Management
@@ -246,31 +209,26 @@ export default {
 </template>
 
 <style scoped>
-#mc_embed_signup .mc-field-group {
-    display: flex;
-    width: 100%;
+button.button-primary {
+    font-weight: 500;
+    font-style: normal;
+    background-color: var(--color--secondary);
+    border-radius: 4px;
+    padding: 8px 16px;
+    color: var(--color-white)!important;
+    font-size: 16px;
+    max-width: 120px;
+    border: 0;
 }
-input#mc-embedded-subscribe {
-  font-weight: 500;
-  font-style: normal;
-  background-color: var(--color--secondary);
-  border-radius: 4px;
-  padding: 8px 16px;
-  color: var(--color-white) !important;
-  font-size: 16px;
-  max-width: 120px;
-  border: 0;
-  width: 100%!important;
+button.button-primary:hover {
+    background-color: var(--color-btn-hover);
+    color: var(--color-white);
+    border: 0;
 }
-input#mc-embedded-subscribe:hover {
-  background-color: var(--color-btn-hover);
-  color: var(--color-white);
-  border: 0;
-}
-#form-contact {
+#form-contact{
   display: block;
 }
-#text-contact {
+#text-contact{
   display: none;
 }
 .contact-page {
@@ -315,11 +273,9 @@ input#email {
   padding: 0 0 0 4%;
   margin-bottom: 3rem;
 }
-#mc_embed_signup form input#mce-EMAIL  {
+form input {
   padding: 8px 16px;
   border: 1px solid #c1c1c1;
-  width: 53%;
-  margin-right: 5px;
 }
 .first-p {
   max-width: 524px;
@@ -331,11 +287,8 @@ input#email {
 .col-info {
   word-break: break-word;
 }
-#mc_embed_signup .mc-field-group{
-  margin-bottom: 14px;
-}
 @media (max-width: 767px) {
-  .info-wrapper {
+  .info-wrapper{
     margin-bottom: 25px;
   }
   .content-contact,

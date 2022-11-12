@@ -29,6 +29,9 @@ export default {
       activeScrollDown: false,
       mousePoint: 0,
       metaContent: {},
+      currentlyActiveToc: "",
+      observer: null,
+      arrowActive: "",
     };
   },
   head() {
@@ -127,13 +130,59 @@ export default {
     onSlideEnd(slide) {
       this.sliding = false;
     },
-
     endedVideo(event) {
       let video = event.srcElement;
 
       video.classList.add("remove-video");
       video.nextSibling.nextElementSibling.classList.remove("remove-video");
     },
+    scrollTo: function (hashtag) {
+      setTimeout(() => {
+        location.href = hashtag;
+      }, 500);
+    },
+  },
+
+  mounted() {
+    if (this.$route.hash) {
+      setTimeout(() => this.scrollTo(this.$route.hash), 500);
+    }
+
+    const menuLinks = document.querySelectorAll('.poits a[href^="#"]');
+
+    this.observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const id = entry.target.getAttribute("id");
+
+          if (entry.isIntersecting) {
+            document;
+            this.currentlyActiveToc = id;
+
+            if (id == "nuro") {
+              this.arrowActive = "ridecell";
+            } else if (id == "ridecell") {
+              this.arrowActive = "whill";
+            } else if (id == "whill") {
+              this.arrowActive = "lp-investiments";
+            }
+          }
+        });
+      },
+      { rootMargin: "-30% 0px -70% 0px" }
+    );
+
+    menuLinks.forEach((menuLink) => {
+      const hash = menuLink.getAttribute("href");
+      const target = document.querySelector(hash);
+
+      if (target) {
+        this.observer.observe(target);
+      }
+    });
+  },
+  beforeDestroy() {
+    this.observer.disconnect();
   },
 };
 </script>
@@ -141,13 +190,6 @@ export default {
 <template>
   <main class="portfolio">
     <div class="container-portfolio">
-      <!-- <portfolio-header
-        :offsets="offsets"
-        :activeSection="activeSection"
-        v-on:sectActive="handleSection"
-      >
-      </portfolio-header> -->
-
       <template v-for="(portfolio, index) in portfoliosCont">
         <section-columns
           :key="index"
@@ -176,7 +218,7 @@ export default {
                 "
               >
                 <video
-                  class="w-100 object-cover vh-50 video-poster pb-5x"
+                  class="w-100 object-cover vh-50 video-poster"
                   autoplay="false"
                   muted="false"
                   controls
@@ -340,11 +382,93 @@ export default {
         </template>
       </section-columns>
     </div>
+    <div class="poits">
+      <a
+        class="item-point"
+        href="#nuro"
+        :class="{ active: currentlyActiveToc == 'nuro' }"
+      ></a>
+      <a
+        class="item-point"
+        href="#ridecell"
+        :class="{ active: currentlyActiveToc == 'ridecell' }"
+      ></a>
+      <a
+        class="item-point"
+        href="#whill"
+        :class="{ active: currentlyActiveToc == 'whill' }"
+      ></a>
+      <a
+        class="item-point"
+        href="#lp-investiments"
+        :class="{ active: currentlyActiveToc == 'lp-investiments' }"
+      ></a>
+    </div>
+    <div class="arrow-active">
+      <a
+        v-if="currentlyActiveToc != 'lp-investiments'"
+        class="item-arrow"
+        :href="`#${arrowActive}`"
+        :class="{ active: currentlyActiveToc == 'ridecell' }"
+      >
+        <img
+          class="img-arrow"
+          src="@/assets/image/Scroll-Down-Arrow.png"
+          alt=""
+        />
+      </a>
+    </div>
   </main>
 </template>
 
 <style scoped>
-
+.arrow-active {
+  position: fixed;
+  bottom: 8px;
+  right: 43%;
+  z-index: 99;
+}
+.arrow-active a.item-arrow {
+  background: unset !important;
+  height: 100%;
+  width: 100%;
+  padding: 0;
+}
+.arrow-active img.img-arrow {
+  height: 45px;
+  width: 45px;
+  object-fit: contain;
+}
+.poits {
+  position: fixed;
+  top: 0;
+  right: 20px;
+  bottom: 0;
+  margin: auto 0;
+  height: auto;
+  width: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 99999;
+}
+a.item-point {
+  background: var(--color--secondary);
+  padding: 3px;
+  margin: 5px 0;
+  border-radius: 100%;
+}
+.poits a.item-point.active,
+.poits a.nuxt-link-exact-active {
+  padding: 5px;
+}
+@media (max-width: 1024px) {
+  div.poits,
+  div.arrow-active {
+    display: none;
+  }
+}
 .remove-video {
   display: none;
 }
@@ -448,10 +572,10 @@ div.text-center p {
 }
 
 @media (max-width: 767px) {
-  .portfolio .col-sticky{
+  .portfolio .col-sticky {
     order: 2;
   }
-  .portfolio .col-content{
+  .portfolio .col-content {
     order: 1;
   }
   .container-portfolio {

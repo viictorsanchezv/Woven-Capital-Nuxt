@@ -1,7 +1,7 @@
 const client = require('./plugins/contentful')
 
 export default {
-  generate: { fallback: true },
+  mode: 'universal',
   head: {
     title: "Woven Capital Management Company, LLC.",
     meta: [
@@ -27,14 +27,13 @@ export default {
     htmlAttrs: {
       lang: 'en'
     },
-    loading: false,
+    loading: true,
    
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200&display=swap'}
     ], 
     scripts: [
-      
     ]
   },
 
@@ -47,7 +46,8 @@ export default {
     '@/plugins/contentful.js',
     {
       src:"plugins/vue-cookies-consent.js", mode:'client'
-    }
+    }, 
+    '@/plugins/gtag',
   ],
 
   components: true,
@@ -57,8 +57,12 @@ export default {
 
   modules: [
     '@nuxtjs/markdownit',
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/gtm',
   ],
+  gtm: {
+    id: 'GTM-WVT8ZKJ'
+  },
 
   markdownit: {
     injected: true,
@@ -69,4 +73,5 @@ export default {
 
   build: {
   }
+  
 }

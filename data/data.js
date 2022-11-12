@@ -15,8 +15,8 @@
         { textLink: 'Insights', linkLink: '/insights', targetL: '_self'  },
         { textLink: 'Pitch', linkLink: '/pitch', targetL: '_self'  },
         { textLink: 'Contact', linkLink: '/contact', targetL: '_self'  },
-        { textLink: 'Privacy Notice', linkLink: '/privacy-notice', targetL: '_self'  },
-
+        { textLink: 'Privacy', linkLink: '/privacy-notice', targetL: '_self'  },
+        { textLink: 'Form 20-2', linkLink: 'https://www.woven-planet.global/en/woven-capital-contact', targetL: '_blank'  },
     ];
    
     

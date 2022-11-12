@@ -162,7 +162,9 @@ export default {
   </main>
 </template>
 <style scoped>
-
+.container-insights{
+  margin-bottom: -10px;
+}
 .content-insights {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(49%, 1fr));
@@ -205,13 +207,13 @@ main.insights-page .fullpage {
     position: relative;
   }
 }
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   main.insights-page .fullpage {
     height: 100%;
     width: 100%;
 }
   .content-insights {
-    grid-template-columns: repeat(auto-fill, minmax(49%, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
     grid-auto-rows: 400px;
     grid-gap: 10px;
     margin-bottom: 10px;

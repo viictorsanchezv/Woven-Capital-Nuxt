@@ -88,15 +88,10 @@ export default {
           <div
             class="col-md-12 p-0 m-0 align-items-center d-flex flex-column text-center"
           >
-            <title-secundary
-              titleH2="Who we are"
-              class="justify-content-center"
-            ></title-secundary>
-            <p class="text-medium text-team">
-              We’re a team of investors, innovators, and industry experts
-              passionate about developing the next-generation of life-changing
-              mobility technologies.
-            </p>
+            <div class="d-flex mt-0 mr-0 ml-0 p-0 w-100 container-secundary justify-content-center">
+              <h2 class="title-secundary">Our Team</h2>
+            </div>
+           
           </div>
         </div>
         <div class="container-team p-0">
@@ -116,6 +111,16 @@ export default {
   </main>
 </template>
 <style scoped>
+
+.container-secundary{
+  margin-bottom: 1.5rem;
+}
+.title-secundary {
+  font-weight: 500;
+  font-style: normal;
+  letter-spacing: -2px;
+  color: var(--color--secondary);
+}
 .p-team {
   padding: 4%;
 }
@@ -131,6 +136,26 @@ p.text-team {
 }
 .team-section {
   min-height: 93vh;
+}
+@media (min-width: 1441px) {
+  .title-secundary {
+    font-size: 45px;
+    line-height: 51.75px;
+  }
+}
+@media (max-width: 1440px) {
+  .title-secundary{
+    font-size: 40px;
+    line-height: 48px;
+  }
+}
+@media (max-width: 767px) {
+  h2.title-secundary {
+    padding: 0;
+    width: 100%;
+    font-size: 35px;
+    line-height: 39px;
+  }
 }
 @media (max-width: 1024px) {
   .team-section {

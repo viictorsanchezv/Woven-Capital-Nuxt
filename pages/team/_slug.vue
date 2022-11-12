@@ -75,9 +75,6 @@ export default {
 
     return { teamCont: teamItem.items, teamInsight: insights.items };
   },
-   mounted() {
-    document.getElementById("footer-container").style.display = "block";
-   }
 };
 </script>
 <template>
@@ -178,7 +175,7 @@ export default {
 h1.h1-45.name-team {
     line-height: 43px;
 }
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .image-profile {
     position: relative;
     height: 50vh;

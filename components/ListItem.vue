@@ -36,14 +36,20 @@ footer .company .content-text {
 footer .content-text-menu:hover {
   color: var(--bg--primary);
 }
-@media (min-width: 1280px) {
+@media (min-width: 1370px) {
   footer .content-text-menu {
     padding: 8px 16px;
   }
 }
-@media (max-width: 1280px) {
+@media (max-width: 1369px) {
   footer .content-text-menu {
     padding: 8px;
   }
 }
+@media (min-width: 1210px){
+  footer .list-group .list-item:nth-child(1) a{
+    padding-left: 0px;
+  }
+}
+
 </style>

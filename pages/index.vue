@@ -85,7 +85,7 @@ export default {
       return new Date(month).toLocaleDateString("en", options);
     },
   },
-  
+
   async asyncData() {
     const portf = await client.getEntries({
       content_type: "portfolioNwc",
@@ -119,88 +119,85 @@ export default {
 <template>
   <main class="homePage">
     <div class="container-homepage">
-     
-        <section
-          class="fullpage hero-image vh-hero d-flex flex-column align-items-center w-100"
-        >
-          <div class="position-relative w-100 hero-container">
+      <section
+        class="fullpage hero-image vh-hero d-flex flex-column align-items-center w-100"
+      >
+        <div class="position-relative w-100 hero-container">
+          <div
+            class="content-hero row align-items-start text-md-center justify-content-center m-0"
+          >
             <div
-              class="content-hero row align-items-start text-md-center justify-content-center m-0"
+              class="col-12 m-0 p-0 d-flex justify-content-center flex-column align-items-center hero-info"
             >
-              <div
-                class="col-12 m-0 p-0 d-flex justify-content-center flex-column align-items-center hero-info"
-              >
-                <div class="content-logos">
-                  <a
-                    href="https://www.woven-planet.global/"
-                    class="woven-planet logo"
-                    target="_blank"
-                  >
-                    <img
-                      src="../assets/image/WovenPlanet Logo.png"
-                      alt="Logo Woven Planet"
-                    />
-                  </a>
-                  <a
-                    href="https://www.woven-city.global/"
-                    class="woven-city logo"
-                    target="_blank"
-                  >
-                    <img
-                      src="../assets/image/Woven-City-Logo.png"
-                      alt="Logo Woven City"
-                    />
-                  </a>
-                  <a
-                    href="https://global.toyota/"
-                    class="toyota logo"
-                    target="_blank"
-                  >
-                    <img
-                      src="../assets/image/Toyota-Logo.png"
-                      alt="Logo Toyota"
-                    />
-                  </a>
+              <div class="content-logos">
+                <a
+                  href="https://www.woven-planet.global/"
+                  class="woven-planet logo"
+                  target="_blank"
+                >
+                  <img
+                    src="../assets/image/WovenPlanet Logo.png"
+                    alt="Logo Woven Planet"
+                  />
+                </a>
+                <a
+                  href="https://www.woven-city.global/"
+                  class="woven-city logo"
+                  target="_blank"
+                >
+                  <img
+                    src="../assets/image/Woven-City-Logo.png"
+                    alt="Logo Woven City"
+                  />
+                </a>
+                <a
+                  href="https://global.toyota/"
+                  class="toyota logo"
+                  target="_blank"
+                >
+                  <img
+                    src="../assets/image/Toyota-Logo.png"
+                    alt="Logo Toyota"
+                  />
+                </a>
+              </div>
+              <div class="m-0">
+                <div
+                  class="logo-hero mt-0 mb-4 mr-0 ml-0 p-0 w-100 align-items-start text-md-center justify-content-center"
+                >
+                  <img
+                    src="../assets/image/Logo_text.png"
+                    alt=""
+                    width="325"
+                    height="45"
+                  />
                 </div>
-                <div class="m-0">
-                  <div
-                    class="logo-hero mt-0 mb-4 mr-0 ml-0 p-0 w-100 align-items-start text-md-center justify-content-center"
-                  >
-                    <img
-                      src="../assets/image/Logo_text.png"
-                      alt=""
-                      width="325"
-                      height="45"
-                    />
-                  </div>
-                  <h1 class="title-home">Building Mobility at Scale</h1>
-                  <buttom-primary
-                    class="d-flex justify-content-center align-items-start text-center"
-                    text_buttom="Read our Story"
-                    link_buttom="/about"
-                  ></buttom-primary>
-                </div>
+                <h1 class="title-home">Building Mobility at Scale</h1>
+                <buttom-primary
+                  class="d-flex justify-content-center align-items-start text-center"
+                  text_buttom="Read our Story"
+                  link_buttom="/about"
+                ></buttom-primary>
               </div>
             </div>
-            <video
-              class="vh-hero w-100 object-cover"
-              src="@/assets/video/Woven-Capital-Animated.mp4"
-              autoplay="true"
-              muted="true"
-              loop="true"
-              poster=""
-            ></video>
           </div>
-        </section>
-   
-        <section
-          class="fullpage our-portfolio w-100"
-        >
-          <div class="position-relative w-100 portf-col">
-            <div
-              class="new-last-post m-0 p-0 position-relative d-flex justify-content-center"
-            >
-              <!-- <div class="position-relative w-100">
+          <video
+            class="vh-hero w-100 object-cover"
+            src="@/assets/video/Woven-Capital-Animated.mp4"
+            autoplay="true"
+            muted="true"
+            loop="true"
+            poster=""
+          ></video>
+        </div>
+      </section>
+
+      <section class="fullpage our-portfolio w-100">
+        <div class="position-relative w-100 portf-col">
+          <div
+            class="new-last-post m-0 p-0 position-relative d-flex justify-content-center"
+          >
+            <!-- <div class="position-relative w-100">
                 <div class="row m-0 p-0">
                   <div class="col-12 m-0 p-0">
                     <new-last
@@ -211,110 +208,139 @@ export default {
                   </div>
                 </div>
               </div> -->
-            </div>
-            <div
-              class="row text-md-center justify-content-center m-0 position-relative our-portfolio-content"
-            >
-              <div class="col-12 m-0 p-0">
-                <title-secundary
-                  class="justify-content-center"
-                  titleH2="Meet the leaders shaping the world of tomorrow, "
-                  spanTitleH2="today"
-                ></title-secundary>
+          </div>
+          <div
+            class="row text-md-center justify-content-center m-0 position-relative our-portfolio-content"
+          >
+            <div class="col-12 m-0 p-0">
+              <title-secundary
+                class="justify-content-center"
+                titleH2="Meet the leaders shaping the world of tomorrow, "
+                spanTitleH2="today"
+              ></title-secundary>
 
-                <p class="text-medium text-portfolio">Our Portfolio</p>
+              <p class="text-medium text-portfolio">Our Portfolio</p>
 
-                <div class="d-flex m-0 p-0 w-100 justify-content-center">
-                  <a href="/portfolio" class="h-100 m-0 p-0">
-                    <img src="../assets/image/chevron-down.png" alt="" />
-                  </a>
-                </div>
+              <div class="d-flex m-0 p-0 w-100 justify-content-center">
+                <a href="/portfolio" class="h-100 m-0 p-0">
+                  <img src="../assets/image/chevron-down.png" alt="" />
+                </a>
               </div>
             </div>
-            <div class="row content-portfolio mt-4 mb-0 mr-0 ml-0 p-0">
-              <template v-for="(portfolio, index) in portfoliosCont">
-                <card-portfolio
-                  :key="index"
-                  :iconPort="portfolio.fields.logo.fields.file.url"
-                  :imagePort="portfolio.fields.coverImage.fields.file.url"
-                  :linkPort="portfolio.fields.slug"
-                ></card-portfolio>
-              </template>
-            </div>
           </div>
-        </section>
-     
-        <section
-          class="fullpage partner-together w-100"
-        >
-          <div class="position-relative w-100 m-0 p-0">
-            <div class="row m-0 partner-col">
-              <div class="col-12 m-0">
-                <title-secundary
-                  class="justify-content-center"
-                  titleH2="Partner together"
-                ></title-secundary>
-
-                <p class="p-0 text-medium text-partner">
-                  If you share our vision and your company would like to be
-                  considered for investment by Woven Capital, we want to hear
-                  from you.
-                </p>
-
-                <buttom-primary
-                  class="mb-1 mr-0 ml-0 mt-0 p-0 justify-content-center align-items-start"
-                  text_buttom="Tell us about yourself"
-                  link_buttom="/pitch"
-                ></buttom-primary>
-              </div>
-              <img
-                src="../assets/image/partner.png"
-                class="p-0 partner-img"
-                alt=""
-              />
-            </div>
+          <div class="row content-portfolio mt-4 mb-0 mr-0 ml-0 p-0">
+            <template v-for="(portfolio, index) in portfoliosCont">
+              <card-portfolio
+                :key="index"
+                :iconPort="portfolio.fields.logo.fields.file.url"
+                :imagePort="portfolio.fields.coverImage.fields.file.url"
+                :linkPort="portfolio.fields.slug"
+              ></card-portfolio>
+            </template>
           </div>
-        </section>
-     
-        <section
-          class="fullpage w-100 section-insight"
-        >
-          <div class="w-100 container-insight">
-            <div class="content-insights m-0">
-              <template v-for="(post, index) in insightsCont">
-                <card-insights
-                  :key="index"
-                  :titleInsights="post.fields.title"
-                  :slugInsights="post.fields.urlSlug"
-                  :externalslugInsights="post.fields.externalLink"
-                  :imageInsights="post.fields.coverImage.fields.file.url"
-                  :dateInsights="dateForm(post.fields.publishDate)"
-                >
-                </card-insights>
-              </template>
+        </div>
+      </section>
+
+      <section class="fullpage partner-together w-100">
+        <div class="position-relative w-100 m-0 p-0">
+          <div class="row m-0 partner-col">
+            <div class="col-12 m-0">
+              <title-secundary
+                class="justify-content-center"
+                titleH2="Partner together"
+              ></title-secundary>
+
+              <p class="p-0 text-medium text-partner">
+                If you share our vision and your company would like to be
+                considered for investment by Woven Capital, we want to hear from
+                you.
+              </p>
+
+              <buttom-primary
+                class="mb-1 mr-0 ml-0 mt-0 p-0 justify-content-center align-items-start"
+                text_buttom="Tell us about yourself"
+                link_buttom="/pitch"
+              ></buttom-primary>
             </div>
-            <div class="hide-team">
-              <div
-                class=" d-flex justify-content-center flex-column align-item-center text-center p-2 read-more-insight"
+            <img
+              src="../assets/image/partner.png"
+              class="p-0 partner-img"
+              alt=""
+            />
+          </div>
+        </div>
+      </section>
+
+      <section class="our-team">
+        <div class="position-relative w-100 m-0 p-0">
+          <div class="row m-0 p-0">
+            <div class="col-12 m-0 text-center">
+              <title-secundary
+                class="justify-content-center title-our-team"
+                titleH2="Who we are"
+              ></title-secundary>
+              <p class="p-0 text-medium text-team">
+               We’re a team of investors, innovators, and industry experts passionate about developing the next-generation of life-changing mobility technologies.
+              </p>
+              <buttom-primary
+                class="mb-1 mr-0 ml-0 mt-0 p-0 justify-content-center align-items-start buttom-team"
+                text_buttom="Meet our global team"
+                link_buttom="/team"
+              ></buttom-primary>
+            </div>
+            <img
+              src="../assets/image/Team-Section.png"
+              class="p-0 team-img"
+              alt=""
+            />
+          </div>
+        </div>
+      </section>
+
+      <section class="fullpage w-100 section-insight">
+        <div class="w-100 container-insight">
+          <div class="content-insights m-0">
+            <template v-for="(post, index) in insightsCont">
+              <card-insights
+                :key="index"
+                :titleInsights="post.fields.title"
+                :slugInsights="post.fields.urlSlug"
+                :externalslugInsights="post.fields.externalLink"
+                :imageInsights="post.fields.coverImage.fields.file.url"
+                :dateInsights="dateForm(post.fields.publishDate)"
               >
-                <div class="d-flex m-0 p-0 w-100 justify-content-center">
-                  <buttom-primary
-                    class="d-flex justify-content-center align-items-start"
-                    text_buttom="Meet the Team"
-                    link_buttom="/team"
-                  ></buttom-primary>
-                </div>
-              </div>
-            </div>
+              </card-insights>
+            </template>
           </div>
-        </section>
-     
+        </div>
+      </section>
     </div>
   </main>
 </template>
 <style>
-.hide-team{
-  display: none;
+img.team-img {
+  width: 100%;
+  margin-top: 10px;
+}
+.our-team{
+  background: var(--color--secondary);
+  padding: 7% 0 0 0;
+  margin-bottom: 10px;
+}
+.our-team .title-our-team h2.title-secundary{
+  color: var(--color-white);
+}
+.our-team  p.text-team {
+    max-width: 776px;
+    margin: 0 auto;
+    color: var(--color-white);
+    margin-bottom: 24px;
+}
+.our-team .buttom-team a{
+  background: var(--bg--primary);
+}
+.our-team .buttom-team a:hover {
+    background: #148117;
 }
 .hero-image {
   z-index: 50;
@@ -448,6 +474,9 @@ h1.title-home {
 }
 
 @media (min-width: 1441px) {
+  .our-team p.text-team{
+    max-width: 935px;
+  }
   .hero-image h1.title-home {
     font-size: 70px;
     line-height: 80px;
@@ -489,9 +518,6 @@ h1.title-home {
     grid-auto-rows: calc(50vh - 5px);
     height: 100vh;
   }
-  .read-more-insight {
-    height: 10vh;
-  }
   .container-insight {
     display: flex;
     flex-direction: column;
@@ -518,11 +544,17 @@ h1.title-home {
 }
 
 @media (max-width: 767px) {
+  img.team-img{
+    display: none;
+  }
+  .our-team{
+    padding: 40px;
+  }
   .read-more-insight {
     margin-bottom: 15px;
   }
   .homePage .content-insights {
-    grid-template-columns: repeat(auto-fill, minmax(50%, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
     grid-auto-rows: 400px;
     grid-gap: 20px;
   }

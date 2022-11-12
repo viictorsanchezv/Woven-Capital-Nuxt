@@ -82,9 +82,6 @@ export default {
       return new Date(month).toLocaleDateString("en", options);
     },
   },
-   mounted() {
-    document.getElementById("footer-container").style.display = "block";
-   }
 };
 </script>
 <template>
